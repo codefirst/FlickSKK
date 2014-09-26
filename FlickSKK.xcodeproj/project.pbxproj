@@ -13,6 +13,8 @@
 		EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56C19D5CB50007B6636 /* Images.xcassets */; };
 		EAD4B57019D5CB50007B6636 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */; };
 		EAD4B57C19D5CB50007B6636 /* FlickSKKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B57B19D5CB50007B6636 /* FlickSKKTests.swift */; };
+		EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */; };
+		EAD4B59119D5CB8A007B6636 /* FlickSKKKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,7 +25,35 @@
 			remoteGlobalIDString = EAD4B55F19D5CB50007B6636;
 			remoteInfo = FlickSKK;
 		};
+		EAD4B58F19D5CB8A007B6636 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD4B55819D5CB50007B6636 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAD4B58819D5CB8A007B6636;
+			remoteInfo = FlickSKKKeyboard;
+		};
+		EAD4B59219D5CB8A007B6636 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EAD4B55819D5CB50007B6636 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EAD4B58819D5CB8A007B6636;
+			remoteInfo = FlickSKKKeyboard;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EAD4B59719D5CB8A007B6636 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EAD4B59119D5CB8A007B6636 /* FlickSKKKeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EAD4B56019D5CB50007B6636 /* FlickSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,6 +66,9 @@
 		EAD4B57519D5CB50007B6636 /* FlickSKKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickSKKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD4B57A19D5CB50007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD4B57B19D5CB50007B6636 /* FlickSKKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickSKKTests.swift; sourceTree = "<group>"; };
+		EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FlickSKKKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAD4B58C19D5CB8A007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +86,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EAD4B58619D5CB8A007B6636 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -61,6 +101,7 @@
 			children = (
 				EAD4B56219D5CB50007B6636 /* FlickSKK */,
 				EAD4B57819D5CB50007B6636 /* FlickSKKTests */,
+				EAD4B58A19D5CB8A007B6636 /* FlickSKKKeyboard */,
 				EAD4B56119D5CB50007B6636 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +111,7 @@
 			children = (
 				EAD4B56019D5CB50007B6636 /* FlickSKK.app */,
 				EAD4B57519D5CB50007B6636 /* FlickSKKTests.xctest */,
+				EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +154,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		EAD4B58A19D5CB8A007B6636 /* FlickSKKKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
+				EAD4B58B19D5CB8A007B6636 /* Supporting Files */,
+			);
+			path = FlickSKKKeyboard;
+			sourceTree = "<group>";
+		};
+		EAD4B58B19D5CB8A007B6636 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAD4B58C19D5CB8A007B6636 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,10 +181,13 @@
 				EAD4B55C19D5CB50007B6636 /* Sources */,
 				EAD4B55D19D5CB50007B6636 /* Frameworks */,
 				EAD4B55E19D5CB50007B6636 /* Resources */,
+				EAD4B59719D5CB8A007B6636 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EAD4B59019D5CB8A007B6636 /* PBXTargetDependency */,
+				EAD4B59319D5CB8A007B6636 /* PBXTargetDependency */,
 			);
 			name = FlickSKK;
 			productName = FlickSKK;
@@ -150,6 +212,23 @@
 			productReference = EAD4B57519D5CB50007B6636 /* FlickSKKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EAD4B58819D5CB8A007B6636 /* FlickSKKKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EAD4B59419D5CB8A007B6636 /* Build configuration list for PBXNativeTarget "FlickSKKKeyboard" */;
+			buildPhases = (
+				EAD4B58519D5CB8A007B6636 /* Sources */,
+				EAD4B58619D5CB8A007B6636 /* Frameworks */,
+				EAD4B58719D5CB8A007B6636 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlickSKKKeyboard;
+			productName = FlickSKKKeyboard;
+			productReference = EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -165,6 +244,9 @@
 					EAD4B57419D5CB50007B6636 = {
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = EAD4B55F19D5CB50007B6636;
+					};
+					EAD4B58819D5CB8A007B6636 = {
+						CreatedOnToolsVersion = 6.0;
 					};
 				};
 			};
@@ -183,6 +265,7 @@
 			targets = (
 				EAD4B55F19D5CB50007B6636 /* FlickSKK */,
 				EAD4B57419D5CB50007B6636 /* FlickSKKTests */,
+				EAD4B58819D5CB8A007B6636 /* FlickSKKKeyboard */,
 			);
 		};
 /* End PBXProject section */
@@ -199,6 +282,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EAD4B57319D5CB50007B6636 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EAD4B58719D5CB8A007B6636 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -225,6 +315,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EAD4B58519D5CB8A007B6636 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -232,6 +330,16 @@
 			isa = PBXTargetDependency;
 			target = EAD4B55F19D5CB50007B6636 /* FlickSKK */;
 			targetProxy = EAD4B57619D5CB50007B6636 /* PBXContainerItemProxy */;
+		};
+		EAD4B59019D5CB8A007B6636 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAD4B58819D5CB8A007B6636 /* FlickSKKKeyboard */;
+			targetProxy = EAD4B58F19D5CB8A007B6636 /* PBXContainerItemProxy */;
+		};
+		EAD4B59319D5CB8A007B6636 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EAD4B58819D5CB8A007B6636 /* FlickSKKKeyboard */;
+			targetProxy = EAD4B59219D5CB8A007B6636 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -388,6 +496,30 @@
 			};
 			name = Release;
 		};
+		EAD4B59519D5CB8A007B6636 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FlickSKKKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EAD4B59619D5CB8A007B6636 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FlickSKKKeyboard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -413,6 +545,14 @@
 			buildConfigurations = (
 				EAD4B58319D5CB50007B6636 /* Debug */,
 				EAD4B58419D5CB50007B6636 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EAD4B59419D5CB8A007B6636 /* Build configuration list for PBXNativeTarget "FlickSKKKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EAD4B59519D5CB8A007B6636 /* Debug */,
+				EAD4B59619D5CB8A007B6636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
