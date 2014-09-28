@@ -18,6 +18,7 @@ enum KanaFlickKey: Hashable {
     case Katakana
     case Number
     case KomojiDakuten
+    case Space
     case Nothing
     
     var buttonLabel: String {
@@ -30,6 +31,7 @@ enum KanaFlickKey: Hashable {
         case .Katakana: return "カナ"
         case .Number: return "123"
         case .KomojiDakuten: return "小゛゜"
+        case .Space: return "space"
         case .Nothing: return ""
         }
     }
@@ -58,7 +60,8 @@ enum KanaFlickKey: Hashable {
         case .Katakana: return 5
         case .Number: return 6
         case .KomojiDakuten: return 7
-        case .Nothing: return 8
+        case .Space: return 8
+        case .Nothing: return 9
         }
     }
 }
@@ -202,7 +205,7 @@ class KeyboardViewController: UIInputViewController {
             ])
         let rightControl = controlViewWithButtons([
             keyButton(.Backspace),
-            keyButton(.Nothing),
+            keyButton(.Space),
             self.shiftButton,
             keyButton(.Return),
             ])
@@ -278,6 +281,7 @@ class KeyboardViewController: UIInputViewController {
     
     func insertText(s: String) {
         self.inputProxy.insertText(s)
+        self.shiftEnabled = false
         self.updateControlButtons()
     }
     
@@ -291,6 +295,7 @@ class KeyboardViewController: UIInputViewController {
         case .Katakana: self.inputMode = .Katakana
         case .Number: self.inputMode = .Number
         case .KomojiDakuten: self.toggleKomojiDakuten()
+        case .Space: self.handleSpace()
         case .Nothing: break
         }
     }
@@ -318,6 +323,10 @@ class KeyboardViewController: UIInputViewController {
     
     func toggleShift() {
         self.shiftEnabled = !self.shiftEnabled
+    }
+    
+    func handleSpace() {
+        self.insertText(" ")
     }
     
     var canConvertKomojiDakuten: Bool {
