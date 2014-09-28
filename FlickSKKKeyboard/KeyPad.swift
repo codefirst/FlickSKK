@@ -12,6 +12,7 @@ import UIKit
 
 class KeyPad : UIView {
     let keys: [KanaFlickKey]
+    var keyButtons: [KeyButton]
 
     var tapped: ((KanaFlickKey, Int?) -> Void)?
     
@@ -21,6 +22,7 @@ class KeyPad : UIView {
     
     init(keys: [KanaFlickKey]) {
         self.keys = keys
+        self.keyButtons = []
         super.init(frame: frame)
         self.addKeypadKeys()
     }
@@ -35,6 +37,7 @@ class KeyPad : UIView {
     
     func addKeypadKeys() {
         if (keys.count != 12) { println("fatal: cannot add keys not having 12 keys to keypad"); return; }
+        
         
         let views: [String:UIView] = [
             "a": keyButton(keys[0]),
@@ -59,6 +62,8 @@ class KeyPad : UIView {
         autolayoutInKeyPad("V:|[a][d(==a)][g(==a)][j(==a)]|")
         autolayoutInKeyPad("V:|[b(==a)][e(==a)][h(==a)][k(==a)]|")
         autolayoutInKeyPad("V:|[c(==a)][f(==a)][i(==a)][l(==a)]|")
+        
+        self.keyButtons = (views as NSDictionary).allValues as [KeyButton]
     }
 
     required init(coder aDecoder: NSCoder) {

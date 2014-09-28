@@ -17,6 +17,7 @@ enum KanaFlickKey: Hashable {
     case Hirakana
     case Katakana
     case Number
+    case KomojiDakuten
     case Nothing
     
     var buttonLabel: String {
@@ -28,6 +29,7 @@ enum KanaFlickKey: Hashable {
         case .Hirakana: return "かな"
         case .Katakana: return "カナ"
         case .Number: return "123"
+        case .KomojiDakuten: return "小゛゜"
         case .Nothing: return ""
         }
     }
@@ -55,7 +57,8 @@ enum KanaFlickKey: Hashable {
         case .Hirakana: return 4
         case .Katakana: return 5
         case .Number: return 6
-        case .Nothing: return 7
+        case .KomojiDakuten: return 7
+        case .Nothing: return 8
         }
     }
 }
@@ -129,7 +132,7 @@ class KeyboardViewController: UIInputViewController {
                 .Seq("まみむめも"),
                 .Seq("や「ゆ」よ"),
                 .Seq("らりるれろ"),
-                .Nothing,
+                .KomojiDakuten,
                 .Seq("わをん"),
                 .Seq("、。？！"),
                 ]),
@@ -143,7 +146,7 @@ class KeyboardViewController: UIInputViewController {
                 .Seq("マミムメモ"),
                 .Seq("ヤ「ユ」ヨ"),
                 .Seq("ラリルレロ"),
-                .Nothing,
+                .KomojiDakuten,
                 .Seq("ワヲン"),
                 .Seq("、。？！"),
                 ]),
@@ -261,14 +264,8 @@ class KeyboardViewController: UIInputViewController {
 
     override func textDidChange(textInput: UITextInput) {
         // The app has just changed the document's contents, the document context has been updated.
-    
-        var textColor: UIColor
-        if inputProxy.keyboardAppearance == UIKeyboardAppearance.Dark {
-            textColor = UIColor.whiteColor()
-        } else {
-            textColor = UIColor.blackColor()
-        }
-        self.nextKeyboardButton.setTitleColor(textColor, forState: .Normal)
+        
+        updateControlButtons()
     }
     
     private func keyButton(key: KanaFlickKey) -> KeyButton {
@@ -281,6 +278,7 @@ class KeyboardViewController: UIInputViewController {
     
     func insertText(s: String) {
         self.inputProxy.insertText(s)
+        self.updateControlButtons()
     }
     
     func keyTapped(key: KanaFlickKey, _ index: Int?) {
@@ -292,7 +290,8 @@ class KeyboardViewController: UIInputViewController {
         case .Hirakana: self.inputMode = .Hirakana
         case .Katakana: self.inputMode = .Katakana
         case .Number: self.inputMode = .Number
-        case .Nothing: break;
+        case .KomojiDakuten: self.toggleKomojiDakuten()
+        case .Nothing: break
         }
     }
     
@@ -306,9 +305,55 @@ class KeyboardViewController: UIInputViewController {
         }
         
         self.shiftButton.selected = self.shiftEnabled
+        
+        for keypad in self.keypads.values {
+            for b in keypad.keyButtons.filter({ $0.key == .KomojiDakuten }) {
+                b.enabled = self.canConvertKomojiDakuten
+            }
+        }
+        
+        // default implementation
+        self.nextKeyboardButton.setTitleColor(inputProxy.keyboardAppearance == UIKeyboardAppearance.Dark ? UIColor.whiteColor() : UIColor.blackColor(), forState: .Normal)
     }
     
     func toggleShift() {
         self.shiftEnabled = !self.shiftEnabled
+    }
+    
+    var canConvertKomojiDakuten: Bool {
+        let beforeString = self.inputProxy.documentContextBeforeInput ?? ""
+        if (beforeString as NSString).length == 0 || beforeString.hasSuffix(komojiDakutenConversionsSkip) { return false }
+        let lastString = String(Array(beforeString).last!)
+        
+        for i in 0..<komojiDakutenConversions.count {
+            if let r = komojiDakutenConversions[i].rangeOfString(lastString) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    let komojiDakutenConversions = [
+        "あいうえおかきくけこさしすせそたちつてとはひふへほやゆよアイウエオカキクケコサシスセソタチツテトハヒフヘホヤユヨ",
+        "ぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョ",
+        "ーーーーーーーーーーーーーーーーーづーーぱぴぷぺぽーーーーーーーーーーーーーーーーーーーーヅーーパピプペポーーー",
+    ]
+    let komojiDakutenConversionsSkip = "ー"
+    
+    func toggleKomojiDakuten() {
+        if !self.canConvertKomojiDakuten { return }
+        let lastString = String(Array(self.inputProxy.documentContextBeforeInput).last ?? Character(""))
+        
+        for i in 0..<komojiDakutenConversions.count {
+            if let r = komojiDakutenConversions[i].rangeOfString(lastString) {
+                var next = String(komojiDakutenConversions[(i + 1) % komojiDakutenConversions.count][r.startIndex])
+                if next == komojiDakutenConversionsSkip {
+                    next = String(komojiDakutenConversions[(i + 2) % komojiDakutenConversions.count][r.startIndex])
+                }
+                self.inputProxy.deleteBackward()
+                self.insertText(String(next))
+                return
+            }
+        }
     }
 }

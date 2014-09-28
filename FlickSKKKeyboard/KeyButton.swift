@@ -32,6 +32,12 @@ class KeyButton: UIView {
             self.backgroundColor = selected ? selectedBackgroundColor : normalBackgroundColor
         }
     }
+    var enabled: Bool {
+        didSet {
+            self.userInteractionEnabled = enabled
+            self.label.textColor = enabled ? UIColor.blackColor() : UIColor.grayColor()
+        }
+    }
     
     var normalBackgroundColor: UIColor
     var selectedBackgroundColor: UIColor
@@ -41,6 +47,7 @@ class KeyButton: UIView {
         self.normalBackgroundColor = key.isControl ? UIColor.lightGrayColor() : UIColor(white: 1.0, alpha: 1.0)
         self.selectedBackgroundColor = UIColor(white: 0.95, alpha: 1.0)
         self.selected = false
+        self.enabled = true
         
         super.init(frame: CGRectZero)
         
