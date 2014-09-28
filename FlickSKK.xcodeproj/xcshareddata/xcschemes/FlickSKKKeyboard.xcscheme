@@ -64,7 +64,11 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <IDERemoteRunnable
+         RemotePath = "/var/mobile/Containers/Bundle/Application/99BECA51-BAE1-409F-B6D1-08A440C31C69/asakusasatellite.app"
+         BundleIdentifier = "/var/mobile/Containers/Bundle/Application/99BECA51-BAE1-409F-B6D1-08A440C31C69/asakusasatellite.app">
+      </IDERemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "EAD4B55F19D5CB50007B6636"
@@ -72,7 +76,7 @@
             BlueprintName = "FlickSKK"
             ReferencedContainer = "container:FlickSKK.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

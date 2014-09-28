@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
+		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56519D5CB50007B6636 /* AppDelegate.swift */; };
 		EAD4B56819D5CB50007B6636 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56719D5CB50007B6636 /* ViewController.swift */; };
 		EAD4B56B19D5CB50007B6636 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56919D5CB50007B6636 /* Main.storyboard */; };
@@ -15,6 +17,7 @@
 		EAD4B57C19D5CB50007B6636 /* FlickSKKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B57B19D5CB50007B6636 /* FlickSKKTests.swift */; };
 		EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */; };
 		EAD4B59119D5CB8A007B6636 /* FlickSKKKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EA985FE519D84AAE0043564C /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
+		EA985FE719D84D060043564C /* KeyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
 		EAD4B56019D5CB50007B6636 /* FlickSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD4B56419D5CB50007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD4B56519D5CB50007B6636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +74,7 @@
 		EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FlickSKKKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD4B58C19D5CB8A007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		EAD4B59819D80AF3007B6636 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
+				EA985FE519D84AAE0043564C /* KeyPad.swift */,
+				EA985FE719D84D060043564C /* KeyButton.swift */,
+				EAD4B59819D80AF3007B6636 /* Utilities.swift */,
 				EAD4B58B19D5CB8A007B6636 /* Supporting Files */,
 			);
 			path = FlickSKKKeyboard;
@@ -319,7 +328,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */,
+				EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */,
 				EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */,
+				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +551,7 @@
 				EAD4B58119D5CB50007B6636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAD4B58219D5CB50007B6636 /* Build configuration list for PBXNativeTarget "FlickSKKTests" */ = {
 			isa = XCConfigurationList;
@@ -547,6 +560,7 @@
 				EAD4B58419D5CB50007B6636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAD4B59419D5CB8A007B6636 /* Build configuration list for PBXNativeTarget "FlickSKKKeyboard" */ = {
 			isa = XCConfigurationList;
@@ -555,6 +569,7 @@
 				EAD4B59619D5CB8A007B6636 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
