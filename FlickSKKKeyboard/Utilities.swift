@@ -55,3 +55,12 @@ func dictionaryWithKeyValues<K,V>(pairs: [(K,V)]) -> [K:V] {
     }
     return d
 }
+
+// FIXME: more effective way?
+func explode(str : String) -> [ Character ] {
+    var xs : [ Character ] = []
+    for s in str {
+        xs.append(s)
+    }
+    return xs
+}
