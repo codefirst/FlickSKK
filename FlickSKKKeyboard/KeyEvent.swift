@@ -15,4 +15,5 @@ enum KeyEvent {
     case Backspace
     case SelectCandidate(index: Int)
     case InputModeChange(inputMode : SKKInputMode)
+    case ToggleDakuten
 }

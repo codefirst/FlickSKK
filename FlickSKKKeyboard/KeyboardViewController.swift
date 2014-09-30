@@ -36,7 +36,7 @@ enum KanaFlickKey: Hashable {
     
     var sequence: [String]? {
         switch self {
-        case let .Seq(s): return explode(s).map({ (c : Character) -> String in return String(c)})
+        case let .Seq(s): return Array(s).map({ (c : Character) -> String in return String(c)})
         case .InputModeChange: return ["-ignore-","_","あ","ア","ｶﾅ"]
         default: return nil
         }
@@ -364,12 +364,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         
         self.shiftButton.selected = self.shiftEnabled
         
-        for keypad in self.keypads.values {
-            for b in keypad.keyButtons.filter({ $0.key == .KomojiDakuten }) {
-                b.enabled = self.canConvertKomojiDakuten
-            }
-        }
-        
         // default implementation
         self.nextKeyboardButton.setTitleColor(inputProxy.keyboardAppearance == UIKeyboardAppearance.Dark ? UIColor.whiteColor() : UIColor.blackColor(), forState: .Normal)
     }
@@ -382,41 +376,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         session.handle(.Space, shift: self.shiftEnabled)
     }
     
-    var canConvertKomojiDakuten: Bool {
-        let beforeString = self.inputProxy.documentContextBeforeInput ?? ""
-        if (beforeString as NSString).length == 0 || beforeString.hasSuffix(komojiDakutenConversionsSkip) { return false }
-        let lastString = String(Array(beforeString).last!)
-        
-        for i in 0..<komojiDakutenConversions.count {
-            if let r = komojiDakutenConversions[i].rangeOfString(lastString) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    let komojiDakutenConversions = [
-        "あいうえおかきくけこさしすせそたちつてとはひふへほやゆよアイウエオカキクケコサシスセソタチツテトハヒフヘホヤユヨ",
-        "ぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョ",
-        "ーーーーーーーーーーーーーーーーーづーーぱぴぷぺぽーーーーーーーーーーーーーーーーーーーーヅーーパピプペポーーー",
-    ]
-    let komojiDakutenConversionsSkip = "ー"
-    
     func toggleKomojiDakuten() {
-        if !self.canConvertKomojiDakuten { return }
-        let lastString = String(Array(self.inputProxy.documentContextBeforeInput).last ?? Character(""))
-        
-        for i in 0..<komojiDakutenConversions.count {
-            if let r = komojiDakutenConversions[i].rangeOfString(lastString) {
-                var next = String(komojiDakutenConversions[(i + 1) % komojiDakutenConversions.count][r.startIndex])
-                if next == komojiDakutenConversionsSkip {
-                    next = String(komojiDakutenConversions[(i + 2) % komojiDakutenConversions.count][r.startIndex])
-                }
-                self.inputProxy.deleteBackward()
-                self.insertText(String(next))
-                return
-            }
-        }
+        self.session.handle(.ToggleDakuten, shift: self.shiftEnabled)
     }
     
     func composeText(text: String) {
@@ -457,5 +418,14 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.session.handle(.SelectCandidate(index: indexPath.row), shift: self.shiftEnabled)
+    }
+
+    func lastString() -> String? {
+        switch Array(self.inputProxy.documentContextBeforeInput).last {
+        case .Some(let c):
+            return String(c)
+        case .None:
+            return .None
+        }
     }
 }

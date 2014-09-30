@@ -56,11 +56,26 @@ func dictionaryWithKeyValues<K,V>(pairs: [(K,V)]) -> [K:V] {
     return d
 }
 
-// FIXME: more effective way?
-func explode(str : String) -> [ Character ] {
-    var xs : [ Character ] = []
-    for s in str {
-        xs.append(s)
+
+
+extension String {
+    func toggleDakuten() -> String? {
+        let komojiDakutenConversions = [
+            "あいうえおかきくけこさしすせそたちつてとはひふへほやゆよアイウエオカキクケコサシスセソタチツテトハヒフヘホヤユヨ",
+            "ぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョ",
+            "ーーーーーーーーーーーーーーーーーづーーぱぴぷぺぽーーーーーーーーーーーーーーーーーーーーヅーーパピプペポーーー",
+        ]
+        let komojiDakutenConversionsSkip = "ー"
+
+        for i in 0..<komojiDakutenConversions.count {
+            if let r = komojiDakutenConversions[i].rangeOfString(self) {
+                var next = String(komojiDakutenConversions[(i + 1) % komojiDakutenConversions.count][r.startIndex])
+                if next == komojiDakutenConversionsSkip {
+                    next = String(komojiDakutenConversions[(i + 2) % komojiDakutenConversions.count][r.startIndex])
+                }
+                return String(next)
+            }
+        }
+        return .None
     }
-    return xs
 }

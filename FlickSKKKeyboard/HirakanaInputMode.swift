@@ -52,6 +52,14 @@ class HirakanaInputMode : InputMode {
                 ()
             case .InputModeChange(inputMode: let mode):
                 changeMode(mode)
+            case .ToggleDakuten:
+                switch delegate.lastString()?.toggleDakuten() {
+                case .Some(let s):
+                    delegate.deleteBackward()
+                    delegate.insertText(s)
+                case .None:
+                    ()
+                }
             }
         case .KanaCompose:
             switch event {
@@ -72,16 +80,21 @@ class HirakanaInputMode : InputMode {
                 self.delegate.insertText(self.composeText)
                 reset()
             case .Backspace:
-                let length = self.composeText.utf16Count
-                if(0 < length) {
-                    self.composeText = self.composeText.substringToIndex(
-                        advance(self.composeText.startIndex, length - 1))
+                if(!self.composeText.isEmpty){
+                    self.composeText = butLast(self.composeText)
                 }
             case .SelectCandidate(_):
                 ()
             case .InputModeChange(inputMode: let mode):
-                // FIXME:xxx
+                // FIXME: カナ確定など
                 ()
+            case .ToggleDakuten:
+                switch String(Array(composeText).last ?? Character("")).toggleDakuten() {
+                case .Some(let s):
+                    self.composeText = butLast(self.composeText) + s
+                case .None:
+                    ()
+                }
             }
         case .KanjiCompose:
             switch event {
@@ -106,6 +119,8 @@ class HirakanaInputMode : InputMode {
                 reset()
             case .InputModeChange(inputMode: _):
                 self.delegate.insertText(self.candidates[self.candidateIndex])
+            case .ToggleDakuten:
+                self.status = .KanaCompose
             }
         }
         refresh()
@@ -144,5 +159,9 @@ class HirakanaInputMode : InputMode {
         } else {
             // TODO: register dict
         }
+    }
+
+    private func butLast(s : String) -> String {
+        return s.substringToIndex(advance(s.startIndex, s.utf16Count - 1))
     }
 }
