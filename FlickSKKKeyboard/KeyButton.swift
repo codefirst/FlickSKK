@@ -15,7 +15,11 @@ class KeyButton: UIView {
     var sequenceIndex: Int? {
         didSet {
             if let s = key.sequence {
-                self.label.text = String(Array(s)[self.sequenceIndex ?? 0])
+                let text = String(Array(s)[self.sequenceIndex ?? 0])
+                // FIXME: special ignore label
+                if(text != "-ignore-") {
+                    self.label.text = text
+                }
             }
         }
     }
@@ -91,7 +95,7 @@ class KeyButton: UIView {
         
         let p = gesture.locationInView(self)
         let s = key.sequence!
-        let maxIndex = (s as NSString).length - 1
+        let maxIndex = s.count - 1
         
         if self.bounds.contains(p) {
             self.sequenceIndex = 0

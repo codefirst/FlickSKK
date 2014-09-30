@@ -14,8 +14,7 @@ enum KanaFlickKey: Hashable {
     case Shift
     case Return
     case Backspace
-    case Hirakana
-    case Katakana
+    case InputModeChange([SKKInputMode?])
     case Number
     case KomojiDakuten
     case Space
@@ -27,8 +26,7 @@ enum KanaFlickKey: Hashable {
         case .Shift: return "⇧"
         case .Return: return "⏎"
         case .Backspace: return "⌫"
-        case .Hirakana: return "かな"
-        case .Katakana: return "カナ"
+        case .InputModeChange: return "あ"
         case .Number: return "123"
         case .KomojiDakuten: return "小゛゜"
         case .Space: return "space"
@@ -36,9 +34,10 @@ enum KanaFlickKey: Hashable {
         }
     }
     
-    var sequence: String? {
+    var sequence: [String]? {
         switch self {
-        case let .Seq(s): return s
+        case let .Seq(s): return explode(s).map({ (c : Character) -> String in return String(c)})
+        case .InputModeChange: return ["-ignore-","_","あ","ア","ｶﾅ"]
         default: return nil
         }
     }
@@ -56,12 +55,11 @@ enum KanaFlickKey: Hashable {
         case .Shift: return 1
         case .Return: return 2
         case .Backspace: return 3
-        case .Hirakana: return 4
-        case .Katakana: return 5
-        case .Number: return 6
-        case .KomojiDakuten: return 7
-        case .Space: return 8
-        case .Nothing: return 9
+        case .InputModeChange: return 4
+        case .Number: return 5
+        case .KomojiDakuten: return 6
+        case .Space: return 7
+        case .Nothing: return 8
         }
     }
 }
@@ -74,9 +72,8 @@ func ==(l: KanaFlickKey, r: KanaFlickKey) -> Bool {
 }
 
 
-enum SKKInputMode {
+enum KeyboardMode {
     case Hirakana
-    case Katakana
     case Number
 }
 
@@ -93,25 +90,29 @@ private func newKeyboardGlobeButton(target: UIInputViewController) -> UIButton {
 }
 
 
-class KeyboardViewController: UIInputViewController {
+class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
     let keypadAndControlsView = UIView()
-    let contextView = UIView()
+    let contextView = UILabel()
+    let candidateView = UITableView()
     
     let nextKeyboardButton: UIButton!
+    let inputModeChangeButton : KeyButton!
     var inputProxy: UITextDocumentProxy {
         return self.textDocumentProxy as UITextDocumentProxy
     }
     
-    let modeButtons: [SKKInputMode:KeyButton]!
     let shiftButton: KeyButton!
-    let keypads: [SKKInputMode:KeyPad]
+    let keypads: [KeyboardMode:KeyPad]
+    
+    let session : SKKSession!
+    let dataSource = CandidateDataSource()
     
     var shiftEnabled: Bool {
         didSet {
             updateControlButtons()
         }
     }
-    var inputMode: SKKInputMode {
+    var keyboardMode: KeyboardMode {
         didSet {
             updateControlButtons()
         }
@@ -123,7 +124,7 @@ class KeyboardViewController: UIInputViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.shiftEnabled = false
-        self.inputMode = .Hirakana
+        self.keyboardMode = .Hirakana
         self.keypads = [
             .Hirakana: KeyPad(keys: [
                 .Seq("あいうえお"),
@@ -137,20 +138,6 @@ class KeyboardViewController: UIInputViewController {
                 .Seq("らりるれろ"),
                 .KomojiDakuten,
                 .Seq("わをん"),
-                .Seq("、。？！"),
-                ]),
-            .Katakana: KeyPad(keys: [
-                .Seq("アイウエオ"),
-                .Seq("カキクケコ"),
-                .Seq("サシスセソ"),
-                .Seq("タチツテト"),
-                .Seq("ナニヌネノ"),
-                .Seq("ハヒフヘホ"),
-                .Seq("マミムメモ"),
-                .Seq("ヤ「ユ」ヨ"),
-                .Seq("ラリルレロ"),
-                .KomojiDakuten,
-                .Seq("ワヲン"),
                 .Seq("、。？！"),
                 ]),
             .Number: KeyPad(keys: [
@@ -172,18 +159,19 @@ class KeyboardViewController: UIInputViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         self.nextKeyboardButton = newKeyboardGlobeButton(self)
+        self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
         self.shiftButton = keyButton(.Shift)
-        self.modeButtons = [
-            .Hirakana: keyButton(.Hirakana),
-            .Katakana: keyButton(.Katakana),
-            .Number: keyButton(.Number),
-        ]
         
         for keypad in self.keypads.values {
             keypad.tapped = { (key:KanaFlickKey, index:Int?) in
                 self.keyTapped(key, index)
             }
         }
+        
+        let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
+        self.session = SKKSession(delegate: self, dict: dict!)
+        
+        updateInputMode()
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -198,9 +186,9 @@ class KeyboardViewController: UIInputViewController {
         super.viewDidLoad()
         
         let leftControl = controlViewWithButtons([
-            self.modeButtons[.Number]!,
-            self.modeButtons[.Hirakana]!,
-            self.modeButtons[.Katakana]!,
+            keyButton(.Number),
+            keyButton(.Nothing), // FIXME: some button
+            inputModeChangeButton,
             nextKeyboardButton,
             ])
         let rightControl = controlViewWithButtons([
@@ -228,15 +216,23 @@ class KeyboardViewController: UIInputViewController {
         
         let views = [
             "context": contextView,
+            "candidate" : candidateView,
             "keypadAndControls": keypadAndControlsView,
         ]
         let autolayout = self.inputView.autolayoutFormat(metrics, views)
         autolayout("H:|[context]|")
         autolayout("H:|[keypadAndControls]|")
-        autolayout("V:|[context(==44)]")
-        autolayout("V:|[keypadAndControls]|")
+        autolayout("H:|[candidate]|")
+        autolayout("V:|[context(==30)]")
+        autolayout("V:|[context][keypadAndControls]|")
+        autolayout("V:|[context][candidate]|")
         self.inputView.bringSubviewToFront(contextView)
-        contextView.hidden = true
+        
+        contextView.text = "welcome to SKK"
+        
+        candidateView.dataSource = dataSource
+        candidateView.delegate = self
+        candidateView.hidden = true
         
         updateControlButtons()
     }
@@ -285,28 +281,85 @@ class KeyboardViewController: UIInputViewController {
         self.updateControlButtons()
     }
     
+    let romanConversions = [
+        "あ" : "a",
+        "い" : "i",
+        "う" : "u",
+        "え" : "e",
+        "お" : "o",
+        "か" : "ka",
+        "き" : "ki",
+        "く" : "ku",
+        "け" : "ke",
+        "こ" : "ko",
+        "さ" : "sa",
+        "し" : "si",
+        "す" : "su",
+        "せ" : "se",
+        "そ" : "so",
+        "た" : "ta",
+        "ち" : "ti",
+        "つ" : "tu",
+        "て" : "te",
+        "と" : "to",
+        "な" : "na",
+        "に" : "ni",
+        "ぬ" : "nu",
+        "ね" : "ne",
+        "の" : "no",
+        "は" : "ha",
+        "ひ" : "hi",
+        "ふ" : "hu",
+        "へ" : "he",
+        "ほ" : "ho",
+        "ま" : "ma",
+        "み" : "mi",
+        "む" : "mu",
+        "め" : "me",
+        "も" : "mo",
+        "や" : "ya",
+        "ゆ" : "yu",
+        "よ" : "yo",
+        "ら" : "ra",
+        "り" : "ri",
+        "る" : "ru",
+        "れ" : "re",
+        "ろ" : "ro",
+        "わ" : "wa",
+        "を" : "wo",
+        "ん" : "nn"
+    ]
+    
     func keyTapped(key: KanaFlickKey, _ index: Int?) {
         switch key {
-        case let .Seq(s): self.insertText(String(Array(s)[index ?? 0]))
-        case .Backspace: self.inputProxy.deleteBackward()
-        case .Return: self.insertText("\n")
+        case let .Seq(s):
+            let kana = String(Array(s)[index ?? 0])
+            let roman = self.romanConversions[kana] ?? ""
+            self.session.handle(.Char(kana: kana, roman: roman), shift: self.shiftEnabled)
+            self.shiftEnabled = false
+        case .Backspace:
+            self.session.handle(.Backspace, shift: self.shiftEnabled)
+        case .Return:
+            self.session.handle(.Enter, shift: self.shiftEnabled)
         case .Shift: toggleShift()
-        case .Hirakana: self.inputMode = .Hirakana
-        case .Katakana: self.inputMode = .Katakana
-        case .Number: self.inputMode = .Number
+        case .InputModeChange(let modes):
+            switch modes[index ?? 0] {
+            case .Some(let m):
+                self.session.handle(.InputModeChange(inputMode: m), shift: self.shiftEnabled)
+            case .None:
+                ()
+            }
+        case .Number: self.keyboardMode = .Number
         case .KomojiDakuten: self.toggleKomojiDakuten()
         case .Space: self.handleSpace()
         case .Nothing: break
         }
+        updateInputMode()
     }
     
     func updateControlButtons() {
-        for (mode, button) in self.modeButtons {
-            button.selected = (mode == self.inputMode)
-        }
-        
         for (mode, keypad) in self.keypads {
-            keypad.hidden = !(mode == self.inputMode)
+            keypad.hidden = !(mode == self.keyboardMode)
         }
         
         self.shiftButton.selected = self.shiftEnabled
@@ -326,7 +379,7 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func handleSpace() {
-        self.insertText(" ")
+        session.handle(.Space, shift: self.shiftEnabled)
     }
     
     var canConvertKomojiDakuten: Bool {
@@ -364,5 +417,45 @@ class KeyboardViewController: UIInputViewController {
                 return
             }
         }
+    }
+    
+    func composeText(text: String) {
+        contextView.text = text
+    }
+    
+    func showCandidates(candidates: [String]?) {
+        switch candidates {
+        case .Some(let xs):
+            dataSource.update(xs)
+            candidateView.reloadData()
+            keypadAndControlsView.hidden = true
+            candidateView.hidden = false
+        case .None:
+            keypadAndControlsView.hidden = false
+            candidateView.hidden = true
+        }
+    }
+    
+    func updateInputMode() {
+        switch self.session.currentMode {
+        case .Hirakana:
+            self.inputModeChangeButton.label.text = "あ"
+        case .Katakana:
+            self.inputModeChangeButton.label.text = "ア"
+        case .HankakuKana:
+            self.inputModeChangeButton.label.text = "ｶﾅ"
+        }
+    }
+    
+    func deleteBackward() {
+        (self.textDocumentProxy as UIKeyInput).deleteBackward()
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 24
+    }
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.session.handle(.SelectCandidate(index: indexPath.row), shift: self.shiftEnabled)
     }
 }
