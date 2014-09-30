@@ -11,19 +11,21 @@ import Foundation
 class SKKDictionary {
     var dictionary : [String:[String]] = [:]
     init(path : String){
-        let content = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error: nil)
-        content.enumerateLinesUsingBlock { (line, _) -> Void in
-            // skip comment
-            if(line.hasPrefix(";")) { return }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            let content = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error: nil)
+            content.enumerateLinesUsingBlock { (line, _) -> Void in
+                // skip comment
+                if(line.hasPrefix(";")) { return }
 
-            switch self.parse(line) {
-                case .Some(let x,let y):
-                    // FIXME: TOO MUCH SLOW!!!
-                    self.dictionary[x] = y
-                case .None:
-                    ()
+                switch self.parse(line) {
+                    case .Some(let x,let y):
+                        // FIXME: TOO MUCH SLOW!!!
+                        self.dictionary[x] = y
+                    case .None:
+                        ()
+                }
             }
-        }
+        })
     }
 
     func find(noraml : String, okuri : String?) -> [ String ] {
