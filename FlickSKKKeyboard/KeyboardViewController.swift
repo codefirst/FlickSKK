@@ -74,6 +74,7 @@ func ==(l: KanaFlickKey, r: KanaFlickKey) -> Bool {
 
 enum KeyboardMode {
     case Hirakana
+    case Katakana
     case Number
 }
 
@@ -138,6 +139,20 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("らりるれろ"),
                 .KomojiDakuten,
                 .Seq("わをん"),
+                .Seq("、。？！"),
+                ]),
+            .Katakana: KeyPad(keys: [
+                .Seq("アイウエオ"),
+                .Seq("カキクケコ"),
+                .Seq("サシスセソ"),
+                .Seq("タチツテト"),
+                .Seq("ナニヌネノ"),
+                .Seq("ハヒフヘホ"),
+                .Seq("マミムメモ"),
+                .Seq("ヤ「ユ」ヨ"),
+                .Seq("ラリルレロ"),
+                .KomojiDakuten,
+                .Seq("ワヲン"),
                 .Seq("、。？！"),
                 ]),
             .Number: KeyPad(keys: [
@@ -281,61 +296,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.updateControlButtons()
     }
     
-    let romanConversions = [
-        "あ" : "a",
-        "い" : "i",
-        "う" : "u",
-        "え" : "e",
-        "お" : "o",
-        "か" : "ka",
-        "き" : "ki",
-        "く" : "ku",
-        "け" : "ke",
-        "こ" : "ko",
-        "さ" : "sa",
-        "し" : "si",
-        "す" : "su",
-        "せ" : "se",
-        "そ" : "so",
-        "た" : "ta",
-        "ち" : "ti",
-        "つ" : "tu",
-        "て" : "te",
-        "と" : "to",
-        "な" : "na",
-        "に" : "ni",
-        "ぬ" : "nu",
-        "ね" : "ne",
-        "の" : "no",
-        "は" : "ha",
-        "ひ" : "hi",
-        "ふ" : "hu",
-        "へ" : "he",
-        "ほ" : "ho",
-        "ま" : "ma",
-        "み" : "mi",
-        "む" : "mu",
-        "め" : "me",
-        "も" : "mo",
-        "や" : "ya",
-        "ゆ" : "yu",
-        "よ" : "yo",
-        "ら" : "ra",
-        "り" : "ri",
-        "る" : "ru",
-        "れ" : "re",
-        "ろ" : "ro",
-        "わ" : "wa",
-        "を" : "wo",
-        "ん" : "nn"
-    ]
-    
     func keyTapped(key: KanaFlickKey, _ index: Int?) {
         switch key {
         case let .Seq(s):
-            let kana = String(Array(s)[index ?? 0])
-            let roman = self.romanConversions[kana] ?? ""
-            self.session.handle(.Char(kana: kana, roman: roman), shift: self.shiftEnabled)
+            let kana = Array(s)[index ?? 0]
+            let roman = kana.toRoman() ?? ""
+            self.session.handle(.Char(kana: String(kana), roman: roman), shift: self.shiftEnabled)
             self.shiftEnabled = false
         case .Backspace:
             self.session.handle(.Backspace, shift: self.shiftEnabled)
@@ -401,11 +367,14 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         switch self.session.currentMode {
         case .Hirakana:
             self.inputModeChangeButton.label.text = "あ"
+            self.keyboardMode = .Hirakana
         case .Katakana:
             self.inputModeChangeButton.label.text = "ア"
+            self.keyboardMode = .Katakana
         case .HankakuKana:
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
+        updateControlButtons()
     }
     
     func deleteBackward() {
@@ -420,10 +389,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.session.handle(.SelectCandidate(index: indexPath.row), shift: self.shiftEnabled)
     }
 
-    func lastString() -> String? {
+    func lastString() -> Character? {
         switch Array(self.inputProxy.documentContextBeforeInput).last {
         case .Some(let c):
-            return String(c)
+            return c
         case .None:
             return .None
         }

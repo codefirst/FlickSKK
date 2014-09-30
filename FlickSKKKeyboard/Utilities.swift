@@ -22,7 +22,7 @@ extension UIView {
     func autolayoutFormat(metrics: [String:CGFloat], _ views: [String:UIView]) -> String -> Void {
         return self.autolayoutFormat(metrics, views, options: NSLayoutFormatOptions.allZeros)
     }
-    
+
     func autolayoutFormat(metrics: [String:CGFloat], _ views: [String:UIView], options: NSLayoutFormatOptions) -> String -> Void {
         for v in views.values {
             if !v.isDescendantOfView(self) {
@@ -56,26 +56,155 @@ func dictionaryWithKeyValues<K,V>(pairs: [(K,V)]) -> [K:V] {
     return d
 }
 
+func toggle(c : Character, table : [String]) -> Character? {
+    let skip : Character = "ー"
+    for i in 0..<table.count {
+        if let r = table[i].rangeOfString(String(c)) {
+            var next = table[(i + 1) % table.count][r.startIndex]
+            if next == skip {
+                next = table[(i + 2) % table.count][r.startIndex]
+            }
+            return next
+        }
+    }
+    return .None
+}
 
+func tr(c : Character, from : String, to : String) -> Character? {
+    if let r = from.rangeOfString(String(c)) {
+        return to[r.startIndex]
+    }
+    return .None
+}
 
-extension String {
-    func toggleDakuten() -> String? {
-        let komojiDakutenConversions = [
+// FIXME: more effective
+func implode(xs : [Character]) -> String {
+    var str = ""
+    for x in xs {
+        str += String(x)
+    }
+    return str
+}
+
+extension Character {
+    func toggleDakuten() -> Character? {
+        let table = [
             "あいうえおかきくけこさしすせそたちつてとはひふへほやゆよアイウエオカキクケコサシスセソタチツテトハヒフヘホヤユヨ",
             "ぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョ",
             "ーーーーーーーーーーーーーーーーーづーーぱぴぷぺぽーーーーーーーーーーーーーーーーーーーーヅーーパピプペポーーー",
         ]
-        let komojiDakutenConversionsSkip = "ー"
+        return toggle(self, table)
+    }
 
-        for i in 0..<komojiDakutenConversions.count {
-            if let r = komojiDakutenConversions[i].rangeOfString(self) {
-                var next = String(komojiDakutenConversions[(i + 1) % komojiDakutenConversions.count][r.startIndex])
-                if next == komojiDakutenConversionsSkip {
-                    next = String(komojiDakutenConversions[(i + 2) % komojiDakutenConversions.count][r.startIndex])
-                }
-                return String(next)
-            }
-        }
-        return .None
+    func toHirakana() -> Character? {
+        let from =
+            "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョヅパピプペポ"
+        let to =
+            "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょづぱぴぷぽ"
+        return tr(self, from, to)
+    }
+
+    func toRoman() -> String? {
+        let table : [Character:String] = [
+            "あ" : "a",
+            "い" : "i",
+            "う" : "u",
+            "え" : "e",
+            "お" : "o",
+            "か" : "ka",
+            "き" : "ki",
+            "く" : "ku",
+            "け" : "ke",
+            "こ" : "ko",
+            "さ" : "sa",
+            "し" : "si",
+            "す" : "su",
+            "せ" : "se",
+            "そ" : "so",
+            "た" : "ta",
+            "ち" : "ti",
+            "つ" : "tu",
+            "て" : "te",
+            "と" : "to",
+            "な" : "na",
+            "に" : "ni",
+            "ぬ" : "nu",
+            "ね" : "ne",
+            "の" : "no",
+            "は" : "ha",
+            "ひ" : "hi",
+            "ふ" : "hu",
+            "へ" : "he",
+            "ほ" : "ho",
+            "ま" : "ma",
+            "み" : "mi",
+            "む" : "mu",
+            "め" : "me",
+            "も" : "mo",
+            "や" : "ya",
+            "ゆ" : "yu",
+            "よ" : "yo",
+            "ら" : "ra",
+            "り" : "ri",
+            "る" : "ru",
+            "れ" : "re",
+            "ろ" : "ro",
+            "わ" : "wa",
+            "を" : "wo",
+            "ん" : "nn",
+            "ア" : "a",
+            "イ" : "i",
+            "ウ" : "u",
+            "エ" : "e",
+            "オ" : "o",
+            "カ" : "ka",
+            "キ" : "ki",
+            "ク" : "ku",
+            "ケ" : "ke",
+            "コ" : "ko",
+            "サ" : "sa",
+            "シ" : "si",
+            "ス" : "su",
+            "セ" : "se",
+            "ソ" : "so",
+            "タ" : "ta",
+            "チ" : "ti",
+            "ツ" : "tu",
+            "テ" : "te",
+            "ト" : "to",
+            "ナ" : "na",
+            "ニ" : "ni",
+            "ヌ" : "nu",
+            "ネ" : "ne",
+            "ノ" : "no",
+            "ハ" : "ha",
+            "ヒ" : "hi",
+            "フ" : "hu",
+            "ヘ" : "he",
+            "ホ" : "ho",
+            "マ" : "ma",
+            "ミ" : "mi",
+            "ム" : "mu",
+            "メ" : "me",
+            "モ" : "mo",
+            "ヤ" : "ya",
+            "ユ" : "yu",
+            "ヨ" : "yo",
+            "ラ" : "ra",
+            "リ" : "ri",
+            "ル" : "ru",
+            "レ" : "re",
+            "ロ" : "ro",
+            "ワ" : "wa",
+            "ヲ" : "wo",
+            "ン" : "nn"
+        ]
+        return table[self]
+    }
+}
+
+extension String {
+    func toHirakana() -> String {
+        return implode(Array(self).map({ (c : Character) -> Character in c.toHirakana() ?? c }))
     }
 }

@@ -21,5 +21,5 @@ protocol SKKDelegate {
     // 変換候補の表示
     func showCandidates(candidates : [String]?)
 
-    func lastString() -> String?
+    func lastString() -> Character?
 }
