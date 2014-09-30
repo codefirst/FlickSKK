@@ -18,7 +18,8 @@ class SKKSession {
         dictionary = SKKDictionary(path: dict)
         inputMode = [
             .Hirakana: HirakanaInputMode(delegate: delegate, dict: dictionary),
-            .Katakana: KatakanaInputMode(delegate: delegate, dict: dictionary)
+            .Katakana: KatakanaInputMode(delegate: delegate, dict: dictionary),
+            .HankakuKana: HankakukanaInputMode(delegate: delegate, dict: dictionary)
         ]
     }
 

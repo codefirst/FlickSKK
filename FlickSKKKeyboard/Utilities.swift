@@ -104,6 +104,15 @@ extension Character {
         return tr(self, from, to)
     }
 
+    // remark: you need to normalize
+    func toZenkakuKana() -> Character? {
+        let from =
+            "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯ"
+        let to =
+            "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォッ"
+        return tr(self, from, to)
+    }
+
     func toRoman() -> String? {
         let table : [Character:String] = [
             "あ" : "a",
@@ -197,14 +206,64 @@ extension Character {
             "ロ" : "ro",
             "ワ" : "wa",
             "ヲ" : "wo",
-            "ン" : "nn"
+            "ン" : "nn",
+            "ｱ" : "a",
+            "ｲ" : "i",
+            "ｳ" : "u",
+            "ｴ" : "e",
+            "ｵ" : "o",
+            "ｶ" : "ka",
+            "ｷ" : "ki",
+            "ｸ" : "ku",
+            "ｹ" : "ke",
+            "ｺ" : "ko",
+            "ｻ" : "sa",
+            "ｼ" : "si",
+            "ｽ" : "su",
+            "ｾ" : "se",
+            "ｿ" : "so",
+            "ﾀ" : "ta",
+            "ﾁ" : "ti",
+            "ﾂ" : "tu",
+            "ﾃ" : "te",
+            "ﾄ" : "to",
+            "ﾅ" : "na",
+            "ﾆ" : "ni",
+            "ﾇ" : "nu",
+            "ﾈ" : "ne",
+            "ﾉ" : "no",
+            "ﾊ" : "ha",
+            "ﾋ" : "hi",
+            "ﾌ" : "hu",
+            "ﾍ" : "he",
+            "ﾎ" : "ho",
+            "ﾏ" : "ma",
+            "ﾐ" : "mi",
+            "ﾑ" : "mu",
+            "ﾒ" : "me",
+            "ﾓ" : "mo",
+            "ﾔ" : "ya",
+            "ﾕ" : "yu",
+            "ﾖ" : "yo",
+            "ﾗ" : "ra",
+            "ﾘ" : "ri",
+            "ﾙ" : "ru",
+            "ﾚ" : "re",
+            "ﾛ" : "ro",
+            "ﾜ" : "wa",
+            "ｦ" : "wo",
+            "ﾝ" : "nn",
         ]
         return table[self]
     }
 }
 
 extension String {
-    func toHirakana() -> String {
+    func fromKatakanaToHirakana() -> String {
         return implode(Array(self).map({ (c : Character) -> Character in c.toHirakana() ?? c }))
+    }
+    func fromHankakuKanaToKatakana() -> String {
+        // TODO: dakuten normalize
+        return implode(Array(self).map({ (c : Character) -> Character in c.toZenkakuKana() ?? c }))
     }
 }

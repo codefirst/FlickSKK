@@ -75,6 +75,7 @@ func ==(l: KanaFlickKey, r: KanaFlickKey) -> Bool {
 enum KeyboardMode {
     case Hirakana
     case Katakana
+    case HankakuKana
     case Number
 }
 
@@ -153,6 +154,20 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("ラリルレロ"),
                 .KomojiDakuten,
                 .Seq("ワヲン"),
+                .Seq("、。？！"),
+                ]),
+            .HankakuKana: KeyPad(keys: [
+                .Seq("ｱｲｳｴｵ"),
+                .Seq("ｶｷｸｹｺ"),
+                .Seq("ｻｼｽｾｿ"),
+                .Seq("ﾀﾁﾂﾃﾄ"),
+                .Seq("ﾅﾆﾇﾈﾉ"),
+                .Seq("ﾊﾋﾌﾍﾎ"),
+                .Seq("ﾏﾐﾑﾒﾓ"),
+                .Seq("ﾔ「ﾕ」ﾖ"),
+                .Seq("ﾗﾘﾙﾚﾛ"),
+                .KomojiDakuten,
+                .Seq("ﾜｦﾝ"),
                 .Seq("、。？！"),
                 ]),
             .Number: KeyPad(keys: [
@@ -373,6 +388,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             self.keyboardMode = .Katakana
         case .HankakuKana:
             self.inputModeChangeButton.label.text = "ｶﾅ"
+            self.keyboardMode = .HankakuKana
         }
         updateControlButtons()
     }

@@ -141,8 +141,19 @@ class InputModeBase : InputMode {
         }
     }
 
+    func normalizeForDict(s : String) -> String { return s }
+
     func findDict(text : String, okuri : (String, String)?) -> [String]{
-        return []
+        switch okuri {
+        case .Some((let kana, let roman)):
+            let okuri = roman.substringToIndex(advance(roman.startIndex, 1))
+            let xs    = dict.find(normalizeForDict(text), okuri: okuri)
+            return xs.map({ (x : String)  ->  String in
+                return x + kana
+            })
+        case .None:
+            return dict.find(normalizeForDict(text), okuri: .None)
+        }
     }
 
     private func reset() {
