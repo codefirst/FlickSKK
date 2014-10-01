@@ -11,7 +11,6 @@ import Foundation
 class SKKDictionaryFile {
     var dictionary : NSMutableDictionary = NSMutableDictionary()
     let path : String
-    let semaphore = dispatch_semaphore_create(0)
     init(path : String){
         self.path = path
         let now = NSDate()
@@ -29,14 +28,13 @@ class SKKDictionaryFile {
             }
         })
         NSLog("loaded (%f)\n", NSDate().timeIntervalSinceDate(now))
-        dispatch_semaphore_signal(self.semaphore)
     }
 
     func find(normal : String, okuri : String?) -> [ String ] {
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
         let entry : String? = self.dictionary[normal + (okuri ?? "")] as String?
         switch entry {
         case .Some(let xs):
+            NSLog("%@", xs)
             let ys : [String] = xs.pathComponents
             return Array(ys[1...ys.count-2])
         case .None:
