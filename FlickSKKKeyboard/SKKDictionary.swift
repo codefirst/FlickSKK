@@ -15,12 +15,13 @@ class SKKDictionaryFile {
     init(path : String){
         self.path = path
         let now = NSDate()
-        
-        IOUtil.each(path, { line -> Void in
-            // skip comment
-            if(line.hasPrefix(";")) { return }
 
-            switch self.parse(line) {
+        IOUtil.each(path, { line -> Void in
+            let s = line as NSString
+            // skip comment
+            if(s.hasPrefix(";")) { return }
+
+            switch self.parse(s) {
             case .Some(let x,let y):
                 self.dictionary[x] = y
             case .None:
@@ -33,48 +34,43 @@ class SKKDictionaryFile {
 
     func find(normal : String, okuri : String?) -> [ String ] {
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-        switch self.dictionary[normal + (okuri ?? "")] {
+        let entry : String? = self.dictionary[normal + (okuri ?? "")] as String?
+        switch entry {
         case .Some(let xs):
-            return (xs as [ String ])
+            let ys : [String] = xs.pathComponents
+            return Array(ys[1...ys.count-2])
         case .None:
             return []
         }
     }
 
-    private func parse(line : String) -> (String, [String])? {
-        switch line.rangeOfString(" ") {
-        case .Some(let range):
-            let kana  = line.substringToIndex(range.startIndex)
-            let kanji = line.substringFromIndex(range.startIndex)
-            let xs    = kanji.componentsSeparatedByString("/").filter({(x : String) -> Bool in
-                return !x.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: " ")).isEmpty
-            })
-            return (kana, xs)
-        case .None:
+    private func parse(line : NSString) -> (String, String)? {
+        let range = line.rangeOfString(" ")
+        if range.location == NSNotFound {
             return .None
+        } else {
+            let kana  : NSString = line.substringToIndex(range.location)
+            let kanji : NSString = line.substringFromIndex(range.location + 1)
+            return (kana as String, kanji as String)
         }
     }
 
     func register(normal : String, okuri: String?, kanji: String) {
-        let old =
-            find(normal, okuri: okuri)
-        self.dictionary[normal + (okuri ?? "")] = [kanji] + old
-        // TODO: flush into file
+        let old : String? = self.dictionary[normal + (okuri ?? "")] as String?
+        self.dictionary[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
     }
 
     func serialie() {
         let file = NSFileHandle(forWritingAtPath: self.path)
         for (k,v) in self.dictionary {
-            if !k.isEmpty {
-                let xs : [ String ] = v as [String]
-                let kanji : String = xs.reduce("/", combine: {(x : String, y : String) -> String in x + y + "/" })
-                let kana  : String = k as String
+            let kana = k as String
+            let kanji = v as String
+            if !kana.isEmpty {
                 let line  : NSString = (kana + " " + kanji + "\n") as NSString
                 let data = NSData(bytes: line.UTF8String,
                                   length: line.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
                 file.writeData(data)
             }
-
         }
         file.closeFile()
     }
