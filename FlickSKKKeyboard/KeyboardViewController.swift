@@ -139,7 +139,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("や「ゆ」よ"),
                 .Seq("らりるれろ"),
                 .KomojiDakuten,
-                .Seq("わをん"),
+                .Seq("わをんー"),
                 .Seq("、。？！"),
                 ]),
             .Katakana: KeyPad(keys: [
@@ -153,7 +153,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("ヤ「ユ」ヨ"),
                 .Seq("ラリルレロ"),
                 .KomojiDakuten,
-                .Seq("ワヲン"),
+                .Seq("ワヲンー"),
                 .Seq("、。？！"),
                 ]),
             .HankakuKana: KeyPad(keys: [
@@ -167,7 +167,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("ﾔ「ﾕ」ﾖ"),
                 .Seq("ﾗﾘﾙﾚﾛ"),
                 .KomojiDakuten,
-                .Seq("ﾜｦﾝ"),
+                .Seq("ﾜｦﾝ-"),
                 .Seq("、。？！"),
                 ]),
             .Number: KeyPad(keys: [
