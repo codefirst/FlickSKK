@@ -9,8 +9,9 @@
 import Foundation
 
 class SKKDictionaryFile {
-    var dictionary : [String:[String]] = [:]
+    var dictionary : NSMutableDictionary = NSMutableDictionary()
     let path : String
+    let semaphore = dispatch_semaphore_create(0)
     init(path : String){
         self.path = path
         let content = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error: nil)
@@ -20,16 +21,23 @@ class SKKDictionaryFile {
 
             switch self.parse(line) {
             case .Some(let x,let y):
-                // FIXME: TOO MUCH SLOW!!!
                 self.dictionary[x] = y
             case .None:
                 ()
             }
         }
+        NSLog("loaded %@\n", path)
+        dispatch_semaphore_signal(self.semaphore)
     }
 
     func find(normal : String, okuri : String?) -> [ String ] {
-        return self.dictionary[normal + (okuri ?? "")] ?? []
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        switch self.dictionary[normal + (okuri ?? "")] {
+        case .Some(let xs):
+            return (xs as [ String ])
+        case .None:
+            return []
+        }
     }
 
     private func parse(line : String) -> (String, [String])? {
@@ -57,8 +65,12 @@ class SKKDictionaryFile {
         let file = NSFileHandle(forWritingAtPath: self.path)
         for (k,v) in self.dictionary {
             if !k.isEmpty {
-                let line = k + " " + v.reduce("/", combine: {(x : String, y : String) -> String in x + y + "/" }) + "\n" as NSString
-                let data = NSData(bytes: line.UTF8String, length: line.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+                let xs : [ String ] = v as [String]
+                let kanji : String = xs.reduce("/", combine: {(x : String, y : String) -> String in x + y + "/" })
+                let kana  : String = k as String
+                let line  : NSString = (kana + " " + kanji + "\n") as NSString
+                let data = NSData(bytes: line.UTF8String,
+                                  length: line.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
                 file.writeData(data)
             }
 
