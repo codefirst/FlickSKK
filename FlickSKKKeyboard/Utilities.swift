@@ -348,7 +348,6 @@ extension String {
                 let prev = xs[xs.count - 2]
                 return String(prev) + String(last)
             } else {
-                NSLog("last word: %@\n", String(last))
                 return String(last)
             }
         case .None:

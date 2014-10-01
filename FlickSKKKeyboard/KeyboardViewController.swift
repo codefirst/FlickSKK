@@ -197,9 +197,14 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 self.keyTapped(key, index)
             }
         }
-        
+
+        let userDict = NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
+        if !NSFileManager.defaultManager().fileExistsAtPath(userDict) {
+            NSFileManager.defaultManager().createFileAtPath(userDict, contents: nil, attributes:nil)
+        }
+        NSLog("%@\n", userDict)
         let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-        self.session = SKKSession(delegate: self, dict: dict!)
+        self.session = SKKSession(delegate: self, dict: SKKDictionary(userDict: userDict, dicts: [dict!]))
         
         updateInputMode()
     }
@@ -403,15 +408,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.session.handle(.SelectCandidate(index: indexPath.row), shift: self.shiftEnabled)
-    }
-
-    func lastString() -> Character? {
-        switch Array(self.inputProxy.documentContextBeforeInput).last {
-        case .Some(let c):
-            return c
-        case .None:
-            return .None
-        }
     }
     
     func beforeString() -> String {

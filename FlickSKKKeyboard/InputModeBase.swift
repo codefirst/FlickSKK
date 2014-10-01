@@ -18,6 +18,57 @@ enum InputModeStatus {
     case KanjiCompose
 }
 
+class RegisterDelegate : SKKDelegate {
+    let kana : String
+    var kanji : String = ""
+    var okuri : (String, String)? = .None
+    var compose : String = ""
+    let delegate : SKKDelegate
+    let commit : (String, (String,String)?, String) -> ()
+    var commited = false
+
+    init(kana : String, okuri : (String, String)?, delegate : SKKDelegate, commit : (String,(String,String)?,String) -> ()) {
+        self.kana = kana
+        self.okuri = okuri
+        self.delegate = delegate
+        self.commit = commit
+    }
+
+    func insertText(text : String){
+        if text == "\n" {
+            commited = true
+            commit(kana, okuri, kanji)
+        } else {
+            kanji += text
+            refresh()
+        }
+    }
+
+    func deleteBackward() {
+        kanji = kanji.butLast()
+        refresh()
+    }
+
+    func composeText(text : String) {
+        self.compose = text
+        refresh()
+    }
+
+    func showCandidates(candidates : [String]?) {
+        self.delegate.showCandidates(candidates)
+    }
+
+    func beforeString() -> String {
+        return kanji
+    }
+
+    func refresh() {
+        if(commited) { return } // FIXME: dirty hack
+        let okuriStr = (self.okuri?.0) ?? ""
+        self.delegate.composeText("[登録:" + kana + (okuriStr.isEmpty ? "" : "*" + okuriStr) + "]" + kanji + compose)
+    }
+}
+
 class InputModeBase : InputMode {
     let delegate       : SKKDelegate
     var status         : InputModeStatus = .Default
@@ -26,13 +77,22 @@ class InputModeBase : InputMode {
     var candidateIndex : Int      = 0
     let inlineCandidate : Int = 3
     var composeText    : String   = ""
+    var composeOkuri   : (String, String)?  = .None
+    let createSession : SKKDelegate -> SKKSession
+    var session : SKKSession?
+    var onRegister = false
 
-    init(delegate : SKKDelegate, dict : SKKDictionary) {
+    init(delegate : SKKDelegate, dict : SKKDictionary, session : SKKDelegate -> SKKSession) {
         self.delegate = delegate
         self.dict = dict
+        self.createSession = session
     }
 
     func handle(event : KeyEvent, shift: Bool, changeMode: SKKInputMode -> ()) {
+        if(onRegister) {
+            self.session?.handle(event, shift: shift)
+            return
+        }
         switch status {
         case .Default:
             switch event {
@@ -67,6 +127,7 @@ class InputModeBase : InputMode {
             switch event {
             case .Char(kana: let kana, roman: let roman):
                 if(shift) {
+                    self.composeOkuri = (kana,roman)
                     let xs = self.findDict(self.composeText, okuri: (kana,roman))
                     setupCandidates(xs)
                 } else {
@@ -100,7 +161,7 @@ class InputModeBase : InputMode {
                 if(self.candidateIndex + 1 < self.candidates.count) {
                     self.candidateIndex += 1
                 } else {
-                    // TODO: register dict
+                    registerDict()
                 }
             case .Enter:
                 self.delegate.insertText(self.candidates[self.candidateIndex])
@@ -125,6 +186,7 @@ class InputModeBase : InputMode {
     }
 
     private func refresh() {
+        if(onRegister) { return } // FIXME: dirty hack to show register mode
         switch status {
         case .Default:
             self.delegate.composeText("")
@@ -144,10 +206,14 @@ class InputModeBase : InputMode {
 
     func normalizeForDict(s : String) -> String { return s }
 
+    func first(x : String) -> String {
+        return String(Array(x)[0])
+    }
+
     func findDict(text : String, okuri : (String, String)?) -> [String]{
         switch okuri {
         case .Some((let kana, let roman)):
-            let okuri = roman.substringToIndex(advance(roman.startIndex, 1))
+            let okuri = first(roman)
             let xs    = dict.find(normalizeForDict(text), okuri: okuri)
             return xs.map({ (x : String)  ->  String in
                 return x + kana
@@ -170,7 +236,29 @@ class InputModeBase : InputMode {
         if(xs.count != 0) {
             self.status = .KanjiCompose
         } else {
-            // TODO: register dict
+            registerDict()
         }
+    }
+
+    private func registerDict() {
+        let commit  = { (kana : String, okuri : (String,String)?, kanji : String) -> () in
+            self.session = nil
+            self.onRegister = false
+            self.delegate.insertText(kanji)
+            var roman : String? = .None
+            switch okuri?.1 {
+            case .Some(let c):
+                roman = self.first(c)
+            case .None:
+                ()
+            }
+            self.dict.register(self.normalizeForDict(kana), okuri: roman , kanji: kanji)
+            self.reset()
+            self.refresh()
+        }
+        let delegate = RegisterDelegate(kana : self.composeText, okuri : self.composeOkuri, delegate: self.delegate, commit: commit)
+        self.session = self.createSession(delegate)
+        delegate.refresh() // FIXME: dirty hack
+        self.onRegister = true
     }
 }

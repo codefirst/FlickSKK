@@ -14,12 +14,13 @@ class SKKSession {
     var currentMode : SKKInputMode = .Hirakana
     let dictionary : SKKDictionary
 
-    init(delegate : SKKDelegate, dict : String) {
-        dictionary = SKKDictionary(path: dict)
+    init(delegate : SKKDelegate, dict : SKKDictionary) {
+        self.dictionary = dict
+        let session = { (delegate : SKKDelegate) -> SKKSession in return SKKSession(delegate: delegate, dict: dict) }
         inputMode = [
-            .Hirakana: HirakanaInputMode(delegate: delegate, dict: dictionary),
-            .Katakana: KatakanaInputMode(delegate: delegate, dict: dictionary),
-            .HankakuKana: HankakukanaInputMode(delegate: delegate, dict: dictionary)
+            .Hirakana: HirakanaInputMode(delegate: delegate, dict: dict, session: session),
+            .Katakana: KatakanaInputMode(delegate: delegate, dict: dict, session: session),
+            .HankakuKana: HankakukanaInputMode(delegate: delegate, dict: dict, session: session)
         ]
     }
 
