@@ -14,8 +14,9 @@ class SKKDictionaryFile {
     let semaphore = dispatch_semaphore_create(0)
     init(path : String){
         self.path = path
-        let content = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error: nil)
-        content.enumerateLinesUsingBlock { (line, _) -> Void in
+        let now = NSDate()
+        
+        IOUtil.each(path, { line -> Void in
             // skip comment
             if(line.hasPrefix(";")) { return }
 
@@ -25,8 +26,8 @@ class SKKDictionaryFile {
             case .None:
                 ()
             }
-        }
-        NSLog("loaded %@\n", path)
+        })
+        NSLog("loaded (%f)\n", NSDate().timeIntervalSinceDate(now))
         dispatch_semaphore_signal(self.semaphore)
     }
 
