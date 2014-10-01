@@ -413,4 +413,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             return .None
         }
     }
+    
+    func beforeString() -> String {
+        return self.inputProxy.documentContextBeforeInput
+    }
 }

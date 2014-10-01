@@ -54,10 +54,11 @@ class InputModeBase : InputMode {
             case .InputModeChange(inputMode: let mode):
                 changeMode(mode)
             case .ToggleDakuten:
-                switch delegate.lastString()?.toggleDakuten() {
+                let dakuten = delegate.beforeString().last()?.toggleDakuten()
+                switch dakuten {
                 case .Some(let s):
-                    delegate.deleteBackward()
-                    delegate.insertText(String(s))
+                    delegate.deleteBackward() // REMARK: 半角カナの場合、濁点付きで消える
+                    delegate.insertText(s)
                 case .None:
                     ()
                 }
@@ -78,7 +79,7 @@ class InputModeBase : InputMode {
                 reset()
             case .Backspace:
                 if(!self.composeText.isEmpty){
-                    self.composeText = butLast(self.composeText)
+                    self.composeText = self.composeText.butLast()
                 }
             case .SelectCandidate(_):
                 ()
@@ -86,9 +87,9 @@ class InputModeBase : InputMode {
                 // FIXME: カナ確定など
                 ()
             case .ToggleDakuten:
-                switch (Array(composeText).last ?? Character("")).toggleDakuten() {
+                switch composeText.last()?.toggleDakuten() {
                 case .Some(let s):
-                    self.composeText = butLast(self.composeText) + String(s)
+                    self.composeText = self.composeText.butLast() + String(s)
                 case .None:
                     ()
                 }
@@ -171,9 +172,5 @@ class InputModeBase : InputMode {
         } else {
             // TODO: register dict
         }
-    }
-
-    private func butLast(s : String) -> String {
-        return s.substringToIndex(advance(s.startIndex, s.utf16Count - 1))
     }
 }

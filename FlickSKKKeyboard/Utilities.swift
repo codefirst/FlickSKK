@@ -69,6 +69,21 @@ func toggle(c : Character, table : [String]) -> Character? {
     }
     return .None
 }
+func toggle2(s : String, table : [[String]]) -> String? {
+    let skip : String = "ー"
+    for (i,t) in enumerate(table) {
+        for (j, x) in enumerate(t) {
+            if s == x {
+                var next = table[(i + 1) % table.count][j]
+                if next == skip {
+                    next = table[(i + 2) % table.count][j]
+                }
+                return .Some(next)
+            }
+        }
+    }
+    return .None
+}
 
 func tr(c : Character, from : String, to : String) -> Character? {
     if let r = from.rangeOfString(String(c)) {
@@ -265,5 +280,92 @@ extension String {
     func fromHankakuKanaToKatakana() -> String {
         // TODO: dakuten normalize
         return implode(Array(self).map({ (c : Character) -> Character in c.toZenkakuKana() ?? c }))
+    }
+    func toggleDakuten() -> String? {
+        let table = [
+            ["あ","い","う","え","お",
+             "か","き","く","け","こ",
+             "さ","し","す","せ","そ",
+             "た","ち","つ","て","と",
+             "は","ひ","ふ","へ","ほ",
+     	     "や","ゆ","よ",
+             "ア","イ","ウ","エ","オ",
+             "カ","キ","ク","ケ","コ",
+             "サ","シ","ス","セ","ソ",
+             "タ","チ","ツ","テ","ト",
+             "ハ","ヒ","フ","ヘ","ホ",
+             "ヤ","ユ","ヨ",
+             "ｱ","ｲ","ｳ","ｴ","ｵ",
+             "ｶ","ｷ","ｸ","ｹ","ｺ",
+             "ｻ","ｼ","ｽ","ｾ","ｿ",
+             "ﾀ","ﾁ","ﾂ","ﾃ","ﾄ",
+             "ﾊ","ﾋ","ﾌ","ﾍ","ﾎ",
+             "ﾔ","ﾕ","ﾖ"],
+            ["ぁ","ぃ","ぅ","ぇ","ぉ",
+             "が","ぎ","ぐ","げ","ご",
+             "ざ","じ","ず","ぜ","ぞ",
+             "だ","ぢ","っ","で","ど",
+             "ば","び","ぶ","べ","ぼ",
+             "ゃ","ゅ","ょ",
+             "ァ","ィ","ゥ","ェ","ォ",
+             "ガ","ギ","グ","ゲ","ゴ",
+             "ザ","ジ","ズ","ゼ","ゾ",
+             "ダ","ヂ","ッ","デ","ド",
+             "バ","ビ","ブ","ベ","ボ",
+             "ャ","ュ","ョ",
+             "ｧ","ｨ","ｩ","ｪ","ｫ",
+             "ｶﾞ","ｷﾞ","ｸﾞ","ｹﾞ","ｺﾞ",
+             "ｻﾞ","ｼﾞ","ｽﾞ","ｾﾞ","ｿﾞ",
+             "ﾀﾞ","ﾁﾞ","ｯ","ﾃﾞ","ﾄﾞ",
+      	     "ﾊﾞ","ﾋﾞ","ﾌﾞ","ﾍﾞ","ﾎﾞ",
+	         "ｬ","ｭ","ｮ"],
+            ["ー","ー","ー","ー","ー",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","づ","ー","ー",
+             "ぱ","ぴ","ぷ","ぺ","ぽ",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","ー",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","ヅ","ー","ー",
+             "パ","ピ","プ","ペ","ポ",
+             "ー","ー","ー",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","ー","ー","ー",
+             "ー","ー","ﾂﾞ","ー","ー",
+             "ﾊﾟ","ﾋﾟ","ﾌﾟ","ﾍﾟ","ﾎﾟ",
+             "ー","ー","ー"]]
+        return toggle2(self, table)
+    }
+
+    func last() -> String? {
+        let xs = Array(self)
+        switch xs.last {
+        case .Some(let last):
+            if (last == "ﾞ" || last == "ﾟ") && xs.count > 1 {
+                let prev = xs[xs.count - 2]
+                return String(prev) + String(last)
+            } else {
+                NSLog("last word: %@\n", String(last))
+                return String(last)
+            }
+        case .None:
+       	    return .None
+        }
+    }
+
+    func butLast() -> String {
+        switch self.last() {
+        case .None:
+            return self
+        case .Some(let s):
+            if(s.utf16Count <= self.utf16Count) {
+                return self.substringToIndex(advance(self.startIndex, self.utf16Count - s.utf16Count))
+            } else {
+                return self
+            }
+        }
     }
 }

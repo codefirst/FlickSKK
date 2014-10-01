@@ -22,4 +22,6 @@ protocol SKKDelegate {
     func showCandidates(candidates : [String]?)
 
     func lastString() -> Character?
+    
+    func beforeString() -> String
 }
