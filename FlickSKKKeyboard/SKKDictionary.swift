@@ -62,7 +62,7 @@ class SKKDictionaryFile {
         self.dictionary[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
     }
 
-    func serialie() {
+    func serialize() {
         let file = NSFileHandle(forWritingAtPath: self.path)
         for (k,v) in self.dictionary {
             let kana = k as String
@@ -103,7 +103,7 @@ class SKKDictionary {
     func register(normal : String, okuri: String?, kanji: String) {
         userDict?.register(normal, okuri: okuri, kanji: kanji)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.userDict?.serialie()
+            self.userDict?.serialize()
             ()
         })
     }
