@@ -34,9 +34,12 @@ class SKKDictionaryFile {
         let entry : String? = self.dictionary[normal + (okuri ?? "")] as String?
         switch entry {
         case .Some(let xs):
-            NSLog("%@", xs)
             let ys : [String] = xs.pathComponents
-            return Array(ys[1...ys.count-2])
+            if ys.count <= 2 {
+                return []
+            } else {
+                return Array(ys[1...ys.count-2])
+            }
         case .None:
             return []
         }
@@ -54,6 +57,7 @@ class SKKDictionaryFile {
     }
 
     func register(normal : String, okuri: String?, kanji: String) {
+        if(kanji.isEmpty) { return }
         let old : String? = self.dictionary[normal + (okuri ?? "")] as String?
         self.dictionary[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
     }
