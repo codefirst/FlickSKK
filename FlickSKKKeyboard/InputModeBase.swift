@@ -25,13 +25,15 @@ class RegisterDelegate : SKKDelegate {
     var compose : String = ""
     let delegate : SKKDelegate
     let commit : (String, (String,String)?, String) -> ()
+    let cancel : () -> ()
     var commited = false
 
-    init(kana : String, okuri : (String, String)?, delegate : SKKDelegate, commit : (String,(String,String)?,String) -> ()) {
+    init(kana : String, okuri : (String, String)?, delegate : SKKDelegate, commit : (String,(String,String)?,String) -> (), cancel : () -> ()) {
         self.kana = kana
         self.okuri = okuri
         self.delegate = delegate
         self.commit = commit
+        self.cancel = cancel
     }
 
     func insertText(text : String){
@@ -45,8 +47,13 @@ class RegisterDelegate : SKKDelegate {
     }
 
     func deleteBackward() {
-        kanji = kanji.butLast()
-        refresh()
+        if(kanji.isEmpty) {
+            commited = true
+            cancel()
+        } else {
+            kanji = kanji.butLast()
+            refresh()
+        }
     }
 
     func composeText(text : String) {
@@ -141,6 +148,8 @@ class InputModeBase : InputMode {
             case .Backspace:
                 if(!self.composeText.isEmpty){
                     self.composeText = self.composeText.butLast()
+                } else {
+                    reset()
                 }
             case .SelectCandidate(_):
                 ()
@@ -256,7 +265,12 @@ class InputModeBase : InputMode {
             self.reset()
             self.refresh()
         }
-        let delegate = RegisterDelegate(kana : self.composeText, okuri : self.composeOkuri, delegate: self.delegate, commit: commit)
+        let cancel = { () -> () in
+            self.session = nil
+            self.onRegister = false
+            self.refresh()
+        }
+        let delegate = RegisterDelegate(kana : self.composeText, okuri : self.composeOkuri, delegate: self.delegate, commit: commit, cancel : cancel)
         self.session = self.createSession(delegate)
         delegate.refresh() // FIXME: dirty hack
         self.onRegister = true
