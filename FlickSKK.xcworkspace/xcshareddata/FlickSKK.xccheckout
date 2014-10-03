@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>78E8B083-22D1-4368-AD74-F660C081F207</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FlickSKK</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9CC0FDC04DA548C6E1C8DEF3E9CC78C0BE8064F9</key>
+		<string>github.com:codefirst/FlickSKK.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>FlickSKK.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9CC0FDC04DA548C6E1C8DEF3E9CC78C0BE8064F9</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:codefirst/FlickSKK.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9CC0FDC04DA548C6E1C8DEF3E9CC78C0BE8064F9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9CC0FDC04DA548C6E1C8DEF3E9CC78C0BE8064F9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FlickSKK</string>
+		</dict>
+	</array>
+</dict>
+</plist>
