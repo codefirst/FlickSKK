@@ -1,0 +1,42 @@
+# FlickSKK
+*現在、開発中であり、AppStore等での配布は行なっていません。*
+
+## Overview
+フリック入力対応版のiOS向けSKKです。
+
+## 動作条件
+
+ * iOS8 以降
+
+## 主な機能
+(TBD)
+
+## ビルド方法
+
+### CocoaPodsの導入(必要ならば)
+
+```
+$ sudo gem install cocoapods
+```
+
+### ビルド
+
+```
+$ git clone https://github.com/codefirst/FlickSKK.git
+$ cd FlickSKK
+$ pod install
+```
+その後、 FlickSKK.*xcworkspace* を開いてビルドしてください。 (注: FlickSKK.*xcodeproj* ではない)
+
+### トラブルシューティング
+#### "ld: library not found for -lz" とエラーがでる
+
+libzがないのが原因です。 適当なlibz.x.x.z.dylib(x.y.zはバージョン番号)へのシンボリックリングを作成すれば回避できます。
+
+```
+$ cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib
+$ ln -s libz.x.y.z.dylib libz.dylib
+```
+
+## License
+(TBD)
