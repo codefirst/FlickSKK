@@ -9,17 +9,38 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    let textView = UITextView()
+    
+    var metrics : [String:CGFloat] {
+        return [:]
     }
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.title = NSLocalizedString("FlickSKK", comment: "")
+        edgesForExtendedLayout = .None
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        textView.backgroundColor = UIColor.whiteColor()
+        textView.textColor = UIColor.blackColor()
+        textView.font = UIFont.systemFontOfSize(18)
+        
+        let keyboardSpacer = KeyboardSpacerView()
+        
+        let views = [
+            "textView": textView,
+            "keyboardSpacer": keyboardSpacer,
+        ]
+        let autolayout = view.autolayoutFormat(metrics, views)
+        autolayout("H:|[textView]|")
+        autolayout("V:|[textView][keyboardSpacer]|")
+        keyboardSpacer.installKeyboardHeightConstraint()
     }
-
-
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        textView.becomeFirstResponder()
+    }
 }
 

@@ -187,8 +187,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        TestFlight.takeOff("20d9b8e4-ea7b-4f65-a81f-89313f8b4a33")
-        
         self.nextKeyboardButton = newKeyboardGlobeButton(self)
         self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
         self.shiftButton = keyButton(.Shift)

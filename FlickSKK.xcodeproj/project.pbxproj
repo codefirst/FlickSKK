@@ -23,11 +23,12 @@
 		13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
 		BDB55BD40232F36069D06BEA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA289C0ED7662F2EF0F3718 /* libPods.a */; };
 		D3C6CB3D1AD977725CC25D71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA289C0ED7662F2EF0F3718 /* libPods.a */; };
+		EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */; };
+		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56519D5CB50007B6636 /* AppDelegate.swift */; };
 		EAD4B56819D5CB50007B6636 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56719D5CB50007B6636 /* ViewController.swift */; };
-		EAD4B56B19D5CB50007B6636 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56919D5CB50007B6636 /* Main.storyboard */; };
 		EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56C19D5CB50007B6636 /* Images.xcassets */; };
 		EAD4B57019D5CB50007B6636 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */; };
 		EAD4B57C19D5CB50007B6636 /* FlickSKKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B57B19D5CB50007B6636 /* FlickSKKTests.swift */; };
@@ -89,16 +90,16 @@
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
 		13F4525119DC538B001A4A1B /* IOUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUtil.h; sourceTree = "<group>"; };
-		13F4525219DC5399001A4A1B /* FlickSKKKeyboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlickSKKKeyboard-Bridging-Header.h"; sourceTree = "<group>"; };
+		13F4525219DC5399001A4A1B /* FlickSKKKeyboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FlickSKKKeyboard-Bridging-Header.h"; path = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSpacerView.swift; sourceTree = "<group>"; };
 		EA985FE519D84AAE0043564C /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
 		EA985FE719D84D060043564C /* KeyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
 		EAD4B56019D5CB50007B6636 /* FlickSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD4B56419D5CB50007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD4B56519D5CB50007B6636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EAD4B56719D5CB50007B6636 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EAD4B56A19D5CB50007B6636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EAD4B56C19D5CB50007B6636 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EAD4B56F19D5CB50007B6636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EAD4B57519D5CB50007B6636 /* FlickSKKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickSKKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +169,6 @@
 				136D161019DAA0AE0091D6BF /* SKKInputMode.swift */,
 				13F4525119DC538B001A4A1B /* IOUtil.h */,
 				13F4525319DC5399001A4A1B /* IOUtil.mm */,
-				13F4525219DC5399001A4A1B /* FlickSKKKeyboard-Bridging-Header.h */,
 			);
 			name = SKKBase;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 			children = (
 				EAD4B56519D5CB50007B6636 /* AppDelegate.swift */,
 				EAD4B56719D5CB50007B6636 /* ViewController.swift */,
-				EAD4B56919D5CB50007B6636 /* Main.storyboard */,
+				EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */,
 				EAD4B56C19D5CB50007B6636 /* Images.xcassets */,
 				EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */,
 				EAD4B56319D5CB50007B6636 /* Supporting Files */,
@@ -278,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD4B58C19D5CB8A007B6636 /* Info.plist */,
+				13F4525219DC5399001A4A1B /* FlickSKKKeyboard-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -390,7 +391,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAD4B56B19D5CB50007B6636 /* Main.storyboard in Resources */,
 				EAD4B57019D5CB50007B6636 /* LaunchScreen.xib in Resources */,
 				13D118CC19D99923009E9E79 /* skk.jisyo in Resources */,
 				EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */,
@@ -484,6 +484,8 @@
 			files = (
 				EAD4B56819D5CB50007B6636 /* ViewController.swift in Sources */,
 				EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */,
+				EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */,
+				EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,14 +541,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EAD4B56919D5CB50007B6636 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EAD4B56A19D5CB50007B6636 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -646,6 +640,7 @@
 				INFOPLIST_FILE = FlickSKK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -658,6 +653,7 @@
 				INFOPLIST_FILE = FlickSKK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h";
 			};
 			name = Release;
 		};
