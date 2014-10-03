@@ -56,20 +56,7 @@ func dictionaryWithKeyValues<K,V>(pairs: [(K,V)]) -> [K:V] {
     return d
 }
 
-func toggle(c : Character, table : [String]) -> Character? {
-    let skip : Character = "ー"
-    for i in 0..<table.count {
-        if let r = table[i].rangeOfString(String(c)) {
-            var next = table[(i + 1) % table.count][r.startIndex]
-            if next == skip {
-                next = table[(i + 2) % table.count][r.startIndex]
-            }
-            return next
-        }
-    }
-    return .None
-}
-func toggle2(s : String, table : [[String]]) -> String? {
+func toggle(s : String, table : [[String]]) -> String? {
     let skip : String = "ー"
     for (i,t) in enumerate(table) {
         for (j, x) in enumerate(t) {
@@ -102,32 +89,6 @@ func implode(xs : [Character]) -> String {
 }
 
 extension Character {
-    func toggleDakuten() -> Character? {
-        let table = [
-            "あいうえおかきくけこさしすせそたちつてとはひふへほやゆよアイウエオカキクケコサシスセソタチツテトハヒフヘホヤユヨ",
-            "ぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョ",
-            "ーーーーーーーーーーーーーーーーーづーーぱぴぷぺぽーーーーーーーーーーーーーーーーーーーーヅーーパピプペポーーー",
-        ]
-        return toggle(self, table)
-    }
-
-    func toHirakana() -> Character? {
-        let from =
-            "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョヅパピプペポ"
-        let to =
-            "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょづぱぴぷぽ"
-        return tr(self, from, to)
-    }
-
-    // remark: you need to normalize
-    func toZenkakuKana() -> Character? {
-        let from =
-            "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯ"
-        let to =
-            "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォッ"
-        return tr(self, from, to)
-    }
-
     func toRoman() -> String? {
         let table : [Character:String] = [
             "あ" : "a",
@@ -273,14 +234,27 @@ extension Character {
     }
 }
 
+enum KanaType {
+    case Hirakana
+    case Katakana
+    case HankakuKana
+}
+let ConversionTable : [KanaType:String] = [
+    .Hirakana:
+        "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょづぱぴぷぽ",
+    .Katakana:
+        "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョヅパピプペポ",
+    .HankakuKana:
+        "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯ"
+]
+
 extension String {
-    func fromKatakanaToHirakana() -> String {
-        return implode(Array(self).map({ (c : Character) -> Character in c.toHirakana() ?? c }))
+    func conv(from : KanaType, to : KanaType) -> String {
+        let x = ConversionTable[from] ?? ""
+        let y = ConversionTable[to] ?? ""
+        return implode(Array(self).map({ (c : Character) -> Character in tr(c, x, y) ?? c }))
     }
-    func fromHankakuKanaToKatakana() -> String {
-        // TODO: dakuten normalize
-        return implode(Array(self).map({ (c : Character) -> Character in c.toZenkakuKana() ?? c }))
-    }
+
     func toggleDakuten() -> String? {
         let table = [
             ["あ","い","う","え","お",
@@ -337,7 +311,7 @@ extension String {
              "ー","ー","ﾂﾞ","ー","ー",
              "ﾊﾟ","ﾋﾟ","ﾌﾟ","ﾍﾟ","ﾎﾟ",
              "ー","ー","ー"]]
-        return toggle2(self, table)
+        return toggle(self, table)
     }
 
     func last() -> String? {

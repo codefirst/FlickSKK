@@ -9,6 +9,17 @@
 import Foundation
 class HankakukanaInputMode : InputModeBase {
     override func normalizeForDict(s: String) -> String {
-        return s.fromHankakuKanaToKatakana().fromKatakanaToHirakana()
+        return s.conv(.HankakuKana, to: .Hirakana)
+    }
+
+    override func conv(text: String, mode: SKKInputMode) -> String {
+        switch mode {
+        case .Hirakana:
+            return text.conv(.HankakuKana, to: .Hirakana)
+        case .Katakana:
+            return text.conv(.HankakuKana, to: .Katakana)
+        case .HankakuKana:
+            return text
+        }
     }
 }

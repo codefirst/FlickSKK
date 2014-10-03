@@ -95,6 +95,10 @@ class InputModeBase : InputMode {
         self.createSession = session
     }
 
+    func conv(text : String, mode: SKKInputMode) -> String {
+        return text
+    }
+
     func handle(event : KeyEvent, shift: Bool, changeMode: SKKInputMode -> ()) {
         if(onRegister) {
             self.session?.handle(event, shift: shift)
@@ -154,8 +158,8 @@ class InputModeBase : InputMode {
             case .SelectCandidate(_):
                 ()
             case .InputModeChange(inputMode: let mode):
-                // FIXME: カナ確定など
-                ()
+                self.delegate.insertText(conv(self.composeText, mode: mode))
+                reset()
             case .ToggleDakuten:
                 switch composeText.last()?.toggleDakuten() {
                 case .Some(let s):
