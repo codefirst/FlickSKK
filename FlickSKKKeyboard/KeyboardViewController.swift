@@ -92,6 +92,8 @@ private func newKeyboardGlobeButton(target: UIInputViewController) -> UIButton {
 
 
 class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
+    var heightConstraint : NSLayoutConstraint!
+    
     let keypadAndControlsView = UIView()
     let contextView = UILabel()
     let candidateView = UITableView()
@@ -219,6 +221,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.heightConstraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
+        
         let leftControl = controlViewWithButtons([
             keyButton(.Number),
             keyButton(.Nothing), // FIXME: some button
@@ -247,6 +251,36 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         }
         
         contextView.backgroundColor = UIColor.whiteColor()
+        contextView.text = "welcome to SKK"
+        
+        candidateView.dataSource = dataSource
+        candidateView.delegate = self
+        candidateView.hidden = true
+        
+        updateControlButtons()
+        
+        // iOS8 layout height(0) workaround: call self.inputView.addSubview() after viewDidAppear
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.setupViewConstraints() // iOS8 layout height(0) workaround: setup constraints after view did appear
+        // keyboard height can be changed, but cause some layout errors.
+        // 'UIView-Encapsulated-Layout-Height' V:[UIInputView:...(216)]
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+//            self.heightConstraint.constant += 100
+//        }
+    }
+    
+    private func setupViewConstraints() {
+        if CGRectIsEmpty(view.frame) {
+            println("\(__FUNCTION__): empty view. ignored.")
+            return
+        }
+        
+        if contextView.isDescendantOfView(view) {
+            return
+        }
         
         let views = [
             "context": contextView,
@@ -260,15 +294,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         autolayout("V:|[context(==30)]")
         autolayout("V:|[context][keypadAndControls]|")
         autolayout("V:|[context][candidate]|")
-        self.inputView.bringSubviewToFront(contextView)
-        
-        contextView.text = "welcome to SKK"
-        
-        candidateView.dataSource = dataSource
-        candidateView.delegate = self
-        candidateView.hidden = true
-        
-        updateControlButtons()
+        self.view.addConstraint(heightConstraint);
     }
     
     func controlViewWithButtons(buttons: [UIView]) -> UIView {
