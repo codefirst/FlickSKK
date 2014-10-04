@@ -29,8 +29,10 @@ class KeyPad : UIView {
         
     private func keyButton(key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
+            weak var weakSelf = self
             b.tapped = { (key:KanaFlickKey, index:Int?) in
-                self.tapped?(key, index) ?? ()
+                weakSelf?.tapped?(key, index)
+                return
             }
         }
     }

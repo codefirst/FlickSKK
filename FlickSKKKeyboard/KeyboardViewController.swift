@@ -194,8 +194,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.shiftButton = keyButton(.Shift)
         
         for keypad in self.keypads.values {
-            keypad.tapped = { (key:KanaFlickKey, index:Int?) in
-                self.keyTapped(key, index)
+            keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?) in
+                self?.keyTapped(key, index)
+                return
             }
         }
 
