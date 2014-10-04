@@ -328,9 +328,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
     
     private func keyButton(key: KanaFlickKey) -> KeyButton {
-        return KeyButton(key: key).tap { [unowned self] (b:KeyButton) in
+        return KeyButton(key: key).tap { (b:KeyButton) in
+            weak var weakSelf = self
             b.tapped = { (key:KanaFlickKey, index:Int?) in
-                self.keyTapped(key, index)
+                weakSelf?.keyTapped(key, index)
+                return
             }
         }
     }
