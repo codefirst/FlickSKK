@@ -107,7 +107,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     let shiftButton: KeyButton!
     let keypads: [KeyboardMode:KeyPad]
     
-    let session : SKKSession!
+    let session : SKKSession?
     let dataSource = CandidateDataSource()
     
     var shiftEnabled: Bool {
@@ -205,7 +205,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         }
         NSLog("%@\n", userDict)
         let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-        self.session = SKKSession(delegate: self, dict: SKKDictionary(userDict: userDict, dicts: [dict!]))
+//        self.session = SKKSession(delegate: self, dict: SKKDictionary(userDict: userDict, dicts: [dict!]))
         
         updateInputMode()
     }
@@ -346,17 +346,17 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         case let .Seq(s):
             let kana = Array(s)[index ?? 0]
             let roman = kana.toRoman() ?? ""
-            self.session.handle(.Char(kana: String(kana), roman: roman), shift: self.shiftEnabled)
+            self.session?.handle(.Char(kana: String(kana), roman: roman), shift: self.shiftEnabled)
             self.shiftEnabled = false
         case .Backspace:
-            self.session.handle(.Backspace, shift: self.shiftEnabled)
+            self.session?.handle(.Backspace, shift: self.shiftEnabled)
         case .Return:
-            self.session.handle(.Enter, shift: self.shiftEnabled)
+            self.session?.handle(.Enter, shift: self.shiftEnabled)
         case .Shift: toggleShift()
         case .InputModeChange(let modes):
             switch modes[index ?? 0] {
             case .Some(let m):
-                self.session.handle(.InputModeChange(inputMode: m), shift: self.shiftEnabled)
+                self.session?.handle(.InputModeChange(inputMode: m), shift: self.shiftEnabled)
             case .None:
                 ()
             }
@@ -384,11 +384,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
     
     func handleSpace() {
-        session.handle(.Space, shift: self.shiftEnabled)
+        session?.handle(.Space, shift: self.shiftEnabled)
     }
     
     func toggleKomojiDakuten() {
-        self.session.handle(.ToggleDakuten, shift: self.shiftEnabled)
+        self.session?.handle(.ToggleDakuten, shift: self.shiftEnabled)
     }
     
     func composeText(text: String) {
@@ -409,7 +409,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
     
     func updateInputMode() {
-        switch self.session.currentMode {
+        if self.session == nil { return }
+        switch self.session!.currentMode {
         case .Hirakana:
             self.inputModeChangeButton.label.text = "あ"
             self.keyboardMode = .Hirakana
@@ -432,7 +433,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.session.handle(.SelectCandidate(index: indexPath.row), shift: self.shiftEnabled)
+        self.session?.handle(.SelectCandidate(index: indexPath.row), shift: self.shiftEnabled)
     }
     
     func beforeString() -> String {
