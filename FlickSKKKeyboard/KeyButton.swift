@@ -25,7 +25,6 @@ class KeyButton: UIView {
     }
     
     let label = UILabel()
-    let popup = UILabel()
     var metrics: [String:CGFloat] {
         return [:]
     }
@@ -83,11 +82,13 @@ class KeyButton: UIView {
     }
     
     func gestureTapped(gesture: UITapGestureRecognizer) {
+        KeyButtonFlickPopup.sharedInstance.hide()
         self.tapped?(self.key, self.sequenceIndex)
     }
     
     func gesturePanned(gesture: UIPanGestureRecognizer) {
         if gesture.state == UIGestureRecognizerState.Ended {
+            KeyButtonFlickPopup.sharedInstance.hide()
             self.tapped?(self.key, self.sequenceIndex)
             self.sequenceIndex = nil
             return
@@ -99,18 +100,27 @@ class KeyButton: UIView {
         
         if self.bounds.contains(p) {
             self.sequenceIndex = 0
-            self.popup.removeFromSuperview() // TODO: show in below block
+            KeyButtonFlickPopup.sharedInstance.hide()
         } else {
+            var direction = KeyButtonFlickDirection.None
+            
             let angle = Double(atan2(p.y - self.bounds.height/2, p.x - self.bounds.width/2))
             if angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
                 self.sequenceIndex = min(1, maxIndex)
+                direction = .Left
             } else if angle < -M_PI_4 {
                 self.sequenceIndex = min(2, maxIndex)
+                direction = .Up
             } else if angle < M_PI_4 {
                 self.sequenceIndex = min(3, maxIndex)
+                direction = .Right
             } else {
                 self.sequenceIndex = min(4, maxIndex)
+                direction = .Down
             }
+            
+            let text = String(Array(s)[self.sequenceIndex ?? 0])
+            KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
         }
     }
 

@@ -264,6 +264,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         
         updateControlButtons()
         
+        KeyButtonFlickPopup.sharedInstance.parentView = inputView
+        
         // iOS8 layout height(0) workaround: call self.inputView.addSubview() after viewDidAppear
     }
     

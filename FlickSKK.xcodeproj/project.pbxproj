@@ -23,6 +23,7 @@
 		D3C6CB3D1AD977725CC25D71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA289C0ED7662F2EF0F3718 /* libPods.a */; };
 		EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */; };
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
+		EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
 		EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56519D5CB50007B6636 /* AppDelegate.swift */; };
@@ -90,6 +91,7 @@
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSpacerView.swift; sourceTree = "<group>"; };
+		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
 		EA985FE519D84AAE0043564C /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
 		EA985FE719D84D060043564C /* KeyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
 		EAD4B56019D5CB50007B6636 /* FlickSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -254,6 +256,7 @@
 				136D160E19DA86690091D6BF /* CandidateDataSource.swift */,
 				EA985FE519D84AAE0043564C /* KeyPad.swift */,
 				EA985FE719D84D060043564C /* KeyButton.swift */,
+				EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */,
 				EAD4B59819D80AF3007B6636 /* Utilities.swift */,
 				EAD4B58B19D5CB8A007B6636 /* Supporting Files */,
 			);
@@ -496,6 +499,7 @@
 				EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */,
 				136D161519DAEBE90091D6BF /* InputMode.swift in Sources */,
 				136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */,
+				EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */,
 				13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */,
 				136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */,
 				133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */,
