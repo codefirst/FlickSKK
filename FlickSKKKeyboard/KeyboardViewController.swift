@@ -397,7 +397,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
     
     func toggleKomojiDakuten() {
-        self.session.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput))
+        self.session.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
     
     func composeText(text: String) {
