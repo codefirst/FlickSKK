@@ -90,6 +90,8 @@ private func newKeyboardGlobeButton(target: UIInputViewController) -> UIButton {
     }
 }
 
+var globalDictionary : SKKDictionary? = .None
+
 
 class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
     var heightConstraint : NSLayoutConstraint!
@@ -200,13 +202,18 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             }
         }
 
-        let userDict = NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
-        if !NSFileManager.defaultManager().fileExistsAtPath(userDict) {
-            NSFileManager.defaultManager().createFileAtPath(userDict, contents: nil, attributes:nil)
+        if globalDictionary == nil {
+            let userDict = NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
+            if !NSFileManager.defaultManager().fileExistsAtPath(userDict) {
+                NSFileManager.defaultManager().createFileAtPath(userDict, contents: nil, attributes:nil)
+            }
+
+            let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
+            globalDictionary = SKKDictionary(userDict: userDict, dicts: [dict!])
+        } else {
+            println("cached")
         }
-        NSLog("%@\n", userDict)
-        let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-        self.session = SKKSession(delegate: self, dict: SKKDictionary(userDict: userDict, dicts: [dict!]))
+        self.session = SKKSession(delegate: self, dict: globalDictionary!)
         
         updateInputMode()
     }
