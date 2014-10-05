@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
+let KeyButtonHighlightedColor = UIColor(hue: 0.10, saturation: 0.07, brightness: 0.96, alpha: 1.0)
 
-class KeyButton: UIView {
+
+class KeyButton: UIView, UIGestureRecognizerDelegate {
     let key: KanaFlickKey
     var sequenceIndex: Int? {
         didSet {
@@ -41,6 +43,11 @@ class KeyButton: UIView {
             self.label.textColor = enabled ? UIColor.blackColor() : UIColor.grayColor()
         }
     }
+    var highlighted: Bool {
+        didSet {
+            self.backgroundColor = highlighted ? KeyButtonHighlightedColor : selected ? selectedBackgroundColor : normalBackgroundColor
+        }
+    }
     
     var normalBackgroundColor: UIColor
     var selectedBackgroundColor: UIColor
@@ -51,6 +58,7 @@ class KeyButton: UIView {
         self.selectedBackgroundColor = UIColor(white: 0.95, alpha: 1.0)
         self.selected = false
         self.enabled = true
+        self.highlighted = false
         
         super.init(frame: CGRectZero)
         
@@ -75,55 +83,77 @@ class KeyButton: UIView {
         autolayout("V:|[label]|")
         
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gestureTapped:"))
-        
-        if let _ = key.sequence {
-            self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
-        }
+        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
+    }
+    
+    // MARK: - Gestures
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.highlighted = true // set to false on end, cancel, started pan
+        super.touchesBegan(touches, withEvent: event)
+    }
+    
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        self.highlighted = false
+        super.touchesEnded(touches, withEvent: event)
+    }
+    
+    override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
+//        self.highlighted = false // surpress flicker (highlighted = false, then true)
+        super.touchesCancelled(touches, withEvent: event)
     }
     
     func gestureTapped(gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
+        self.highlighted = false
         self.tapped?(self.key, self.sequenceIndex)
     }
     
     func gesturePanned(gesture: UIPanGestureRecognizer) {
+        let p = gesture.locationInView(self)
+        
         if gesture.state == UIGestureRecognizerState.Ended {
             KeyButtonFlickPopup.sharedInstance.hide()
-            self.tapped?(self.key, self.sequenceIndex)
+            if key.sequence != nil || self.bounds.contains(p) {
+                // always trigger when Seq, and trigger non-Seq (single char) key when touchUpInside
+                self.tapped?(self.key, self.sequenceIndex)
+            }
             self.sequenceIndex = nil
+            self.highlighted = false
             return
         }
         
-        let p = gesture.locationInView(self)
-        let s = key.sequence!
-        let maxIndex = s.count - 1
-        
         if self.bounds.contains(p) {
-            self.sequenceIndex = 0
+            self.sequenceIndex = (key.sequence != nil ? 0 : nil)
             KeyButtonFlickPopup.sharedInstance.hide()
+            self.highlighted = true
         } else {
-            var direction = KeyButtonFlickDirection.None
-            
-            let angle = Double(atan2(p.y - self.bounds.height/2, p.x - self.bounds.width/2))
-            if angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
-                self.sequenceIndex = min(1, maxIndex)
-                direction = .Left
-            } else if angle < -M_PI_4 {
-                self.sequenceIndex = min(2, maxIndex)
-                direction = .Up
-            } else if angle < M_PI_4 {
-                self.sequenceIndex = min(3, maxIndex)
-                direction = .Right
-            } else {
-                self.sequenceIndex = min(4, maxIndex)
-                direction = .Down
+            self.highlighted = false
+            if let s = key.sequence {
+                let maxIndex = s.count - 1
+                var direction = KeyButtonFlickDirection.None
+                
+                let angle = Double(atan2(p.y - self.bounds.height/2, p.x - self.bounds.width/2))
+                if angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
+                    self.sequenceIndex = min(1, maxIndex)
+                    direction = .Left
+                } else if angle < -M_PI_4 {
+                    self.sequenceIndex = min(2, maxIndex)
+                    direction = .Up
+                } else if angle < M_PI_4 {
+                    self.sequenceIndex = min(3, maxIndex)
+                    direction = .Right
+                } else {
+                    self.sequenceIndex = min(4, maxIndex)
+                    direction = .Down
+                }
+                
+                let text = String(Array(s)[self.sequenceIndex ?? 0])
+                KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
             }
-            
-            let text = String(Array(s)[self.sequenceIndex ?? 0])
-            KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
         }
     }
 
+    // MARK: -
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

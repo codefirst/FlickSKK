@@ -54,7 +54,7 @@ class KeyButtonFlickPopup: UIView {
     private override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor(hue: 0.10, saturation: 0.07, brightness: 0.96, alpha: 1.0)
+        self.backgroundColor = KeyButtonHighlightedColor
 //        self.layer.borderColor = UIColor.redColor().CGColor
 //        self.layer.borderWidth = 1.0
         self.clipsToBounds = false
