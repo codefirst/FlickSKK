@@ -205,7 +205,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.shiftButton = keyButton(.Shift)
         
         for keypad in self.keypads.values {
-            keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?) in
+            keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?, withShift: Bool) in
+                if withShift { self?.shiftEnabled = true }
                 self?.keyTapped(key, index)
                 return
             }
@@ -337,7 +338,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     private func keyButton(key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
-            b.tapped = { (key:KanaFlickKey, index:Int?) in
+            b.tapped = { (key:KanaFlickKey, index:Int?, withShift: Bool) in
+                if withShift { weakSelf?.shiftEnabled = true }
                 weakSelf?.keyTapped(key, index)
                 return
             }

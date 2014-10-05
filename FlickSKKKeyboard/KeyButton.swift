@@ -31,7 +31,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         return [:]
     }
     
-    var tapped: ((KanaFlickKey, Int?) -> Void)?
+    var tapped: ((KanaFlickKey, Int?, withShift: Bool) -> Void)?
     var selected: Bool {
         didSet {
             self.backgroundColor = selected ? selectedBackgroundColor : normalBackgroundColor
@@ -48,6 +48,9 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             self.backgroundColor = highlighted ? KeyButtonHighlightedColor : selected ? selectedBackgroundColor : normalBackgroundColor
         }
     }
+    
+    var doubleTapGesture: UITapGestureRecognizer!
+    var doubleTapPanGesture: UIPanGestureRecognizer!
     
     var normalBackgroundColor: UIColor
     var selectedBackgroundColor: UIColor
@@ -82,8 +85,27 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         autolayout("H:|[label]|")
         autolayout("V:|[label]|")
         
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gestureTapped:"))
+        let tap = UITapGestureRecognizer(target: self, action: "gestureTapped:").tap {
+            (g: UITapGestureRecognizer) in
+            self.addGestureRecognizer(g)
+        }
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
+        
+        // double-tap or double-tap-and-pan to input with shift
+        if key.sequence != nil {
+            self.doubleTapGesture = UITapGestureRecognizer(target: self, action: "gestureTapped:").tap {
+                (g: UITapGestureRecognizer) in
+                g.delegate = self
+                g.numberOfTapsRequired = 2
+                self.addGestureRecognizer(g)
+            }
+            self.doubleTapPanGesture = UIPanGestureRecognizer(target: self, action: "gesturePanned:").tap {
+                (g: UIPanGestureRecognizer) in
+                g.delegate = self
+                tap.requireGestureRecognizerToFail(g)
+                self.addGestureRecognizer(g)
+            }
+        }
     }
     
     // MARK: - Gestures
@@ -102,20 +124,42 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         super.touchesCancelled(touches, withEvent: event)
     }
     
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        println("tapCount = \(touch.tapCount)")
+        if (gestureRecognizer === doubleTapGesture) {
+            return (touch.tapCount <= 2)
+        } else if (gestureRecognizer === doubleTapPanGesture) {
+            return (touch.tapCount >= 2)
+        }
+        return false
+    }
+    
     func gestureTapped(gesture: UITapGestureRecognizer) {
+        let doubleTapped = (gesture === self.doubleTapGesture)
+        println("tapped: double = \(doubleTapped)")
+        
         KeyButtonFlickPopup.sharedInstance.hide()
         self.highlighted = false
-        self.tapped?(self.key, self.sequenceIndex)
+        
+        if doubleTapped {
+            self.tapped?(KanaFlickKey.Backspace, nil, withShift: false)
+        }
+        self.tapped?(self.key, self.sequenceIndex, withShift: doubleTapped)
     }
     
     func gesturePanned(gesture: UIPanGestureRecognizer) {
+        let doubleTapPanned = (gesture === self.doubleTapPanGesture)
         let p = gesture.locationInView(self)
+        
+        if gesture.state == .Began && doubleTapPanned {
+            self.tapped?(KanaFlickKey.Backspace, nil, withShift: false)
+        }
         
         if gesture.state == UIGestureRecognizerState.Ended {
             KeyButtonFlickPopup.sharedInstance.hide()
             if key.sequence != nil || self.bounds.contains(p) {
                 // always trigger when Seq, and trigger non-Seq (single char) key when touchUpInside
-                self.tapped?(self.key, self.sequenceIndex)
+                self.tapped?(self.key, self.sequenceIndex, withShift: gesture === self.doubleTapPanGesture)
             }
             self.sequenceIndex = nil
             self.highlighted = false

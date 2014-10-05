@@ -14,7 +14,7 @@ class KeyPad : UIView {
     let keys: [KanaFlickKey]
     var keyButtons: [KeyButton]
 
-    var tapped: ((KanaFlickKey, Int?) -> Void)?
+    var tapped: ((KanaFlickKey, Int?, withShift: Bool) -> Void)?
     
     var metrics: [String:CGFloat] {
         return [:]
@@ -30,8 +30,8 @@ class KeyPad : UIView {
     private func keyButton(key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
-            b.tapped = { (key:KanaFlickKey, index:Int?) in
-                weakSelf?.tapped?(key, index)
+            b.tapped = { (key:KanaFlickKey, index:Int?, withShift:Bool) in
+                weakSelf?.tapped?(key, index, withShift: withShift)
                 return
             }
         }
