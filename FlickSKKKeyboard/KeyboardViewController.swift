@@ -349,17 +349,17 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         case let .Seq(s):
             let kana = Array(s)[index ?? 0]
             let roman = kana.toRoman() ?? ""
-            self.session.handle(.Char(kana: String(kana), roman: roman), shift: self.shiftEnabled)
+            self.session.handle(.Char(kana: String(kana), roman: roman, shift: self.shiftEnabled))
             self.shiftEnabled = false
         case .Backspace:
-            self.session.handle(.Backspace, shift: self.shiftEnabled)
+            self.session.handle(.Backspace)
         case .Return:
-            self.session.handle(.Enter, shift: self.shiftEnabled)
+            self.session.handle(.Enter)
         case .Shift: toggleShift()
         case .InputModeChange(let modes):
             switch modes[index ?? 0] {
             case .Some(let m):
-                self.session.handle(.InputModeChange(inputMode: m), shift: self.shiftEnabled)
+                self.session.handle(.InputModeChange(inputMode: m))
             case .None:
                 ()
             }
@@ -387,11 +387,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
     
     func handleSpace() {
-        session.handle(.Space, shift: self.shiftEnabled)
+        session.handle(.Space)
     }
     
     func toggleKomojiDakuten() {
-        self.session.handle(.ToggleDakuten, shift: self.shiftEnabled)
+        self.session.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput))
     }
     
     func composeText(text: String) {
@@ -435,10 +435,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.session.handle(.SelectCandidate(index: indexPath.row), shift: self.shiftEnabled)
-    }
-    
-    func beforeString() -> String {
-        return self.inputProxy.documentContextBeforeInput
+        self.session.handle(.SelectCandidate(index: indexPath.row))
     }
 }

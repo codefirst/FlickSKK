@@ -7,16 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		133CDCF219D9896400B8120D /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF119D9896400B8120D /* InputMode.swift */; };
-		133CDCF419D98A1200B8120D /* HirakanaInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF319D98A1200B8120D /* HirakanaInputMode.swift */; };
 		133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
 		133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
 		136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D160E19DA86690091D6BF /* CandidateDataSource.swift */; };
 		136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
-		136D161319DAEB620091D6BF /* KatakanaInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161219DAEB620091D6BF /* KatakanaInputMode.swift */; };
-		136D161519DAEBE90091D6BF /* InputModeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputModeBase.swift */; };
-		137CD74019DB7EAE00CFB356 /* HankakukanaInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137CD73F19DB7EAE00CFB356 /* HankakukanaInputMode.swift */; };
+		136D161519DAEBE90091D6BF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputMode.swift */; };
+		1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */; };
+		1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4F19E0EEE200175343 /* BaseSession.swift */; };
 		13D118CC19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
@@ -77,16 +75,14 @@
 
 /* Begin PBXFileReference section */
 		0CA289C0ED7662F2EF0F3718 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		133CDCF119D9896400B8120D /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
-		133CDCF319D98A1200B8120D /* HirakanaInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HirakanaInputMode.swift; sourceTree = "<group>"; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
 		133CDCF819D98ADA00B8120D /* KeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		133CDCFA19D98DAB00B8120D /* SKKSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSession.swift; sourceTree = "<group>"; };
 		136D160E19DA86690091D6BF /* CandidateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateDataSource.swift; sourceTree = "<group>"; };
 		136D161019DAA0AE0091D6BF /* SKKInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
-		136D161219DAEB620091D6BF /* KatakanaInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KatakanaInputMode.swift; sourceTree = "<group>"; };
-		136D161419DAEBE90091D6BF /* InputModeBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputModeBase.swift; sourceTree = "<group>"; };
-		137CD73F19DB7EAE00CFB356 /* HankakukanaInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HankakukanaInputMode.swift; sourceTree = "<group>"; };
+		136D161419DAEBE90091D6BF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
+		1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterSession.swift; sourceTree = "<group>"; };
+		1393DF4F19E0EEE200175343 /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
 		13F4525119DC538B001A4A1B /* IOUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUtil.h; sourceTree = "<group>"; };
@@ -148,18 +144,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		133CDCF019D9895700B8120D /* InputMode */ = {
-			isa = PBXGroup;
-			children = (
-				133CDCF119D9896400B8120D /* InputMode.swift */,
-				136D161219DAEB620091D6BF /* KatakanaInputMode.swift */,
-				136D161419DAEBE90091D6BF /* InputModeBase.swift */,
-				133CDCF319D98A1200B8120D /* HirakanaInputMode.swift */,
-				137CD73F19DB7EAE00CFB356 /* HankakukanaInputMode.swift */,
-			);
-			name = InputMode;
-			sourceTree = "<group>";
-		};
 		133CDCF719D98A4C00B8120D /* SKKBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,7 +160,10 @@
 		133CDCFC19D98DB100B8120D /* SKKSession */ = {
 			isa = PBXGroup;
 			children = (
+				136D161419DAEBE90091D6BF /* InputMode.swift */,
+				1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */,
 				133CDCFA19D98DAB00B8120D /* SKKSession.swift */,
+				1393DF4F19E0EEE200175343 /* BaseSession.swift */,
 			);
 			name = SKKSession;
 			sourceTree = "<group>";
@@ -262,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				133CDCF719D98A4C00B8120D /* SKKBase */,
-				133CDCF019D9895700B8120D /* InputMode */,
 				133CDCFC19D98DB100B8120D /* SKKSession */,
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
 				136D160E19DA86690091D6BF /* CandidateDataSource.swift */,
@@ -504,17 +490,15 @@
 				EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */,
 				13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */,
 				133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */,
-				133CDCF419D98A1200B8120D /* HirakanaInputMode.swift in Sources */,
+				1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */,
+				1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */,
 				EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */,
 				EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */,
-				136D161519DAEBE90091D6BF /* InputModeBase.swift in Sources */,
-				133CDCF219D9896400B8120D /* InputMode.swift in Sources */,
+				136D161519DAEBE90091D6BF /* InputMode.swift in Sources */,
 				136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */,
 				13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */,
-				136D161319DAEB620091D6BF /* KatakanaInputMode.swift in Sources */,
 				136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */,
 				133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */,
-				137CD74019DB7EAE00CFB356 /* HankakukanaInputMode.swift in Sources */,
 				133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,
 			);

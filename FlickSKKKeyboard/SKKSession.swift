@@ -9,25 +9,77 @@
 
 import Foundation
 
-class SKKSession {
-    let inputMode : [SKKInputMode:InputMode]
-    var currentMode : SKKInputMode = .Hirakana
-    let dictionary : SKKDictionary
-
+class SKKSession : BaseSession {
+    // 通常モード用
+    private weak var delegate : SKKDelegate?
+    
     init(delegate : SKKDelegate, dict : SKKDictionary) {
-        self.dictionary = dict
-        let session = { (delegate : SKKDelegate) -> SKKSession in return SKKSession(delegate: delegate, dict: dict) }
-        inputMode = [
-            .Hirakana: HirakanaInputMode(delegate: delegate, dict: dict, session: session),
-            .Katakana: KatakanaInputMode(delegate: delegate, dict: dict, session: session),
-            .HankakuKana: HankakukanaInputMode(delegate: delegate, dict: dict, session: session)
-        ]
+        self.delegate = delegate
+        super.init(dict: dict)
     }
 
-    func handle(event : KeyEvent, shift : Bool) {
-        let m : InputMode? = inputMode[currentMode]
-        m?.handle(event, shift: shift, changeMode: { (mode : SKKInputMode) -> () in
-            self.currentMode = mode
-        })
+    func handle(event : KeyEvent) {
+        switch(self.status) {
+        case .Default:
+            onDefault(event)
+        case .WordRegister:
+            onWordRegister(event)
+        }
+        
+        switch(self.status) {
+        case .Default:
+            showInfo(currentInputMode()?.info())
+        case .WordRegister:
+            showInfo(subSession?.info())
+        }        
+    }
+    
+    private func onDefault(event : KeyEvent) {
+        let m = currentInputMode()
+        processHandles(m?.handle(event) ?? [])
+    }
+    
+    private func onWordRegister(event : KeyEvent) {
+        switch subSession?.handle(event) {
+        case .Some(.Commit(kanji : let kanji)):
+            self.status = .Default
+            onDefault(.CommitWord(kanji: kanji))
+        case .Some(.Cancel):
+            self.status = .Default
+            onDefault(.CancelWord)
+        case .Some(.Handles(xs: let xs)):
+            processHandles(xs)
+        case .None:
+            ()
+        }
+    }
+    
+    private func processHandles(xs : [InputMode.Handle]) {
+        for x in xs {
+            switch x {
+            case .InsertText(text: let text):
+                self.delegate?.insertText(text)
+            case .DeleteText(count: let count):
+                for _ in 0..<count {
+                    self.delegate?.deleteBackward()
+                }
+            case .InputModeChange(mode: let mode):
+                self.currentMode = mode
+            case .RegisterWord(kana: let kana, okuri: let okuri):
+                registerWord(kana, okuri: okuri)
+            }
+        }
+    }
+    
+    private func showInfo(info : InputMode.Info?) {
+        switch info {
+        case .Some(.ComposeText(text: let text)):
+            self.delegate?.composeText(text)
+            self.delegate?.showCandidates(.None)
+        case .Some(.Candidates(xs: let xs)):
+            self.delegate?.showCandidates(xs)
+        case .None:
+            ()
+        }
     }
 }

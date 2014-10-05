@@ -9,11 +9,15 @@
 import Foundation
 
 enum KeyEvent {
-    case Char(kana : String, roman : String)
+    case Char(kana : String, roman : String, shift : Bool)
     case Space
     case Enter
     case Backspace
     case SelectCandidate(index: Int)
     case InputModeChange(inputMode : SKKInputMode)
-    case ToggleDakuten
+    case ToggleDakuten(beforeText : String)
+    
+    // 仮想イベント
+    case CommitWord(kanji: String)
+    case CancelWord
 }
