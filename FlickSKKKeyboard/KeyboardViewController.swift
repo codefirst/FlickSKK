@@ -8,6 +8,17 @@
 
 import UIKit
 
+
+private let kGlobalDictionary: SKKDictionary = { // lazily stored global constant
+    let userDict = NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
+    if !NSFileManager.defaultManager().fileExistsAtPath(userDict) {
+        NSFileManager.defaultManager().createFileAtPath(userDict, contents: nil, attributes:nil)
+    }
+    let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
+    return SKKDictionary(userDict: userDict, dicts: [dict!])
+}()
+
+
 enum KanaFlickKey: Hashable {
     case Seq(String)
     case Shift
@@ -89,8 +100,6 @@ private func newKeyboardGlobeButton(target: UIInputViewController) -> UIButton {
         b.layer.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
     }
 }
-
-var globalDictionary : SKKDictionary? = .None
 
 
 class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
@@ -201,19 +210,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 return
             }
         }
-
-        if globalDictionary == nil {
-            let userDict = NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
-            if !NSFileManager.defaultManager().fileExistsAtPath(userDict) {
-                NSFileManager.defaultManager().createFileAtPath(userDict, contents: nil, attributes:nil)
-            }
-
-            let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-            globalDictionary = SKKDictionary(userDict: userDict, dicts: [dict!])
-        } else {
-            println("cached")
-        }
-        self.session = SKKSession(delegate: self, dict: globalDictionary!)
+        self.session = SKKSession(delegate: self, dict: kGlobalDictionary)
         
         updateInputMode()
     }
