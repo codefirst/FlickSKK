@@ -108,13 +108,14 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     let keypadAndControlsView = UIView()
     let contextView = UILabel()
     let candidateView = UITableView()
-    
+
     let nextKeyboardButton: UIButton!
     let inputModeChangeButton : KeyButton!
+    var numberModeButton : KeyButton!
     var inputProxy: UITextDocumentProxy {
         return self.textDocumentProxy as UITextDocumentProxy
     }
-    
+
     let shiftButton: KeyButton!
     let keypads: [KeyboardMode:KeyPad]
     
@@ -126,7 +127,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             updateControlButtons()
         }
     }
-    var keyboardMode: KeyboardMode {
+
+    var numberEnabled: Bool {
         didSet {
             updateControlButtons()
         }
@@ -138,7 +140,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.shiftEnabled = false
-        self.keyboardMode = .Hirakana
+        self.numberEnabled = false
         self.keypads = [
             .Hirakana: KeyPad(keys: [
                 .Seq("あいうえお"),
@@ -202,6 +204,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         
         self.nextKeyboardButton = newKeyboardGlobeButton(self)
         self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
+        self.numberModeButton = keyButton(.Number)
         self.shiftButton = keyButton(.Shift)
         
         for keypad in self.keypads.values {
@@ -211,8 +214,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             }
         }
         self.session = SKKSession(delegate: self, dict: kGlobalDictionary)
-        
-        updateInputMode()
+        updateControlButtons()
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -229,7 +231,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.heightConstraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
         
         let leftControl = controlViewWithButtons([
-            keyButton(.Number),
+            numberModeButton,
             keyButton(.Nothing), // FIXME: some button
             inputModeChangeButton,
             nextKeyboardButton,
@@ -369,23 +371,53 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             case .None:
                 ()
             }
-        case .Number: self.keyboardMode = .Number
+            self.numberEnabled = false
+        case .Number:
+            self.numberEnabled = true
         case .KomojiDakuten: self.toggleKomojiDakuten()
         case .Space: self.handleSpace()
         case .Nothing: break
         }
-        updateInputMode()
+        updateControlButtons()
     }
     
     func updateControlButtons() {
-        for (mode, keypad) in self.keypads {
-            keypad.hidden = !(mode == self.keyboardMode)
+        // Keyboard mode
+        var keyboardMode : KeyboardMode = .Hirakana
+        if self.numberEnabled {
+            keyboardMode = .Number
+        } else {
+            switch self.session.currentMode {
+            case .Hirakana:
+                keyboardMode = .Hirakana
+            case .Katakana:
+                keyboardMode = .Katakana
+            case .HankakuKana:
+                keyboardMode = .HankakuKana
+            }
         }
-        
+
+        for (mode, keypad) in self.keypads {
+            keypad.hidden = !(mode == keyboardMode)
+        }
+
+        // each button
+        self.inputModeChangeButton.selected = !self.numberEnabled
+        self.numberModeButton.selected = self.numberEnabled
         self.shiftButton.selected = self.shiftEnabled
         
         // default implementation
         self.nextKeyboardButton.setTitleColor(inputProxy.keyboardAppearance == UIKeyboardAppearance.Dark ? UIColor.whiteColor() : UIColor.blackColor(), forState: .Normal)
+
+        // InputMode
+        switch self.session.currentMode {
+        case .Hirakana:
+            self.inputModeChangeButton.label.text = "あ"
+        case .Katakana:
+            self.inputModeChangeButton.label.text = "ア"
+        case .HankakuKana:
+            self.inputModeChangeButton.label.text = "ｶﾅ"
+        }
     }
     
     func toggleShift() {
@@ -416,22 +448,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             candidateView.hidden = true
         }
     }
-    
-    func updateInputMode() {
-        switch self.session.currentMode {
-        case .Hirakana:
-            self.inputModeChangeButton.label.text = "あ"
-            self.keyboardMode = .Hirakana
-        case .Katakana:
-            self.inputModeChangeButton.label.text = "ア"
-            self.keyboardMode = .Katakana
-        case .HankakuKana:
-            self.inputModeChangeButton.label.text = "ｶﾅ"
-            self.keyboardMode = .HankakuKana
-        }
-        updateControlButtons()
-    }
-    
+
     func deleteBackward() {
         (self.textDocumentProxy as UIKeyInput).deleteBackward()
     }
