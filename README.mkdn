@@ -28,6 +28,19 @@ $ pod install
 ```
 その後、 FlickSKK.*xcworkspace* を開いてビルドしてください。 (注: FlickSKK.*xcodeproj* ではない)
 
+### TestFlightへのリリース
+以下の準備を行なう。
+
+ * TestFlightのDesktopAppをインストールする
+ * FlickSKKという名前でMobileProvisionを導入する
+ * アイコン等をコミットしたbranchを用意する
+
+その後、以下のコマンドでTestFlightへのリリースが行なえる。
+
+```
+$ ./misc/package branch-name
+```
+
 ### トラブルシューティング
 #### "ld: library not found for -lz" とエラーがでる
 
