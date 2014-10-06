@@ -13,9 +13,13 @@ class UtilitiesSpec: QuickSpec {
     override func spec() {
         describe("String") {
             context("ひらがな to カタカナ") {
-                it("is convert あ行") {
+                it("convert あ行") {
                     let result = "あいうえお".conv(.Hirakana, to: .Katakana)
                     expect(result).to(equal("アイウエオ"))
+                }
+                it("convert 'ポップアップ'") {
+                    let result = "ぽっぷあっぷ".conv(.Hirakana, to: .Katakana)
+                    expect(result).to(equal("ポップアップ"))
                 }
             }
         }
