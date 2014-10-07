@@ -21,6 +21,7 @@
 		13D118CC19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
+		13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */; };
 		13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
 		13F9325819E2DBFC00AC5019 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		13F9326119E2DC1700AC5019 /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
@@ -170,6 +171,7 @@
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
+		13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSessionSpec.swift; sourceTree = "<group>"; };
 		13F4525119DC538B001A4A1B /* IOUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUtil.h; sourceTree = "<group>"; };
 		13F4525219DC5399001A4A1B /* FlickSKKKeyboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FlickSKKKeyboard-Bridging-Header.h"; path = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */,
 				1394A99219E2D80300F01BF0 /* Quick.xcodeproj */,
 				13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */,
+				13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */,
 				EAD4B57919D5CB50007B6636 /* Supporting Files */,
 			);
 			path = FlickSKKTests;
@@ -666,6 +669,7 @@
 				13F9326319E2DC1700AC5019 /* SKKDictionary.swift in Sources */,
 				13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */,
 				13F9326519E2DC1700AC5019 /* IOUtil.h in Sources */,
+				13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
 				13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */,
 				13F9326819E2DC1700AC5019 /* WordRegisterSession.swift in Sources */,

@@ -79,6 +79,9 @@ class SKKDictionaryFile {
 }
 
 class SKKDictionary {
+    private let semaphore = dispatch_semaphore_create(0)
+    private var initialized = false
+
     var dictionaries : [ SKKDictionaryFile ] = []
     var userDict : SKKDictionaryFile?
     init(userDict: String, dicts : [String]){
@@ -86,6 +89,8 @@ class SKKDictionary {
             self.userDict = SKKDictionaryFile(path: userDict)
             self.dictionaries = [ self.userDict! ] + dicts.map({ x -> SKKDictionaryFile in
                 SKKDictionaryFile(path: x)})
+            dispatch_semaphore_signal(self.semaphore)
+            self.initialized = true
         })
     }
 
@@ -106,5 +111,10 @@ class SKKDictionary {
             self.userDict?.serialize()
             ()
         })
+    }
+
+    func waitForLoading() {
+        if initialized { return }
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
     }
 }
