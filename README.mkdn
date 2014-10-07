@@ -1,4 +1,6 @@
 # FlickSKK
+![Build status](https://travis-ci.org/codefirst/FlickSKK.svg)
+
 *現在、開発中であり、AppStore等での配布は行なっていません。*
 
 ## Overview
