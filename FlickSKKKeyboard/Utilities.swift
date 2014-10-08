@@ -73,8 +73,15 @@ func toggle(s : String, table : [[String]]) -> String? {
 }
 
 func tr(c : Character, from : String, to : String) -> Character? {
-    if let r = from.rangeOfString(String(c)) {
-        return to[r.startIndex]
+    /*
+     * REMARK:
+     * - Stringのsubscriptionだと半角カナのカナと濁点が分離してしまう。
+     * - Arrayに変換するとカナと濁点をセットにしたまま分割できる。
+     * - String.IndexをIntに変換する方法がわからなかったので、NSStringのメソッドを利用している。
+     */
+    let r = (from as NSString).rangeOfString(String(c))
+    if r.location != NSNotFound {
+        return Array(to)[r.location]
     }
     return .None
 }
@@ -241,11 +248,11 @@ enum KanaType {
 }
 let ConversionTable : [KanaType:String] = [
     .Hirakana:
-        "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょづぱぴぷぺぽ",
+        "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんぁぃぅぇぉがぎぐげござじずぜぞだぢっでどばびぶべぼゃゅょづぱぴぷぺぽー",
     .Katakana:
-        "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョヅパピプペポ",
+        "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンァィゥェォガギグゲゴザジズゼゾダヂッデドバビブベボャュョヅパピプペポー",
     .HankakuKana:
-        "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｯ"
+        "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜｦﾝｧｨｩｪｫｶﾞｷﾞｸﾞｹﾞｺﾞｻﾞｼﾞｽﾞｾﾞｿﾞﾀﾞﾁﾞｯﾃﾞﾄﾞﾊﾞﾋﾞﾌﾞﾍﾞﾎﾞｬｭｮﾂﾞﾊﾟﾋﾟﾌﾟﾍﾟﾎﾟｰ"
 ]
 
 extension String {

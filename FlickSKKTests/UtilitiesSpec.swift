@@ -22,6 +22,20 @@ class UtilitiesSpec: QuickSpec {
                     expect(result).to(equal("ポップアップ"))
                 }
             }
+            context("ひらがな to ﾊﾝｶｸｶﾅ") {
+                it("convert あ行") {
+                    let result = "あいうえお".conv(.Hirakana, to: .HankakuKana)
+                    expect(result).to(equal("ｱｲｳｴｵ"))
+                }
+                it("convert が行") {
+                    let result = "がぎぐげご".conv(.Hirakana, to: .HankakuKana)
+                    expect(result).to(equal("ｶﾞｷﾞｸﾞｹﾞｺﾞ"))
+                }
+                it("convert ゃゅょｰ") {
+                    let result = "ゃゅょー".conv(.Hirakana, to: .HankakuKana)
+                    expect(result).to(equal("ｬｭｮｰ"))
+                }
+            }
             context("toggle upper case/lower case") {
                 it("convert ABCZ") {
                     expect("A".toggleUpperLower()).to(equal("a"))
