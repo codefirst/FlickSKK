@@ -75,9 +75,8 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                 it("ignore okuri for number") {
                     session.handle(.Char(kana: "1", roman: "", shift: true))
                     session.handle(.Char(kana: "2", roman: "", shift: true))
-                    session.handle(.Space)
                     session.handle(.Enter)
-                    expect(self.insertedText).to(equal("十二"))
+                    expect(self.insertedText).to(equal("12"))
                 }
             }
             describe("alphabet input") {
