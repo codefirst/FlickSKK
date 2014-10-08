@@ -22,6 +22,18 @@ class UtilitiesSpec: QuickSpec {
                     expect(result).to(equal("ポップアップ"))
                 }
             }
+            context("toggle upper case/lower case") {
+                it("convert ABCZ") {
+                    expect("A".toggleUpperLower()).to(equal("a"))
+                    expect("H".toggleUpperLower()).to(equal("h"))
+                    expect("Z".toggleUpperLower()).to(equal("z"))
+                }
+                it("convert abc") {
+                    expect("a".toggleUpperLower()).to(equal("A"))
+                    expect("h".toggleUpperLower()).to(equal("H"))
+                    expect("z".toggleUpperLower()).to(equal("Z"))
+                }
+            }
         }
     }
 }

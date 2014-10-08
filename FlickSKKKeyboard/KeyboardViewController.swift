@@ -26,7 +26,9 @@ enum KanaFlickKey: Hashable {
     case Backspace
     case InputModeChange([SKKInputMode?])
     case Number
+    case Alphabet
     case KomojiDakuten
+    case UpperLower
     case Space
     case Nothing
     
@@ -38,7 +40,9 @@ enum KanaFlickKey: Hashable {
         case .Backspace: return "⌫"
         case .InputModeChange: return "あ"
         case .Number: return "123"
+        case .Alphabet: return "ABC"
         case .KomojiDakuten: return "小゛゜"
+        case .UpperLower: return "a/A"
         case .Space: return "space"
         case .Nothing: return ""
         }
@@ -67,9 +71,11 @@ enum KanaFlickKey: Hashable {
         case .Backspace: return 3
         case .InputModeChange: return 4
         case .Number: return 5
-        case .KomojiDakuten: return 6
-        case .Space: return 7
-        case .Nothing: return 8
+        case .Alphabet: return 6
+        case .KomojiDakuten: return 7
+        case .UpperLower: return 8
+        case .Space: return 9
+        case .Nothing: return 10
         }
     }
 }
@@ -81,12 +87,25 @@ func ==(l: KanaFlickKey, r: KanaFlickKey) -> Bool {
     }
 }
 
-
-enum KeyboardMode {
-    case Hirakana
-    case Katakana
-    case HankakuKana
+enum KeyboardMode: Hashable {
+    case InputMode(mode : SKKInputMode)
     case Number
+    case Alphabet
+
+    var hashValue: Int {
+        switch self {
+        case .InputMode(_): return 0
+        case .Number: return 1
+        case .Alphabet: return 2
+        }
+    }
+}
+
+func ==(l : KeyboardMode, r : KeyboardMode) -> Bool {
+    switch (l,r)  {
+    case let (.InputMode(m), .InputMode(n)): return m == n
+    default: return l.hashValue == r.hashValue
+    }
 }
 
 
@@ -112,6 +131,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     let nextKeyboardButton: UIButton!
     let inputModeChangeButton : KeyButton!
     var numberModeButton : KeyButton!
+    var alphabetModeButton : KeyButton!
     var inputProxy: UITextDocumentProxy {
         return self.textDocumentProxy as UITextDocumentProxy
     }
@@ -128,7 +148,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         }
     }
 
-    var numberEnabled: Bool {
+    var keyboardMode : KeyboardMode {
         didSet {
             updateControlButtons()
         }
@@ -139,10 +159,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        self.keyboardMode = .InputMode(mode: .Hirakana)
         self.shiftEnabled = false
-        self.numberEnabled = false
         self.keypads = [
-            .Hirakana: KeyPad(keys: [
+            .InputMode(mode: .Hirakana): KeyPad(keys: [
                 .Seq("あいうえお"),
                 .Seq("かきくけこ"),
                 .Seq("さしすせそ"),
@@ -156,7 +176,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("わをんー"),
                 .Seq("、。？！"),
                 ]),
-            .Katakana: KeyPad(keys: [
+            .InputMode(mode: .Katakana): KeyPad(keys: [
                 .Seq("アイウエオ"),
                 .Seq("カキクケコ"),
                 .Seq("サシスセソ"),
@@ -170,7 +190,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("ワヲンー"),
                 .Seq("、。？！"),
                 ]),
-            .HankakuKana: KeyPad(keys: [
+            .InputMode(mode: .HankakuKana): KeyPad(keys: [
                 .Seq("ｱｲｳｴｵ"),
                 .Seq("ｶｷｸｹｺ"),
                 .Seq("ｻｼｽｾｿ"),
@@ -198,6 +218,20 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq("0～⋯"),
                 .Seq(".,-/"),
                 ]),
+            .Alphabet: KeyPad(keys: [
+                .Seq("@#/&_"),
+                .Seq("ABC"),
+                .Seq("DEF"),
+                .Seq("GHI"),
+                .Seq("JKL"),
+                .Seq("MNO"),
+                .Seq("PQRS"),
+                .Seq("TUV"),
+                .Seq("WXYZ"),
+                .UpperLower,
+                .Seq("'\"()"),
+                .Seq(".,?!")
+                ]),
         ]
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -205,6 +239,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.nextKeyboardButton = newKeyboardGlobeButton(self)
         self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
         self.numberModeButton = keyButton(.Number)
+        self.alphabetModeButton = keyButton(.Alphabet)
         self.shiftButton = keyButton(.Shift)
         
         for keypad in self.keypads.values {
@@ -232,7 +267,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         
         let leftControl = controlViewWithButtons([
             numberModeButton,
-            keyButton(.Nothing), // FIXME: some button
+            alphabetModeButton,
             inputModeChangeButton,
             nextKeyboardButton,
             ])
@@ -371,10 +406,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             case .None:
                 ()
             }
-            self.numberEnabled = false
+            self.keyboardMode = .InputMode(mode: self.session.currentMode)
         case .Number:
-            self.numberEnabled = true
+            self.keyboardMode = .Number
+        case .Alphabet:
+            self.keyboardMode = .Alphabet
         case .KomojiDakuten: self.toggleKomojiDakuten()
+        case .UpperLower: self.toggleUpperLower()
         case .Space: self.handleSpace()
         case .Nothing: break
         }
@@ -383,27 +421,19 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     
     func updateControlButtons() {
         // Keyboard mode
-        var keyboardMode : KeyboardMode = .Hirakana
-        if self.numberEnabled {
-            keyboardMode = .Number
-        } else {
-            switch self.session.currentMode {
-            case .Hirakana:
-                keyboardMode = .Hirakana
-            case .Katakana:
-                keyboardMode = .Katakana
-            case .HankakuKana:
-                keyboardMode = .HankakuKana
-            }
-        }
-
         for (mode, keypad) in self.keypads {
             keypad.hidden = !(mode == keyboardMode)
         }
 
         // each button
-        self.inputModeChangeButton.selected = !self.numberEnabled
-        self.numberModeButton.selected = self.numberEnabled
+        switch(self.keyboardMode) {
+        case .InputMode(_):
+            self.inputModeChangeButton.selected = true
+        default:
+            self.inputModeChangeButton.selected = false
+        }
+        self.numberModeButton.selected = self.keyboardMode == .Number
+        self.alphabetModeButton.selected = self.keyboardMode == .Alphabet
         self.shiftButton.selected = self.shiftEnabled
         
         // default implementation
@@ -432,10 +462,14 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.session.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
     
+    func toggleUpperLower() {
+        self.session.handle(.ToggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
+    }
+
     func composeText(text: String) {
         contextView.text = text
     }
-    
+
     func showCandidates(candidates: [String]?) {
         switch candidates {
         case .Some(let xs):

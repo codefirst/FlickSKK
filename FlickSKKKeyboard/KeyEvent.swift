@@ -16,6 +16,7 @@ enum KeyEvent {
     case SelectCandidate(index: Int)
     case InputModeChange(inputMode : SKKInputMode)
     case ToggleDakuten(beforeText : String)
+    case ToggleUpperLower(beforeText : String)
     
     // 仮想イベント
     case CommitWord(kanji: String)

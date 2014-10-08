@@ -130,6 +130,14 @@ class InputMode {
             case .None:
                 return done()
             }
+        case .ToggleUpperLower(beforeText: let beforeText):
+            let s = beforeText.last()?.toggleUpperLower()
+            switch s {
+            case .Some(let s):
+                return deleteText(1) + insertText(s)
+            case .None:
+                return done()
+            }
         case .CommitWord(_):
             return done()
         case .CancelWord:
@@ -142,7 +150,8 @@ class InputMode {
     private func onKanaCompose(event : KeyEvent) -> [Handle] {
         switch event {
         case .Char(kana: let kana, roman: let roman, shift: let shift):
-            if(shift) {
+            // REMARK: ignore shift for non-roman character(e.g. 1,2,3)
+            if(shift && !roman.isEmpty) {
                 self.composeOkuri = (kana,roman)
                 let xs = consult(self.composeText, okuri: (kana,roman))
                 if(xs.isEmpty) {
@@ -191,6 +200,14 @@ class InputMode {
             case .None:
                 return done()
             }
+        case .ToggleUpperLower(_):
+            switch composeText.last()?.toggleUpperLower() {
+            case .Some(let s):
+                self.composeText = self.composeText.butLast() + String(s)
+                return done()
+            case .None:
+                return done()
+            }
         case .CommitWord(kanji: let kanji):
             return withReset(insertText(kanji))
         case .CancelWord:
@@ -228,6 +245,8 @@ class InputMode {
         case .InputModeChange(inputMode: _):
             return done()
         case .ToggleDakuten:
+            return done()
+        case .ToggleUpperLower(beforeText: _):
             return done()
         }
     }
