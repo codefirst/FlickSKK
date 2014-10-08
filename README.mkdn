@@ -53,5 +53,12 @@ $ cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Deve
 $ ln -s libz.x.y.z.dylib libz.dylib
 ```
 
+## 辞書の作成
+SKK辞書なら利用できます。 ただし、アルファベットのみのエントリ(例: alpha)などは利用しないため取り除くことが望ましいです。
+
+```
+ruby ./misc/strip.rb /path/to/skk.jisyo > Resources/skk.jisyo
+```
+
 ## License
 (TBD)
