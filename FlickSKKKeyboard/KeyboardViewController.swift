@@ -38,7 +38,7 @@ enum KanaFlickKey: Hashable {
         case .Shift: return "⇧"
         case .Return: return "⏎"
         case .Backspace: return "⌫"
-        case .InputModeChange: return "あ"
+        case .InputModeChange: return "かな"
         case .Number: return "123"
         case .Alphabet: return "ABC"
         case .KomojiDakuten: return "小゛゜"
@@ -51,7 +51,7 @@ enum KanaFlickKey: Hashable {
     var sequence: [String]? {
         switch self {
         case let .Seq(s): return Array(s).map({ (c : Character) -> String in return String(c)})
-        case .InputModeChange: return ["-ignore-","_","あ","ア","ｶﾅ"]
+        case .InputModeChange: return ["-ignore-","_","かな","カナ","ｶﾅ"]
         default: return nil
         }
     }
@@ -442,9 +442,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         // InputMode
         switch self.session.currentMode {
         case .Hirakana:
-            self.inputModeChangeButton.label.text = "あ"
+            self.inputModeChangeButton.label.text = "かな"
         case .Katakana:
-            self.inputModeChangeButton.label.text = "ア"
+            self.inputModeChangeButton.label.text = "カナ"
         case .HankakuKana:
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
