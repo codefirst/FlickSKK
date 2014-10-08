@@ -240,11 +240,24 @@ class InputMode {
             return withReset(insertText(self.candidates[n]))
         case .CommitWord(kanji: let kanji):
             return withReset(insertText(kanji))
+        case .ToggleDakuten:
+            switch self.composeOkuri?.0.toggleDakuten() {
+            case .Some(let str):
+                let c = Array(str)[0]
+                self.composeOkuri = (str, c.toRoman() ?? "")
+                let xs = consult(self.composeText, okuri: self.composeOkuri)
+                if(xs.isEmpty) {
+                    return registerWord(self.composeText, okuri: self.composeOkuri)
+                } else {
+                    setupCandidates(xs)
+                    return done()
+                }
+            case .None:
+                return done()
+            }
         case .CancelWord:
             return done()
         case .InputModeChange(inputMode: _):
-            return done()
-        case .ToggleDakuten:
             return done()
         case .ToggleUpperLower(beforeText: _):
             return done()
@@ -256,7 +269,7 @@ class InputMode {
         let t = text.conv(self.sourceType, to: .Hirakana)
         switch okuri {
         case .Some((let kana, let roman)):
-            let okuri = String(Array(roman)[0])
+            let okuri : String? = roman.isEmpty ? .None : .Some(String(Array(roman)[0]))
             let xs    = self.dictionary.find(t, okuri: okuri)
             return xs.map({ (x : String)  ->  String in
                 return x + kana

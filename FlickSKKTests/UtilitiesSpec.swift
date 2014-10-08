@@ -11,6 +11,32 @@ import Nimble
 
 class UtilitiesSpec: QuickSpec {
     override func spec() {
+        describe("Character") {
+            context("ひらかな to romain") {
+                it("convert あ") {
+                    expect("あ".toRoman()).to(equal("a"))
+                }
+                it("convert が") {
+                    expect("が".toRoman()).to(equal("ga"))
+                }
+            }
+            context("カタカナ to romain") {
+                it("convert ア") {
+                    expect("ア".toRoman()).to(equal("a"))
+                }
+                it("convert ガ") {
+                    expect("ガ".toRoman()).to(equal("ga"))
+                }
+            }
+            context("半角カナ to romain") {
+                it("convert ｱ") {
+                    expect("ｱ".toRoman()).to(equal("a"))
+                }
+                it("convert ｶﾞ") {
+                    expect("ｶﾞ".toRoman()).to(equal("ga"))
+                }
+            }
+        }
         describe("String") {
             context("ひらがな to カタカナ") {
                 it("convert あ行") {

@@ -52,6 +52,15 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                     session.handle(.Enter)
                     expect(self.insertedText).to(equal("荒る"))
                 }
+                it("convert kanji with dakuten okuri") {
+                    session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                    session.handle(.Char(kana: "ん", roman: "nn", shift: false))
+                    session.handle(.Char(kana: "し", roman: "si", shift: true))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("感じ"))                    
+                }
+                
                 it("toggle dakuten") {
                     session.handle(.Char(kana: "か", roman: "ka", shift: false))
                     session.handle(.Char(kana: "か", roman: "ka", shift: false))
