@@ -16,11 +16,15 @@ class InputMode {
         case KanaCompose
         // ▼モード
         case KanjiCompose
+        // 登録モード中
+        case WordRegister
     }
 
     enum Handle {
         case DeleteText(count : Int)
         case InsertText(text : String)
+        case ToggleDakuten(beforeText : String)
+        case ToggleUpperLower(beforeText : String)
         case InputModeChange(mode: SKKInputMode)
         case RegisterWord(kana : String, okuri : (String, String)?)
     }
@@ -36,6 +40,7 @@ class InputMode {
     private var status     : InputModeStatus = .Default
 
     // KanaComposeモード用
+    // FIXME: InputModeStatusの引数にしたほうがいいのでは
     private var composeText  : String = ""
     private var composeOkuri : (String, String)?  = .None
 
@@ -43,6 +48,9 @@ class InputMode {
     private let INLINE_CANDIDATES = 3
     private var candidates     : [String] = []
     private var candidateIndex : Int      = 0
+
+    // WordRegister用
+    private var oldStatus : InputModeStatus = .Default
 
     init(sourceType : KanaType, dictionary : SKKDictionary){
         self.sourceType = sourceType
@@ -59,6 +67,10 @@ class InputMode {
     }
 
     private func registerWord(kana : String, okuri : (String, String)?) -> [Handle] {
+        if self.status != .WordRegister {
+            self.oldStatus = self.status
+        }
+        self.status = .WordRegister
         return [.RegisterWord(kana : kana, okuri : okuri)]
     }
 
@@ -88,6 +100,8 @@ class InputMode {
             } else {
                 return .Candidates(xs: self.candidates)
             }
+        case .WordRegister:
+            return .ComposeText(text: "oops")
         }
     }
 
@@ -100,6 +114,8 @@ class InputMode {
             return onKanaCompose(event)
         case .KanjiCompose:
             return onKanjiCompose(event)
+        case .WordRegister:
+            return onWordRegister(event)
         }
     }
 
@@ -122,22 +138,9 @@ class InputMode {
         case .InputModeChange(inputMode: let mode):
             return [.InputModeChange(mode: mode)]
         case .ToggleDakuten(beforeText : let beforeText):
-            let dakuten = beforeText.last()?.toggleDakuten()
-            switch dakuten {
-            case .Some(let s):
-                // REMARK: 1文字消せば、半角カナも濁点付きで消える
-                return deleteText(1) + insertText(s)
-            case .None:
-                return done()
-            }
+            return [.ToggleDakuten(beforeText: beforeText)]
         case .ToggleUpperLower(beforeText: let beforeText):
-            let s = beforeText.last()?.toggleUpperLower()
-            switch s {
-            case .Some(let s):
-                return deleteText(1) + insertText(s)
-            case .None:
-                return done()
-            }
+            return [.ToggleUpperLower(beforeText: beforeText)]
         case .CommitWord(_):
             return done()
         case .CancelWord:
@@ -209,7 +212,7 @@ class InputMode {
                 return done()
             }
         case .CommitWord(kanji: let kanji):
-            return withReset(insertText(kanji))
+            return done()
         case .CancelWord:
             return done()
         case .SelectCandidate(_):
@@ -238,6 +241,34 @@ class InputMode {
             return done()
         case .SelectCandidate(let n):
             return withReset(insertText(self.candidates[n]))
+        case .CommitWord(kanji: _):
+            return done()
+        case .CancelWord:
+            return done()
+        case .ToggleDakuten:
+            switch self.composeOkuri?.0.toggleDakuten() {
+            case .Some(let str):
+                let c = Array(str)[0]
+                self.composeOkuri = (str, c.toRoman() ?? "")
+                let xs = consult(self.composeText, okuri: self.composeOkuri)
+                if(xs.isEmpty) {
+                    return registerWord(self.composeText, okuri: self.composeOkuri)
+                } else {
+                    setupCandidates(xs)
+                    return done()
+                }
+            case .None:
+                return done()
+            }
+        case .InputModeChange(inputMode: _):
+            return done()
+        case .ToggleUpperLower(beforeText: _):
+            return done()
+        }
+    }
+
+    func onWordRegister(event : KeyEvent) -> [Handle] {
+        switch event {
         case .CommitWord(kanji: let kanji):
             return withReset(insertText(kanji))
         case .ToggleDakuten:
@@ -256,6 +287,18 @@ class InputMode {
                 return done()
             }
         case .CancelWord:
+            self.status = self.oldStatus
+            return done()
+        // ignore
+        case .Space:
+            return done()
+        case .Enter:
+            return done()
+        case .Char(kana: _, roman: _, shift: _):
+            return done()
+        case .Backspace:
+            return done()
+        case .SelectCandidate(let n):
             return done()
         case .InputModeChange(inputMode: _):
             return done()

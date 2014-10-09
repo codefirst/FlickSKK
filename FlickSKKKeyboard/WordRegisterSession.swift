@@ -12,6 +12,7 @@ class WordRegisterSession : BaseSession {
     enum Handle {
         case Commit(kanji : String)
         case Cancel
+        case ToggleDakuten(beforeText : String)
         case Handles(xs : [InputMode.Handle])
     }
     
@@ -57,6 +58,26 @@ class WordRegisterSession : BaseSession {
                 } else {
                     self.kanji = self.kanji.butLast()
                 }
+            case .ToggleDakuten(beforeText: let beforeText):
+                if kanji.isEmpty {
+                    return .ToggleDakuten(beforeText : beforeText)
+                } else {
+                    let dakuten = self.kanji.last()?.toggleDakuten()
+                    switch dakuten {
+                    case .Some(let s):
+                        self.kanji = self.kanji.butLast() + s
+                    case .None:
+                        ()
+                    }
+                }
+            case .ToggleUpperLower(_):
+                let s = kanji.last()?.toggleUpperLower()
+                switch s {
+                case .Some(let s):
+                    self.kanji = self.kanji.butLast() + s
+                case .None:
+                    ()
+                }
             case .InputModeChange(mode: let mode):
                 xs.append(.InputModeChange(mode: mode))
             case .RegisterWord(kana: let kana, okuri: let okuri):
@@ -74,6 +95,9 @@ class WordRegisterSession : BaseSession {
         case .Some(.Cancel):
             self.status = .Default
             return onDefault(.CancelWord)
+        case .Some(.ToggleDakuten(beforeText: let beforeText)):
+            self.status = .Default
+            return onDefault(.ToggleDakuten(beforeText: beforeText))
         case .Some(.Handles(xs: let xs)):
             return .Handles(xs : xs)
         case .None:
