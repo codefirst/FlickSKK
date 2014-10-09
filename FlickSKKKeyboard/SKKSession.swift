@@ -63,6 +63,25 @@ class SKKSession : BaseSession {
                 for _ in 0..<count {
                     self.delegate?.deleteBackward()
                 }
+            case .ToggleDakuten(beforeText : let beforeText):
+                let dakuten = beforeText.last()?.toggleDakuten()
+                switch dakuten {
+                case .Some(let s):
+                    // REMARK: 1文字消せば、半角カナも濁点付きで消える
+                    self.delegate?.deleteBackward()
+                    self.delegate?.insertText(s)
+                case .None:
+                    ()
+                }
+            case .ToggleUpperLower(beforeText: let beforeText):
+                let s = beforeText.last()?.toggleUpperLower()
+                switch s {
+                case .Some(let s):
+                    self.delegate?.deleteBackward()
+                    self.delegate?.insertText(s)
+                case .None:
+                    ()
+                }
             case .InputModeChange(mode: let mode):
                 self.currentMode = mode
             case .RegisterWord(kana: let kana, okuri: let okuri):

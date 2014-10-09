@@ -57,6 +57,22 @@ class WordRegisterSession : BaseSession {
                 } else {
                     self.kanji = self.kanji.butLast()
                 }
+            case .ToggleDakuten(_):
+                let dakuten = kanji.last()?.toggleDakuten()
+                switch dakuten {
+                case .Some(let s):
+                    self.kanji = self.kanji.butLast() + s
+                case .None:
+                    ()
+                }
+            case .ToggleUpperLower(_):
+                let s = kanji.last()?.toggleUpperLower()
+                switch s {
+                case .Some(let s):
+                    self.kanji = self.kanji.butLast() + s
+                case .None:
+                    ()
+                }
             case .InputModeChange(mode: let mode):
                 xs.append(.InputModeChange(mode: mode))
             case .RegisterWord(kana: let kana, okuri: let okuri):

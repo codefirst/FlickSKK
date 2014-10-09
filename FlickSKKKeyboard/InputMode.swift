@@ -21,6 +21,8 @@ class InputMode {
     enum Handle {
         case DeleteText(count : Int)
         case InsertText(text : String)
+        case ToggleDakuten(beforeText : String)
+        case ToggleUpperLower(beforeText : String)
         case InputModeChange(mode: SKKInputMode)
         case RegisterWord(kana : String, okuri : (String, String)?)
     }
@@ -122,22 +124,24 @@ class InputMode {
         case .InputModeChange(inputMode: let mode):
             return [.InputModeChange(mode: mode)]
         case .ToggleDakuten(beforeText : let beforeText):
-            let dakuten = beforeText.last()?.toggleDakuten()
+/*            let dakuten = beforeText.last()?.toggleDakuten()
             switch dakuten {
             case .Some(let s):
                 // REMARK: 1文字消せば、半角カナも濁点付きで消える
                 return deleteText(1) + insertText(s)
             case .None:
                 return done()
-            }
+            }*/
+            return [.ToggleDakuten(beforeText: beforeText)]
         case .ToggleUpperLower(beforeText: let beforeText):
-            let s = beforeText.last()?.toggleUpperLower()
+/*            let s = beforeText.last()?.toggleUpperLower()
             switch s {
             case .Some(let s):
                 return deleteText(1) + insertText(s)
             case .None:
                 return done()
-            }
+            }*/
+            return [.ToggleUpperLower(beforeText: beforeText)]
         case .CommitWord(_):
             return done()
         case .CancelWord:
