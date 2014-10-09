@@ -249,11 +249,24 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             }
         }
         self.session = SKKSession(delegate: self, dict: kGlobalDictionary)
+        kGlobalDictionary.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
         updateControlButtons()
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        kGlobalDictionary.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
+    }
+    
+    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+        if let dict = object as? SKKDictionary {
+            println("waiting load = \(dict.isWaitingForLoad)")
+        } else {
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        }
     }
     
     var metrics: [String:CGFloat] {

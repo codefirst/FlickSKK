@@ -78,23 +78,28 @@ class SKKDictionaryFile {
     }
 }
 
-class SKKDictionary {
-    private let semaphore = dispatch_semaphore_create(0)
+class SKKDictionary : NSObject {
     private var initialized = false
 
     var dictionaries : [ SKKDictionaryFile ] = []
     var userDict : SKKDictionaryFile?
+    
+    dynamic var isWaitingForLoad : Bool = false
+    class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
+    
     init(userDict: String, dicts : [String]){
+        super.init()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.userDict = SKKDictionaryFile(path: userDict)
             self.dictionaries = [ self.userDict! ] + dicts.map({ x -> SKKDictionaryFile in
                 SKKDictionaryFile(path: x)})
-            dispatch_semaphore_signal(self.semaphore)
             self.initialized = true
         })
     }
 
     func find(normal : String, okuri : String?) -> [ String ] {
+        self.waitForLoading()
+        
         let xs : [String] = self.dictionaries.map({(dict : SKKDictionaryFile) -> [String] in
             dict.find(normal, okuri: okuri)
         }).reduce([],
@@ -115,6 +120,11 @@ class SKKDictionary {
 
     func waitForLoading() {
         if initialized { return }
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        
+        self.isWaitingForLoad = true
+        while !self.initialized {
+            NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: 0.1))
+        }
+        self.isWaitingForLoad = false
     }
 }
