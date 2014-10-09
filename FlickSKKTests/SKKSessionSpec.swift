@@ -52,13 +52,33 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                     session.handle(.Enter)
                     expect(self.insertedText).to(equal("荒る"))
                 }
-                it("convert kanji with dakuten okuri") {
-                    session.handle(.Char(kana: "か", roman: "ka", shift: true))
-                    session.handle(.Char(kana: "ん", roman: "nn", shift: false))
-                    session.handle(.Char(kana: "し", roman: "si", shift: true))
-                    session.handle(.ToggleDakuten(beforeText: ""))
-                    session.handle(.Enter)
-                    expect(self.insertedText).to(equal("感じ"))                    
+                context("with dakuten") {
+                    it("convert kanji on compose mode") {
+                        session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                        session.handle(.Char(kana: "ん", roman: "nn", shift: false))
+                        session.handle(.Char(kana: "し", roman: "si", shift: true))
+                        session.handle(.ToggleDakuten(beforeText: ""))
+                        session.handle(.Enter)
+                        expect(self.insertedText).to(equal("感じ"))
+                    }
+                    it("convert kanji on register mode") {
+                        session.handle(.Char(kana: "わ", roman: "wa", shift: true))
+                        session.handle(.Char(kana: "れ", roman: "re", shift: false))
+                        session.handle(.Char(kana: "ら", roman: "ra", shift: false))
+                        session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                        session.handle(.ToggleDakuten(beforeText: ""))
+                        session.handle(.Enter)
+                        expect(self.insertedText).to(equal("我等が"))
+                    }
+                    it("convert kanji without dakuten") {
+                        session.handle(.Char(kana: "わ", roman: "wa", shift: true))
+                        session.handle(.Char(kana: "り", roman: "ri", shift: false))
+                        session.handle(.Char(kana: "き", roman: "ki", shift: true))
+                        session.handle(.ToggleDakuten(beforeText: ""))
+                        session.handle(.ToggleDakuten(beforeText: ""))
+                        session.handle(.Enter)
+                        expect(self.insertedText).to(equal("割き"))
+                    }
                 }
                 
                 it("toggle dakuten") {
