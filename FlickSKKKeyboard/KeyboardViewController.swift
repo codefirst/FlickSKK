@@ -125,7 +125,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     var heightConstraint : NSLayoutConstraint!
     
     let keypadAndControlsView = UIView()
-    let contextView = UILabel()
+    let contextView = UIView()
+    let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    let sessionLabel = UILabel()
     let candidateView = UITableView()
 
     let nextKeyboardButton: UIButton!
@@ -263,7 +265,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     
     override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
         if let dict = object as? SKKDictionary {
-            println("waiting load = \(dict.isWaitingForLoad)")
+            if dict.isWaitingForLoad {
+                self.disableAllKeys()
+                loadingProgressView.startAnimating()
+            } else {
+                self.enableAllKeys()
+                loadingProgressView.stopAnimating()
+            }
         } else {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
@@ -306,7 +314,15 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         }
         
         contextView.backgroundColor = UIColor.whiteColor()
-        contextView.text = "welcome to SKK"
+        sessionLabel.text = "welcome to SKK"
+        let cViews = [
+            "progress": loadingProgressView,
+            "l": sessionLabel,
+        ]
+        let autolayout = contextView.autolayoutFormat(metrics, cViews)
+        autolayout("H:|[l][progress]-(>=0)-|")
+        autolayout("V:|[progress]|")
+        autolayout("V:|[l]|")
         
         candidateView.dataSource = dataSource
         candidateView.delegate = self
@@ -480,7 +496,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
 
     func composeText(text: String) {
-        contextView.text = text
+        sessionLabel.text = text
     }
 
     func showCandidates(candidates: [String]?) {
@@ -494,6 +510,21 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             keypadAndControlsView.hidden = false
             candidateView.hidden = true
         }
+    }
+    
+    private let userInteractionMaskView = UIView()
+    private func disableAllKeys() {
+        userInteractionMaskView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        userInteractionMaskView.frame = self.view.bounds
+        userInteractionMaskView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        if userInteractionMaskView.superview == nil {
+            self.view.addSubview(userInteractionMaskView)
+        } else {
+            self.view.bringSubviewToFront(userInteractionMaskView)
+        }
+    }
+    private func enableAllKeys() {
+        userInteractionMaskView.removeFromSuperview()
     }
 
     func deleteBackward() {
