@@ -6,7 +6,7 @@ PROVISIONING_PROFILE=${PROVISIONING_PROFILE:-'XC Ad Hoc: *'}
 
 PRETTY=cat
 if which xcpretty; then
-  PRETTY=xcpretty
+  PRETTY='xcpretty -c'
 fi
 
 echo "cleanup" && \
