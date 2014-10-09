@@ -2,7 +2,7 @@
 
 BRANCH=${1:-master}
 ARCHIVE_NAME=tmp/FlickSKK
-PROVISIONING_PROFILE=FlickSKK
+PROVISIONING_PROFILE=${PROVISIONING_PROFILE:-'XC Ad Hoc: *'}
 
 PRETTY=cat
 if which xcpretty; then
@@ -14,10 +14,10 @@ rm -rf tmp && mkdir tmp && \
 echo "apply icon" && \
 git checkout $BRANCH && \
 git rebase master && \
-echo "build archive" && \
+echo "build archive using provisioning profile: $PROVISIONING_PROFILE" && \
 xcodebuild archive -workspace FlickSKK.xcworkspace -scheme FlickSKK -archivePath $ARCHIVE_NAME  | $PRETTY && \
 echo "create ipa" && \
-xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportPath $ARCHIVE_NAME -exportFormat ipa | $PRETTY && \
+xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportPath $ARCHIVE_NAME -exportFormat ipa -exportProvisioningProfile "$PROVISIONING_PROFILE" | $PRETTY && \
 echo "Go to testflight" && \
 git checkout master && \
 open -a TestFlight $ARCHIVE_NAME.ipa
