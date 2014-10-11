@@ -313,10 +313,18 @@ class InputMode {
         switch okuri {
         case .Some((let kana, let roman)):
             let okuri : String? = roman.isEmpty ? .None : .Some(String(Array(roman)[0]))
-            let xs    = self.dictionary.find(t, okuri: okuri)
-            return xs.map({ (x : String)  ->  String in
+            var xs    = self.dictionary.find(t, okuri: okuri).map({ (x : String)  ->  String in
                 return x + kana
             })
+            if okuri != .None && t.last() == "っ" {
+                // 「っ」送り仮名の場合の特殊処理
+                // https://github.com/codefirst/FlickSKK/issues/27
+                let ys = self.dictionary.find(t.butLast(), okuri: okuri).map({ (y : String)  ->  String in
+                    return y + "っ" + kana
+                })
+                xs += ys
+            }
+            return xs
         case .None:
             return self.dictionary.find(t, okuri: .None)
         }

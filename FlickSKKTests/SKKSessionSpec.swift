@@ -138,6 +138,38 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                     expect(self.insertedText).to(equal("abB"))
                 }
             }
+            describe("「っ」送り仮名変換") {
+                it("can convert 「はいった」") {
+                    session.handle(.Char(kana: "は", roman: "ta", shift: true))
+                    session.handle(.Char(kana: "い", roman: "i", shift: false))
+                    session.handle(.Char(kana: "つ", roman: "tu", shift: false))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.Char(kana: "た", roman: "ta", shift: true))
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("入った"))
+                }
+
+                it("can convert 「ひっぱる」"){
+                    session.handle(.Char(kana: "ひ", roman: "ta", shift: true))
+                    session.handle(.Char(kana: "つ", roman: "tu", shift: false))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.Char(kana: "は", roman: "ha", shift: true))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("引っぱ"))
+                }
+
+                it("can convert 「ばっする」"){
+                    session.handle(.Char(kana: "は", roman: "ta", shift: true))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.Char(kana: "つ", roman: "tu", shift: false))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.Char(kana: "す", roman: "su", shift: true))
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("罰す"))
+                }
+            }
             describe("dictionary") {
                 it("can register dakuten kana") {
                     session.handle(.Char(kana: "か", roman: "ka", shift: true))
