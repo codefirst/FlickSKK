@@ -11,9 +11,6 @@ import UIKit
 
 private let kGlobalDictionary: SKKDictionary = { // lazily stored global constant
     let userDict = NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
-    if !NSFileManager.defaultManager().fileExistsAtPath(userDict) {
-        NSFileManager.defaultManager().createFileAtPath(userDict, contents: nil, attributes:nil)
-    }
     let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
     return SKKDictionary(userDict: userDict, dicts: [dict!])
 }()
