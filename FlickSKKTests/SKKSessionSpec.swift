@@ -14,11 +14,12 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
     // delegate
     func insertText(text : String) { self.insertedText += text }
     func deleteBackward() {}
-    func composeText(text : String) {}
+    func composeText(text : String) { self.currentComposeText = text }
     func showCandidates(candidates : [String]?) {}
     
     // stub variable
     var insertedText = ""
+    var currentComposeText = ""
     
     override func spec() {
         var session : SKKSession!
@@ -42,6 +43,7 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                 it("convert kanji") {
                     session.handle(.Char(kana: "や", roman: "ya", shift: true))
                     session.handle(.Char(kana: "ま", roman: "ma", shift: false))
+                    expect(self.currentComposeText).to(equal("▽やま"))
                     session.handle(.Space)
                     session.handle(.Enter)
                     expect(self.insertedText).to(equal("山"))
@@ -57,7 +59,9 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                         session.handle(.Char(kana: "か", roman: "ka", shift: true))
                         session.handle(.Char(kana: "ん", roman: "nn", shift: false))
                         session.handle(.Char(kana: "し", roman: "si", shift: true))
+                        expect(self.currentComposeText).to(equal("▼関し"))
                         session.handle(.ToggleDakuten(beforeText: ""))
+                        expect(self.currentComposeText).to(equal("▼感じ"))
                         session.handle(.Enter)
                         expect(self.insertedText).to(equal("感じ"))
                     }
