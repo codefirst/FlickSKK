@@ -8,30 +8,30 @@
 
 import Foundation
 
-
-
+/*
+ * L辞書などの固定辞書。ソートされていることを前提に、二分探索などを行なう。
+ */
 class SKKLocalDictionaryFile : SKKDictionaryFile {
-    var isOkuriAri = true
-    var okuriAri : NSMutableArray = NSMutableArray()
-    var okuriNashi : NSMutableArray = NSMutableArray()
-    let path : String
+    private var okuriAri : NSMutableArray = NSMutableArray()
+    private var okuriNasi : NSMutableArray = NSMutableArray()
+    private let path : String
     init(path : String){
         self.path = path
         let now = NSDate()
-        
+        var isOkuriAri = true
         IOUtil.each(path, { line -> Void in
             let s = line as NSString
             // toggle
             if s.hasPrefix(";; okuri-nasi entries.") {
-                self.isOkuriAri = false
+                isOkuriAri = false
             }
             // skip comment
             if s.hasPrefix(";") { return }
             
-            if self.isOkuriAri {
+            if isOkuriAri {
                 self.okuriAri.addObject(line)
             } else {
-                self.okuriNashi.addObject(line)
+                self.okuriNasi.addObject(line)
             }
         })
         NSLog("loaded (%f)\n", NSDate().timeIntervalSinceDate(now))
@@ -41,8 +41,8 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
         switch okuri {
         case .None:
             let str = binarySearch(normal + " ",
-                xs: self.okuriNashi,
-                begin: 0, end: self.okuriNashi.count,
+                xs: self.okuriNasi,
+                begin: 0, end: self.okuriNasi.count,
                 compare: NSComparisonResult.OrderedAscending) ?? ""
             return parse(str)
         case .Some(let okuri):

@@ -8,9 +8,14 @@
 
 import Foundation
 
+/*
+ * ユーザ辞書。並び順について仮定を持たない。
+ */
 class SKKUserDictionaryFile  : SKKDictionaryFile {
-    var dictionary : NSMutableDictionary = NSMutableDictionary()
-    let path : String
+    // REMARK: Swift dictionary is too slow. So, we need use NSMutableDictionary.
+    private var okuriAri   = NSMutableDictionary()
+    private var okuriNasi = NSMutableDictionary()
+    private let path : String
     
     init(path : String){
         self.path = path
@@ -20,13 +25,23 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         }
         
         let now = NSDate()
+        var isOkuriAri = true
         IOUtil.each(path, { line -> Void in
             let s = line as NSString
+            // toggle
+            if s.hasPrefix(";; okuri-nasi entries.") {
+                isOkuriAri = false
+            }
             // skip comment
             if(s.hasPrefix(";")) { return }
+
             switch self.parse(s) {
             case .Some(let x,let y):
-                self.dictionary[x] = y
+                if isOkuriAri {
+                    self.okuriAri[x] = y
+                } else {
+                    self.okuriNasi[x] = y
+                }
             case .None:
                 ()
             }
@@ -35,7 +50,12 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     }
     
     func find(normal : String, okuri : String?) -> [ String ] {
-        let entry : String? = self.dictionary[normal + (okuri ?? "")] as String?
+        var entry : String?
+        if okuri == .None {
+            entry = self.okuriNasi[normal] as String?
+        } else {
+            entry = self.okuriAri[normal + (okuri ?? "")] as String?
+        }
         switch entry {
         case .Some(let xs):
             let ys : [String] = xs.pathComponents
@@ -62,24 +82,42 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     
     func register(normal : String, okuri: String?, kanji: String) {
         if(kanji.isEmpty) { return }
-        let old : String? = self.dictionary[normal + (okuri ?? "")] as String?
+        var dict : NSMutableDictionary!
+        if okuri == .None {
+            dict = self.okuriNasi
+        } else {
+            dict = self.okuriAri
+        }
+        let old : String? = dict[normal + (okuri ?? "")] as String?
         if old?.rangeOfString("/\(kanji)") == .None {
-            self.dictionary[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
+            dict[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
         }
     }
     
     func serialize() {
         let file = NSFileHandle(forWritingAtPath: self.path)
-        for (k,v) in self.dictionary {
+        write(file, str: ";; okuri-ari entries.\n")
+        for (k,v) in self.okuriAri {
             let kana = k as String
             let kanji = v as String
             if !kana.isEmpty {
-                let line  : NSString = (kana + " " + kanji + "\n") as NSString
-                let data = NSData(bytes: line.UTF8String,
-                    length: line.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-                file.writeData(data)
+                write(file, str: kana + " " + kanji + "\n")
+            }
+        }
+        write(file, str: ";; okuri-nasi entries.\n")
+        for (k,v) in self.okuriNasi {
+            let kana = k as String
+            let kanji = v as String
+            if !kana.isEmpty {
+                write(file, str: kana + " " + kanji + "\n")
             }
         }
         file.closeFile()
+    }
+
+    private func write(handle : NSFileHandle, str : NSString) {
+        let data = NSData(bytes: str.UTF8String,
+                          length: str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+        handle.writeData(data)
     }
 }
