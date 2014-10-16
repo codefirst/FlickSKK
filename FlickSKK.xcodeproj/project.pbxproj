@@ -23,6 +23,12 @@
 		13D118CC19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
+		13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
+		13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
+		13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */; };
+		13DFEAC819F07A54006D7E40 /* SKKLocalDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */; };
+		13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */; };
+		13DFEACA19F07AC8006D7E40 /* SKKLocalDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */; };
 		13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */; };
 		13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
 		13F9325819E2DBFC00AC5019 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
@@ -175,6 +181,9 @@
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
+		13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryFile.swift; sourceTree = "<group>"; };
+		13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKUserDictionaryFile.swift; sourceTree = "<group>"; };
+		13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKLocalDictionaryFile.swift; sourceTree = "<group>"; };
 		13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSessionSpec.swift; sourceTree = "<group>"; };
 		13F4525119DC538B001A4A1B /* IOUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUtil.h; sourceTree = "<group>"; };
 		13F4525219DC5399001A4A1B /* FlickSKKKeyboard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FlickSKKKeyboard-Bridging-Header.h"; path = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -242,10 +251,7 @@
 			children = (
 				133CDCF519D98A3B00B8120D /* SKKDelegate.swift */,
 				133CDCF819D98ADA00B8120D /* KeyEvent.swift */,
-				13D118CE19D9994D009E9E79 /* SKKDictionary.swift */,
 				136D161019DAA0AE0091D6BF /* SKKInputMode.swift */,
-				13F4525119DC538B001A4A1B /* IOUtil.h */,
-				13F4525319DC5399001A4A1B /* IOUtil.mm */,
 			);
 			name = SKKBase;
 			sourceTree = "<group>";
@@ -289,6 +295,19 @@
 				13D118C719D99923009E9E79 /* skk.jisyo */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		13DFEAC319F079C8006D7E40 /* SKKDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				13F4525119DC538B001A4A1B /* IOUtil.h */,
+				13F4525319DC5399001A4A1B /* IOUtil.mm */,
+				13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */,
+				13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */,
+				13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */,
+				13D118CE19D9994D009E9E79 /* SKKDictionary.swift */,
+			);
+			name = SKKDictionary;
 			sourceTree = "<group>";
 		};
 		6050DDC7DD7FB6FB1BD2A214 /* Frameworks */ = {
@@ -369,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				133CDCF719D98A4C00B8120D /* SKKBase */,
+				13DFEAC319F079C8006D7E40 /* SKKDictionary */,
 				133CDCFC19D98DB100B8120D /* SKKSession */,
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
 				136D160E19DA86690091D6BF /* CandidateDataSource.swift */,
@@ -676,6 +696,7 @@
 				13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */,
 				13F9326519E2DC1700AC5019 /* IOUtil.h in Sources */,
 				13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */,
+				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
 				13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */,
@@ -685,7 +706,9 @@
 				13F9326B19E2DC1700AC5019 /* KeyboardViewController.swift in Sources */,
 				13F9326C19E2DC1700AC5019 /* CandidateDataSource.swift in Sources */,
 				13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */,
+				13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */,
+				13DFEACA19F07AC8006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,
 				13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */,
 				13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */,
 				13F9325819E2DBFC00AC5019 /* Utilities.swift in Sources */,
@@ -698,6 +721,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */,
+				13DFEAC819F07A54006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,
+				13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */,
 				133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */,
 				1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */,
@@ -711,6 +736,7 @@
 				136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */,
 				133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */,
 				133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */,
+				13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

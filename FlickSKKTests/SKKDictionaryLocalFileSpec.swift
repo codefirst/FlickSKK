@@ -12,7 +12,7 @@ import Nimble
 class SKKDictionaryLocalFileSpec : QuickSpec {
     override func spec() {
         let jisyo = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-        let dict = SKKDictionaryLocalFile(path: jisyo!)
+        let dict = SKKLocalDictionaryFile(path: jisyo!)
         describe("okuri-nasi") {
             it("can find at first entry") {
                 let xs = dict.find("あいかた", okuri: .None)

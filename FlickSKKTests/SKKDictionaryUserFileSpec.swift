@@ -12,7 +12,7 @@ import Nimble
 class SKKDictionaryUserFileSpec : QuickSpec {
     override func spec() {
         let path = NSHomeDirectory().stringByAppendingPathComponent("Library/skk-test.jisyo")
-        let dict = SKKDictionaryUserFile(path: path)
+        let dict = SKKUserDictionaryFile(path: path)
         describe("SKK dictionary") {
             it("can find register entry") {
                 dict.register("まじ", okuri: .None, kanji: "本気")
@@ -23,7 +23,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                 dict.register("まじ", okuri: .None, kanji: "本気")
                 dict.serialize()
 
-                let dict2 = SKKDictionaryUserFile(path: path)
+                let dict2 = SKKUserDictionaryFile(path: path)
                 let xs = dict2.find("まじ", okuri: .None)
                 expect(xs).to(contain("本気"))
             }
