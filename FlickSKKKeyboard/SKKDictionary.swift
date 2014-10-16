@@ -67,7 +67,7 @@ class SKKDictionaryUserFile  : SKKDictionaryFile {
     func register(normal : String, okuri: String?, kanji: String) {
         if(kanji.isEmpty) { return }
         let old : String? = self.dictionary[normal + (okuri ?? "")] as String?
-        if old?.rangeOfString("/\(kanji)") != .None {
+        if old?.rangeOfString("/\(kanji)") == .None {
             self.dictionary[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
         }
     }
