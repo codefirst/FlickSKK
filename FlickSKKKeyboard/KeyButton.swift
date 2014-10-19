@@ -108,8 +108,14 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         self.tapped?(self.key, self.sequenceIndex)
     }
     
+    var originOfPanGesture = CGPointZero
+    
     func gesturePanned(gesture: UIPanGestureRecognizer) {
         let p = gesture.locationInView(self)
+        
+        if gesture.state == UIGestureRecognizerState.Began {
+            originOfPanGesture = p
+        }
         
         if gesture.state == UIGestureRecognizerState.Ended {
             KeyButtonFlickPopup.sharedInstance.hide()
@@ -122,7 +128,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             return
         }
         
-        if self.bounds.contains(p) {
+        let distance = sqrt(pow(p.x - originOfPanGesture.x, 2) + pow(p.y - originOfPanGesture.y, 2))
+        if self.bounds.contains(p) && distance < 12 {
             self.sequenceIndex = (key.sequence != nil ? 0 : nil)
             KeyButtonFlickPopup.sharedInstance.hide()
             self.highlighted = true
@@ -132,7 +139,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 let maxIndex = s.count - 1
                 var direction = KeyButtonFlickDirection.None
                 
-                let angle = Double(atan2(p.y - self.bounds.height/2, p.x - self.bounds.width/2))
+                let angle = Double(atan2(p.y - originOfPanGesture.y, p.x - originOfPanGesture.x))
                 if angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
                     self.sequenceIndex = min(1, maxIndex)
                     direction = .Left
