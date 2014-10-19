@@ -54,8 +54,10 @@
 		EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
 		EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
+		EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
+		EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56519D5CB50007B6636 /* AppDelegate.swift */; };
-		EAD4B56819D5CB50007B6636 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56719D5CB50007B6636 /* ViewController.swift */; };
+		EAD4B56819D5CB50007B6636 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */; };
 		EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56C19D5CB50007B6636 /* Images.xcassets */; };
 		EAD4B57019D5CB50007B6636 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */; };
 		EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */; };
@@ -193,10 +195,12 @@
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
 		EA985FE519D84AAE0043564C /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
 		EA985FE719D84D060043564C /* KeyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
+		EACD529C19F3F0C4001FB2A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EACD529E19F3F18D001FB2A7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EAD4B56019D5CB50007B6636 /* FlickSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD4B56419D5CB50007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD4B56519D5CB50007B6636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EAD4B56719D5CB50007B6636 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		EAD4B56C19D5CB50007B6636 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EAD4B56F19D5CB50007B6636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EAD4B57519D5CB50007B6636 /* FlickSKKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickSKKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				13D118C719D99923009E9E79 /* skk.jisyo */,
+				EACD529D19F3F0C4001FB2A7 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -345,7 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD4B56519D5CB50007B6636 /* AppDelegate.swift */,
-				EAD4B56719D5CB50007B6636 /* ViewController.swift */,
+				EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */,
 				EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */,
 				EAD4B56C19D5CB50007B6636 /* Images.xcassets */,
 				EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */,
@@ -501,6 +506,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = EAD4B55719D5CB50007B6636;
 			productRefGroup = EAD4B56119D5CB50007B6636 /* Products */;
@@ -589,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD4B57019D5CB50007B6636 /* LaunchScreen.xib in Resources */,
+				EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
 				13D118CC19D99923009E9E79 /* skk.jisyo in Resources */,
 				EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */,
 			);
@@ -606,6 +613,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13D118CD19D99923009E9E79 /* skk.jisyo in Resources */,
+				EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,7 +687,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAD4B56819D5CB50007B6636 /* ViewController.swift in Sources */,
+				EAD4B56819D5CB50007B6636 /* MainMenuViewController.swift in Sources */,
 				EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */,
 				EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */,
 				EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */,
@@ -767,6 +775,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		EACD529D19F3F0C4001FB2A7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EACD529C19F3F0C4001FB2A7 /* Base */,
+				EACD529E19F3F18D001FB2A7 /* ja */,
+			);
+			name = Localizable.strings;
+			path = ../FlickSKK;
+			sourceTree = "<group>";
+		};
 		EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
