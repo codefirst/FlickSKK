@@ -75,8 +75,12 @@ class MainMenuViewController: UITableViewController {
     }
     
     func gotoLicense() {
-        
+        if let path = NSBundle.mainBundle().pathForResource("License", ofType: "html", inDirectory: "html") {
+            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
+        }
     }
+    
+    // MARK: -
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
