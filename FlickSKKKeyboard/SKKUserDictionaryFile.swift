@@ -12,9 +12,14 @@ import Foundation
  * ユーザ辞書。並び順について仮定を持たない。
  */
 class SKKUserDictionaryFile  : SKKDictionaryFile {
+    class func defaultUserDictionaryPath() -> String { return AppGroup.pathForResource("Library/skk.jisyo") ?? NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo") }
+    class func defaultUserDictionary() -> SKKUserDictionaryFile {
+        return SKKUserDictionaryFile(path: self.defaultUserDictionaryPath())
+    }
+    
     // REMARK: Swift dictionary is too slow. So, we need use NSMutableDictionary.
-    private var okuriAri   = NSMutableDictionary()
-    private var okuriNasi = NSMutableDictionary()
+    var okuriAri  = NSMutableDictionary()
+    var okuriNasi = NSMutableDictionary()
     private let path : String
     
     init(path : String){
@@ -46,7 +51,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
                 ()
             }
         })
-        NSLog("loaded (%f)\n", NSDate().timeIntervalSinceDate(now))
+        NSLog("loaded (%f) (%d + %d entries from %@)\n", NSDate().timeIntervalSinceDate(now), okuriAri.count, okuriNasi.count, path)
     }
     
     func find(normal : String, okuri : String?) -> [ String ] {

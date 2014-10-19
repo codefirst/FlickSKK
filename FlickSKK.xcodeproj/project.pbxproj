@@ -59,6 +59,15 @@
 		EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */; };
 		EACD52A419F3F58B001FB2A7 /* html in Resources */ = {isa = PBXBuildFile; fileRef = EACD52A319F3F58B001FB2A7 /* html */; };
 		EACD52A519F3F58B001FB2A7 /* html in Resources */ = {isa = PBXBuildFile; fileRef = EACD52A319F3F58B001FB2A7 /* html */; };
+		EACD52AA19F3FD43001FB2A7 /* UserDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */; };
+		EACD52B319F3FECF001FB2A7 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
+		EACD52B419F3FEE4001FB2A7 /* SKKUserDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */; };
+		EACD52B519F3FEF1001FB2A7 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
+		EACD52B619F3FEFD001FB2A7 /* SKKLocalDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */; };
+		EACD52B719F3FF0F001FB2A7 /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
+		EACD52BB19F4074C001FB2A7 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52BA19F4074C001FB2A7 /* AppGroup.swift */; };
+		EACD52BC19F4074C001FB2A7 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52BA19F4074C001FB2A7 /* AppGroup.swift */; };
+		EACD52BD19F4074C001FB2A7 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52BA19F4074C001FB2A7 /* AppGroup.swift */; };
 		EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56519D5CB50007B6636 /* AppDelegate.swift */; };
 		EAD4B56819D5CB50007B6636 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */; };
 		EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56C19D5CB50007B6636 /* Images.xcassets */; };
@@ -202,6 +211,10 @@
 		EACD529E19F3F18D001FB2A7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		EACD52A319F3F58B001FB2A7 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = FlickSKK/html; sourceTree = SOURCE_ROOT; };
+		EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDictionaryViewController.swift; sourceTree = "<group>"; };
+		EACD52B819F40599001FB2A7 /* FlickSKK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FlickSKK.entitlements; sourceTree = "<group>"; };
+		EACD52B919F406AE001FB2A7 /* FlickSKKKeyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = FlickSKKKeyboard.entitlements; sourceTree = "<group>"; };
+		EACD52BA19F4074C001FB2A7 /* AppGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppGroup.swift; path = FlickSKK/AppGroup.swift; sourceTree = SOURCE_ROOT; };
 		EAD4B56019D5CB50007B6636 /* FlickSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD4B56419D5CB50007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD4B56519D5CB50007B6636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -355,8 +368,11 @@
 		EAD4B56219D5CB50007B6636 /* FlickSKK */ = {
 			isa = PBXGroup;
 			children = (
+				EACD52B819F40599001FB2A7 /* FlickSKK.entitlements */,
 				EAD4B56519D5CB50007B6636 /* AppDelegate.swift */,
+				EACD52BA19F4074C001FB2A7 /* AppGroup.swift */,
 				EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */,
+				EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */,
 				EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */,
 				EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */,
 				EAD4B56C19D5CB50007B6636 /* Images.xcassets */,
@@ -399,6 +415,7 @@
 		EAD4B58A19D5CB8A007B6636 /* FlickSKKKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				EACD52B919F406AE001FB2A7 /* FlickSKKKeyboard.entitlements */,
 				133CDCF719D98A4C00B8120D /* SKKBase */,
 				13DFEAC319F079C8006D7E40 /* SKKDictionary */,
 				133CDCFC19D98DB100B8120D /* SKKSession */,
@@ -496,6 +513,11 @@
 				TargetAttributes = {
 					EAD4B55F19D5CB50007B6636 = {
 						CreatedOnToolsVersion = 6.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					EAD4B57419D5CB50007B6636 = {
 						CreatedOnToolsVersion = 6.0;
@@ -503,6 +525,11 @@
 					};
 					EAD4B58819D5CB8A007B6636 = {
 						CreatedOnToolsVersion = 6.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -697,9 +724,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD4B56819D5CB50007B6636 /* MainMenuViewController.swift in Sources */,
+				EACD52B319F3FECF001FB2A7 /* SKKDictionary.swift in Sources */,
+				EACD52AA19F3FD43001FB2A7 /* UserDictionaryViewController.swift in Sources */,
 				EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */,
+				EACD52B419F3FEE4001FB2A7 /* SKKUserDictionaryFile.swift in Sources */,
+				EACD52B619F3FEFD001FB2A7 /* SKKLocalDictionaryFile.swift in Sources */,
 				EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */,
+				EACD52BB19F4074C001FB2A7 /* AppGroup.swift in Sources */,
+				EACD52B719F3FF0F001FB2A7 /* IOUtil.mm in Sources */,
 				EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */,
+				EACD52B519F3FEF1001FB2A7 /* SKKDictionaryFile.swift in Sources */,
 				EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,6 +749,7 @@
 				13F9326519E2DC1700AC5019 /* IOUtil.h in Sources */,
 				13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */,
 				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
+				EACD52BC19F4074C001FB2A7 /* AppGroup.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
 				13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */,
@@ -741,6 +776,7 @@
 				EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */,
 				13DFEAC819F07A54006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,
 				13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */,
+				EACD52BD19F4074C001FB2A7 /* AppGroup.swift in Sources */,
 				13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */,
 				133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */,
 				1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */,
@@ -890,10 +926,14 @@
 			baseConfigurationReference = 70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = FlickSKK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h";
 			};
 			name = Debug;
@@ -903,10 +943,13 @@
 			baseConfigurationReference = F3DD18F195A212F9D8B92DB9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FlickSKK/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h";
 			};
 			name = Release;
@@ -968,6 +1011,9 @@
 			baseConfigurationReference = 70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -976,6 +1022,7 @@
 				INFOPLIST_FILE = FlickSKKKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -987,10 +1034,13 @@
 			baseConfigurationReference = F3DD18F195A212F9D8B92DB9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FlickSKKKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "FlickSKKKeyboard/FlickSKKKeyboard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

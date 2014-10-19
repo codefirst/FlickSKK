@@ -71,7 +71,7 @@ class MainMenuViewController: UITableViewController {
     }
     
     func gotoUserDictionary() {
-        
+        navigationController?.pushViewController(UserDictionaryViewController(), animated: true)
     }
     
     func gotoLicense() {
