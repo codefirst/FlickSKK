@@ -46,6 +46,8 @@ class KeyButtonFlickPopup: UIView {
     }
     
     let label = UILabel()
+    let arrow = UIView()
+    let arrowShapeLayer = CAShapeLayer()
     var metrics: [String:CGFloat] {
         return ["p": 8,
             "popupExtendLength": 12]
@@ -54,21 +56,34 @@ class KeyButtonFlickPopup: UIView {
     private override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = KeyButtonHighlightedColor
-//        self.layer.borderColor = UIColor.redColor().CGColor
-//        self.layer.borderWidth = 1.0
         self.clipsToBounds = false
-        self.layer.cornerRadius = 2.0
-        self.layer.shadowColor = UIColor.blackColor().CGColor
-        self.layer.shadowOpacity = 0.2
-        self.layer.shadowOffset = CGSizeMake(0, 0)
-        self.layer.shadowRadius = 2.0
+        self.layer.tap { (la:CALayer) in
+            la.shadowColor = UIColor.blackColor().CGColor
+            la.shadowOpacity = 0.2
+            la.shadowOffset = CGSizeMake(0, 0)
+            la.shadowRadius = 2.0
+        }
         
-        label.textColor = UIColor.blackColor()
-        label.textAlignment = .Center
-        label.font = UIFont.boldSystemFontOfSize(20.0)
-        label.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-        self.addSubview(label)
+        label.tap { (l:UILabel) in
+            l.backgroundColor = KeyButtonHighlightedColor
+            l.textColor = UIColor.blackColor()
+            l.textAlignment = .Center
+            l.font = UIFont.boldSystemFontOfSize(28.0)
+            l.layer.tap { (la:CALayer) in
+                la.cornerRadius = 2.0
+                la.masksToBounds = true
+            }
+            self.addSubview(l)
+        }
+        
+        arrowShapeLayer.tap{ (sl:CAShapeLayer) in
+            sl.fillColor = KeyButtonHighlightedColor.CGColor
+        }
+        arrow.tap { (a:UIView) in
+            a.backgroundColor = UIColor.clearColor()
+            a.layer.addSublayer(self.arrowShapeLayer)
+            self.addSubview(a)
+        }
     }
     
     // MARK: - public methods
@@ -78,36 +93,76 @@ class KeyButtonFlickPopup: UIView {
         pv.bringSubviewToFront(self)
         label.text = text
         
-        var center = pv.convertPoint(fromView.center, fromView: fromView.superview)
+        let center = pv.convertPoint(fromView.center, fromView: fromView.superview)
+        var labelCenter = center
         var size = fromView.bounds.size
         let extendLength: CGFloat = metrics["popupExtendLength"]!
+        
+        var arrowFrameSize = CGSizeZero
         
         switch direction {
         case .None: break
         case .Left:
-            center.x -= extendLength + size.width
-            center.x = max(center.x, size.width / 2)
+            labelCenter.x -= extendLength + size.width
+            labelCenter.x = max(labelCenter.x, size.width / 2)
             size.height += extendLength * 2
+            arrowFrameSize = CGSizeMake(2*(center.x - (labelCenter.x + size.width / 2)), size.height)
         case .Up:
-            center.y -= extendLength + size.height
-            center.y = max(center.y, size.height / 2)
+            labelCenter.y -= extendLength + size.height
+            labelCenter.y = max(labelCenter.y, size.height / 2)
             size.width += extendLength * 3
+            arrowFrameSize = CGSizeMake(size.width, 2*(center.y - (labelCenter.y + size.height / 2)))
         case .Right:
-            center.x += extendLength + size.width
-            center.x = min(center.x, pv.bounds.size.width - size.width / 2)
+            labelCenter.x += extendLength + size.width
+            labelCenter.x = min(labelCenter.x, pv.bounds.size.width - size.width / 2)
             size.height += extendLength * 2
+            arrowFrameSize = CGSizeMake(2*((labelCenter.x - size.width / 2) - center.x), size.height)
         case .Down:
-            center.y += extendLength + size.height
-            center.y = min(center.y, pv.bounds.size.height - size.height / 2)
+            labelCenter.y += extendLength + size.height
+            labelCenter.y = min(labelCenter.y, pv.bounds.size.height - size.height / 2)
             size.width += extendLength * 3
+            arrowFrameSize = CGSizeMake(size.width, 2*((labelCenter.y - size.height / 2) - center.y))
         }
         
-        self.frame = CGRectIntersection(CGRectMake(
-            center.x - size.width / 2.0,
-            center.y - size.height / 2.0,
+        let labelFrame = CGRectIntersection(CGRectMake(
+            labelCenter.x - size.width / 2.0,
+            labelCenter.y - size.height / 2.0,
             size.width,
             size.height), pv.bounds)
-        self.label.frame = self.bounds
+        let arrowFrame = CGRectIntersection(CGRectMake(
+            center.x - arrowFrameSize.width / 2,
+            center.y - arrowFrameSize.height / 2,
+            arrowFrameSize.width,
+            arrowFrameSize.height), pv.bounds)
+        self.frame = CGRectUnion(labelFrame, arrowFrame)
+        self.label.frame = self.convertRect(labelFrame, fromView: pv)
+        self.arrow.frame = self.convertRect(arrowFrame, fromView: pv)
+        
+        arrowShapeLayer.path = UIBezierPath().tap{ (p:UIBezierPath) in
+            let (c, lt, rt, lb, rb) = (
+                self.arrow.convertPoint(center, fromView: pv),
+                CGPointMake(0, 0),
+                CGPointMake(arrowFrame.size.width, 0),
+                CGPointMake(0, arrowFrame.size.height),
+                CGPointMake(arrowFrame.size.width, arrowFrame.size.height))
+            p.moveToPoint(c)
+            switch direction {
+            case .None: break
+            case .Left:
+                p.addLineToPoint(lt)
+                p.addLineToPoint(lb)
+            case .Up:
+                p.addLineToPoint(lt)
+                p.addLineToPoint(rt)
+            case .Right:
+                p.addLineToPoint(rt)
+                p.addLineToPoint(rb)
+            case .Down:
+                p.addLineToPoint(lb)
+                p.addLineToPoint(rb)
+            }
+            p.closePath()
+        }.CGPath
         
         self.hidden = (direction == .None)
     }
