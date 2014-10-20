@@ -63,7 +63,7 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
         if x.hasPrefix(target) {
             return x
         } else {
-            if target.compare(x) == compare {
+            if target.compare(x, options: .LiteralSearch) == compare {
                 return binarySearch(target, xs: xs, begin: begin, end: mid, compare : compare)
             } else {
                 return binarySearch(target, xs: xs, begin: mid, end: end, compare : compare)

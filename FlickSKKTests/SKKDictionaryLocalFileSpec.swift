@@ -24,6 +24,10 @@ class SKKDictionaryLocalFileSpec : QuickSpec {
                 expect(xs).to(contain("割戻し"))
                 expect(xs).to(contain("割り戻し"))
             }
+            it("can find one word entry") {
+                let xs = dict.find("じ", okuri: .None)
+                expect(xs).to(contain("字"))
+            }
         }
         describe("okuri-ari") {
             it("can find first entry"){
