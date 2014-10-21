@@ -64,7 +64,7 @@ class UserDictionaryViewController: UITableViewController {
             let key = dict.allKeys[indexPath.row] as String
             let value = dict[key]! as String
             
-            cell.textLabel?.text = "\(key): \(value)"
+            cell.textLabel.text = "\(key): \(value)"
         }
         
         return cell

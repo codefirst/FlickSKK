@@ -101,23 +101,28 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     
     func serialize() {
         let file = NSFileHandle(forWritingAtPath: self.path)
-        write(file, str: ";; okuri-ari entries.\n")
-        for (k,v) in self.okuriAri {
-            let kana = k as String
-            let kanji = v as String
-            if !kana.isEmpty {
-                write(file, str: kana + " " + kanji + "\n")
+        switch file {
+        case .None:
+            ()
+        case .Some(let file):
+            write(file, str: ";; okuri-ari entries.\n")
+            for (k,v) in self.okuriAri {
+                let kana = k as String
+                let kanji = v as String
+                if !kana.isEmpty {
+                    write(file, str: kana + " " + kanji + "\n")
+                }
             }
-        }
-        write(file, str: ";; okuri-nasi entries.\n")
-        for (k,v) in self.okuriNasi {
-            let kana = k as String
-            let kanji = v as String
-            if !kana.isEmpty {
-                write(file, str: kana + " " + kanji + "\n")
+            write(file, str: ";; okuri-nasi entries.\n")
+            for (k,v) in self.okuriNasi {
+                let kana = k as String
+                let kanji = v as String
+                if !kana.isEmpty {
+                    write(file, str: kana + " " + kanji + "\n")
+                }
             }
+            file.closeFile()
         }
-        file.closeFile()
     }
 
     private func write(handle : NSFileHandle, str : NSString) {

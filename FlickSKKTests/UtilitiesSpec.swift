@@ -14,26 +14,32 @@ class UtilitiesSpec: QuickSpec {
         describe("Character") {
             context("ひらかな to romain") {
                 it("convert あ") {
-                    expect("あ".toRoman()).to(equal("a"))
+                    let result = ("あ" as Character).toRoman()
+                    expect(result).to(equal("a"))
                 }
                 it("convert が") {
-                    expect("が".toRoman()).to(equal("ga"))
+                    let result = ("が" as Character).toRoman()
+                    expect(result).to(equal("ga"))
                 }
             }
             context("カタカナ to romain") {
                 it("convert ア") {
-                    expect("ア".toRoman()).to(equal("a"))
+                    let result = ("ア" as Character).toRoman()
+                    expect(result).to(equal("a"))
                 }
                 it("convert ガ") {
-                    expect("ガ".toRoman()).to(equal("ga"))
+                    let result = ("ガ" as Character).toRoman()
+                    expect(result).to(equal("ga"))
                 }
             }
             context("半角カナ to romain") {
                 it("convert ｱ") {
-                    expect("ｱ".toRoman()).to(equal("a"))
+                    let result = ("ｱ" as Character).toRoman()
+                    expect(result).to(equal("a"))
                 }
                 it("convert ｶﾞ") {
-                    expect("ｶﾞ".toRoman()).to(equal("ga"))
+                    let result = ("ｶﾞ" as Character).toRoman()
+                    expect(result).to(equal("ga"))
                 }
             }
         }

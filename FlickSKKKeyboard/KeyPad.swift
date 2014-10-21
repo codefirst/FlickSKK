@@ -23,7 +23,7 @@ class KeyPad : UIView {
     init(keys: [KanaFlickKey]) {
         self.keys = keys
         self.keyButtons = []
-        super.init(frame: frame)
+        super.init()
         self.addKeypadKeys()
     }
         

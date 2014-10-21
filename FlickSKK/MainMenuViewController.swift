@@ -53,7 +53,7 @@ class MainMenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
         let row = sections[indexPath.section].rows[indexPath.row]
-        cell.textLabel?.text = row.title
+        cell.textLabel.text = row.title
         cell.accessoryType = .DisclosureIndicator
         return cell
     }
@@ -76,7 +76,7 @@ class MainMenuViewController: UITableViewController {
     
     func gotoLicense() {
         if let path = NSBundle.mainBundle().pathForResource("License", ofType: "html", inDirectory: "html") {
-            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
+            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
         }
     }
     
