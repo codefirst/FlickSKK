@@ -100,11 +100,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     }
     
     func serialize() {
-        let file = NSFileHandle(forWritingAtPath: self.path)
-        switch file {
-        case .None:
-            ()
-        case .Some(let file):
+        if let file = NSFileHandle(forWritingAtPath: self.path) {
             write(file, str: ";; okuri-ari entries.\n")
             for (k,v) in self.okuriAri {
                 let kana = k as String
