@@ -3,4 +3,5 @@
 //
 
 #import "IOUtil.h"
+#include "AppGroupSupport.h"
 #import <TestFlight.h>

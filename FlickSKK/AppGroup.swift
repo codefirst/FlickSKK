@@ -11,6 +11,8 @@ import Foundation
 
 class AppGroup {
     class func pathForResource(subpath: String) -> String? {
-        return NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier("group.org.codefirst.skk.FlickSKK")?.path?.stringByAppendingPathComponent(subpath)
+        let userName = AppGroupSupport.userName()
+        let identifier = "group.org.codefirst.skk.\(userName).FlickSKK"
+        return NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(identifier)?.path?.stringByAppendingPathComponent(subpath)
     }
 }

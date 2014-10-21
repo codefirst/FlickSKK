@@ -11,6 +11,8 @@
 		133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
 		133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
 		1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */; };
+		134543AA19F71A08008C4595 /* AppGroupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 134543A919F71A08008C4595 /* AppGroupSupport.m */; };
+		134543AB19F71A99008C4595 /* AppGroupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 134543A919F71A08008C4595 /* AppGroupSupport.m */; };
 		136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D160E19DA86690091D6BF /* CandidateDataSource.swift */; };
 		136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
 		136D161519DAEBE90091D6BF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputMode.swift */; };
@@ -184,6 +186,8 @@
 		133CDCF819D98ADA00B8120D /* KeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		133CDCFA19D98DAB00B8120D /* SKKSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSession.swift; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
+		134543A319F71823008C4595 /* AppGroupSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGroupSupport.h; sourceTree = "<group>"; };
+		134543A919F71A08008C4595 /* AppGroupSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGroupSupport.m; sourceTree = "<group>"; };
 		136D160E19DA86690091D6BF /* CandidateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateDataSource.swift; sourceTree = "<group>"; };
 		136D161019DAA0AE0091D6BF /* SKKInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
 		136D161419DAEBE90091D6BF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
@@ -433,6 +437,8 @@
 		EAD4B58B19D5CB8A007B6636 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				134543A319F71823008C4595 /* AppGroupSupport.h */,
+				134543A919F71A08008C4595 /* AppGroupSupport.m */,
 				EAD4B58C19D5CB8A007B6636 /* Info.plist */,
 				13F4525219DC5399001A4A1B /* FlickSKKKeyboard-Bridging-Header.h */,
 			);
@@ -731,6 +737,7 @@
 				EACD52B619F3FEFD001FB2A7 /* SKKLocalDictionaryFile.swift in Sources */,
 				EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */,
 				EACD52BB19F4074C001FB2A7 /* AppGroup.swift in Sources */,
+				134543AB19F71A99008C4595 /* AppGroupSupport.m in Sources */,
 				EACD52B719F3FF0F001FB2A7 /* IOUtil.mm in Sources */,
 				EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */,
 				EACD52B519F3FEF1001FB2A7 /* SKKDictionaryFile.swift in Sources */,
@@ -792,6 +799,7 @@
 				133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */,
 				13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,
+				134543AA19F71A08008C4595 /* AppGroupSupport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +876,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					"USER=$(USER)",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -909,6 +918,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "USER=$(USER)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
