@@ -10,12 +10,13 @@
 #import "AppGroupSupport.h"
 
 #define STR(x) @#x
+#define STR2(x) STR(x)
 
 @implementation AppGroupSupport
 
 + (NSString*)userName
 {
-    return STR(USER);
+    return STR2(USER);
 }
 
 
