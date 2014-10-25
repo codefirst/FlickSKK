@@ -27,8 +27,20 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     }
     
     let label = UILabel()
+    lazy var imageView: UIImageView = { [unowned self] in
+        UIImageView().tap{ (iv:UIImageView) in
+            self.label.text = nil
+            
+            iv.contentMode = .ScaleAspectFit
+            
+            let autolayout = self.autolayoutFormat(self.metrics, ["iv": iv])
+            autolayout("H:|-p-[iv]-p-|")
+            autolayout("V:|-p-[iv]-p-|")
+        }
+    }()
+    
     var metrics: [String:CGFloat] {
-        return [:]
+        return ["p": 10]
     }
     
     var tapped: ((KanaFlickKey, Int?) -> Void)?

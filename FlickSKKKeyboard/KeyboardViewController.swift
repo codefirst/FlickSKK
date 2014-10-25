@@ -239,7 +239,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
         self.numberModeButton = keyButton(.Number)
         self.alphabetModeButton = keyButton(.Alphabet)
-        self.shiftButton = keyButton(.Shift)
+        self.shiftButton = keyButton(.Shift).tap { (kb:KeyButton) in
+            kb.imageView.image = UIImage(named: "flickskk-arrow")
+        }
         
         for keypad in self.keypads.values {
             keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?) in
