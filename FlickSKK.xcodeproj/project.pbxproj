@@ -54,6 +54,8 @@
 		EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */; };
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
+		EA892D5719FBE70400265181 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5519FBE70400265181 /* iTunesArtwork */; };
+		EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5619FBE70400265181 /* iTunesArtwork@2x */; };
 		EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
@@ -209,6 +211,8 @@
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSpacerView.swift; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
+		EA892D5519FBE70400265181 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		EA892D5619FBE70400265181 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		EA985FE519D84AAE0043564C /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
 		EA985FE719D84D060043564C /* KeyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
 		EACD529C19F3F0C4001FB2A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -380,6 +384,8 @@
 				EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */,
 				EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */,
 				EAD4B56C19D5CB50007B6636 /* Images.xcassets */,
+				EA892D5519FBE70400265181 /* iTunesArtwork */,
+				EA892D5619FBE70400265181 /* iTunesArtwork@2x */,
 				EAD4B56E19D5CB50007B6636 /* LaunchScreen.xib */,
 				EAD4B56319D5CB50007B6636 /* Supporting Files */,
 			);
@@ -635,6 +641,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAD4B57019D5CB50007B6636 /* LaunchScreen.xib in Resources */,
+				EA892D5719FBE70400265181 /* iTunesArtwork in Resources */,
+				EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */,
 				EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
 				13D118CC19D99923009E9E79 /* skk.jisyo in Resources */,
 				EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */,
