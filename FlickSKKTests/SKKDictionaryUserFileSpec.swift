@@ -27,6 +27,22 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                 let xs = dict2.find("まじ", okuri: .None)
                 expect(xs).to(contain("本気"))
             }
+            it("return sorted entries") {
+                dict.register("あああ", okuri: .None, kanji: "AAA")
+                dict.register("あああ", okuri: .None, kanji: "BBB")
+                dict.register("あああ", okuri: "い", kanji: "CCC")
+                dict.register("いいい", okuri: .None, kanji: "DDD")
+
+                let actual = dict.entries()
+                expect(actual).to(equal([
+                    .SKKDictionaryEntry(kanji: "AAA", kana: "あああ", okuri: .None),
+                    .SKKDictionaryEntry(kanji: "BBB", kana: "あああ", okuri: .None),
+                    .SKKDictionaryEntry(kanji: "CCC", kana: "あああ", okuri: "い"),
+                    .SKKDictionaryEntry(kanji: "DDD", kana: "いいい", okuri: .None),
+                    .SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: .None)
+                    ]))
+            }
+
         }
     }
 }

@@ -15,6 +15,9 @@
 		136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
 		136D161519DAEBE90091D6BF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputMode.swift */; };
 		136F409919E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */; };
+		1388669A1A09202500B7D8A4 /* SKKDictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */; };
+		1388669B1A09204300B7D8A4 /* SKKDictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */; };
+		1388669C1A0920D500B7D8A4 /* SKKDictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */; };
 		1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */; };
 		1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4F19E0EEE200175343 /* BaseSession.swift */; };
 		1394A9B119E2D83C00F01BF0 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A99B19E2D80300F01BF0 /* Quick.framework */; };
@@ -189,6 +192,7 @@
 		136D161019DAA0AE0091D6BF /* SKKInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
 		136D161419DAEBE90091D6BF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
 		136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryUserFileSpec.swift; sourceTree = "<group>"; };
+		138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryEntry.swift; sourceTree = "<group>"; };
 		1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterSession.swift; sourceTree = "<group>"; };
 		1393DF4F19E0EEE200175343 /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
 		1394A99219E2D80300F01BF0 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -331,6 +335,7 @@
 				13F4525119DC538B001A4A1B /* IOUtil.h */,
 				13F4525319DC5399001A4A1B /* IOUtil.mm */,
 				13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */,
+				138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */,
 				13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */,
 				13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */,
 				13D118CE19D9994D009E9E79 /* SKKDictionary.swift */,
@@ -743,6 +748,7 @@
 			files = (
 				EAD4B56819D5CB50007B6636 /* MainMenuViewController.swift in Sources */,
 				EAF1DB6F19FBFDFD00816CF5 /* AppGroup.m in Sources */,
+				1388669B1A09204300B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				EACD52B319F3FECF001FB2A7 /* SKKDictionary.swift in Sources */,
 				EACD52AA19F3FD43001FB2A7 /* UserDictionaryViewController.swift in Sources */,
 				EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */,
@@ -765,6 +771,7 @@
 				13F9326319E2DC1700AC5019 /* SKKDictionary.swift in Sources */,
 				13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */,
 				13F9326519E2DC1700AC5019 /* IOUtil.h in Sources */,
+				1388669C1A0920D500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */,
 				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
@@ -806,6 +813,7 @@
 				13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */,
 				136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */,
 				133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */,
+				1388669A1A09202500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */,
 				13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,

@@ -12,7 +12,9 @@ import Foundation
  * ユーザ辞書。並び順について仮定を持たない。
  */
 class SKKUserDictionaryFile  : SKKDictionaryFile {
-    class func defaultUserDictionaryPath() -> String { return AppGroup.pathForResource("Library/skk.jisyo") ?? NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo") }
+    class func defaultUserDictionaryPath() -> String {
+        return AppGroup.pathForResource("Library/skk.jisyo") ?? NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
+    }
     class func defaultUserDictionary() -> SKKUserDictionaryFile {
         return SKKUserDictionaryFile(path: self.defaultUserDictionaryPath())
     }
@@ -61,17 +63,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         } else {
             entry = self.okuriAri[normal + (okuri ?? "")] as String?
         }
-        switch entry {
-        case .Some(let xs):
-            let ys : [String] = xs.pathComponents
-            if ys.count <= 2 {
-                return []
-            } else {
-                return Array(ys[1...ys.count-2])
-            }
-        case .None:
-            return []
-        }
+        return entry.map(split) ?? []
     }
     
     private func parse(line : NSString) -> (String, String)? {
@@ -125,5 +117,35 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         let data = NSData(bytes: str.UTF8String,
                           length: str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
         handle.writeData(data)
+    }
+
+    private func split(x : String) -> [String] {
+        let xs = x.pathComponents
+        if xs.count <= 2 {
+            return []
+        } else {
+            return Array(xs[1...xs.count-2])
+        }
+    }
+
+    func entries() -> [SKKDictionaryEntry] {
+        var xs : [SKKDictionaryEntry] = []
+
+        for (k, v) in okuriNasi {
+            for kanji in split(v as String) {
+                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: k as String, okuri: .None))
+            }
+        }
+
+        for (k, v) in okuriAri {
+            let kana = (k as String).butLast()
+            let okuri = (k as String).last()
+            for kanji in split(v as String) {
+                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: kana, okuri: okuri))
+            }
+        }
+
+        sort(&xs)
+        return xs
     }
 }
