@@ -10,10 +10,10 @@ import UIKit
 import FlickSKKKeyboard
 
 class UserDictionaryViewController: UITableViewController {
-    let userDict = SKKUserDictionaryFile.defaultUserDictionary()
+    var entries : [SKKDictionaryEntry] = []
     
     convenience override init() {
-        self.init(style: .Grouped)
+        self.init(style: .Plain)
     }
     
     override init(nibName: String?, bundle: NSBundle?) {
@@ -28,43 +28,22 @@ class UserDictionaryViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = NSLocalizedString("User Dictionary", comment: "")
+        self.entries = SKKUserDictionaryFile.defaultUserDictionary().entries()
     }
     
     // MARK: - Table View
-    
-    private func dictForSection(section: Int) -> NSMutableDictionary? {
-        switch section {
-        case 0: return userDict.okuriAri
-        case 1: return userDict.okuriNasi
-        default: return nil
-        }
-    }
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: return NSLocalizedString("Okuri-Ari", comment: "")
-        case 1: return NSLocalizedString("Okuri-Nashi", comment: "")
-        default: return nil
-        }
-    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dictForSection(section)?.count ?? 0
+        return self.entries.count
     }
     
     private let kCellID = "Cell"
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
         
-        if let dict = dictForSection(indexPath.section) {
-            let key = dict.allKeys[indexPath.row] as String
-            let value = dict[key]! as String
-            
-            cell.textLabel.text = "\(key): \(value)"
+        switch self.entries[indexPath.row] {
+        case .SKKDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
+            let o = okuri ?? ""
+            cell.textLabel.text = "\(kanji): \(kana)\(o)"
         }
         
         return cell
