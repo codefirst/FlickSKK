@@ -24,6 +24,7 @@ class MainMenuViewController: UITableViewController {
         
         weak var weakSelf = self
         sections = [
+            (title: nil, rows: [(title: NSLocalizedString("How to use", comment: ""), action: { weakSelf?.gotoHowToUse(); return})]),
             (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
             (title: nil, rows: [(title: NSLocalizedString("User Dictionary", comment: ""), action: { weakSelf?.gotoUserDictionary(); return})]),
             (title: nil, rows: [(title: NSLocalizedString("License", comment: ""), action: { weakSelf?.gotoLicense(); return})]),
@@ -66,6 +67,12 @@ class MainMenuViewController: UITableViewController {
     
     // MARK: - Actions
     
+    func gotoHowToUse() {
+        if let path = NSBundle.mainBundle().pathForResource("HowToUse", ofType: "html", inDirectory: "html") {
+            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
+        }
+    }
+
     func gotoSettings() {
         
     }
