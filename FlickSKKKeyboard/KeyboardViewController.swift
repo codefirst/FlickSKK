@@ -313,7 +313,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         }
         
         contextView.backgroundColor = UIColor.whiteColor()
-        sessionLabel.text = "welcome to SKK"
         let cViews = [
             "progress": loadingProgressView,
             "l": sessionLabel,
