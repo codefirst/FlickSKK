@@ -21,6 +21,7 @@ enum KanaFlickKey: Hashable {
     case Shift
     case Return
     case Backspace
+    case KeyboardChange
     case InputModeChange([SKKInputMode?])
     case Number
     case Alphabet
@@ -35,6 +36,7 @@ enum KanaFlickKey: Hashable {
         case .Shift: return "⇧"
         case .Return: return "⏎"
         case .Backspace: return "⌫"
+        case .KeyboardChange: return ""
         case .InputModeChange: return "かな"
         case .Number: return "123"
         case .Alphabet: return "ABC"
@@ -66,13 +68,14 @@ enum KanaFlickKey: Hashable {
         case .Shift: return 1
         case .Return: return 2
         case .Backspace: return 3
-        case .InputModeChange: return 4
-        case .Number: return 5
-        case .Alphabet: return 6
-        case .KomojiDakuten: return 7
-        case .UpperLower: return 8
-        case .Space: return 9
-        case .Nothing: return 10
+        case KeyboardChange: return 4
+        case .InputModeChange: return 5
+        case .Number: return 6
+        case .Alphabet: return 7
+        case .KomojiDakuten: return 8
+        case .UpperLower: return 9
+        case .Space: return 10
+        case .Nothing: return 11
         }
     }
 }
@@ -105,19 +108,6 @@ func ==(l : KeyboardMode, r : KeyboardMode) -> Bool {
     }
 }
 
-
-private func newKeyboardGlobeButton(target: UIInputViewController) -> UIButton {
-    return (UIButton.buttonWithType(.System) as UIButton).tap {
-        (b:UIButton) in
-        b.setTitle(NSLocalizedString("🌐", comment: "globe"), forState: .Normal)
-        b.addTarget(target, action: "advanceToNextInputMode", forControlEvents: .TouchUpInside)
-        b.backgroundColor = UIColor.lightGrayColor()
-        b.layer.borderColor = UIColor.grayColor().CGColor
-        b.layer.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
-    }
-}
-
-
 class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
     var heightConstraint : NSLayoutConstraint!
     
@@ -127,7 +117,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     let sessionLabel = UILabel()
     let candidateView = UITableView()
 
-    let nextKeyboardButton: UIButton!
+    let nextKeyboardButton: KeyButton!
     let inputModeChangeButton : KeyButton!
     var numberModeButton : KeyButton!
     var alphabetModeButton : KeyButton!
@@ -235,7 +225,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
-        self.nextKeyboardButton = newKeyboardGlobeButton(self)
+        self.nextKeyboardButton = keyButton(.KeyboardChange).tap { (kb:KeyButton) in
+            kb.imageView.image = UIImage(named: "globe")
+        }
         self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
         self.numberModeButton = keyButton(.Number)
         self.alphabetModeButton = keyButton(.Alphabet)
@@ -426,6 +418,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         case .Return:
             self.session.handle(.Enter)
         case .Shift: toggleShift()
+        case .KeyboardChange:
+            advanceToNextInputMode()
         case .InputModeChange(let modes):
             switch modes[index ?? 0] {
             case .Some(let m):
@@ -463,9 +457,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.alphabetModeButton.selected = self.keyboardMode == .Alphabet
         self.shiftButton.selected = self.shiftEnabled
         
-        // default implementation
-        self.nextKeyboardButton.setTitleColor(inputProxy.keyboardAppearance == UIKeyboardAppearance.Dark ? UIColor.whiteColor() : UIColor.blackColor(), forState: .Normal)
-
         // InputMode
         switch self.session.currentMode {
         case .Hirakana:
