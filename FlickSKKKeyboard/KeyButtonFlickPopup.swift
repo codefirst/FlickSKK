@@ -84,6 +84,7 @@ class KeyButtonFlickPopup: UIView {
             a.layer.addSublayer(self.arrowShapeLayer)
             self.addSubview(a)
         }
+        userInteractionEnabled = false
     }
     
     // MARK: - public methods
