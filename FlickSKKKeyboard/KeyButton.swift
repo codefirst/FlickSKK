@@ -130,7 +130,10 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         }
         
         if gesture.state == UIGestureRecognizerState.Ended {
-            KeyButtonFlickPopup.sharedInstance.hide()
+            NSTimer.scheduledTimerWithTimeInterval(0.2,
+                target: KeyButtonFlickPopup.sharedInstance,
+                selector: Selector("hide"),
+                userInfo: nil, repeats: false)
             if key.sequence != nil || self.bounds.contains(p) {
                 // always trigger when Seq, and trigger non-Seq (single char) key when touchUpInside
                 self.tapped?(self.key, self.sequenceIndex)
