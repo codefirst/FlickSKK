@@ -16,7 +16,20 @@
                     <locales>
                         <locale name="ja-JP">
                             <title>FlickSKK</title>
-                            <description>FlickSKK is awesome</description>
+                            <description>
+日本語入力キーボード FlickSKK。シンプル日本語入力を、iPhoneで。
+
+●FlickSKKの特長
+
+■1. SKKならではのシンプルな日本語変換
+・単文節変換および暗黙の確定による効率的な入力
+・3つの入力モードのサポート: 「ひらかな」モード、「カタカナ」モード、「半角カタカナ」モード
+・ひらかな確定、カタカナ確定、半角カナ確定機能
+・インラインでの単語登録
+
+■2. iPhoneらしいフリック入力
+・フリック入力による自然な入力をサポート
+</description>
                             <keywords>
                                 <keyword>SKK</keyword>
                                 <keyword>Keyboard</keyword>
