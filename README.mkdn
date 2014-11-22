@@ -21,6 +21,14 @@
 $ sudo gem install cocoapods
 ```
 
+### App Identifierの設定
+
+```
+$ cp Config.xcconfig.example Config.xcconfig
+```
+
+`APP_IDENTIFIER` を自分のDeveloper ProgramのApp IDに書き換えてください。
+
 ### ビルド
 
 ```
