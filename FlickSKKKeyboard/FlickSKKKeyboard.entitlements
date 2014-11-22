@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.org.codefirst.skk.$(USER).FlickSKK</string>
+		<string>group.$(APP_IDENTIFIER)</string>
 	</array>
 </dict>
 </plist>

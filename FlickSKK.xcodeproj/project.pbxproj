@@ -39,7 +39,6 @@
 		13F9326219E2DC1700AC5019 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
 		13F9326319E2DC1700AC5019 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
-		13F9326519E2DC1700AC5019 /* IOUtil.h in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525119DC538B001A4A1B /* IOUtil.h */; };
 		13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
 		13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputMode.swift */; };
 		13F9326819E2DC1700AC5019 /* WordRegisterSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */; };
@@ -232,6 +231,8 @@
 		EAD4B58C19D5CB8A007B6636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		EAD4B59819D80AF3007B6636 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		EAE8EA441A2083BD008316DD /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		EAE8EA4A1A2097A2008316DD /* Config.xcconfig.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Config.xcconfig.example; sourceTree = "<group>"; };
 		EAF1DB6D19FBFDFD00816CF5 /* AppGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppGroup.h; path = Common/AppGroup.h; sourceTree = SOURCE_ROOT; };
 		EAF1DB6E19FBFDFD00816CF5 /* AppGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppGroup.m; path = Common/AppGroup.m; sourceTree = SOURCE_ROOT; };
 		EAF1DB7119FBFF9900816CF5 /* FlickSKK-Common-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FlickSKK-Common-Bridging-Header.h"; path = "Common/FlickSKK-Common-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -354,6 +355,8 @@
 		EAD4B55719D5CB50007B6636 = {
 			isa = PBXGroup;
 			children = (
+				EAE8EA441A2083BD008316DD /* Config.xcconfig */,
+				EAE8EA4A1A2097A2008316DD /* Config.xcconfig.example */,
 				13D118C419D99923009E9E79 /* Resources */,
 				EAF1DB6C19FBFDDC00816CF5 /* Common */,
 				EAD4B56219D5CB50007B6636 /* FlickSKK */,
@@ -770,7 +773,6 @@
 				13F9326219E2DC1700AC5019 /* KeyEvent.swift in Sources */,
 				13F9326319E2DC1700AC5019 /* SKKDictionary.swift in Sources */,
 				13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */,
-				13F9326519E2DC1700AC5019 /* IOUtil.h in Sources */,
 				1388669C1A0920D500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */,
 				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
@@ -869,6 +871,7 @@
 /* Begin XCBuildConfiguration section */
 		EAD4B57D19D5CB50007B6636 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAE8EA441A2083BD008316DD /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -893,7 +896,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
-					"USER=$(USER)",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -915,6 +917,7 @@
 		};
 		EAD4B57E19D5CB50007B6636 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAE8EA441A2083BD008316DD /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -936,7 +939,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "USER=$(USER)";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

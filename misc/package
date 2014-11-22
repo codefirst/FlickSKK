@@ -2,7 +2,7 @@
 
 BRANCH=${1:-master}
 ARCHIVE_NAME=tmp/FlickSKK
-PROVISIONING_PROFILE=${PROVISIONING_PROFILE:-"XC Ad Hoc: org.codefirst.skk.$(whoami).FlickSKK"}
+PROVISIONING_PROFILE=${PROVISIONING_PROFILE:-"XC Ad Hoc: $(grep '^APP_IDENTIFIER' Config.xcconfig | grep -oE '[^= ]+$')"}
 
 PRETTY=cat
 if which xcpretty; then

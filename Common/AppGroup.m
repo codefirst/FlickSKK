@@ -10,13 +10,13 @@
 
 #define STR(x) @#x
 #define STR2(x) STR(x)
-static NSString * const kDeveloperName = STR2(USER);
+static NSString * const kAppIdentifier = STR2(APP_IDENTIFIER);
 
 @implementation AppGroup
 
 + (NSString *)appGroupID
 {
-    return [NSString stringWithFormat:@"group.org.codefirst.skk.%@.FlickSKK", kDeveloperName];
+    return [NSString stringWithFormat:@"group.%@", kAppIdentifier];
 }
 
 + (NSString *)pathForResource:(NSString *)subpath
