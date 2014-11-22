@@ -148,7 +148,14 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                     session.handle(.Enter)
                     expect(self.insertedText).to(equal("入った"))
                 }
-
+                it("can convert 「はいっ」") {
+                    session.handle(.Char(kana: "は", roman: "ta", shift: true))
+                    session.handle(.Char(kana: "い", roman: "i", shift: false))
+                    session.handle(.Char(kana: "つ", roman: "tu", shift: true))
+                    session.handle(.ToggleDakuten(beforeText: ""))
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("入っ"))
+                }
                 it("can convert 「ひっぱる」"){
                     session.handle(.Char(kana: "ひ", roman: "ta", shift: true))
                     session.handle(.Char(kana: "つ", roman: "tu", shift: false))
