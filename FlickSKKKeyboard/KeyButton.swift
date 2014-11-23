@@ -82,10 +82,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             l.textAlignment = .Center
             l.font = UIFont.systemFontOfSize(17.0)
         }
-        self.layer.tap { (l:CALayer) in
-            l.borderColor = UIColor.grayColor().CGColor
-            l.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
-        }
+        self.layer.borderColor = UIColor.grayColor().CGColor
+        self.layer.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
         
         let views = [
             "label": label,
