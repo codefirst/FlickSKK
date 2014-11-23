@@ -25,7 +25,8 @@ class MainMenuViewController: UITableViewController {
         weak var weakSelf = self
         sections = [
             (title: nil, rows: [(title: NSLocalizedString("How to use", comment: ""), action: { weakSelf?.gotoHowToUse(); return})]),
-            (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
+            // FIXME: 設定項目をなんか増やす
+            // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
             (title: nil, rows: [(title: NSLocalizedString("User Dictionary", comment: ""), action: { weakSelf?.gotoUserDictionary(); return})]),
             (title: nil, rows: [(title: NSLocalizedString("License", comment: ""), action: { weakSelf?.gotoLicense(); return})]),
         ]
