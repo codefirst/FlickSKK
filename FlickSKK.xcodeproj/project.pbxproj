@@ -52,6 +52,7 @@
 		D3C6CB3D1AD977725CC25D71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA289C0ED7662F2EF0F3718 /* libPods.a */; };
 		EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */; };
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
+		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
 		EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
 		EA892D5719FBE70400265181 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5519FBE70400265181 /* iTunesArtwork */; };
 		EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5619FBE70400265181 /* iTunesArtwork@2x */; };
@@ -204,6 +205,7 @@
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSpacerView.swift; sourceTree = "<group>"; };
+		EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
 		EA892D5519FBE70400265181 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		EA892D5619FBE70400265181 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */,
 				EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */,
 				EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */,
+				EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */,
 				EAD4B56C19D5CB50007B6636 /* Images.xcassets */,
 				EA892D5519FBE70400265181 /* iTunesArtwork */,
 				EA892D5619FBE70400265181 /* iTunesArtwork@2x */,
@@ -648,6 +651,7 @@
 				EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */,
 				EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
 				EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */,
+				EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */,
 				EACD52A419F3F58B001FB2A7 /* html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
