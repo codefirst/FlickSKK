@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://apple.com/itunes/importer" version="software5.2">
+    <!-- NOTE: metadata_token is generated on lookup.  Modifying the value of this will result in an import error -->
+    <metadata_token>1416676135643-6dcb48839a459516685d93afbeac403b47fe9d5a494e9f024a9e4be160b7d95b</metadata_token>
+    <provider>JUNBAN198441466</provider>
+    <team_id>FPZK4WRGW7</team_id>
+    <software>
+        <!--Apple ID: 944678753-->
+        <vendor_id>FlickSKK</vendor_id>
+        <read_only_info>
+            <read_only_value key="apple-id">944678753</read_only_value>
+        </read_only_info>
+        <software_metadata>
+            <versions>
+                <version string="1.0.0">
+                    <locales>
+                        <locale name="ja-JP">
+                            <title>FlickSKK</title>
+                            <description>
+日本語入力キーボード FlickSKK。シンプル日本語入力を、iPhoneで。
+
+●FlickSKKの特長
+
+■1. SKKならではのシンプルな日本語変換
+・単文節変換および暗黙の確定による効率的な入力
+・3つの入力モードのサポート: 「ひらかな」モード、「カタカナ」モード、「半角カタカナ」モード
+・ひらかな確定、カタカナ確定、半角カナ確定機能
+・インラインでの単語登録
+
+■2. iPhoneらしいフリック入力
+・フリック入力による自然な入力をサポート
+</description>
+                            <keywords>
+                                <keyword>SKK</keyword>
+                                <keyword>Keyboard</keyword>
+                                <keyword>キーボード</keyword>
+                                <keyword>フリック</keyword>
+                                <keyword>日本語入力</keyword>
+                            </keywords>
+                            <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
+                            <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
+                        </locale>
+                    </locales>
+                </version>
+            </versions>
+            <products>
+                <product>
+                    <territory>WW</territory>
+                    <cleared_for_sale>true</cleared_for_sale>
+                    <sales_start_date>2014-11-22</sales_start_date>
+                    <intervals>
+                        <!--The following <interval> element represents a snapshot of present and future pricing and availability information.
+In other words, past data may not be reflected by this interval.-->
+                        <interval>
+                            <start_date>2014-11-22</start_date>
+                            <wholesale_price_tier>0</wholesale_price_tier>
+                        </interval>
+                    </intervals>
+                    <allow_volume_discount>true</allow_volume_discount>
+                </product>
+            </products>
+        </software_metadata>
+    </software>
+</package>
