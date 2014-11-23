@@ -4,4 +4,3 @@
 
 #import "IOUtil.h"
 #include "AppGroup.h"
-#import <TestFlight.h>
