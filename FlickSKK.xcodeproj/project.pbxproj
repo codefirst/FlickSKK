@@ -23,7 +23,6 @@
 		1394A9B119E2D83C00F01BF0 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A99B19E2D80300F01BF0 /* Quick.framework */; };
 		1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; };
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
-		13D118CC19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
@@ -53,6 +52,7 @@
 		D3C6CB3D1AD977725CC25D71 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA289C0ED7662F2EF0F3718 /* libPods.a */; };
 		EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */; };
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
+		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
 		EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
 		EA892D5719FBE70400265181 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5519FBE70400265181 /* iTunesArtwork */; };
 		EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5619FBE70400265181 /* iTunesArtwork@2x */; };
@@ -62,7 +62,6 @@
 		EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */; };
 		EACD52A419F3F58B001FB2A7 /* html in Resources */ = {isa = PBXBuildFile; fileRef = EACD52A319F3F58B001FB2A7 /* html */; };
-		EACD52A519F3F58B001FB2A7 /* html in Resources */ = {isa = PBXBuildFile; fileRef = EACD52A319F3F58B001FB2A7 /* html */; };
 		EACD52AA19F3FD43001FB2A7 /* UserDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */; };
 		EACD52B319F3FECF001FB2A7 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		EACD52B419F3FEE4001FB2A7 /* SKKUserDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */; };
@@ -206,6 +205,7 @@
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSpacerView.swift; sourceTree = "<group>"; };
+		EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
 		EA892D5519FBE70400265181 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		EA892D5619FBE70400265181 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
@@ -317,16 +317,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		13D118C419D99923009E9E79 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				13D118C719D99923009E9E79 /* skk.jisyo */,
-				EACD529D19F3F0C4001FB2A7 /* Localizable.strings */,
-				EACD52A319F3F58B001FB2A7 /* html */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		13DFEAC319F079C8006D7E40 /* SKKDictionary */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,12 +339,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EA2F67951A21D7BE00DDCBB9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */,
+				EAD4B56C19D5CB50007B6636 /* Images.xcassets */,
+				EACD52A319F3F58B001FB2A7 /* html */,
+				EA892D5519FBE70400265181 /* iTunesArtwork */,
+				EA892D5619FBE70400265181 /* iTunesArtwork@2x */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA2F67961A21D9C700DDCBB9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				13D118C719D99923009E9E79 /* skk.jisyo */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		EA2F67971A21D9D200DDCBB9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EACD529D19F3F0C4001FB2A7 /* Localizable.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		EAD4B55719D5CB50007B6636 = {
 			isa = PBXGroup;
 			children = (
 				EAE8EA441A2083BD008316DD /* Config.xcconfig */,
 				EAE8EA4A1A2097A2008316DD /* Config.xcconfig.example */,
-				13D118C419D99923009E9E79 /* Resources */,
 				EAF1DB6C19FBFDDC00816CF5 /* Common */,
 				EAD4B56219D5CB50007B6636 /* FlickSKK */,
 				EAD4B57819D5CB50007B6636 /* FlickSKKTests */,
@@ -378,15 +395,12 @@
 		EAD4B56219D5CB50007B6636 /* FlickSKK */ = {
 			isa = PBXGroup;
 			children = (
-				EACD52B819F40599001FB2A7 /* FlickSKK.entitlements */,
 				EAD4B56519D5CB50007B6636 /* AppDelegate.swift */,
 				EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */,
 				EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */,
 				EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */,
 				EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */,
-				EAD4B56C19D5CB50007B6636 /* Images.xcassets */,
-				EA892D5519FBE70400265181 /* iTunesArtwork */,
-				EA892D5619FBE70400265181 /* iTunesArtwork@2x */,
+				EA2F67951A21D7BE00DDCBB9 /* Resources */,
 				EAD4B56319D5CB50007B6636 /* Supporting Files */,
 			);
 			path = FlickSKK;
@@ -396,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD4B56419D5CB50007B6636 /* Info.plist */,
+				EACD52B819F40599001FB2A7 /* FlickSKK.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -425,7 +440,6 @@
 		EAD4B58A19D5CB8A007B6636 /* FlickSKKKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				EACD52B919F406AE001FB2A7 /* FlickSKKKeyboard.entitlements */,
 				133CDCF719D98A4C00B8120D /* SKKBase */,
 				13DFEAC319F079C8006D7E40 /* SKKDictionary */,
 				133CDCFC19D98DB100B8120D /* SKKSession */,
@@ -435,6 +449,7 @@
 				EA985FE719D84D060043564C /* KeyButton.swift */,
 				EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */,
 				EAD4B59819D80AF3007B6636 /* Utilities.swift */,
+				EA2F67961A21D9C700DDCBB9 /* Resources */,
 				EAD4B58B19D5CB8A007B6636 /* Supporting Files */,
 			);
 			path = FlickSKKKeyboard;
@@ -444,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD4B58C19D5CB8A007B6636 /* Info.plist */,
+				EACD52B919F406AE001FB2A7 /* FlickSKKKeyboard.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -454,6 +470,7 @@
 				EAF1DB6D19FBFDFD00816CF5 /* AppGroup.h */,
 				EAF1DB6E19FBFDFD00816CF5 /* AppGroup.m */,
 				EAF1DB7119FBFF9900816CF5 /* FlickSKK-Common-Bridging-Header.h */,
+				EA2F67971A21D9D200DDCBB9 /* Resources */,
 			);
 			name = Common;
 			path = FlickSKK;
@@ -649,8 +666,8 @@
 				EA892D5719FBE70400265181 /* iTunesArtwork in Resources */,
 				EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */,
 				EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
-				13D118CC19D99923009E9E79 /* skk.jisyo in Resources */,
 				EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */,
+				EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */,
 				EACD52A419F3F58B001FB2A7 /* html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -667,7 +684,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13D118CD19D99923009E9E79 /* skk.jisyo in Resources */,
-				EACD52A519F3F58B001FB2A7 /* html in Resources */,
 				EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -847,7 +863,7 @@
 				EACD529E19F3F18D001FB2A7 /* ja */,
 			);
 			name = Localizable.strings;
-			path = ../FlickSKK;
+			path = ../Common;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
