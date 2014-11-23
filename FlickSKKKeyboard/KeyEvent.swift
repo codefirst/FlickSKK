@@ -19,6 +19,6 @@ enum KeyEvent {
     case ToggleUpperLower(beforeText : String)
     
     // 仮想イベント
-    case CommitWord(kanji: String)
+    case CommitWord(word: String)
     case CancelWord
 }

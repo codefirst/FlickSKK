@@ -29,7 +29,7 @@ enum KanaFlickKey: Hashable {
     case UpperLower
     case Space
     case Nothing
-    
+
     var buttonLabel: String {
         switch self {
         case let .Seq(s): return String(s[s.startIndex])
