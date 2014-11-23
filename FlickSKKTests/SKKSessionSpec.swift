@@ -187,6 +187,31 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                     session.handle(.ToggleDakuten(beforeText: ""))
                     session.handle(.Enter)
                     expect(self.insertedText).to(equal("が"))
+
+                    self.insertedText = ""
+
+                    session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                    session.handle(.Char(kana: "か", roman: "ka", shift: false))
+                    session.handle(.Char(kana: "か", roman: "ka", shift: false))
+                    session.handle(.Space)
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("が"))
+                }
+                it("can register word with okuri") {
+                    // かかk を辞書に登録する
+                    session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                    session.handle(.Char(kana: "か", roman: "ka", shift: false))
+                    session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                    session.handle(.Char(kana: "か", roman: "ka", shift: false))
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("かか"))
+                    self.insertedText = ""
+
+                    session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                    session.handle(.Char(kana: "か", roman: "ka", shift: false))
+                    session.handle(.Char(kana: "か", roman: "ka", shift: true))
+                    session.handle(.Enter)
+                    expect(self.insertedText).to(equal("かか"))
                 }
             }
         }

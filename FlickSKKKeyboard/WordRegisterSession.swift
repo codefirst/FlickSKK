@@ -10,7 +10,7 @@ import Foundation
 
 class WordRegisterSession : BaseSession {
     enum Handle {
-        case Commit(kanji : String)
+        case Commit(word : String)
         case Cancel
         case ToggleDakuten(beforeText : String)
         case Handles(xs : [InputMode.Handle])
@@ -47,8 +47,10 @@ class WordRegisterSession : BaseSession {
             switch h {
             case .InsertText(text: let text):
                 if(text == "\n") {
-                    self.dictionary.register(self.kana, okuri: self.okuri?.1, kanji: kanji)
-                    return .Commit(kanji: kanji)
+                    let okuri = (self.okuri?.1).map({ s in String(s[s.startIndex])}) 
+                    self.dictionary.register(self.kana, okuri: okuri, kanji: kanji)
+                    let okuriStr = (self.okuri?.0) ?? ""
+                    return .Commit(word: kanji + okuriStr)
                 } else {
                     self.kanji += text
                 }
@@ -89,9 +91,9 @@ class WordRegisterSession : BaseSession {
     
     private func onRegisterWord(event : KeyEvent) -> Handle {
         switch subSession?.handle(event) {
-        case .Some(.Commit(kanji : let kanji)):
+        case .Some(.Commit(word : let word)):
             self.status = .Default
-            return onDefault(.CommitWord(kanji: kanji))
+            return onDefault(.CommitWord(word: word))
         case .Some(.Cancel):
             self.status = .Default
             return onDefault(.CancelWord)

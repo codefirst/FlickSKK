@@ -41,9 +41,9 @@ class SKKSession : BaseSession {
     
     private func onWordRegister(event : KeyEvent) {
         switch subSession?.handle(event) {
-        case .Some(.Commit(kanji : let kanji)):
+        case .Some(.Commit(word : let word)):
             self.status = .Default
-            onDefault(.CommitWord(kanji: kanji))
+            onDefault(.CommitWord(word: word))
         case .Some(.Cancel):
             self.status = .Default
             onDefault(.CancelWord)
