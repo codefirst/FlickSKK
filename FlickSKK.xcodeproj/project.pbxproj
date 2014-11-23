@@ -23,7 +23,6 @@
 		1394A9B119E2D83C00F01BF0 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A99B19E2D80300F01BF0 /* Quick.framework */; };
 		1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; };
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
-		13D118CC19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
@@ -62,7 +61,6 @@
 		EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */; };
 		EACD52A419F3F58B001FB2A7 /* html in Resources */ = {isa = PBXBuildFile; fileRef = EACD52A319F3F58B001FB2A7 /* html */; };
-		EACD52A519F3F58B001FB2A7 /* html in Resources */ = {isa = PBXBuildFile; fileRef = EACD52A319F3F58B001FB2A7 /* html */; };
 		EACD52AA19F3FD43001FB2A7 /* UserDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */; };
 		EACD52B319F3FECF001FB2A7 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		EACD52B419F3FEE4001FB2A7 /* SKKUserDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */; };
@@ -649,7 +647,6 @@
 				EA892D5719FBE70400265181 /* iTunesArtwork in Resources */,
 				EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */,
 				EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
-				13D118CC19D99923009E9E79 /* skk.jisyo in Resources */,
 				EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */,
 				EACD52A419F3F58B001FB2A7 /* html in Resources */,
 			);
@@ -667,7 +664,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13D118CD19D99923009E9E79 /* skk.jisyo in Resources */,
-				EACD52A519F3F58B001FB2A7 /* html in Resources */,
 				EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
