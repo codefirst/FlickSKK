@@ -254,7 +254,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         kGlobalDictionary.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
     }
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if let dict = object as? SKKDictionary {
             if dict.isWaitingForLoad {
                 self.disableAllKeys()
