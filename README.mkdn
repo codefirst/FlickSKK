@@ -69,4 +69,8 @@ ruby ./misc/strip.rb /path/to/skk.jisyo > Resources/skk.jisyo
 ```
 
 ## License
+
+FlickSKKはSKK-JISYO.Lを元にしたSKK辞書を同梱しています。
+<https://github.com/codefirst/FlickSKK/blob/master/FlickSKKKeyboard/skk.jisyo>
+
 (TBD)
