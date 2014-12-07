@@ -74,7 +74,7 @@ class UserDictionaryViewController: UITableViewController {
         switch self.entries[indexPath.row] {
         case .SKKDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
             let o = okuri ?? ""
-            cell.textLabel.text = "\(kanji): \(kana)\(o)"
+            cell.textLabel?.text = "\(kanji): \(kana)\(o)"
         }
         
         return cell

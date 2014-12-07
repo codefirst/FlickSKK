@@ -17,11 +17,11 @@ class CandidateDataSource: NSObject, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(candidate) as UITableViewCell?
 
         if(cell != nil) {
-            cell?.textLabel.text = candidate
+            cell?.textLabel?.text = candidate
             return cell!
         } else {
             let c = UITableViewCell(style: .Default, reuseIdentifier: candidate)
-            c.textLabel.text = candidate
+            c.textLabel?.text = candidate
             return c
         }
     }

@@ -55,7 +55,7 @@ class MainMenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
         let row = sections[indexPath.section].rows[indexPath.row]
-        cell.textLabel.text = row.title
+        cell.textLabel?.text = row.title
         cell.accessoryType = .DisclosureIndicator
         return cell
     }
