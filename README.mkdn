@@ -1,7 +1,6 @@
 # FlickSKK
-[![Build Status](https://travis-ci.org/codefirst/FlickSKK.svg?branch=master)](https://travis-ci.org/codefirst/FlickSKK)
-
-*現在、開発中であり、AppStore等での配布は行なっていません。*
+[AppStoreにて公開しています。
+](https://itunes.apple.com/jp/app/flickskk/id944678753?mt=8)
 
 ## Overview
 フリック入力対応版のiOS向けSKKです。
