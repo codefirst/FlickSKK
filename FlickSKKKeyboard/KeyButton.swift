@@ -126,9 +126,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     func gestureTapped(gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
         self.highlighted = false
-        if self.key.isRepeat {
-            self.repeatTimer?.cancel()
-        } else {
+        if !self.key.isRepeat {
             self.tapped?(self.key, self.sequenceIndex)
         }
     }
