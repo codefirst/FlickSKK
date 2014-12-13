@@ -42,7 +42,7 @@ class KeyRepeatTimer : NSObject {
         self.timer = nil
     }
 
-    func repeat() {
+    @objc private func repeat() {
         self.action()
     }
 }
