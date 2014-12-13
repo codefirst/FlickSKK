@@ -26,7 +26,7 @@ class KeyRepeatTimer : NSObject {
 
     func start() {
         self.action()
-
+        cancel()
         self.timer = NSTimer(
             fireDate: NSDate(timeIntervalSinceNow: self.delayInterval),
             interval: self.repeatInterval,
