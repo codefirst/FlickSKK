@@ -63,6 +63,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     
     var normalBackgroundColor: UIColor
     var selectedBackgroundColor: UIColor
+    let repeatTimer : KeyRepeatTimer?
     
     init(key: KanaFlickKey) {
         self.key = key
@@ -85,6 +86,13 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         self.layer.borderColor = UIColor.grayColor().CGColor
         self.layer.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
         
+        if key.isRepeat {
+            self.repeatTimer = KeyRepeatTimer(delayInterval: 0.45, repeatInterval: 0.05, action: {
+                self.tapped?(self.key, self.sequenceIndex)
+                return ()
+            })
+        }
+
         let views = [
             "label": label,
         ]
@@ -99,28 +107,35 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     // MARK: - Gestures
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.highlighted = true // set to false on end, cancel, started pan
+        self.repeatTimer?.start()
         super.touchesBegan(touches, withEvent: event)
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
         self.highlighted = false
+        self.repeatTimer?.cancel()
         super.touchesEnded(touches, withEvent: event)
     }
     
     override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
 //        self.highlighted = false // surpress flicker (highlighted = false, then true)
+        self.repeatTimer?.cancel()
         super.touchesCancelled(touches, withEvent: event)
     }
     
     func gestureTapped(gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
         self.highlighted = false
-        self.tapped?(self.key, self.sequenceIndex)
+        if !self.key.isRepeat {
+            self.tapped?(self.key, self.sequenceIndex)
+        }
     }
     
     var originOfPanGesture = CGPointZero
     
     func gesturePanned(gesture: UIPanGestureRecognizer) {
+        // FIXME: キーリピート対応について、なにも考慮してない。
+        // 動くような気もするけど未確認。
         let p = gesture.locationInView(self)
         
         if gesture.state == UIGestureRecognizerState.Began {

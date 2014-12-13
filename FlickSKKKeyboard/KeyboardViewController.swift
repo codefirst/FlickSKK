@@ -62,6 +62,13 @@ enum KanaFlickKey: Hashable {
         }
     }
     
+    var isRepeat: Bool {
+        switch self {
+        case .Backspace: return true
+        default: return false
+        }
+    }
+
     var hashValue: Int {
         switch self {
         case .Seq(_): return 0
