@@ -149,7 +149,7 @@ class InputMode {
             return done()
         }
     }
-    
+
     private func onKanaCompose(event : KeyEvent) -> [Handle] {
         switch event {
         case .Char(kana: let kana, roman: let roman, shift: let shift):
@@ -219,7 +219,7 @@ class InputMode {
             return done()
         }
     }
-    
+
     private func onKanjiCompose(event : KeyEvent) -> [Handle] {
         switch event {
         case .Space:
@@ -329,7 +329,7 @@ class InputMode {
             return self.dictionary.find(t, okuri: .None)
         }
     }
-    
+
     private func setupCandidates(xs : [String]) {
         self.candidates     = xs
         self.candidateIndex = 0

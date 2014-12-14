@@ -17,7 +17,7 @@ enum KeyEvent {
     case InputModeChange(inputMode : SKKInputMode)
     case ToggleDakuten(beforeText : String)
     case ToggleUpperLower(beforeText : String)
-    
+
     // 仮想イベント
     case CommitWord(word: String)
     case CancelWord

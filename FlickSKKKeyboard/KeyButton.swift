@@ -25,24 +25,24 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             }
         }
     }
-    
+
     let label = UILabel()
     lazy var imageView: UIImageView = { [unowned self] in
         UIImageView().tap{ (iv:UIImageView) in
             self.label.text = nil
-            
+
             iv.contentMode = .ScaleAspectFit
-            
+
             let autolayout = self.autolayoutFormat(self.metrics, ["iv": iv])
             autolayout("H:|-p-[iv]-p-|")
             autolayout("V:|-p-[iv]-p-|")
         }
     }()
-    
+
     var metrics: [String:CGFloat] {
         return ["p": 10]
     }
-    
+
     var tapped: ((KanaFlickKey, Int?) -> Void)?
     var selected: Bool {
         didSet {
@@ -60,11 +60,11 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             self.backgroundColor = highlighted ? KeyButtonHighlightedColor : selected ? selectedBackgroundColor : normalBackgroundColor
         }
     }
-    
+
     var normalBackgroundColor: UIColor
     var selectedBackgroundColor: UIColor
     let repeatTimer : KeyRepeatTimer?
-    
+
     init(key: KanaFlickKey) {
         self.key = key
         self.normalBackgroundColor = key.isControl ? UIColor.lightGrayColor() : UIColor(white: 1.0, alpha: 1.0)
@@ -72,11 +72,11 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         self.selected = false
         self.enabled = true
         self.highlighted = false
-        
+
         super.init(frame: CGRectZero)
-        
+
         self.backgroundColor = normalBackgroundColor
-        
+
         self.label.tap { (l:UILabel) in
             l.text = self.key.buttonLabel
             l.textColor = UIColor.blackColor()
@@ -85,7 +85,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         }
         self.layer.borderColor = UIColor.grayColor().CGColor
         self.layer.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
-        
+
         if key.isRepeat {
             self.repeatTimer = KeyRepeatTimer(delayInterval: 0.45, repeatInterval: 0.05, action: {
                 self.tapped?(self.key, self.sequenceIndex)
@@ -99,30 +99,30 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         let autolayout = self.autolayoutFormat(metrics, views)
         autolayout("H:|[label]|")
         autolayout("V:|[label]|")
-        
+
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gestureTapped:"))
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
     }
-    
+
     // MARK: - Gestures
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.highlighted = true // set to false on end, cancel, started pan
         self.repeatTimer?.start()
         super.touchesBegan(touches, withEvent: event)
     }
-    
+
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
         self.highlighted = false
         self.repeatTimer?.cancel()
         super.touchesEnded(touches, withEvent: event)
     }
-    
+
     override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
 //        self.highlighted = false // surpress flicker (highlighted = false, then true)
         self.repeatTimer?.cancel()
         super.touchesCancelled(touches, withEvent: event)
     }
-    
+
     func gestureTapped(gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
         self.highlighted = false
@@ -130,18 +130,18 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             self.tapped?(self.key, self.sequenceIndex)
         }
     }
-    
+
     var originOfPanGesture = CGPointZero
-    
+
     func gesturePanned(gesture: UIPanGestureRecognizer) {
         // FIXME: キーリピート対応について、なにも考慮してない。
         // 動くような気もするけど未確認。
         let p = gesture.locationInView(self)
-        
+
         if gesture.state == UIGestureRecognizerState.Began {
             originOfPanGesture = p
         }
-        
+
         if gesture.state == UIGestureRecognizerState.Ended {
             let delay = 0.2 * Double(NSEC_PER_SEC)
             let time  = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -156,7 +156,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             self.highlighted = false
             return
         }
-        
+
         let distance = sqrt(pow(p.x - originOfPanGesture.x, 2) + pow(p.y - originOfPanGesture.y, 2))
         if self.bounds.contains(p) && distance < 12 {
             self.sequenceIndex = (key.sequence != nil ? 0 : nil)
@@ -167,7 +167,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             if let s = key.sequence {
                 let maxIndex = s.count - 1
                 var direction = KeyButtonFlickDirection.None
-                
+
                 let angle = Double(atan2(p.y - originOfPanGesture.y, p.x - originOfPanGesture.x))
                 if angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
                     self.sequenceIndex = min(1, maxIndex)
@@ -182,7 +182,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                     self.sequenceIndex = min(4, maxIndex)
                     direction = .Down
                 }
-                
+
                 let text = String(Array(s)[self.sequenceIndex ?? 0])
                 KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
             }

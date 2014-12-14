@@ -10,7 +10,7 @@ import UIKit
 
 class CandidateDataSource: NSObject, UITableViewDataSource {
     var candidates : [String] = []
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let index = indexPath.row
         let candidate = (index < candidates.count) ? candidates[index] : "";
@@ -25,11 +25,11 @@ class CandidateDataSource: NSObject, UITableViewDataSource {
             return c
         }
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return candidates.count
     }
-    
+
     func update(xs : [String]){
         self.candidates = xs
     }

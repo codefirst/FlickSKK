@@ -11,7 +11,7 @@ import UIKit
 
 class KeyboardSpacerView : UIView {
     var keyboardHeightConstraint: NSLayoutConstraint?
-    
+
     func installKeyboardHeightConstraint() {
         keyboardHeightConstraint = NSLayoutConstraint(item: self,
             attribute: NSLayoutAttribute.Height,
@@ -21,7 +21,7 @@ class KeyboardSpacerView : UIView {
             multiplier: 0,
             constant: 0)
         addConstraint(keyboardHeightConstraint!)
-        
+
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: nil) { (n: NSNotification!) -> Void in
             if let userInfo = n.userInfo {
                 if let f = (userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue?)?.CGRectValue() {
@@ -30,7 +30,7 @@ class KeyboardSpacerView : UIView {
             }
         }
     }
-    
+
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }

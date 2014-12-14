@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = UINavigationController(rootViewController: MainMenuViewController())
         window?.makeKeyAndVisible()
-        
+
         return true
     }
 

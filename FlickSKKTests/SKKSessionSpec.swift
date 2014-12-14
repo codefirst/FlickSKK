@@ -10,28 +10,28 @@ import Quick
 import Nimble
 
 class SKKSessionSpec : QuickSpec, SKKDelegate {
-    
+
     // delegate
     func insertText(text : String) { self.insertedText += text }
     func deleteBackward() {}
     func composeText(text : String) { self.currentComposeText = text }
     func showCandidates(candidates : [String]?) {}
-    
+
     // stub variable
     var insertedText = ""
     var currentComposeText = ""
-    
+
     override func spec() {
         var session : SKKSession!
         let jisyo = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
         let dict = SKKDictionary(userDict: "", dicts:[jisyo!])
         dict.waitForLoading()
-        
+
         beforeEach {
             session = SKKSession(delegate: self, dict: dict)
             self.insertedText = ""
         }
-        
+
         context("hirakana mode") {
             describe("ひらかな input") {
                 it("insert text") {
@@ -84,7 +84,7 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
                         expect(self.insertedText).to(equal("割き"))
                     }
                 }
-                
+
                 it("toggle dakuten") {
                     session.handle(.Char(kana: "か", roman: "ka", shift: false))
                     session.handle(.Char(kana: "か", roman: "ka", shift: false))

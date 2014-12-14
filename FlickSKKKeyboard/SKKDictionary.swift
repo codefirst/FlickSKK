@@ -13,10 +13,10 @@ class SKKDictionary : NSObject {
 
     var dictionaries : [ SKKDictionaryFile ] = []
     var userDict : SKKUserDictionaryFile?
-    
+
     dynamic var isWaitingForLoad : Bool = false
     class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
-    
+
     init(userDict: String, dicts : [String]){
         super.init()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -29,7 +29,7 @@ class SKKDictionary : NSObject {
 
     func find(normal : String, okuri : String?) -> [ String ] {
         self.waitForLoading()
-        
+
         let xs : [String] = self.dictionaries.map({(dict : SKKDictionaryFile) -> [String] in
             dict.find(normal, okuri: okuri)
         }).reduce([],
@@ -50,7 +50,7 @@ class SKKDictionary : NSObject {
 
     func waitForLoading() {
         if initialized { return }
-        
+
         self.isWaitingForLoad = true
         while !self.initialized {
             NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: 0.1))

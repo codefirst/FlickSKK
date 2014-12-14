@@ -14,14 +14,14 @@ class MainMenuViewController: UITableViewController {
     convenience override init() {
         self.init(style: .Grouped)
     }
-    
+
     override init(nibName: String?, bundle: NSBundle?) {
         super.init(nibName: nibName, bundle: bundle)
     }
-    
+
     override init(style: UITableViewStyle) {
         super.init(style: style)
-        
+
         weak var weakSelf = self
         sections = [
             (title: nil, rows: [(title: NSLocalizedString("How to use", comment: ""), action: { weakSelf?.gotoHowToUse(); return})]),
@@ -33,25 +33,25 @@ class MainMenuViewController: UITableViewController {
     }
 
     // MARK: View Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = NSLocalizedString("FlickSKK", comment: "")
     }
-    
+
     // MARK: - Table View
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rows.count
     }
-    
+
     let kCellID = "Cell"
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
         let row = sections[indexPath.section].rows[indexPath.row]
@@ -59,15 +59,15 @@ class MainMenuViewController: UITableViewController {
         cell.accessoryType = .DisclosureIndicator
         return cell
     }
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()
     }
-    
+
     // MARK: - Actions
-    
+
     func gotoHowToUse() {
         if let path = NSBundle.mainBundle().pathForResource("HowToUse", ofType: "html", inDirectory: "html") {
             navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
@@ -75,19 +75,19 @@ class MainMenuViewController: UITableViewController {
     }
 
     func gotoSettings() {
-        
+
     }
-    
+
     func gotoUserDictionary() {
         navigationController?.pushViewController(UserDictionaryViewController(), animated: true)
     }
-    
+
     func gotoLicense() {
         if let path = NSBundle.mainBundle().pathForResource("License", ofType: "html", inDirectory: "html") {
             navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
         }
     }
-    
+
     // MARK: -
 
     required init(coder aDecoder: NSCoder) {

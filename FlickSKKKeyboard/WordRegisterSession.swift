@@ -15,7 +15,7 @@ class WordRegisterSession : BaseSession {
         case ToggleDakuten(beforeText : String)
         case Handles(xs : [InputMode.Handle])
     }
-    
+
     // === 通常モード ===
     // よみがな
     private let kana  : String
@@ -23,13 +23,13 @@ class WordRegisterSession : BaseSession {
     private let okuri : (String, String)?
     // 漢字
     private var kanji : String = ""
-    
+
     init(kana : String, okuri : (String, String)?, dict : SKKDictionary) {
         self.kana  = kana
         self.okuri = okuri
         super.init(dict: dict)
     }
-    
+
     func handle(event : KeyEvent) -> Handle {
         let m = currentInputMode()
         switch(self.status) {
@@ -39,7 +39,7 @@ class WordRegisterSession : BaseSession {
             return onRegisterWord(event)
         }
     }
-    
+
     private func onDefault(event : KeyEvent) -> Handle {
         let m = currentInputMode()
         var xs : [InputMode.Handle] = []
@@ -47,7 +47,7 @@ class WordRegisterSession : BaseSession {
             switch h {
             case .InsertText(text: let text):
                 if(text == "\n") {
-                    let okuri = (self.okuri?.1).map({ s in String(s[s.startIndex])}) 
+                    let okuri = (self.okuri?.1).map({ s in String(s[s.startIndex])})
                     self.dictionary.register(self.kana, okuri: okuri, kanji: kanji)
                     let okuriStr = (self.okuri?.0) ?? ""
                     return .Commit(word: kanji + okuriStr)
@@ -88,7 +88,7 @@ class WordRegisterSession : BaseSession {
         }
         return .Handles(xs: xs)
     }
-    
+
     private func onRegisterWord(event : KeyEvent) -> Handle {
         switch subSession?.handle(event) {
         case .Some(.Commit(word : let word)):
@@ -106,7 +106,7 @@ class WordRegisterSession : BaseSession {
             return .Handles(xs : [])
         }
     }
-    
+
     override func info() -> InputMode.Info? {
         var info : InputMode.Info? = .None
         switch status {
