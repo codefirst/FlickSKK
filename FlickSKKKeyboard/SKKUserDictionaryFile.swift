@@ -18,19 +18,19 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     class func defaultUserDictionary() -> SKKUserDictionaryFile {
         return SKKUserDictionaryFile(path: self.defaultUserDictionaryPath())
     }
-    
+
     // REMARK: Swift dictionary is too slow. So, we need use NSMutableDictionary.
     var okuriAri  = NSMutableDictionary()
     var okuriNasi = NSMutableDictionary()
     private let path : String
-    
+
     init(path : String){
         self.path = path
-        
+
         if !NSFileManager.defaultManager().fileExistsAtPath(path) {
             NSFileManager.defaultManager().createFileAtPath(path, contents: nil, attributes:nil)
         }
-        
+
         let now = NSDate()
         var isOkuriAri = true
         IOUtil.each(path, { line -> Void in
@@ -55,7 +55,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         })
         NSLog("loaded (%f) (%d + %d entries from %@)\n", NSDate().timeIntervalSinceDate(now), okuriAri.count, okuriNasi.count, path)
     }
-    
+
     func find(normal : String, okuri : String?) -> [ String ] {
         var entry : String?
         if okuri == .None {
@@ -65,7 +65,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         }
         return entry.map(split) ?? []
     }
-    
+
     private func parse(line : NSString) -> (String, String)? {
         let range = line.rangeOfString(" ")
         if range.location == NSNotFound {
@@ -76,7 +76,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             return (kana as String, kanji as String)
         }
     }
-    
+
     func register(normal : String, okuri: String?, kanji: String) {
         if(kanji.isEmpty) { return }
         var dict : NSMutableDictionary!
@@ -90,7 +90,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             dict[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
         }
     }
-    
+
     func serialize() {
         if let file = NSFileHandle(forWritingAtPath: self.path) {
             write(file, str: ";; okuri-ari entries.\n")

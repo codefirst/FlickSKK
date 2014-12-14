@@ -27,7 +27,7 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
             }
             // skip comment
             if s.hasPrefix(";") { return }
-            
+
             if isOkuriAri {
                 self.okuriAri.addObject(line)
             } else {
@@ -36,7 +36,7 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
         })
         NSLog("loaded (%f)\n", NSDate().timeIntervalSinceDate(now))
     }
-    
+
     func find(normal : String, okuri : String?) -> [ String ] {
         switch okuri {
         case .None:
@@ -53,11 +53,11 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
             return parse(str)
         }
     }
-    
+
     private func binarySearch(target : NSString, xs : NSMutableArray, begin : Int, end : Int, compare : NSComparisonResult) -> String? {
         if begin == end { return .None }
         if begin + 1 == end { return .None }
-        
+
         let mid = (end - begin) / 2 + begin;
         let x  = xs[mid] as NSString
         if x.hasPrefix(target) {
@@ -70,7 +70,7 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
             }
         }
     }
-    
+
     private func parse(line : NSString) -> [String] {
         let range = line.rangeOfString(" ")
         if range.location == NSNotFound {
@@ -85,5 +85,5 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
             }
         }
     }
-    
+
 }

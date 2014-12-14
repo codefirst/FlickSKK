@@ -1,6 +1,6 @@
 //
 //  SKKDictionaryEntry.swift
-//  
+//
 //
 //  Created by MIZUNO Hiroki on 11/4/14.
 //

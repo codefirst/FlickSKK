@@ -12,7 +12,7 @@ import UIKit
 
 enum KeyButtonFlickDirection : Printable {
     case None, Left, Up, Right, Down
-    
+
     var description: String {
         switch self {
         case .None: return "None"
@@ -34,7 +34,7 @@ class KeyButtonFlickPopup: UIView {
         return Static.instance
     }
     // MARK: -
-    
+
     weak var parentView: UIView? {
         didSet {
             if let v = parentView {
@@ -44,7 +44,7 @@ class KeyButtonFlickPopup: UIView {
             }
         }
     }
-    
+
     let label = UILabel()
     let arrow = UIView()
     let arrowShapeLayer = CAShapeLayer()
@@ -52,10 +52,10 @@ class KeyButtonFlickPopup: UIView {
         return ["p": 8,
             "popupExtendLength": 12]
     }
-    
+
     private override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.clipsToBounds = false
         self.layer.tap { (la:CALayer) in
             la.shadowColor = UIColor.blackColor().CGColor
@@ -63,7 +63,7 @@ class KeyButtonFlickPopup: UIView {
             la.shadowOffset = CGSizeMake(0, 0)
             la.shadowRadius = 2.0
         }
-        
+
         label.tap { (l:UILabel) in
             l.backgroundColor = KeyButtonHighlightedColor
             l.textColor = UIColor.blackColor()
@@ -75,7 +75,7 @@ class KeyButtonFlickPopup: UIView {
             }
             self.addSubview(l)
         }
-        
+
         arrowShapeLayer.tap{ (sl:CAShapeLayer) in
             sl.fillColor = KeyButtonHighlightedColor.CGColor
         }
@@ -86,21 +86,21 @@ class KeyButtonFlickPopup: UIView {
         }
         userInteractionEnabled = false
     }
-    
+
     // MARK: - public methods
     func show(text: String, fromView: UIView, direction: KeyButtonFlickDirection) {
         if parentView == nil { return }
         let pv = parentView!
         pv.bringSubviewToFront(self)
         label.text = text
-        
+
         let center = pv.convertPoint(fromView.center, fromView: fromView.superview)
         var labelCenter = center
         var size = fromView.bounds.size
         let extendLength: CGFloat = metrics["popupExtendLength"]!
-        
+
         var arrowFrameSize = CGSizeZero
-        
+
         switch direction {
         case .None: break
         case .Left:
@@ -124,7 +124,7 @@ class KeyButtonFlickPopup: UIView {
             size.width += extendLength * 3
             arrowFrameSize = CGSizeMake(size.width, 2*((labelCenter.y - size.height / 2) - center.y))
         }
-        
+
         let labelFrame = CGRectIntersection(CGRectMake(
             labelCenter.x - size.width / 2.0,
             labelCenter.y - size.height / 2.0,
@@ -138,7 +138,7 @@ class KeyButtonFlickPopup: UIView {
         self.frame = CGRectUnion(labelFrame, arrowFrame)
         self.label.frame = self.convertRect(labelFrame, fromView: pv)
         self.arrow.frame = self.convertRect(arrowFrame, fromView: pv)
-        
+
         arrowShapeLayer.path = UIBezierPath().tap{ (p:UIBezierPath) in
             let (c, lt, rt, lb, rb) = (
                 self.arrow.convertPoint(center, fromView: pv),
@@ -164,14 +164,14 @@ class KeyButtonFlickPopup: UIView {
             }
             p.closePath()
         }.CGPath
-        
+
         self.hidden = (direction == .None)
     }
-    
+
     func hide() {
         self.hidden = true
     }
-    
+
     // MARK: - private methods
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

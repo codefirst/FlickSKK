@@ -46,7 +46,7 @@ enum KanaFlickKey: Hashable {
         case .Nothing: return ""
         }
     }
-    
+
     var sequence: [String]? {
         switch self {
         case let .Seq(s): return Array(s).map({ (c : Character) -> String in return String(c)})
@@ -54,14 +54,14 @@ enum KanaFlickKey: Hashable {
         default: return nil
         }
     }
-    
+
     var isControl: Bool {
         switch self {
         case .Seq(_): return false
         default: return true
         }
     }
-    
+
     var isRepeat: Bool {
         switch self {
         case .Backspace: return true
@@ -117,7 +117,7 @@ func ==(l : KeyboardMode, r : KeyboardMode) -> Bool {
 
 class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
     var heightConstraint : NSLayoutConstraint!
-    
+
     let keypadAndControlsView = UIView()
     let contextView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
@@ -134,10 +134,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
     let shiftButton: KeyButton!
     let keypads: [KeyboardMode:KeyPad]
-    
+
     let session : SKKSession!
     let dataSource = CandidateDataSource()
-    
+
     var shiftEnabled: Bool {
         didSet {
             updateControlButtons()
@@ -149,11 +149,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             updateControlButtons()
         }
     }
-    
+
     convenience override init() {
         self.init(nibName: nil, bundle: nil)
     }
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.keyboardMode = .InputMode(mode: .Hirakana)
         self.shiftEnabled = false
@@ -229,9 +229,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
                 .Seq(".,?!")
                 ]),
         ]
-        
+
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
+
         self.nextKeyboardButton = keyButton(.KeyboardChange).tap { (kb:KeyButton) in
             kb.imageView.image = UIImage(named: "globe")
         }
@@ -241,7 +241,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.shiftButton = keyButton(.Shift).tap { (kb:KeyButton) in
             kb.imageView.image = UIImage(named: "flickskk-arrow")
         }
-        
+
         for keypad in self.keypads.values {
             keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?) in
                 self?.keyTapped(key, index)
@@ -256,11 +256,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     deinit {
         kGlobalDictionary.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
     }
-    
+
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if let dict = object as? SKKDictionary {
             if dict.isWaitingForLoad {
@@ -274,16 +274,16 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
     }
-    
+
     var metrics: [String:CGFloat] {
         return [:]
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.heightConstraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
-        
+
         let leftControl = controlViewWithButtons([
             numberModeButton,
             alphabetModeButton,
@@ -296,7 +296,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             self.shiftButton,
             keyButton(.Return),
             ])
-        
+
         for keypad in self.keypads.values {
             let views = [
                 "left": leftControl,
@@ -310,7 +310,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             autolayout("V:|[right]|")
             self.keypadAndControlsView.addConstraint(NSLayoutConstraint(item: keypad, attribute: .Width, relatedBy: .Equal, toItem: leftControl, attribute: .Width, multiplier: 3.0, constant: 0.0))
         }
-        
+
         contextView.backgroundColor = UIColor.whiteColor()
         let cViews = [
             "progress": loadingProgressView,
@@ -320,18 +320,18 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         autolayout("H:|[l][progress]-(>=0)-|")
         autolayout("V:|[progress]|")
         autolayout("V:|[l]|")
-        
+
         candidateView.dataSource = dataSource
         candidateView.delegate = self
         candidateView.hidden = true
-        
+
         updateControlButtons()
-        
+
         KeyButtonFlickPopup.sharedInstance.parentView = inputView
-        
+
         // iOS8 layout height(0) workaround: call self.inputView.addSubview() after viewDidAppear
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.setupViewConstraints() // iOS8 layout height(0) workaround: setup constraints after view did appear
@@ -341,17 +341,17 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 //            self.heightConstraint.constant += 100
 //        }
     }
-    
+
     private func setupViewConstraints() {
         if CGRectIsEmpty(view.frame) {
             println("\(__FUNCTION__): empty view. ignored.")
             return
         }
-        
+
         if contextView.isDescendantOfView(view) {
             return
         }
-        
+
         let views = [
             "context": contextView,
             "candidate" : candidateView,
@@ -366,17 +366,17 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         autolayout("V:|[context][candidate]|")
         self.view.addConstraint(heightConstraint);
     }
-    
+
     func controlViewWithButtons(buttons: [UIView]) -> UIView {
         if (buttons.count != 4) { println("fatal: cannot add buttons not having 4 buttons to control"); return UIView(); }
-        
+
         let views = [
             "a": buttons[0],
             "b": buttons[1],
             "c": buttons[2],
             "d": buttons[3],
         ]
-        
+
         return UIView().tap { (c:UIView) in
             let autolayout = c.autolayoutFormat(self.metrics, views)
             autolayout("H:|[a]|")
@@ -393,10 +393,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
     override func textDidChange(textInput: UITextInput) {
         // The app has just changed the document's contents, the document context has been updated.
-        
+
         updateControlButtons()
     }
-    
+
     private func keyButton(key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
@@ -406,13 +406,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             }
         }
     }
-    
+
     func insertText(s: String) {
         self.inputProxy.insertText(s)
         self.shiftEnabled = false
         self.updateControlButtons()
     }
-    
+
     func keyTapped(key: KanaFlickKey, _ index: Int?) {
         switch key {
         case let .Seq(s):
@@ -446,7 +446,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         }
         updateControlButtons()
     }
-    
+
     func updateControlButtons() {
         // Keyboard mode
         for (mode, keypad) in self.keypads {
@@ -463,7 +463,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         self.numberModeButton.selected = self.keyboardMode == .Number
         self.alphabetModeButton.selected = self.keyboardMode == .Alphabet
         self.shiftButton.selected = self.shiftEnabled
-        
+
         // InputMode
         switch self.session.currentMode {
         case .Hirakana:
@@ -474,19 +474,19 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
     }
-    
+
     func toggleShift() {
         self.shiftEnabled = !self.shiftEnabled
     }
-    
+
     func handleSpace() {
         session.handle(.Space)
     }
-    
+
     func toggleKomojiDakuten() {
         self.session.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
-    
+
     func toggleUpperLower() {
         self.session.handle(.ToggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
@@ -507,7 +507,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             candidateView.hidden = true
         }
     }
-    
+
     private let userInteractionMaskView = UIView()
     private func disableAllKeys() {
         userInteractionMaskView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
@@ -526,7 +526,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     func deleteBackward() {
         (self.textDocumentProxy as UIKeyInput).deleteBackward()
     }
-    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 24
     }

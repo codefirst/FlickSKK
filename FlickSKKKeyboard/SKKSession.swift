@@ -12,7 +12,7 @@ import Foundation
 class SKKSession : BaseSession {
     // 通常モード用
     private weak var delegate : SKKDelegate?
-    
+
     init(delegate : SKKDelegate, dict : SKKDictionary) {
         self.delegate = delegate
         super.init(dict: dict)
@@ -25,20 +25,20 @@ class SKKSession : BaseSession {
         case .WordRegister:
             onWordRegister(event)
         }
-        
+
         switch(self.status) {
         case .Default:
             showInfo(currentInputMode()?.info())
         case .WordRegister:
             showInfo(subSession?.info())
-        }        
+        }
     }
-    
+
     private func onDefault(event : KeyEvent) {
         let m = currentInputMode()
         processHandles(m?.handle(event) ?? [])
     }
-    
+
     private func onWordRegister(event : KeyEvent) {
         switch subSession?.handle(event) {
         case .Some(.Commit(word : let word)):
@@ -56,7 +56,7 @@ class SKKSession : BaseSession {
             ()
         }
     }
-    
+
     private func processHandles(xs : [InputMode.Handle]) {
         for x in xs {
             switch x {
@@ -92,7 +92,7 @@ class SKKSession : BaseSession {
             }
         }
     }
-    
+
     private func showInfo(info : InputMode.Info?) {
         switch info {
         case .Some(.ComposeText(text: let text)):

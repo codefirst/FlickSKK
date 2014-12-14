@@ -15,18 +15,18 @@ class KeyPad : UIView {
     var keyButtons: [KeyButton]
 
     var tapped: ((KanaFlickKey, Int?) -> Void)?
-    
+
     var metrics: [String:CGFloat] {
         return [:]
     }
-    
+
     init(keys: [KanaFlickKey]) {
         self.keys = keys
         self.keyButtons = []
         super.init(frame: CGRectZero)
         self.addKeypadKeys()
     }
-        
+
     private func keyButton(key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
@@ -36,11 +36,11 @@ class KeyPad : UIView {
             }
         }
     }
-    
+
     func addKeypadKeys() {
         if (keys.count != 12) { println("fatal: cannot add keys not having 12 keys to keypad"); return; }
-        
-        
+
+
         let views: [String:UIView] = [
             "a": keyButton(keys[0]),
             "b": keyButton(keys[1]),
@@ -55,7 +55,7 @@ class KeyPad : UIView {
             "k": keyButton(keys[10]),
             "l": keyButton(keys[11]),
         ]
-        
+
         let autolayoutInKeyPad = self.autolayoutFormat(metrics, views)
         autolayoutInKeyPad("H:|[a][b(==a)][c(==a)]|")
         autolayoutInKeyPad("H:|[d(==a)][e(==a)][f(==a)]|")
@@ -64,7 +64,7 @@ class KeyPad : UIView {
         autolayoutInKeyPad("V:|[a][d(==a)][g(==a)][j(==a)]|")
         autolayoutInKeyPad("V:|[b(==a)][e(==a)][h(==a)][k(==a)]|")
         autolayoutInKeyPad("V:|[c(==a)][f(==a)][i(==a)][l(==a)]|")
-        
+
         self.keyButtons = (views as NSDictionary).allValues as [KeyButton]
     }
 
