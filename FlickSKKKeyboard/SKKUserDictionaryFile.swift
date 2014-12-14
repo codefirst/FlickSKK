@@ -20,6 +20,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     }
 
     // REMARK: Swift dictionary is too slow. So, we need use NSMutableDictionary.
+    // [String:String]相当の実装になってる
     var okuriAri  = NSMutableDictionary()
     var okuriNasi = NSMutableDictionary()
     private let path : String
@@ -31,6 +32,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             NSFileManager.defaultManager().createFileAtPath(path, contents: nil, attributes:nil)
         }
 
+        // TODO: 変なデータが来たら、空で初期化する
         let now = NSDate()
         var isOkuriAri = true
         IOUtil.each(path, { line -> Void in
@@ -57,12 +59,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     }
 
     func find(normal : String, okuri : String?) -> [ String ] {
-        var entry : String?
-        if okuri == .None {
-            entry = self.okuriNasi[normal] as String?
-        } else {
-            entry = self.okuriAri[normal + (okuri ?? "")] as String?
-        }
+        let entry : String? = dictFor(okuri)[normal + (okuri ?? "")] as String?
         return entry.map(split) ?? []
     }
 
@@ -79,12 +76,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
 
     func register(normal : String, okuri: String?, kanji: String) {
         if(kanji.isEmpty) { return }
-        var dict : NSMutableDictionary!
-        if okuri == .None {
-            dict = self.okuriNasi
-        } else {
-            dict = self.okuriAri
-        }
+        let dict : NSMutableDictionary = dictFor(okuri)
         let old : String? = dict[normal + (okuri ?? "")] as String?
         if old?.rangeOfString("/\(kanji)") == .None {
             dict[normal + (okuri ?? "")] =  "/" + kanji + "/" + (old ?? "")
@@ -93,6 +85,8 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
 
     func serialize() {
         if let file = NSFileHandle(forWritingAtPath: self.path) {
+            // 前回の辞書の内容がのこっているので、いったんファイルの内容を全部消す
+            file.truncateFileAtOffset(0)
             write(file, str: ";; okuri-ari entries.\n")
             for (k,v) in self.okuriAri {
                 let kana = k as String
@@ -147,5 +141,29 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
 
         sort(&xs)
         return xs
+    }
+
+    func unregister(entry : SKKDictionaryEntry) {
+        switch entry {
+        case .SKKDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
+            let words = self.find(kana, okuri: okuri).filter({ word in
+                word != kanji
+            })
+            if words.isEmpty {
+                dictFor(okuri).removeObjectForKey(kana + (okuri ?? ""))
+            } else {
+                // ["foo", "bar"] => "/foo/bar/"
+                dictFor(okuri)[kana + (okuri ?? "")] = words.reduce("", {(x,y) in x + "/" + y }) + "/"
+            }
+            self.serialize()
+        }
+    }
+
+    private func dictFor(okuri: String?) -> NSMutableDictionary {
+        if okuri == .None {
+            return self.okuriNasi
+        } else {
+            return self.okuriAri
+        }
     }
 }
