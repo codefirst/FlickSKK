@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Quick/Quick.xcodeproj">
+      location = "group:Quick.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Externals/Nimble/Nimble.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Examples/Scenester/Scenester.xcodeproj">
    </FileRef>
 </Workspace>

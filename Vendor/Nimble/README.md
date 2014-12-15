@@ -1,5 +1,7 @@
 # Nimble
 
+[![Build Status](https://travis-ci.org/Quick/Nimble.svg?branch=master)](https://travis-ci.org/Quick/Nimble)
+
 Use Nimble to express the expected outcomes of Swift
 or Objective-C expressions. Inspired by
 [Cedar](https://github.com/pivotal/cedar).
@@ -45,6 +47,8 @@ expect(ocean.isClean).toEventually(beTruthy())
   - [Supporting Objective-C](#supporting-objective-c)
     - [Properly Handling `nil` in Objective-C Matchers](#properly-handling-nil-in-objective-c-matchers)
 - [Installing Nimble](#installing-nimble)
+  - [Installing Nimble as a Submodule](#installing-nimble-as-a-submodule)
+  - [Installing Nimble via CocoaPods](#installing-nimble-via-cocoapods)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -174,6 +178,9 @@ exception once evaluated:
 ```swift
 // Swift
 
+// Note: Swift currently doesn't have exceptions.
+//       Only Objective-C code can raise exceptions
+/        that Nimble will catch.
 let exception = NSException(
   name: NSInternalInconsistencyException,
   reason: "Not enough fish in the sea.",
@@ -223,9 +230,7 @@ without explicitly specifying both types:
 ```swift
 // Swift
 
-// Both of these work:
 expect(1 as CInt).to(equal(1))
-expect(1).to(equal(1 as CInt))
 ```
 
 > In Objective-C, Nimble only supports Objective-C objects. To
@@ -245,7 +250,7 @@ asynchronously. Just use `toEventually` or `toEventuallyNot`:
 // Swift
 
 dispatch_async(dispatch_get_main_queue()) {
-  ocean.add("dolphins"")
+  ocean.add("dolphins")
   ocean.add("whales")
 }
 expect(ocean).toEventually(contain("dolphins", "whales"))
@@ -276,7 +281,12 @@ cases, use the `timeout` parameter:
 expect(ocean).toEventually(contain("starfish"), timeout: 3)
 ```
 
-> Sorry, [Nimble doesn't support specifying custom timeouts in Objective-C yet](https://github.com/Quick/Nimble/issues/25).
+```objc
+// Objective-C
+
+// Waits three seconds for ocean to contain "starfish":
+expect(ocean).withTimeout(3).toEventually(contain(@"starfish"));
+```
 
 You can also provide a callback by using the `waitUntil` function:
 
@@ -301,6 +311,8 @@ waitUntil(timeout: 10) { done in
   done()
 }
 ```
+
+> Sorry, Nimble doesn't support waitUntil in Objective-C.
 
 ## Objective-C Support
 
@@ -520,8 +532,14 @@ expect(dolphin).to(beAKindOf([Mammal class]));
 // Passes if actual is not nil, false, or an object with a boolean value of false:
 expect(actual).to(beTruthy())
 
+// Passes if actual is only true (not nil or an object conforming to BooleanType true):
+expect(actual).to(beTrue())
+
 // Passes if actual is nil, false, or an object with a boolean value of false:
 expect(actual).to(beFalsy())
+
+// Passes if actual is only false (not nil or an object conforming to BooleanType false):
+expect(actual).to(beFalse())
 
 // Passes if actual is nil:
 expect(actual).to(beNil())
@@ -533,8 +551,14 @@ expect(actual).to(beNil())
 // Passes if actual is not nil, false, or an object with a boolean value of false:
 expect(actual).to(beTruthy());
 
+// Passes if actual is only true (not nil or an object conforming to BooleanType true):
+expect(actual).to(beTrue());
+
 // Passes if actual is nil, false, or an object with a boolean value of false:
 expect(actual).to(beFalsy());
+
+// Passes if actual is only false (not nil or an object conforming to BooleanType false):
+expect(actual).to(beFalse());
 
 // Passes if actual is nil:
 expect(actual).to(beNil());
@@ -561,6 +585,9 @@ expect(actual).to(raiseException(named: name, reason: reason))
 // Passes if actual, when evaluated, raises an exception:
 expect(actual).to(raiseException())
 ```
+
+Note: Swift currently doesn't have exceptions. Only Objective-C code can raise
+exceptions that Nimble will catch.
 
 > Sorry, [Nimble doesn't support matching on exception `name`, `reason`, or `userInfo` yet](https://github.com/Quick/Nimble/issues/26).
 
@@ -655,6 +682,9 @@ expect(actual).to(endWith(expected))
 
 // Passes if actual is an empty string, "":
 expect(actual).to(beEmpty())
+
+// Passes if actual matches the regular expression defined in expected:
+expect(actual).to(match(expected))
 ```
 
 ```objc
@@ -671,6 +701,9 @@ expect(actual).to(endWith(expected));
 
 // Passes if actual is an empty string, "":
 expect(actual).to(beEmpty());
+
+// Passes if actual matches the regular expression defined in expected:
+expect(actual).to(match(expected))
 ```
 
 # Writing Your Own Matchers
@@ -757,7 +790,7 @@ By default, Nimble outputs the following failure message when an
 expectation fails:
 
 ```
-expected <\(actual)> to match
+expected to match, got <\(actual)>
 ```
 
 You can customize this message by modifying the `failureMessage` struct
@@ -767,7 +800,7 @@ something else, update the `postfixMessage` property:
 ```swift
 // Swift
 
-// Outputs: expected <\(actual)> to be under the sea
+// Outputs: expected to be under the sea, got <\(actual)>
 failureMessage.postfixMessage = "be under the sea"
 ```
 
@@ -841,6 +874,34 @@ expect(nil).to(equal(nil)); // fails
 expect(nil).to(beNil());    // passes
 ```
 
+If your matcher does not want to match with nil, you use `NonNilMatcherFunc`
+and the `canMatchNil` constructor on `NMBObjCMatcher`. Using both types will
+automatically generate expected value failure messages when they're nil.
+
+```swift
+
+public func beginWith<S: SequenceType, T: Equatable where S.Generator.Element == T>(startingElement: T) -> NonNilMatcherFunc<S> {
+    return NonNilMatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "begin with <\(startingElement)>"
+        if let actualValue = actualExpression.evaluate() {
+            var actualGenerator = actualValue.generate()
+            return actualGenerator.next() == startingElement
+        }
+        return false
+    }
+}
+
+extension NMBObjCMatcher {
+    public class func beginWithMatcher(expected: AnyObject) -> NMBObjCMatcher {
+        return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage, location in
+            let actual = actualExpression.evaluate()
+            let expr = actualExpression.cast { $0 as? NMBOrderedCollection }
+            return beginWith(expected).matches(expr, failureMessage: failureMessage)
+        }
+    }
+}
+```
+
 # Installing Nimble
 
 > Nimble can be used on its own, or in conjunction with its sister
@@ -848,8 +909,13 @@ expect(nil).to(beNil());    // passes
   Quick and Nimble, follow [the installation instructions in the Quick
   README](https://github.com/Quick/Quick#how-to-install-quick).
 
-To use Nimble to test your iOS or OS X applications, follow these 4 easy
-steps:
+Nimble can currently be installed in one of two ways: using a pre-release 
+version of CocoaPods, or with git submodules. 
+
+## Installing Nimble as a Submodule
+
+To use Nimble as a submodule to test your iOS or OS X applications, follow these
+4 easy steps:
 
 1. Clone the Nimble repository
 2. Add Nimble.xcodeproj to your test target
@@ -861,3 +927,37 @@ read [How to Install Quick](https://github.com/Quick/Quick#how-to-install-quick)
 Ignore the steps involving adding Quick to your project in order to
 install just Nimble.
 
+## Installing Nimble via CocoaPods
+
+To use Nimble in CocoaPods to test your iOS or OS X applications, we'll need a 
+*Gemfile* that will specify unreleased versions of CocoaPods. Create an empty 
+file called "Gemfile" in your project's directory and add the following lines. 
+
+```ruby
+source 'https://rubygems.org'
+
+gem 'cocoapods', :git => 'https://github.com/CocoaPods/CocoaPods.git', :branch => 'swift'
+gem 'cocoapods-core', :git => 'https://github.com/CocoaPods/Core.git', :branch => 'swift'
+gem 'xcodeproj',  :git => "https://github.com/CocoaPods/Xcodeproj.git", :branch => 'ext_build_settings'
+```
+
+Now that you have these specified, run `bundle install` from the command line in
+that directory. This will install the prerelease version of CocoaPods. To run
+this version, you'll need to type `bundle exec` in front of your pod commands. 
+
+In that directory, run `bundle exec pod init` to create a blank podfile. iIt 
+will look something like the following (add the line for Nimble).
+
+```ruby
+platform :ios, '8.0'
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+# Whatever pods you need for your app go here
+
+target 'YOUR_APP_NAME_HERE_Tests' do
+  pod 'Nimble', :git => "https://github.com/Quick/Nimble"
+end
+```
+
+Finally run `bundle exec pod install`. 
