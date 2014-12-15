@@ -143,6 +143,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             updateControlButtons()
         }
     }
+    var prevShiftEnabled: Bool = false
 
     var keyboardMode : KeyboardMode {
         didSet {
@@ -419,9 +420,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             let kana = Array(s)[index ?? 0]
             let roman = kana.toRoman() ?? ""
             self.session.handle(.Char(kana: String(kana), roman: roman, shift: self.shiftEnabled))
+            self.prevShiftEnabled = self.shiftEnabled
             self.shiftEnabled = false
         case .Backspace:
             self.session.handle(.Backspace)
+            self.shiftEnabled = self.prevShiftEnabled
+            self.prevShiftEnabled = false
         case .Return:
             self.session.handle(.Enter)
         case .Shift: toggleShift()

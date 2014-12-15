@@ -178,8 +178,8 @@ class InputMode {
         case .Enter:
             return withReset(insertText(self.composeText))
         case .Backspace:
-            if(!self.composeText.isEmpty){
-                self.composeText = self.composeText.butLast()
+            self.composeText = self.composeText.butLast()
+            if !self.composeText.isEmpty {
                 return done()
             } else {
                 return withReset(done())
