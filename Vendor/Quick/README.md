@@ -1,7 +1,9 @@
-![](http://f.cl.ly/items/2o2r3F1f3h3W1Y2E360J/Introducing-Quick.png)
+![](http://f.cl.ly/items/0r1E192C1R0b2g2Q3h2w/QuickLogo_Color.png)
 
 Quick is a behavior-driven development framework for Swift and Objective-C.
 Inspired by [RSpec](https://github.com/rspec/rspec), [Specta](https://github.com/specta/specta), and [Ginkgo](https://github.com/onsi/ginkgo).
+
+[![Build Status](https://travis-ci.org/Quick/Quick.svg)](https://travis-ci.org/Quick/Quick)
 
 ![](https://raw.githubusercontent.com/Quick/Assets/master/Screenshots/QuickSpec%20screenshot.png)
 
@@ -44,8 +46,11 @@ class TableOfContentsSpec: QuickSpec {
     - [Sharing Setup/Teardown Code Using `beforeEach` and `afterEach`](#sharing-setupteardown-code-using-beforeeach-and-aftereach)
     - [Specifying Conditional Behavior Using `context`](#specifying-conditional-behavior-using-context)
   - [Temporarily Disabling Examples or Groups Using `pending`](#temporarily-disabling-examples-or-groups-using-pending)
+    - [Shorthand syntax](#shorthand-syntax)
   - [Global Setup/Teardown Using `beforeSuite` and `afterSuite`](#global-setupteardown-using-beforesuite-and-aftersuite)
   - [Sharing Examples](#sharing-examples)
+- [Using Quick in Objective-C: The Optional Shorthand Syntax](#using-quick-in-objective-c-the-optional-shorthand-syntax)
+  - [Caveat: Your Test Target Must Include At Least One Swift File](#caveat-your-test-target-must-include-at-least-one-swift-file)
 - [Nimble: Assertions Using `expect(...).to`](#nimble-assertions-using-expectto)
 - [Testing UIKit with Quick](#testing-uikit-with-quick)
 - [How to Install Quick](#how-to-install-quick)
@@ -57,6 +62,7 @@ class TableOfContentsSpec: QuickSpec {
   - [Adding Quick as a Git Submodule](#adding-quick-as-a-git-submodule)
   - [Updating the Quick Submodule](#updating-the-quick-submodule)
   - [Cloning a Repository that Includes a Quick Submodule](#cloning-a-repository-that-includes-a-quick-submodule)
+- [How to Install Quick using Beta CocoaPods](#how-to-install-quick-using-beta-cocoapods)
 - [How to Install Quick File Templates](#how-to-install-quick-file-templates)
   - [Using Alcatraz](#using-alcatraz)
   - [Manually via the Rakefile](#manually-via-the-rakefile)
@@ -105,11 +111,11 @@ class DolphinSpec: QuickSpec {
 
 QuickSpecBegin(DolphinSpec)
 
-qck_it(@"is friendly", ^{
+it(@"is friendly", ^{
   expect(@([[Dolphin new] isFriendly])).to(beTruthy());
 });
 
-qck_it(@"is smart", ^{
+it(@"is smart", ^{
   expect(@([[Dolphin new] isSmart])).to(beTruthy());
 });
 
@@ -164,14 +170,14 @@ class DolphinSpec: QuickSpec {
 
 QuickSpecBegin(DolphinSpec)
 
-qck_describe(@"a dolphin", ^{
-  qck_describe(@"its click", ^{
-    qck_it(@"is loud", ^{
+describe(@"a dolphin", ^{
+  describe(@"its click", ^{
+    it(@"is loud", ^{
       Click *click = [[Dolphin new] click];
       expect(@(click.isLoud)).to(beTruthy());
     });
 
-    qck_it(@"has a high frequency", ^{
+    it(@"has a high frequency", ^{
       Click *click = [[Dolphin new] click];
       expect(@(click.hasHighFrequency)).to(beTruthy());
     });
@@ -231,23 +237,23 @@ class DolphinSpec: QuickSpec {
 
 QuickSpecBegin(DolphinSpec)
 
-qck_describe(@"a dolphin", ^{
+describe(@"a dolphin", ^{
   __block Dolphin *dolphin = nil;
-  qck_beforeEach(^{
+  beforeEach(^{
       dolphin = [Dolphin new];
   });
 
-  qck_describe(@"its click", ^{
+  describe(@"its click", ^{
     __block Click *click = nil;
-    qck_beforeEach(^{
+    beforeEach(^{
       click = [dolphin click];
     });
 
-    qck_it(@"is loud", ^{
+    it(@"is loud", ^{
       expect(@(click.isLoud)).to(beTruthy());
     });
 
-    qck_it(@"has a high frequency", ^{
+    it(@"has a high frequency", ^{
       expect(@(click.hasHighFrequency)).to(beTruthy());
     });
   });
@@ -320,24 +326,24 @@ class DolphinSpec: QuickSpec {
 
 QuickSpecBegin(DolphinSpec)
 
-qck_describe(@"a dolphin", ^{
+describe(@"a dolphin", ^{
   __block Dolphin *dolphin = nil;
-  qck_beforeEach(^{ dolphin = [Dolphin new]; });
+  beforeEach(^{ dolphin = [Dolphin new]; });
 
-  qck_describe(@"its click", ^{
-    qck_context(@"when the dolphin is not near anything interesting", ^{
-      qck_it(@"is only emitted once", ^{
+  describe(@"its click", ^{
+    context(@"when the dolphin is not near anything interesting", ^{
+      it(@"is only emitted once", ^{
         expect(@([[dolphin click] count])).to(equal(@1));
       });
     });
 
-    qck_context(@"when the dolphin is near something interesting", ^{
-      qck_beforeEach(^{
+    context(@"when the dolphin is near something interesting", ^{
+      beforeEach(^{
         [[Jamaica dolphinCove] add:[SunkenShip new]];
         [[Jamaica dolphinCove] add:dolphin];
       });
 
-      qck_it(@"is emitted three times", ^{
+      it(@"is emitted three times", ^{
         expect(@([[dolphin click] count])).to(equal(@3));
       });
     });
@@ -349,9 +355,8 @@ QuickSpecEnd
 
 ### Temporarily Disabling Examples or Groups Using `pending`
 
-For examples that don't pass yet, use `pending` in Swift, or
-`qck_pending` in Objective-C. Pending examples are not run,
-but are printed out along with the test results.
+For examples that don't pass yet, use `pending`. Pending examples
+are not run, but are printed out along with the test results.
 
 The example below marks the cases in which the dolphin is close to
 something interesting as "pending"--perhaps that functionality hasn't
@@ -369,7 +374,7 @@ pending("when the dolphin is near something interesting") {
 ```objc
 // Objective-C
 
-qck_pending(@"when the dolphin is near something interesting", ^{
+pending(@"when the dolphin is near something interesting", ^{
   // ...none of the code in this closure will be run.
 });
 ```
@@ -377,8 +382,7 @@ qck_pending(@"when the dolphin is near something interesting", ^{
 #### Shorthand syntax
 
 Examples and groups can also be marked as pending by using
-`xdescribe`, `xcontext`, and `xit` in Swift, and `qck_xdescribe`,
-`qck_xcontext`, and `qck_xit` in Objective-C.
+`xdescribe`, `xcontext`, and `xit`:
 
 ```swift
 // Swift
@@ -399,15 +403,15 @@ xit("is only emitted once") {
 ```objc
 // Objective-C
 
-qck_xdescribe(@"its click", ^{
+xdescribe(@"its click", ^{
   // ...none of the code in this closure will be run.
 });
 
-qck_xcontext(@"when the dolphin is not near anything interesting", ^{
+xcontext(@"when the dolphin is not near anything interesting", ^{
   // ...none of the code in this closure will be run.
 });
 
-qck_xit(@"is only emitted once", ^{
+xit(@"is only emitted once", ^{
   // ...none of the code in this closure will be run.
 });
 ```
@@ -451,16 +455,16 @@ class DolphinSpec: QuickSpec {
 
 QuickSpecBegin(DolphinSpec)
 
-qck_beforeSuite(^{
+beforeSuite(^{
   [OceanDatabase createDatabase:@"test.db"];
   [OceanDatabase connectToDatabase:@"test.db"];
 });
 
-qck_afterSuite(^{
+afterSuite(^{
   [OceanDatabase teardownDatabase:@"test.db"];
 });
 
-qck_describe(@"a dolphin", ^{
+describe(@"a dolphin", ^{
   // ...
 });
 
@@ -490,8 +494,8 @@ and specifies that both mackerel and cod behave like "something edible":
 import Quick
 import Nimble
 
-class EdibleSharedExamples: QuickSharedExampleGroups {
-  override class func sharedExampleGroups() {
+class EdibleSharedExamplesConfiguration: QuickConfiguration {
+  override class func configure(configuration: Configuration) {
     sharedExamples("something edible") { (sharedExampleContext: SharedExampleContext) in
       it("makes dolphins happy") {
         let dolphin = Dolphin(happy: false)
@@ -532,39 +536,41 @@ class CodSpec: QuickSpec {
 #import <Quick/Quick.h>
 #import <Nimble/Nimble.h>
 
-QuickSharedExampleGroupsBegin(EdibleSharedExamples)
+QuickConfigurationBegin(EdibleSharedExamplesConfiguration)
 
-qck_sharedExamples(@"something edible", ^(QCKDSLSharedExampleContext exampleContext) {
-  it(@"makes dolphins happy") {
-    Dolphin *dolphin = [[Dolphin alloc] init];
-    dolphin.happy = NO;
-    id<Edible> edible = exampleContext()[@"edible"];
-    [dolphin eat:edible];
-    expect(dolphin.isHappy).to(beTruthy())
-  }
-});
++ (void)configure:(Configuration *configuration) {
+  sharedExamples(@"something edible", ^(QCKDSLSharedExampleContext exampleContext) {
+    it(@"makes dolphins happy") {
+      Dolphin *dolphin = [[Dolphin alloc] init];
+      dolphin.happy = NO;
+      id<Edible> edible = exampleContext()[@"edible"];
+      [dolphin eat:edible];
+      expect(dolphin.isHappy).to(beTruthy())
+    }
+  });
+}
 
-QuickSharedExampleGroupsEnd
+QuickConfigurationEnd
 
 QuickSpecBegin(MackerelSpec)
 
 __block Mackerel *mackerel = nil;
-qck_beforeEach(^{
+beforeEach(^{
   mackerel = [[Mackerel alloc] init];
 });
 
-qck_itBehavesLike(@"someting edible", ^{ return @{ @"edible": mackerel }; });
+itBehavesLike(@"someting edible", ^{ return @{ @"edible": mackerel }; });
 
 QuickSpecEnd
 
 QuickSpecBegin(CodSpec)
 
 __block Mackerel *cod = nil;
-qck_beforeEach(^{
+beforeEach(^{
   cod = [[Cod alloc] init];
 });
 
-qck_itBehavesLike(@"someting edible", ^{ return @{ @"edible": cod }; });
+itBehavesLike(@"someting edible", ^{ return @{ @"edible": cod }; });
 
 QuickSpecEnd
 ```
@@ -593,6 +599,52 @@ itBehavesLike("everything under the sea")
   `QCKDSLSharedExampleContext`, even if you don't plan on using that
   argument. Sorry, but that's the way the cookie crumbles!
   :cookie: :bomb:
+
+## Using Quick in Objective-C: The Optional Shorthand Syntax
+
+Quick works equally well in both Swift and Objective-C.
+
+Importing Quick in an Objective-C file defines macros named `it` and
+`itShouldBehaveLike`, as well as functions like `context()`, `describe()`, etc.
+If the project you are testing also defines symbols with these names, you may
+encounter confusing build failures. In that case, you can avoid namespace
+collision by turning off Quick's optional "shorthand" syntax:
+
+```objc
+#define QUICK_DISABLE_SHORT_SYNTAX 1
+
+#import <Quick/Quick.h>
+
+QuickSpecBegin(DolphinSpec)
+// ...
+QuickSpecEnd
+```
+
+You must define the `QUICK_DISABLE_SHORT_SYNTAX` macro *before*
+importing the Quick header.
+
+### Caveat: Your Test Target Must Include At Least One Swift File
+
+The Swift stdlib will not be linked into your test target, and thus
+Quick will fail to execute properly, if you test target does not contain
+*at least one* Swift file. If it does not, your tests will exit
+prematurely with the following error:
+
+```
+*** Test session exited(82) without checking in. Executable cannot be
+loaded for some other reason, such as a problem with a library it
+depends on or a code signature/entitlements mismatch.
+```
+
+To fix the problem, add a blank file called `SwiftSpec.swift` to your test target:
+
+```swift
+// SwiftSpec.swift
+
+import Quick
+```
+
+> For more details on this issue, see https://github.com/Quick/Quick/issues/164.
 
 ## Nimble: Assertions Using `expect(...).to`
 
@@ -649,9 +701,10 @@ class DolphinTableViewControllerSpecs: QuickSpec {
 
     describe("viewDidLoad") {
       beforeEach {
-        viewController.view
         // Accessing the view property causes the UIKit framework to trigger the necessary methods to render the view.
+        viewController.view
       }
+
 
       it("loads the table view with one cell") {
         let tableView = viewController.tableView
@@ -665,7 +718,9 @@ class DolphinTableViewControllerSpecs: QuickSpec {
 
     describe("didSelectRowAtIndexPath") {
       beforeEach {
-        viewController.view
+        // Causes the UIKit framework to trigger the necessary methods to render the view and perform viewWillAppear: and viewDidAppear: callbacks
+        viewController.beginAppearanceTransition(true, animated: false)
+        viewController.endAppearanceTransition()
       }
 
       it("deletes the selected row and reloads the tableView's data") {
@@ -691,17 +746,17 @@ class DolphinTableViewControllerSpecs: QuickSpec {
 
 QuickSpecBegin(DolphinTableViewControllerSpec)
 
-qck_describe(@"viewDidLoad") {
+describe(@"viewDidLoad", ^{
   __block DolphinTableViewController *viewController = nil;
 
-  qck_beforeEach(^{
+  beforeEach(^{
     viewController = [[DolphinTableViewController alloc] init];
   });
 
-  qck_it(@"loads the table view with three types of dolphin", ^{
-    qck_beforeEach(^{
-      [viewController view];
+  it(@"loads the table view with three types of dolphin", ^{
+    beforeEach(^{
       // Accessing the view property causes the UIKit framework to trigger the necessary methods to render the view.
+      [viewController view];
     });
 
     UITableView *tableView = [viewController tableView];
@@ -712,15 +767,17 @@ qck_describe(@"viewDidLoad") {
   });
 }
 
-qck_describe(@"didSelectRowAtIndexPath") {
+describe(@"didSelectRowAtIndexPath", ^{
   __block DolphinTableViewController *viewController = nil;
 
-  qck_beforeEach(^{
+  beforeEach(^{
+    // Causes the UIKit framework to trigger the necessary methods to render the view and perform viewWillAppear: and 
     viewController = [[DolphinTableViewController alloc] init];
-    [viewController view];
+    [viewController beginAppearanceTransition:YES animated:NO];
+    [viewController endAppearanceTransition];
    });
 
-  qck_it(@"deletes the selected row and reloads the tableView's data", ^{
+  it(@"deletes the selected row and reloads the tableView's data", ^{
     UITableView *tableView = [viewController tableView];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 
@@ -845,6 +902,31 @@ You can read more about Git submodules
 of Git submodules in action, check out any of the repositories linked to
 in the ["Who Uses Quick"](#who-uses-quick) section of this guide.
 
+## How to Install Quick using Beta CocoaPods
+
+If you would like to use Quick with CocoaPods today, you will need to use
+rubygem's [Bundler](http://bundler.io) to use the swift branch of CocoaPods. This 
+can be done by including a Gemfile that looks like this:
+
+```ruby
+source 'https://rubygems.org'
+
+gem 'cocoapods', :git => 'https://github.com/CocoaPods/CocoaPods.git', :branch => 'swift'
+gem 'cocoapods-core', :git => 'https://github.com/CocoaPods/Core.git'
+gem 'xcodeproj',  :git => 'https://github.com/CocoaPods/Xcodeproj.git'
+gem 'claide', :git => 'https://github.com/CocoaPods/CLAide.git'
+```
+
+Then run `bundle install` to start using Swift CocoaPods for just this project.
+Then in your Podfile, add the following to your test target.
+
+```
+  pod 'Quick', :git => 'https://github.com/Quick/Quick', :tag => 'v0.2.1'
+```
+
+Finally, run `bundle exec pod install`. The `bundle exec` ensures you're using
+the Swift CocoaPods version from your Gemfile.
+
 ## How to Install Quick File Templates
 
 The Quick repository includes file templates for both Swift and
@@ -876,6 +958,13 @@ $ rake templates:uninstall
 
 ## Who Uses Quick
 
+Quick is used by many companies, open-source projects, and individuals,
+including [GitHub](https://github.com/github) and
+[ReactiveCocoa](https://github.com/ReactiveCocoa). See examples below:
+
+- https://github.com/ReactiveCocoa/ReactiveCocoa
+- https://github.com/github/Archimedes
+- https://github.com/libgit2/objective-git
 - https://github.com/jspahrsummers/RXSwift
 - https://github.com/artsy/eidolon
 - https://github.com/AshFurrow/Moya
@@ -886,5 +975,5 @@ $ rake templates:uninstall
 
 ## License
 
-MIT license. See the `LICENSE` file for details.
+Apache 2.0 license. See the `LICENSE` file for details.
 

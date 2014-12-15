@@ -52,6 +52,14 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_beFalsy() {
     return [NMBObjCMatcher beFalsyMatcher];
 }
 
+NIMBLE_EXPORT id<NMBMatcher> NMB_beTrue() {
+    return [NMBObjCMatcher beTrueMatcher];
+}
+
+NIMBLE_EXPORT id<NMBMatcher> NMB_beFalse() {
+    return [NMBObjCMatcher beFalseMatcher];
+}
+
 NIMBLE_EXPORT id<NMBMatcher> NMB_beNil() {
     return [NMBObjCMatcher beNilMatcher];
 }
@@ -66,6 +74,10 @@ NIMBLE_EXPORT id<NMBMatcher> NMB_endWith(id itemElementOrSubstring) {
 
 NIMBLE_EXPORT id<NMBMatcher> NMB_equal(id expectedValue) {
     return [NMBObjCMatcher equalMatcher:expectedValue];
+}
+
+NIMBLE_EXPORT id<NMBMatcher> NMB_match(id expectedValue) {
+    return [NMBObjCMatcher matchMatcher:expectedValue];
 }
 
 NIMBLE_EXPORT NMBObjCRaiseExceptionMatcher *NMB_raiseException() {

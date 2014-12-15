@@ -13,14 +13,11 @@
 
 # Welcome to Quick!
 
-We're building a BDD framework for a new generation of Swift and
+We're building a testing framework for a new generation of Swift and
 Objective-C developers.
 
 Quick should be easy to use and easy to maintain. Let's keep things
 simple and well-tested.
-
-**tl;dr:** If you've added a file to the project, make sure it's
-included in both the OS X and iOS targets.
 
 ## Reporting Bugs
 
@@ -35,8 +32,8 @@ it.
 
 ## Building the Project
 
-- Use `Quick.xcworkspace` to work on Quick, Nimble, and the example
-  apps.
+- Use `Quick.xcworkspace` to work on Quick. The workspace includes
+  Nimble, which is used in Quick's tests.
 
 ## Pull Requests
 
@@ -49,10 +46,7 @@ it.
   README or other documentation.
 - Be sure the unit tests for both the OS X and iOS targets of both Quick
   and Nimble pass before submitting your pull request. You can run all
-  the OS X unit tests using `rake test` (hopefully this will support iOS
-  soon, see: https://github.com/Quick/Quick/issues/25).
-- If you've added a file to the project, make sure it's included in both
-  the OS X and iOS targets.
+  the iOS and OS X unit tests using `rake test`.
 
 ### Style Conventions
 
@@ -79,6 +73,9 @@ some "ground rules":
   Ideally, however, all changes should be submitted as GitHub pull
   requests. No one should merge their own pull request, unless no
   other core members respond for at least a few days.
+
+  Pull requests should be issued from personal forks. The Quick repo
+  should be reserved for long-running feature branches.
 
   If you'd like to create a new repository, it'd be nice if you created
   a GitHub issue and gathered some feedback first.
