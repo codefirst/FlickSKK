@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		132607DC1A3D65C000DA9F8C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; };
 		133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
 		133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
@@ -22,7 +23,6 @@
 		1388669C1A0920D500B7D8A4 /* SKKDictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */; };
 		1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */; };
 		1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4F19E0EEE200175343 /* BaseSession.swift */; };
-		1394A9B119E2D83C00F01BF0 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A99B19E2D80300F01BF0 /* Quick.framework */; };
 		1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; };
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
@@ -50,6 +50,8 @@
 		13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
+		13FFFD471A3D24F70049D45D /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
+		13FFFD511A3D261C0049D45D /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */; };
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
@@ -59,6 +61,8 @@
 		EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5619FBE70400265181 /* iTunesArtwork@2x */; };
 		EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
+		EA997CBB1A3D8218006D5AA2 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EA997CBC1A3D8220006D5AA2 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */; };
@@ -80,30 +84,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1394A99A19E2D80300F01BF0 /* PBXContainerItemProxy */ = {
+		132607D81A3D658000DA9F8C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1394A99219E2D80300F01BF0 /* Quick.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DAEB6B8E1943873100289F44;
-			remoteInfo = Quick;
-		};
-		1394A99C19E2D80300F01BF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1394A99219E2D80300F01BF0 /* Quick.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DAEB6B991943873100289F44;
-			remoteInfo = QuickTests;
-		};
-		1394A99E19E2D80300F01BF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1394A99219E2D80300F01BF0 /* Quick.xcodeproj */;
+			containerPortal = 132607C91A3D658000DA9F8C /* Quick.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5A5D117C19473F2100F6D13D;
 			remoteInfo = "Quick-iOS";
 		};
-		1394A9A019E2D80300F01BF0 /* PBXContainerItemProxy */ = {
+		132607DA1A3D658000DA9F8C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1394A99219E2D80300F01BF0 /* Quick.xcodeproj */;
+			containerPortal = 132607C91A3D658000DA9F8C /* Quick.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5A5D118619473F2100F6D13D;
 			remoteInfo = "Quick-iOSTests";
@@ -121,20 +111,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 1F1A74341940169200FFFC47;
 			remoteInfo = "Nimble-iOSTests";
-		};
-		1394A9AD19E2D81200F01BF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F925EAD195C0D6300ED456B;
-			remoteInfo = "Nimble-OSX";
-		};
-		1394A9AF19E2D81200F01BF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F925EB7195C0D6300ED456B;
-			remoteInfo = "Nimble-OSXTests";
 		};
 		1394A9B319E2D97200F01BF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -167,6 +143,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		EA997CB61A3D8206006D5AA2 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EA997CBC1A3D8220006D5AA2 /* Nimble.framework in Copy Frameworks */,
+				EA997CBB1A3D8218006D5AA2 /* Quick.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAD4B59719D5CB8A007B6636 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,6 +170,7 @@
 
 /* Begin PBXFileReference section */
 		0CA289C0ED7662F2EF0F3718 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		132607C91A3D658000DA9F8C /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
 		133CDCF819D98ADA00B8120D /* KeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		133CDCFA19D98DAB00B8120D /* SKKSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSession.swift; sourceTree = "<group>"; };
@@ -194,7 +183,6 @@
 		138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryEntry.swift; sourceTree = "<group>"; };
 		1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterSession.swift; sourceTree = "<group>"; };
 		1393DF4F19E0EEE200175343 /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
-		1394A99219E2D80300F01BF0 /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Vendor/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
@@ -251,8 +239,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				132607DC1A3D65C000DA9F8C /* Quick.framework in Frameworks */,
 				1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */,
-				1394A9B119E2D83C00F01BF0 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +261,15 @@
 				F3DD18F195A212F9D8B92DB9 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		132607CA1A3D658000DA9F8C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				132607D91A3D658000DA9F8C /* Quick.framework */,
+				132607DB1A3D658000DA9F8C /* Quick-iOSTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		133CDCF719D98A4C00B8120D /* SKKBase */ = {
@@ -296,24 +293,11 @@
 			name = SKKSession;
 			sourceTree = "<group>";
 		};
-		1394A99319E2D80300F01BF0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1394A99B19E2D80300F01BF0 /* Quick.framework */,
-				1394A99D19E2D80300F01BF0 /* QuickTests.xctest */,
-				1394A99F19E2D80300F01BF0 /* Quick.framework */,
-				1394A9A119E2D80300F01BF0 /* Quick-iOSTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		1394A9A319E2D81200F01BF0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				1394A9AA19E2D81200F01BF0 /* Nimble.framework */,
 				1394A9AC19E2D81200F01BF0 /* NimbleTests.xctest */,
-				1394A9AE19E2D81200F01BF0 /* Nimble.framework */,
-				1394A9B019E2D81200F01BF0 /* Nimble-OSXTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -421,7 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */,
-				1394A99219E2D80300F01BF0 /* Quick.xcodeproj */,
+				132607C91A3D658000DA9F8C /* Quick.xcodeproj */,
 				13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */,
 				13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */,
 				1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */,
@@ -509,6 +493,7 @@
 				EAD4B57119D5CB50007B6636 /* Sources */,
 				EAD4B57219D5CB50007B6636 /* Frameworks */,
 				EAD4B57319D5CB50007B6636 /* Resources */,
+				EA997CB61A3D8206006D5AA2 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -585,8 +570,8 @@
 					ProjectRef = 1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */;
 				},
 				{
-					ProductGroup = 1394A99319E2D80300F01BF0 /* Products */;
-					ProjectRef = 1394A99219E2D80300F01BF0 /* Quick.xcodeproj */;
+					ProductGroup = 132607CA1A3D658000DA9F8C /* Products */;
+					ProjectRef = 132607C91A3D658000DA9F8C /* Quick.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -599,32 +584,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1394A99B19E2D80300F01BF0 /* Quick.framework */ = {
+		132607D91A3D658000DA9F8C /* Quick.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Quick.framework;
-			remoteRef = 1394A99A19E2D80300F01BF0 /* PBXContainerItemProxy */;
+			remoteRef = 132607D81A3D658000DA9F8C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1394A99D19E2D80300F01BF0 /* QuickTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = QuickTests.xctest;
-			remoteRef = 1394A99C19E2D80300F01BF0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1394A99F19E2D80300F01BF0 /* Quick.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Quick.framework;
-			remoteRef = 1394A99E19E2D80300F01BF0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1394A9A119E2D80300F01BF0 /* Quick-iOSTests.xctest */ = {
+		132607DB1A3D658000DA9F8C /* Quick-iOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "Quick-iOSTests.xctest";
-			remoteRef = 1394A9A019E2D80300F01BF0 /* PBXContainerItemProxy */;
+			remoteRef = 132607DA1A3D658000DA9F8C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		1394A9AA19E2D81200F01BF0 /* Nimble.framework */ = {
@@ -641,20 +612,6 @@
 			remoteRef = 1394A9AB19E2D81200F01BF0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		1394A9AE19E2D81200F01BF0 /* Nimble.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Nimble.framework;
-			remoteRef = 1394A9AD19E2D81200F01BF0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1394A9B019E2D81200F01BF0 /* Nimble-OSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Nimble-OSXTests.xctest";
-			remoteRef = 1394A9AF19E2D81200F01BF0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -665,6 +622,7 @@
 				EA892D5719FBE70400265181 /* iTunesArtwork in Resources */,
 				EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */,
 				EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
+				13FFFD511A3D261C0049D45D /* skk.jisyo in Resources */,
 				EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */,
 				EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */,
 				EACD52A419F3F58B001FB2A7 /* html in Resources */,
@@ -675,6 +633,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13FFFD471A3D24F70049D45D /* skk.jisyo in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
