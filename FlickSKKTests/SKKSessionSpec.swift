@@ -23,7 +23,8 @@ class SKKSessionSpec : QuickSpec, SKKDelegate {
 
     override func spec() {
         var session : SKKSession!
-        let jisyo = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
+        let bundle = NSBundle(forClass: self.classForCoder)
+        let jisyo = bundle.pathForResource("skk", ofType: "jisyo")
         let dict = SKKDictionary(userDict: "", dicts:[jisyo!])
         dict.waitForLoading()
 
