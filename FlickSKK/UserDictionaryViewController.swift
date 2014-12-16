@@ -86,6 +86,14 @@ class UserDictionaryViewController: UITableViewController {
         // TODO: something
     }
 
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let entry = self.entries[indexPath.row]
+            SKKUserDictionaryFile.defaultUserDictionary().unregister(entry)
+            self.reloadEntries()
+        }
+    }
+
     // MARK: -
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -47,7 +47,47 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                     .SKKDictionaryEntry(kanji: "DDD", kana: "いいい", okuri: .None),
                     ]))
             }
+            describe("unregister") {
+                it("送りなしを全部消す") {
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                    dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: .None))
 
+                    let dict2 = SKKUserDictionaryFile(path: path)
+                    let xs = dict2.find("まじ", okuri: .None)
+                    expect(xs).notTo(contain("本気"))
+                }
+
+                it("送りありを1個消す") {
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                    dict.register("まじ", okuri: .None, kanji: "AAA")
+
+                    dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: .None))
+
+                    let dict2 = SKKUserDictionaryFile(path: path)
+                    let xs = dict2.find("まじ", okuri: .None)
+                    expect(xs).to(contain("AAA"))
+                }
+
+                it("送りありを全部消す") {
+                    dict.register("まじ", okuri: "a", kanji: "本気")
+                    dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: "a"))
+
+                    let dict2 = SKKUserDictionaryFile(path: path)
+                    let xs = dict2.find("まじ", okuri: "a")
+                    expect(xs).notTo(contain("本気"))
+                }
+
+                it("送りありを1個消す") {
+                    dict.register("まじ", okuri: "a", kanji: "本気")
+                    dict.register("まじ", okuri: "a", kanji: "AAA")
+
+                    dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: "a"))
+
+                    let dict2 = SKKUserDictionaryFile(path: path)
+                    let xs = dict2.find("まじ", okuri: "a")
+                    expect(xs).to(contain("AAA"))
+                }
+            }
         }
     }
 }
