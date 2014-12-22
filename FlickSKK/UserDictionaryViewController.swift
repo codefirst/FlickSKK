@@ -32,6 +32,10 @@ class UserDictionaryViewController: UITableViewController {
         super.viewDidLoad()
 
         self.title = NSLocalizedString("User Dictionary", comment: "")
+
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("openWordRegister"))
+        self.navigationItem.rightBarButtonItem = addButton
+
         self.reloadEntries()
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -97,5 +101,16 @@ class UserDictionaryViewController: UITableViewController {
     // MARK: -
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    @objc private func openWordRegister() {
+        let controller = WordRegisterViewController()
+        controller.done = {(word, okuri, yomi) in
+            let dict = SKKUserDictionaryFile.defaultUserDictionary()
+            dict.register(yomi, okuri: okuri, kanji: word)
+            dict.serialize()
+            self.reloadEntries()
+        }
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
