@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131DBA8F1A42403100756CFA /* WordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */; };
 		132607DC1A3D65C000DA9F8C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; };
 		133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
@@ -169,6 +170,7 @@
 
 /* Begin PBXFileReference section */
 		0CA289C0ED7662F2EF0F3718 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterViewController.swift; sourceTree = "<group>"; };
 		132607C91A3D658000DA9F8C /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
 		133CDCF819D98ADA00B8120D /* KeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				EAD4B56519D5CB50007B6636 /* AppDelegate.swift */,
 				EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */,
 				EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */,
+				131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */,
 				EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */,
 				EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */,
 				EA2F67951A21D7BE00DDCBB9 /* Resources */,
@@ -661,6 +664,7 @@
 				EACD52B419F3FEE4001FB2A7 /* SKKUserDictionaryFile.swift in Sources */,
 				EACD52B619F3FEFD001FB2A7 /* SKKLocalDictionaryFile.swift in Sources */,
 				EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */,
+				131DBA8F1A42403100756CFA /* WordRegisterViewController.swift in Sources */,
 				EACD52B719F3FF0F001FB2A7 /* IOUtil.mm in Sources */,
 				EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */,
 				EACD52B519F3FEF1001FB2A7 /* SKKDictionaryFile.swift in Sources */,
