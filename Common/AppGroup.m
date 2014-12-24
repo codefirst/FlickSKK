@@ -11,12 +11,18 @@
 #define STR(x) @#x
 #define STR2(x) STR(x)
 static NSString * const kAppIdentifier = STR2(APP_IDENTIFIER);
+static NSString * const kInitalText = STR2(INITIAL_TEXT);
 
 @implementation AppGroup
 
 + (NSString *)appGroupID
 {
     return [NSString stringWithFormat:@"group.%@", kAppIdentifier];
+}
+
++ (NSString *)initialText
+{
+    return kInitalText;
 }
 
 + (NSString *)pathForResource:(NSString *)subpath

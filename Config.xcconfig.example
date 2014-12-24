@@ -1,3 +1,4 @@
 // copy this file to Config.xcconfig and change to your app identifier
 APP_IDENTIFIER = org.codefirst.FlickSKK
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) APP_IDENTIFIER=${APP_IDENTIFIER}
+INITIAL_TEXT=
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) APP_IDENTIFIER=${APP_IDENTIFIER} INITIAL_TEXT="${INITIAL_TEXT}"

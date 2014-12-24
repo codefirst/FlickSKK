@@ -327,9 +327,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
         KeyButtonFlickPopup.sharedInstance.parentView = inputView
 
-        if AppGroup.appGroupID() != "group.org.codefirst.FlickSKK" {
-            sessionLabel.text = AppGroup.appGroupID()
-        }
+        sessionLabel.text = AppGroup.initialText()
+
         // iOS8 layout height(0) workaround: call self.inputView.addSubview() after viewDidAppear
     }
 
