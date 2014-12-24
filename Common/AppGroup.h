@@ -11,6 +11,7 @@
 @interface AppGroup : NSObject
 
 + (NSString *)appGroupID;
++ (NSString *)initialText;
 + (NSString *)pathForResource:(NSString *)subpath;
 
 @end
