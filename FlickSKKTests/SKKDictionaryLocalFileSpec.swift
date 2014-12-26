@@ -29,6 +29,11 @@ class SKKDictionaryLocalFileSpec : QuickSpec {
                 let xs = dict.find("じ", okuri: .None)
                 expect(xs).to(contain("字"))
             }
+            it("can find number entry") {
+                let xs = dict.find("1えん", okuri: .None)
+                expect(xs).to(contain("一円"))
+                expect(xs).to(contain("1円"))
+            }
         }
         describe("okuri-ari") {
             it("can find first entry"){
