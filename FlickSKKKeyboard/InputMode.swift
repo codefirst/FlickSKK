@@ -240,7 +240,12 @@ class InputMode {
             self.status = .KanaCompose
             return done()
         case .SelectCandidate(let n):
-            return withReset(insertText(self.candidates[n]))
+            if n + 1 == self.candidates.count {
+                // NOTES: 最後には、単語登録用の仮想エントリがあるはず。
+                return registerWord(self.composeText, okuri: self.composeOkuri)
+            } else {
+                return withReset(insertText(self.candidates[n]))
+            }
         case .CommitWord(kanji: _):
             return done()
         case .CancelWord:
@@ -331,10 +336,15 @@ class InputMode {
     }
 
     private func setupCandidates(xs : [String]) {
-        self.candidates     = xs
-        self.candidateIndex = 0
         if(xs.count != 0) {
+            var ys = xs
+            ys.append("▼単語登録")
+            self.candidates     = ys
+            self.candidateIndex = 0
             self.status = .KanjiCompose
+        } else {
+            self.candidates     = []
+            self.candidateIndex = 0
         }
     }
 }
