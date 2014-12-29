@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130CA3901A4EF94C00A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
+		130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */; };
+		130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
+		130CA3981A4EFA4200A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
 		131DBA8F1A42403100756CFA /* WordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */; };
 		132607DC1A3D65C000DA9F8C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; };
+		133432C11A4D95030080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
+		133432C61A4D9BA90080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
+		133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
 		133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
 		133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
@@ -170,8 +177,11 @@
 
 /* Begin PBXFileReference section */
 		0CA289C0ED7662F2EF0F3718 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
+		130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatterSpec.swift; sourceTree = "<group>"; };
 		131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterViewController.swift; sourceTree = "<group>"; };
 		132607C91A3D658000DA9F8C /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
+		133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKNumberPreprocessor.swift; sourceTree = "<group>"; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
 		133CDCF819D98ADA00B8120D /* KeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		133CDCFA19D98DAB00B8120D /* SKKSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSession.swift; sourceTree = "<group>"; };
@@ -273,6 +283,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1327F7B01A4FB161009796FB /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */,
+				EAD4B59819D80AF3007B6636 /* Utilities.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		133CDCF719D98A4C00B8120D /* SKKBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +332,7 @@
 				13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */,
 				13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */,
 				13D118CE19D9994D009E9E79 /* SKKDictionary.swift */,
+				133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */,
 			);
 			name = SKKDictionary;
 			sourceTree = "<group>";
@@ -412,6 +432,7 @@
 				13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */,
 				1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */,
 				136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */,
+				130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */,
 				EAD4B57919D5CB50007B6636 /* Supporting Files */,
 			);
 			path = FlickSKKTests;
@@ -431,13 +452,13 @@
 				133CDCF719D98A4C00B8120D /* SKKBase */,
 				13DFEAC319F079C8006D7E40 /* SKKDictionary */,
 				133CDCFC19D98DB100B8120D /* SKKSession */,
+				1327F7B01A4FB161009796FB /* Utilities */,
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
 				136D160E19DA86690091D6BF /* CandidateDataSource.swift */,
 				EA985FE519D84AAE0043564C /* KeyPad.swift */,
 				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
 				EA985FE719D84D060043564C /* KeyButton.swift */,
 				EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */,
-				EAD4B59819D80AF3007B6636 /* Utilities.swift */,
 				EA2F67961A21D9C700DDCBB9 /* Resources */,
 				EAD4B58B19D5CB8A007B6636 /* Supporting Files */,
 			);
@@ -665,6 +686,8 @@
 				EACD52B619F3FEFD001FB2A7 /* SKKLocalDictionaryFile.swift in Sources */,
 				EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */,
 				131DBA8F1A42403100756CFA /* WordRegisterViewController.swift in Sources */,
+				133432C61A4D9BA90080280F /* SKKNumberPreprocessor.swift in Sources */,
+				130CA3981A4EFA4200A84D24 /* NumberFormatter.swift in Sources */,
 				EACD52B719F3FF0F001FB2A7 /* IOUtil.mm in Sources */,
 				EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */,
 				EACD52B519F3FEF1001FB2A7 /* SKKDictionaryFile.swift in Sources */,
@@ -686,6 +709,9 @@
 				137AAB4E1A3C13970092F8A5 /* KeyRepeatTimer.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
+				130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */,
+				133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */,
+				130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */,
 				13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */,
 				13F9326819E2DC1700AC5019 /* WordRegisterSession.swift in Sources */,
 				13F9326919E2DC1700AC5019 /* SKKSession.swift in Sources */,
@@ -723,8 +749,10 @@
 				EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */,
 				13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */,
 				136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */,
+				133432C11A4D95030080280F /* SKKNumberPreprocessor.swift in Sources */,
 				133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */,
 				1388669A1A09202500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
+				130CA3901A4EF94C00A84D24 /* NumberFormatter.swift in Sources */,
 				133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */,
 				13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,

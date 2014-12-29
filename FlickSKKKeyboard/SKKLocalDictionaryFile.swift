@@ -40,18 +40,29 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
     func find(normal : String, okuri : String?) -> [ String ] {
         switch okuri {
         case .None:
-            let str = binarySearch(normal + " ",
+            return search(normal + " ",
                 xs: self.okuriNasi,
-                begin: 0, end: self.okuriNasi.count,
-                compare: NSComparisonResult.OrderedAscending) ?? ""
-            return parse(str)
+                compare: NSComparisonResult.OrderedAscending)
         case .Some(let okuri):
-            let str = binarySearch(normal + okuri + " ",
+            return search(normal + okuri + " ",
                 xs: self.okuriAri,
-                begin: 0, end: self.okuriAri.count,
-                compare: NSComparisonResult.OrderedDescending) ?? ""
-            return parse(str)
+                compare: NSComparisonResult.OrderedDescending)
         }
+    }
+
+    private func search(target : NSString, xs : NSMutableArray, compare : NSComparisonResult) -> [String] {
+        let preprocessor = SKKNumberPreprocessor(value: target)
+
+        let line = binarySearch(preprocessor.preProcess(),
+            xs: xs,
+            begin: 0,
+            end: xs.count,
+            compare: compare) ?? ""
+
+        let entries = parse(line)
+
+        return entries.map({ entry in
+            return preprocessor.postProcess(entry) })
     }
 
     private func binarySearch(target : NSString, xs : NSMutableArray, begin : Int, end : Int, compare : NSComparisonResult) -> String? {
