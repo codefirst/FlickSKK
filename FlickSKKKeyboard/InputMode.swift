@@ -35,7 +35,7 @@ class InputMode {
     }
 
     // 状態遷移の管理
-    private let sourceType : KanaType
+    private var sourceType : KanaType = .Hirakana
     private let dictionary : SKKDictionary
     private var status     : InputModeStatus = .Default
 
@@ -52,8 +52,7 @@ class InputMode {
     // WordRegister用
     private var oldStatus : InputModeStatus = .Default
 
-    init(sourceType : KanaType, dictionary : SKKDictionary){
-        self.sourceType = sourceType
+    init(dictionary : SKKDictionary) {
         self.dictionary = dictionary
     }
 
@@ -136,6 +135,14 @@ class InputMode {
         case .Backspace:
             return deleteText(1)
         case .InputModeChange(inputMode: let mode):
+            switch mode {
+            case .Hirakana:
+                self.sourceType = .Hirakana
+            case .Katakana:
+                self.sourceType = .Katakana
+            case .HankakuKana:
+                self.sourceType = .HankakuKana
+            }
             return [.InputModeChange(mode: mode)]
         case .ToggleDakuten(beforeText : let beforeText):
             return [.ToggleDakuten(beforeText: beforeText)]
