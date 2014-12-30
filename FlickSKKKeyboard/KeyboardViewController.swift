@@ -520,7 +520,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
     func showCandidates(candidates: [String]?) {
         switch candidates {
-        case .Some(let xs):
+        case .Some(var xs):
+            xs.append("▼単語登録")
             dataSource.update(xs)
             candidateView.reloadData()
             keypadAndControlsView.hidden = true
