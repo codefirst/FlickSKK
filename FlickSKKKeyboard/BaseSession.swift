@@ -19,7 +19,7 @@ class BaseSession {
     var status : Status = .Default
 
     // 通常モード用
-    private let inputMode : [SKKInputMode:InputMode]
+    private let inputMode : InputMode
     var currentMode : SKKInputMode = .Hirakana
     let dictionary : SKKDictionary
 
@@ -28,15 +28,11 @@ class BaseSession {
 
     init(dict : SKKDictionary) {
         self.dictionary = dict
-        self.inputMode = [
-            .Hirakana:    InputMode(sourceType: .Hirakana,    dictionary: self.dictionary),
-            .Katakana:    InputMode(sourceType: .Katakana,    dictionary: self.dictionary),
-            .HankakuKana: InputMode(sourceType: .HankakuKana, dictionary: self.dictionary)
-        ]
+        self.inputMode = InputMode(dictionary: self.dictionary)
     }
 
     func currentInputMode() -> InputMode? {
-        return self.inputMode[self.currentMode]
+        return self.inputMode
     }
 
     func info() -> InputMode.Info? {
