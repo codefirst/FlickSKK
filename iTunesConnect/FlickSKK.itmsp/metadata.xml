@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package xmlns="http://apple.com/itunes/importer" version="software5.2">
     <!-- NOTE: metadata_token is generated on lookup.  Modifying the value of this will result in an import error -->
-    <metadata_token>1416676135643-6dcb48839a459516685d93afbeac403b47fe9d5a494e9f024a9e4be160b7d95b</metadata_token>
+    <metadata_token>1422155619517-dd004f76a374026fbca7c615f545c8e53fcb21f344ace8d9252edf797e5ea8a7</metadata_token>
     <provider>JUNBAN198441466</provider>
     <team_id>FPZK4WRGW7</team_id>
     <software>
@@ -12,12 +12,11 @@
         </read_only_info>
         <software_metadata>
             <versions>
-                <version string="1.0.0">
+                <version string="1.1.0">
                     <locales>
                         <locale name="ja-JP">
                             <title>FlickSKK</title>
-                            <description>
-日本語入力キーボード FlickSKK。シンプルな日本語入力を、iPhone/iPadで。
+                            <description>日本語入力キーボード FlickSKK。シンプル日本語入力を、iPhone/iPadで。
 
 ●FlickSKKの特長
 ■1. SKKならではのシンプルな日本語変換
@@ -26,8 +25,10 @@
 ・ひらかな確定、カタカナ確定、半角カナ確定機能
 ・インラインでの単語登録
 
+
 ■2. iPhoneらしいフリック入力
 ・フリック入力による自然な入力をサポート
+
 
 ●使い方
 ■1. 単文節変換
@@ -40,6 +41,7 @@
 3. 変換候補が適当でない場合は、さらに「space」を押します。
 4. 「⏎」で変換を確定します。
 
+
 ■2. 送り仮名変換
 変換中の「⇧」は、送り仮名の開始として認識されます。
 
@@ -50,19 +52,20 @@
 3. 変換候補が適当でない場合は、さらに「space」を押します。
 4. 「⏎」で変換を確定します。
 
+
 ■3. カタカナ入力
 「かな」を横にフリックすると、カタカナ入力モードになります。
 また、変換中に同じ操作をすると、カタカナとして確定されます。
 
 同様に、「かな」を上にフリックするとひらかな入力モードに、下にフリックすると半角カナ入力モードになります。
 
+
 ■4. 辞書登録
 辞書に登録されていない単語を変換しようとすると、辞書登録モードになります。
 
 変換後の単語を入力し、「⏎」を押すことで辞書登録ができます。
 
-登録した単語は、FlickSKKアプリの「ユーザー辞書」から確認できます。ただし、フルアクセスの許可が必要です。
-                            </description>
+登録した単語は、FlickSKKアプリの「ユーザー辞書」から確認できます。ただし、フルアクセスの許可が必要です。</description>
                             <keywords>
                                 <keyword>SKK</keyword>
                                 <keyword>Keyboard</keyword>
@@ -70,28 +73,96 @@
                                 <keyword>フリック</keyword>
                                 <keyword>日本語入力</keyword>
                             </keywords>
+                            <version_whats_new>・設定アプリから単語の登録・削除ができるようになりました。
+・候補リストの末尾の「▼単語登録」から単語登録ができるようになりました。
+・バックスペースがキーリピートを認識するようになりました。
+・バックスペースを押した際、Shiftの状態を復元するようになりました。
+・アルファベットモードのデフォルトが小文字になりました。
+・その他、バグ修正。</version_whats_new>
+                            <software_url>http://www.codefirst.org/FlickSKK/</software_url>
                             <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
                             <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
+                            <software_screenshots>
+                                <software_screenshot display_target="iOS-3.5-in" position="1">
+                                    <size>181563</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">e1438785b351c4ae561d71222dd8a89f</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-3.5-in" position="2">
+                                    <size>174643</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">9701f6cc6cdf22d11ced362a2d432cb0</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-3.5-in" position="3">
+                                    <size>117615</size>
+                                    <file_name>iPhone-3.5inch-3.png</file_name>
+                                    <checksum type="md5">99a656c7780fa74170b7a7212de46b39</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-iPad" position="1">
+                                    <size>504981</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">8fa7c25a9dbfd07abc406cfe125f8baf</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-iPad" position="2">
+                                    <size>507877</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">b943680faad808fae7b3a9950682fa52</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-iPad" position="3">
+                                    <size>192160</size>
+                                    <file_name>iPad-3.png</file_name>
+                                    <checksum type="md5">5b691424245b2c87d840544428b6b65e</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4-in" position="1">
+                                    <size>195940</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">8426400858c77fb811a7a030cd1b1fff</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4-in" position="2">
+                                    <size>198611</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">f6fce3401fe7a91e07cb55b2c3507ea6</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4-in" position="3">
+                                    <size>125143</size>
+                                    <file_name>iPhone-4.0inch-3.png</file_name>
+                                    <checksum type="md5">81963f96360490878b9b4f9500eb558c</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-5.5-in" position="1">
+                                    <size>640344</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">0723992cdf03377d9230dac7ae2c1138</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-5.5-in" position="2">
+                                    <size>645109</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">7eda26330a8dcfe611dff632a14db50d</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-5.5-in" position="3">
+                                    <size>266519</size>
+                                    <file_name>iPhone-5.5inch-3.png</file_name>
+                                    <checksum type="md5">9f34f529b616fa31a3b99f4b7b2792f9</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4.7-in" position="1">
+                                    <size>261134</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">8502553a9182985d3d35a28dc7f826fb</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4.7-in" position="2">
+                                    <size>263817</size>
+                                    <file_name>pr_source.png</file_name>
+                                    <checksum type="md5">50735360647ca5b7095c8ef3f54af009</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4.7-in" position="3">
+                                    <size>142215</size>
+                                    <file_name>iPhone-4.7inch-3.png</file_name>
+                                    <checksum type="md5">374c67cfd3ffae8106f615101ade4701</checksum>
+                                </software_screenshot>
+                            </software_screenshots>
                         </locale>
                     </locales>
                 </version>
             </versions>
-            <products>
-                <product>
-                    <territory>WW</territory>
-                    <cleared_for_sale>true</cleared_for_sale>
-                    <sales_start_date>2014-11-22</sales_start_date>
-                    <intervals>
-                        <!--The following <interval> element represents a snapshot of present and future pricing and availability information.
-In other words, past data may not be reflected by this interval.-->
-                        <interval>
-                            <start_date>2014-11-22</start_date>
-                            <wholesale_price_tier>0</wholesale_price_tier>
-                        </interval>
-                    </intervals>
-                    <allow_volume_discount>true</allow_volume_discount>
-                </product>
-            </products>
         </software_metadata>
     </software>
 </package>
