@@ -111,14 +111,14 @@ func ==(l : KeyboardMode, r : KeyboardMode) -> Bool {
     }
 }
 
-class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
+class KeyboardViewController: UIInputViewController, SKKDelegate {
     var heightConstraint : NSLayoutConstraint!
 
     let keypadAndControlsView = UIView()
     let contextView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     let sessionLabel = UILabel()
-    let candidateView = UITableView()
+    let candidateListView = CandidateListView()
 
     let nextKeyboardButton: KeyButton!
     let inputModeChangeButton : KeyButton!
@@ -132,7 +132,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     let keypads: [KeyboardMode:KeyPad]
 
     let session : SKKSession!
-    let dataSource = CandidateDataSource()
 
     var shiftEnabled: Bool {
         didSet {
@@ -313,15 +312,21 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         let cViews = [
             "progress": loadingProgressView,
             "l": sessionLabel,
+            "candidateListView": candidateListView
         ]
         let autolayout = contextView.autolayoutFormat(metrics, cViews)
-        autolayout("H:|[l][progress]-(>=0)-|")
+        autolayout("H:|[l][progress][candidateListView]|")
         autolayout("V:|[progress]|")
         autolayout("V:|[l]|")
+        autolayout("V:|[candidateListView]|")
 
-        candidateView.dataSource = dataSource
-        candidateView.delegate = self
-        candidateView.hidden = true
+        candidateListView.setContentCompressionResistancePriority(50, forAxis: .Horizontal) // UILayoutPriorityFittingSizeLevel cause compile error
+        candidateListView.setContentHuggingPriority(50, forAxis: .Horizontal)  // UILayoutPriorityFittingSizeLevel cause compile error
+        candidateListView.hidden = true
+        candidateListView.didSelectCandidateAtIndex = { [weak self] index in
+            self?.session.handle(.SelectCandidate(index: index))
+            return
+        }
 
         updateControlButtons()
 
@@ -374,16 +379,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
         let views = [
             "context": contextView,
-            "candidate" : candidateView,
             "keypadAndControls": keypadAndControlsView,
         ]
         let autolayout = self.inputView.autolayoutFormat(metrics, views)
         autolayout("H:|[context]|")
         autolayout("H:|[keypadAndControls]|")
-        autolayout("H:|[candidate]|")
-        autolayout("V:|[context(==30)]")
-        autolayout("V:|[context][keypadAndControls]|")
-        autolayout("V:|[context][candidate]|")
+        autolayout("V:|[context(==30)][keypadAndControls]|")
+
         self.view.addConstraint(heightConstraint);
     }
 
@@ -522,13 +524,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         switch candidates {
         case .Some(var xs):
             xs.append("▼単語登録")
-            dataSource.update(xs)
-            candidateView.reloadData()
-            keypadAndControlsView.hidden = true
-            candidateView.hidden = false
+            candidateListView.candidates = xs
+            candidateListView.hidden = false
         case .None:
-            keypadAndControlsView.hidden = false
-            candidateView.hidden = true
+            candidateListView.hidden = true
         }
     }
 
@@ -549,13 +548,5 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
     func deleteBackward() {
         (self.textDocumentProxy as UIKeyInput).deleteBackward()
-    }
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 24
-    }
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.session.handle(.SelectCandidate(index: indexPath.row))
     }
 }
