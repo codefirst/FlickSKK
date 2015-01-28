@@ -12,7 +12,7 @@ import UIKit
 private let kCellID = "CellID"
 
 
-class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
+class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var candidates: [String] = [] {
         didSet {
             self.collectionView.reloadData()
@@ -30,8 +30,7 @@ class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDel
     override init(frame: CGRect) {
         self.collectionViewLayout = UICollectionViewFlowLayout().tap { (l: UICollectionViewFlowLayout) in
             l.scrollDirection = .Horizontal
-            l.itemSize = CGSizeZero
-            l.minimumInteritemSpacing = 1.0 / UIScreen.mainScreen().scale // inter-item border width
+            l.minimumInteritemSpacing = 0.0
             l.minimumLineSpacing = 0.0
         }
         self.collectionView = UICollectionView(
@@ -59,12 +58,6 @@ class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDel
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        self.collectionViewLayout.itemSize = CGSizeMake(64, self.bounds.height)
-    }
-    
     // MARK: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -75,14 +68,22 @@ class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDel
         self.didSelectCandidateAtIndex?(indexPath.row)
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let index = indexPath.row
+    private func configureCell(cell: CandidateCollectionViewCell, forIndexPath indexPath: NSIndexPath) -> CandidateCollectionViewCell {
+        let index = indexPath.item
         let candidate = (index < candidates.count) ? candidates[index] : "";
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellID, forIndexPath: indexPath) as CandidateCollectionViewCell
-        
         cell.textLabel.text = candidate
-        
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellID, forIndexPath: indexPath) as CandidateCollectionViewCell
+        return self.configureCell(cell, forIndexPath: indexPath)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let minWidth = CGFloat(44 + 8)
+        let cell = self.configureCell(CandidateCollectionViewCell(), forIndexPath: indexPath)
+        return CGSizeMake(max(cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width, minWidth),self.collectionView.bounds.height)
     }
 }
 
@@ -97,19 +98,25 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        self.backgroundColor = UIColor.whiteColor()
         
         self.textLabel.tap { (l: UILabel) in
             l.font = UIFont.systemFontOfSize(17.0)
             l.textColor = UIColor.blackColor()
-            l.backgroundColor = UIColor.whiteColor()
+            l.backgroundColor = UIColor.clearColor()
             l.textAlignment = .Center
             l.lineBreakMode = .ByClipping
-            l.adjustsFontSizeToFitWidth = true
         }
         
-        let autolayout = self.autolayoutFormat(["p": 2], ["l": self.textLabel])
-        autolayout("H:|-p-[l]-p-|")
+        let border = UIView().tap { (v: UIView) in
+            v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
+        }
+        
+        let autolayout = self.autolayoutFormat(
+            ["p": 4, "onepx": 1.0 / UIScreen.mainScreen().scale],
+            ["l": self.textLabel, "b": border])
+        autolayout("H:|[b(==onepx)]-p-[l]-p-|")
+        autolayout("V:|[b]|")
         autolayout("V:|[l]|")
     }
 
