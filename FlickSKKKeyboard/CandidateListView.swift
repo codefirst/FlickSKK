@@ -16,6 +16,11 @@ class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDel
     var candidates: [String] = [] {
         didSet {
             self.collectionView.reloadData()
+            
+            // for test
+            if self.candidates.count > 1 {
+                self.collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 0), animated: false, scrollPosition: nil)
+            }
         }
     }
     var didSelectCandidateAtIndex: (Int -> Void)? = nil
@@ -122,5 +127,23 @@ class CandidateCollectionViewCell: UICollectionViewCell {
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func updateStates() {
+        self.backgroundColor = highlighted ? UIColor(white: 0.5, alpha: 1.0)
+            : selected ? UIColor(white: 0.9, alpha: 1.0)
+            : UIColor.whiteColor()
+    }
+    
+    override var selected: Bool {
+        didSet {
+            self.updateStates()
+        }
+    }
+    
+    override var highlighted: Bool {
+        didSet {
+            self.updateStates()
+        }
     }
 }
