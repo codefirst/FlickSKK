@@ -34,6 +34,14 @@ class BaseSession {
     func currentInputMode() -> InputMode? {
         return self.inputMode
     }
+    
+    func topmostInputMode() -> InputMode? {
+        if self.subSession != nil && self.status == .WordRegister {
+            return self.subSession!.topmostInputMode()
+        } else {
+            return self.currentInputMode()
+        }
+    }
 
     func info() -> InputMode.Info? {
         return .None

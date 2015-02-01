@@ -13,6 +13,7 @@ private let kCellID = "CellID"
 
 
 class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    let session: SKKSession
     var composeText: String? {
         didSet {
             self.collectionView.reloadData()
@@ -22,9 +23,8 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         didSet {
             self.collectionView.reloadData()
             
-            // for test
-            if self.candidates.count > 1 {
-                self.collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 1, inSection: Section.Candidates.rawValue), animated: false, scrollPosition: nil)
+            dispatch_async(dispatch_get_main_queue()) {
+                self.updateCandidateSelection()
             }
         }
     }
@@ -33,18 +33,15 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     let collectionView: UICollectionView
     private let collectionViewLayout: UICollectionViewFlowLayout
     
-    override convenience init() {
-        self.init(frame: CGRectZero)
-    }
-    
-    override init(frame: CGRect) {
+    init(session: SKKSession) {
+        self.session = session
         self.collectionViewLayout = UICollectionViewFlowLayout().tap { (l: UICollectionViewFlowLayout) in
             l.scrollDirection = .Horizontal
             l.minimumInteritemSpacing = 0.0
             l.minimumLineSpacing = 0.0
         }
         self.collectionView = UICollectionView(
-            frame: CGRect(origin: CGPointZero, size: frame.size),
+            frame: CGRectZero,
             collectionViewLayout: self.collectionViewLayout).tap { (cv: UICollectionView) in
                 cv.registerClass(CandidateCollectionViewCell.self, forCellWithReuseIdentifier: kCellID)
                 cv.showsHorizontalScrollIndicator = false
@@ -52,7 +49,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
                 cv.backgroundColor = UIColor.whiteColor()
         }
         
-        super.init(frame: frame)
+        super.init(frame: CGRectZero)
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -66,6 +63,22 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func updateCandidateSelection() {
+        let selectionIndex = self.session.topmostInputMode()?.candidateIndex
+        if let index = selectionIndex {
+            if index < self.candidates.count {
+                let indexPath = NSIndexPath(forItem: index, inSection: Section.Candidates.rawValue)
+                let scrollPosition = find(self.collectionView.indexPathsForVisibleItems() as [NSIndexPath], indexPath) == nil ? UICollectionViewScrollPosition.CenteredHorizontally : .None
+                self.collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: scrollPosition)
+            }
+        } else {
+            // deselect all
+            for indexPath in self.collectionView.indexPathsForSelectedItems() as [NSIndexPath] {
+                self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+            }
+        }
     }
     
     // MARK: UICollectionViewDataSource, UICollectionViewDelegate
@@ -162,9 +175,11 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     }
     
     private func updateStates() {
+        UIView.setAnimationsEnabled(false) // disable fade-in
         self.backgroundColor = highlighted ? UIColor(white: 0.5, alpha: 1.0)
             : selected ? UIColor(white: 0.9, alpha: 1.0)
             : UIColor.whiteColor()
+        UIView.setAnimationsEnabled(true)
     }
     
     override var selected: Bool {

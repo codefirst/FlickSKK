@@ -46,8 +46,8 @@ class InputMode {
 
     // KanjiCompose用
     private let INLINE_CANDIDATES = 1
-    private var candidates     : [String] = []
-    private var candidateIndex : Int      = 0
+    var candidates     : [String] = []
+    var candidateIndex : Int      = 0
 
     // WordRegister用
     private var oldStatus : InputModeStatus = .Default

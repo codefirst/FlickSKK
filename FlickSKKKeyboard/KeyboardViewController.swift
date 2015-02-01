@@ -116,7 +116,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     let keypadAndControlsView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let sessionView = SessionView()
+    let sessionView: SessionView!
 
     let nextKeyboardButton: KeyButton!
     let inputModeChangeButton : KeyButton!
@@ -244,6 +244,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         }
         loadDictionary()
         self.session = SKKSession(delegate: self, dict: kGlobalDictionary!)
+        self.sessionView = SessionView(session: self.session)
         kGlobalDictionary!.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
         updateControlButtons()
     }
