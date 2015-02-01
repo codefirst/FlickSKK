@@ -1,5 +1,5 @@
 //
-//  CandidateListView
+//  SessionView
 //  FlickSKK
 //
 //  Created by BAN Jun on 2015/01/26.
@@ -12,14 +12,19 @@ import UIKit
 private let kCellID = "CellID"
 
 
-class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    var composeText: String? {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
     var candidates: [String] = [] {
         didSet {
             self.collectionView.reloadData()
             
             // for test
             if self.candidates.count > 1 {
-                self.collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 0), animated: false, scrollPosition: nil)
+                self.collectionView.selectItemAtIndexPath(NSIndexPath(forItem: 1, inSection: Section.Candidates.rawValue), animated: false, scrollPosition: nil)
             }
         }
     }
@@ -65,19 +70,45 @@ class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: UICollectionViewDataSource, UICollectionViewDelegate
     
+    enum Section: Int {
+        case ComposeText = 0, Candidates
+    }
+
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 2 // composeText, candidates
+    }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return candidates.count
+        switch Section(rawValue: section) {
+        case .Some(.ComposeText): return self.composeText != nil ? 1 : 0
+        case .Some(.Candidates): return self.candidates.count
+        case .None: return 0
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.didSelectCandidateAtIndex?(indexPath.row)
+        switch Section(rawValue: indexPath.section) {
+        case .Some(.ComposeText): break
+        case .Some(.Candidates): self.didSelectCandidateAtIndex?(indexPath.row)
+        case .None: break
+        }
     }
     
     private func configureCell(cell: CandidateCollectionViewCell, forIndexPath indexPath: NSIndexPath) -> CandidateCollectionViewCell {
-        let index = indexPath.item
-        let candidate = (index < candidates.count) ? candidates[index] : "";
-        cell.textLabel.text = candidate
-        return cell
+        switch Section(rawValue: indexPath.section) {
+        case .Some(.ComposeText):
+            cell.textLabel.text = self.composeText ?? ""
+            cell.textLabel.textAlignment = .Left
+            return cell
+        case .Some(.Candidates):
+            let index = indexPath.item
+            let candidate = (index < candidates.count) ? candidates[index] : "";
+            cell.textLabel.text = candidate
+            cell.textLabel.textAlignment = .Center
+            return cell
+        case .None:
+            return cell
+        }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -86,8 +117,9 @@ class CandidateListView: UIView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        struct Static { static let layoutCell = CandidateCollectionViewCell() }
         let minWidth = CGFloat(44 + 8)
-        let cell = self.configureCell(CandidateCollectionViewCell(), forIndexPath: indexPath)
+        let cell = self.configureCell(Static.layoutCell, forIndexPath: indexPath)
         return CGSizeMake(max(cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width, minWidth),self.collectionView.bounds.height)
     }
 }

@@ -68,8 +68,8 @@
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		EA997CBB1A3D8218006D5AA2 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EA997CBC1A3D8220006D5AA2 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EAB03E3C1A765DAF00F3F28F /* CandidateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* CandidateListView.swift */; };
-		EAB03E411A76607A00F3F28F /* CandidateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* CandidateListView.swift */; };
+		EAB03E3C1A765DAF00F3F28F /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* SessionView.swift */; };
+		EAB03E411A76607A00F3F28F /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* SessionView.swift */; };
 		EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */; };
@@ -212,7 +212,7 @@
 		EA892D5619FBE70400265181 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		EA985FE519D84AAE0043564C /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
 		EA985FE719D84D060043564C /* KeyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
-		EAB03E3B1A765DAF00F3F28F /* CandidateListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateListView.swift; sourceTree = "<group>"; };
+		EAB03E3B1A765DAF00F3F28F /* SessionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		EACD529E19F3F18D001FB2A7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		EACD52A319F3F58B001FB2A7 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = FlickSKK/html; sourceTree = SOURCE_ROOT; };
@@ -454,7 +454,7 @@
 				133CDCFC19D98DB100B8120D /* SKKSession */,
 				1327F7B01A4FB161009796FB /* Utilities */,
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
-				EAB03E3B1A765DAF00F3F28F /* CandidateListView.swift */,
+				EAB03E3B1A765DAF00F3F28F /* SessionView.swift */,
 				EA985FE519D84AAE0043564C /* KeyPad.swift */,
 				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
 				EA985FE719D84D060043564C /* KeyButton.swift */,
@@ -713,7 +713,7 @@
 				133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */,
 				130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */,
 				13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */,
-				EAB03E411A76607A00F3F28F /* CandidateListView.swift in Sources */,
+				EAB03E411A76607A00F3F28F /* SessionView.swift in Sources */,
 				13F9326819E2DC1700AC5019 /* WordRegisterSession.swift in Sources */,
 				13F9326919E2DC1700AC5019 /* SKKSession.swift in Sources */,
 				13F9326A19E2DC1700AC5019 /* BaseSession.swift in Sources */,
@@ -743,7 +743,7 @@
 				1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */,
 				EAF1DB7019FBFDFD00816CF5 /* AppGroup.m in Sources */,
 				EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */,
-				EAB03E3C1A765DAF00F3F28F /* CandidateListView.swift in Sources */,
+				EAB03E3C1A765DAF00F3F28F /* SessionView.swift in Sources */,
 				EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */,
 				136D161519DAEBE90091D6BF /* InputMode.swift in Sources */,
 				136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */,

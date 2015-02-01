@@ -115,10 +115,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     var heightConstraint : NSLayoutConstraint!
 
     let keypadAndControlsView = UIView()
-    let contextView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let sessionLabel = UILabel()
-    let candidateListView = CandidateListView()
+    let sessionView = SessionView()
 
     let nextKeyboardButton: KeyButton!
     let inputModeChangeButton : KeyButton!
@@ -307,32 +305,16 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             autolayout("V:|[right]|")
             self.keypadAndControlsView.addConstraint(NSLayoutConstraint(item: keypad, attribute: .Width, relatedBy: .Equal, toItem: leftControl, attribute: .Width, multiplier: 3.0, constant: 0.0))
         }
-
-        contextView.backgroundColor = UIColor.whiteColor()
-        let cViews = [
-            "progress": loadingProgressView,
-            "l": sessionLabel,
-            "candidateListView": candidateListView
-        ]
-        let autolayout = contextView.autolayoutFormat(metrics, cViews)
-        autolayout("H:|[l][progress][candidateListView]|")
-        autolayout("V:|[progress]|")
-        autolayout("V:|[l]|")
-        autolayout("V:|[candidateListView]|")
-
-        candidateListView.setContentCompressionResistancePriority(50, forAxis: .Horizontal) // UILayoutPriorityFittingSizeLevel cause compile error
-        candidateListView.setContentHuggingPriority(50, forAxis: .Horizontal)  // UILayoutPriorityFittingSizeLevel cause compile error
-        candidateListView.hidden = true
-        candidateListView.didSelectCandidateAtIndex = { [weak self] index in
+        
+        sessionView.didSelectCandidateAtIndex = { [weak self] index in
             self?.session.handle(.SelectCandidate(index: index))
             return
         }
+        sessionView.composeText = AppGroup.initialText()
 
         updateControlButtons()
 
         KeyButtonFlickPopup.sharedInstance.parentView = inputView
-
-        sessionLabel.text = AppGroup.initialText()
 
         // iOS8 layout height(0) workaround: call self.inputView.addSubview() after viewDidAppear
     }
@@ -373,18 +355,21 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             return
         }
 
-        if contextView.isDescendantOfView(view) {
+        if sessionView.isDescendantOfView(view) {
             return
         }
 
         let views = [
-            "context": contextView,
+            "sessionView": sessionView,
+            "progress": loadingProgressView,
             "keypadAndControls": keypadAndControlsView,
         ]
         let autolayout = self.inputView.autolayoutFormat(metrics, views)
-        autolayout("H:|[context]|")
+        autolayout("H:|[sessionView]|")
+        autolayout("H:|[progress]")
         autolayout("H:|[keypadAndControls]|")
-        autolayout("V:|[context(==30)][keypadAndControls]|")
+        autolayout("V:|[sessionView(==30)][keypadAndControls]|")
+        autolayout("V:|[progress(==sessionView)]")
 
         self.view.addConstraint(heightConstraint);
     }
@@ -517,17 +502,16 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func composeText(text: String) {
-        sessionLabel.text = text
+        self.sessionView.composeText = text
     }
 
     func showCandidates(candidates: [String]?) {
         switch candidates {
         case .Some(var xs):
             xs.append("▼単語登録")
-            candidateListView.candidates = xs
-            candidateListView.hidden = false
+            sessionView.candidates = xs
         case .None:
-            candidateListView.hidden = true
+            sessionView.candidates = []
         }
     }
 
