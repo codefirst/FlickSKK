@@ -70,7 +70,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         if let index = selectionIndex {
             if index < self.candidates.count {
                 let indexPath = NSIndexPath(forItem: index, inSection: Section.Candidates.rawValue)
-                let scrollPosition = find(self.collectionView.indexPathsForVisibleItems() as [NSIndexPath], indexPath) == nil ? UICollectionViewScrollPosition.CenteredHorizontally : .None
+                let scrollPosition = contains(self.collectionView.indexPathsForVisibleItems() as [NSIndexPath], indexPath) ? UICollectionViewScrollPosition.CenteredHorizontally : .None
                 self.collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: scrollPosition)
             }
         } else {
