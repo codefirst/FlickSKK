@@ -31,4 +31,8 @@ class SKKEngine {
     func candidates() -> ([String], Int)? {
         return self.presenter.candidates(self.composeMode)
     }
+
+    func inStatusShowsCandidatesBySpace() -> Bool {
+        return self.presenter.inStatusShowsCandidatesBySpace(composeMode)
+    }
 }

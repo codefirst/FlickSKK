@@ -29,4 +29,19 @@ class ComposeModePresenter {
             return candidates(m[0])
         }
     }
+
+    // スペースか次候補か
+    func inStatusShowsCandidatesBySpace(composeMode : ComposeMode) -> Bool {
+        switch composeMode {
+        case .DirectInput:
+            return false
+        case .KanaCompose(kana: let kana):
+            return false
+        case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
+            return true
+        case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
+            return inStatusShowsCandidatesBySpace(m[0]
+            )
+        }
+    }
 }
