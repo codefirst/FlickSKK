@@ -20,7 +20,6 @@
 		133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
 		133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
 		1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */; };
-		136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D160E19DA86690091D6BF /* CandidateDataSource.swift */; };
 		136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
 		136D161519DAEBE90091D6BF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputMode.swift */; };
 		136F409919E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */; };
@@ -54,7 +53,6 @@
 		13F9326919E2DC1700AC5019 /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
 		13F9326A19E2DC1700AC5019 /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4F19E0EEE200175343 /* BaseSession.swift */; };
 		13F9326B19E2DC1700AC5019 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */; };
-		13F9326C19E2DC1700AC5019 /* CandidateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D160E19DA86690091D6BF /* CandidateDataSource.swift */; };
 		13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
@@ -70,6 +68,8 @@
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		EA997CBB1A3D8218006D5AA2 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EA997CBC1A3D8220006D5AA2 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EAB03E3C1A765DAF00F3F28F /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* SessionView.swift */; };
+		EAB03E411A76607A00F3F28F /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* SessionView.swift */; };
 		EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD529B19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
 		EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */; };
@@ -186,7 +186,6 @@
 		133CDCF819D98ADA00B8120D /* KeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
 		133CDCFA19D98DAB00B8120D /* SKKSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSession.swift; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
-		136D160E19DA86690091D6BF /* CandidateDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CandidateDataSource.swift; sourceTree = "<group>"; };
 		136D161019DAA0AE0091D6BF /* SKKInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
 		136D161419DAEBE90091D6BF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
 		136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryUserFileSpec.swift; sourceTree = "<group>"; };
@@ -213,6 +212,7 @@
 		EA892D5619FBE70400265181 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		EA985FE519D84AAE0043564C /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
 		EA985FE719D84D060043564C /* KeyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButton.swift; sourceTree = "<group>"; };
+		EAB03E3B1A765DAF00F3F28F /* SessionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		EACD529E19F3F18D001FB2A7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		EACD52A319F3F58B001FB2A7 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; name = html; path = FlickSKK/html; sourceTree = SOURCE_ROOT; };
@@ -454,7 +454,7 @@
 				133CDCFC19D98DB100B8120D /* SKKSession */,
 				1327F7B01A4FB161009796FB /* Utilities */,
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
-				136D160E19DA86690091D6BF /* CandidateDataSource.swift */,
+				EAB03E3B1A765DAF00F3F28F /* SessionView.swift */,
 				EA985FE519D84AAE0043564C /* KeyPad.swift */,
 				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
 				EA985FE719D84D060043564C /* KeyButton.swift */,
@@ -713,11 +713,11 @@
 				133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */,
 				130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */,
 				13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */,
+				EAB03E411A76607A00F3F28F /* SessionView.swift in Sources */,
 				13F9326819E2DC1700AC5019 /* WordRegisterSession.swift in Sources */,
 				13F9326919E2DC1700AC5019 /* SKKSession.swift in Sources */,
 				13F9326A19E2DC1700AC5019 /* BaseSession.swift in Sources */,
 				13F9326B19E2DC1700AC5019 /* KeyboardViewController.swift in Sources */,
-				13F9326C19E2DC1700AC5019 /* CandidateDataSource.swift in Sources */,
 				13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */,
 				13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */,
@@ -743,12 +743,12 @@
 				1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */,
 				EAF1DB7019FBFDFD00816CF5 /* AppGroup.m in Sources */,
 				EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */,
+				EAB03E3C1A765DAF00F3F28F /* SessionView.swift in Sources */,
 				EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */,
 				136D161519DAEBE90091D6BF /* InputMode.swift in Sources */,
 				136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */,
 				EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */,
 				13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */,
-				136D160F19DA86690091D6BF /* CandidateDataSource.swift in Sources */,
 				133432C11A4D95030080280F /* SKKNumberPreprocessor.swift in Sources */,
 				133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */,
 				1388669A1A09202500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,

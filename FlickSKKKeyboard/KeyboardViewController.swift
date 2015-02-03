@@ -111,14 +111,12 @@ func ==(l : KeyboardMode, r : KeyboardMode) -> Bool {
     }
 }
 
-class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDelegate {
+class KeyboardViewController: UIInputViewController, SKKDelegate {
     var heightConstraint : NSLayoutConstraint!
 
     let keypadAndControlsView = UIView()
-    let contextView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let sessionLabel = UILabel()
-    let candidateView = UITableView()
+    let sessionView: SessionView!
 
     let nextKeyboardButton: KeyButton!
     let inputModeChangeButton : KeyButton!
@@ -132,7 +130,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     let keypads: [KeyboardMode:KeyPad]
 
     let session : SKKSession!
-    let dataSource = CandidateDataSource()
 
     var shiftEnabled: Bool {
         didSet {
@@ -247,6 +244,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
         }
         loadDictionary()
         self.session = SKKSession(delegate: self, dict: kGlobalDictionary!)
+        self.sessionView = SessionView(session: self.session)
         kGlobalDictionary!.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
         updateControlButtons()
     }
@@ -308,26 +306,16 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             autolayout("V:|[right]|")
             self.keypadAndControlsView.addConstraint(NSLayoutConstraint(item: keypad, attribute: .Width, relatedBy: .Equal, toItem: leftControl, attribute: .Width, multiplier: 3.0, constant: 0.0))
         }
-
-        contextView.backgroundColor = UIColor.whiteColor()
-        let cViews = [
-            "progress": loadingProgressView,
-            "l": sessionLabel,
-        ]
-        let autolayout = contextView.autolayoutFormat(metrics, cViews)
-        autolayout("H:|[l][progress]-(>=0)-|")
-        autolayout("V:|[progress]|")
-        autolayout("V:|[l]|")
-
-        candidateView.dataSource = dataSource
-        candidateView.delegate = self
-        candidateView.hidden = true
+        
+        sessionView.didSelectCandidateAtIndex = { [weak self] index in
+            self?.session.handle(.SelectCandidate(index: index))
+            return
+        }
+        sessionView.composeText = AppGroup.initialText()
 
         updateControlButtons()
 
         KeyButtonFlickPopup.sharedInstance.parentView = inputView
-
-        sessionLabel.text = AppGroup.initialText()
 
         // iOS8 layout height(0) workaround: call self.inputView.addSubview() after viewDidAppear
     }
@@ -368,22 +356,22 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
             return
         }
 
-        if contextView.isDescendantOfView(view) {
+        if sessionView.isDescendantOfView(view) {
             return
         }
 
         let views = [
-            "context": contextView,
-            "candidate" : candidateView,
+            "sessionView": sessionView,
+            "progress": loadingProgressView,
             "keypadAndControls": keypadAndControlsView,
         ]
         let autolayout = self.inputView.autolayoutFormat(metrics, views)
-        autolayout("H:|[context]|")
+        autolayout("H:|[sessionView]|")
+        autolayout("H:|[progress]")
         autolayout("H:|[keypadAndControls]|")
-        autolayout("H:|[candidate]|")
-        autolayout("V:|[context(==30)]")
-        autolayout("V:|[context][keypadAndControls]|")
-        autolayout("V:|[context][candidate]|")
+        autolayout("V:|[sessionView(==30)][keypadAndControls]|")
+        autolayout("V:|[progress(==sessionView)]")
+
         self.view.addConstraint(heightConstraint);
     }
 
@@ -515,20 +503,16 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
     }
 
     func composeText(text: String) {
-        sessionLabel.text = text
+        self.sessionView.composeText = text
     }
 
     func showCandidates(candidates: [String]?) {
         switch candidates {
         case .Some(var xs):
             xs.append("▼単語登録")
-            dataSource.update(xs)
-            candidateView.reloadData()
-            keypadAndControlsView.hidden = true
-            candidateView.hidden = false
+            sessionView.candidates = xs
         case .None:
-            keypadAndControlsView.hidden = false
-            candidateView.hidden = true
+            sessionView.candidates = []
         }
     }
 
@@ -549,13 +533,5 @@ class KeyboardViewController: UIInputViewController, SKKDelegate, UITableViewDel
 
     func deleteBackward() {
         (self.textDocumentProxy as UIKeyInput).deleteBackward()
-    }
-
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 24
-    }
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.session.handle(.SelectCandidate(index: indexPath.row))
     }
 }

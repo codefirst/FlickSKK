@@ -45,9 +45,9 @@ class InputMode {
     private var composeOkuri : (String, String)?  = .None
 
     // KanjiCompose用
-    private let INLINE_CANDIDATES = 3
-    private var candidates     : [String] = []
-    private var candidateIndex : Int      = 0
+    private let INLINE_CANDIDATES = 0
+    var candidates     : [String] = []
+    var candidateIndex : Int      = 0
 
     // WordRegister用
     private var oldStatus : InputModeStatus = .Default
