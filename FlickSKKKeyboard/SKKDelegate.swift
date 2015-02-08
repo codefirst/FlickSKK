@@ -18,6 +18,9 @@ protocol SKKDelegate : class {
     // 未確定文字の表示
     func composeText(text : String)
 
+    // 入力モードの変更
+    func changeInputMode(inputMode : SKKInputMode)
+
     // 変換候補の表示
     func showCandidates(candidates : [String]?)
 }

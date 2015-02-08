@@ -13,7 +13,7 @@ private let kCellID = "CellID"
 
 
 class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    let session: SKKSession
+    let engine: SKKEngine
     var composeText: String? {
         didSet {
             self.collectionView.reloadData()
@@ -33,8 +33,8 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     let collectionView: UICollectionView
     private let collectionViewLayout: UICollectionViewFlowLayout
     
-    init(session: SKKSession) {
-        self.session = session
+    init(engine: SKKEngine) {
+        self.engine = engine
         self.collectionViewLayout = UICollectionViewFlowLayout().tap { (l: UICollectionViewFlowLayout) in
             l.scrollDirection = .Horizontal
             l.minimumInteritemSpacing = 0.0
@@ -66,7 +66,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     private func updateCandidateSelection() {
-        let selectionIndex = self.session.topmostInputMode()?.candidateIndex
+        let selectionIndex = self.engine.candidates()?.1
         if let index = selectionIndex {
             if index < self.candidates.count {
                 let indexPath = NSIndexPath(forItem: index, inSection: Section.Candidates.rawValue)

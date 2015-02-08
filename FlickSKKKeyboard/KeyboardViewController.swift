@@ -129,7 +129,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     let shiftButton: KeyButton!
     let keypads: [KeyboardMode:KeyPad]
 
-    let session : SKKSession!
+    let engine : SKKEngine!
 
     var shiftEnabled: Bool {
         didSet {
@@ -243,8 +243,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             }
         }
         loadDictionary()
-        self.session = SKKSession(delegate: self, dict: kGlobalDictionary!)
-        self.sessionView = SessionView(session: self.session)
+        self.engine = SKKEngine(delegate: self, dictionary: kGlobalDictionary!)
+        self.sessionView = SessionView(engine: self.engine)
         kGlobalDictionary!.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
         updateControlButtons()
     }
@@ -308,7 +308,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         }
         
         sessionView.didSelectCandidateAtIndex = { [weak self] index in
-            self?.session.handle(.SelectCandidate(index: index))
+            self?.engine.handle(.Select(index : index))
             return
         }
         sessionView.composeText = AppGroup.initialText()
@@ -425,27 +425,25 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         switch key {
         case let .Seq(s):
             let kana = Array(s)[index ?? 0]
-            let roman = kana.toRoman() ?? ""
-            self.session.handle(.Char(kana: String(kana), roman: roman, shift: self.shiftEnabled))
+            self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled))
             self.prevShiftEnabled = self.shiftEnabled
             self.shiftEnabled = false
         case .Backspace:
-            self.session.handle(.Backspace)
+            self.engine.handle(.Backspace)
             self.shiftEnabled = self.prevShiftEnabled
             self.prevShiftEnabled = false
         case .Return:
-            self.session.handle(.Enter)
+            self.engine.handle(.Enter)
         case .Shift: toggleShift()
         case .KeyboardChange:
             advanceToNextInputMode()
         case .InputModeChange(let modes):
             switch modes[index ?? 0] {
             case .Some(let m):
-                self.session.handle(.InputModeChange(inputMode: m))
+                self.engine.handle(.InputModeChange(inputMode: m))
             case .None:
                 ()
             }
-            self.keyboardMode = .InputMode(mode: self.session.currentMode)
         case .Number:
             self.keyboardMode = .Number
         case .Alphabet:
@@ -474,16 +472,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.numberModeButton.selected = self.keyboardMode == .Number
         self.alphabetModeButton.selected = self.keyboardMode == .Alphabet
         self.shiftButton.selected = self.shiftEnabled
-
-        // InputMode
-        switch self.session.currentMode {
-        case .Hirakana:
-            self.inputModeChangeButton.label.text = "かな"
-        case .Katakana:
-            self.inputModeChangeButton.label.text = "カナ"
-        case .HankakuKana:
-            self.inputModeChangeButton.label.text = "ｶﾅ"
-        }
     }
 
     func toggleShift() {
@@ -491,15 +479,15 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func handleSpace() {
-        session.handle(.Space)
+        engine.handle(.Space)
     }
 
     func toggleKomojiDakuten() {
-        self.session.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
+        self.engine.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
 
     func toggleUpperLower() {
-        self.session.handle(.ToggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
+        self.engine.handle(.ToggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
 
     func composeText(text: String) {
@@ -533,5 +521,16 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     func deleteBackward() {
         (self.textDocumentProxy as UIKeyInput).deleteBackward()
+    }
+
+    func changeInputMode(inputMode : SKKInputMode) {
+        switch inputMode {
+        case .Hirakana:
+            self.inputModeChangeButton.label.text = "かな"
+        case .Katakana:
+            self.inputModeChangeButton.label.text = "カナ"
+        case .HankakuKana:
+            self.inputModeChangeButton.label.text = "ｶﾅ"
+        }
     }
 }
