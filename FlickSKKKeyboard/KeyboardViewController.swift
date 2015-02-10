@@ -475,6 +475,15 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.numberModeButton.selected = self.keyboardMode == .Number
         self.alphabetModeButton.selected = self.keyboardMode == .Alphabet
         self.shiftButton.selected = self.shiftEnabled
+
+        switch self.inputMode {
+        case .Hirakana:
+            self.inputModeChangeButton.label.text = "かな"
+        case .Katakana:
+            self.inputModeChangeButton.label.text = "カナ"
+        case .HankakuKana:
+            self.inputModeChangeButton.label.text = "ｶﾅ"
+        }
     }
 
     func toggleShift() {
@@ -528,13 +537,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     func changeInputMode(inputMode : SKKInputMode) {
         self.inputMode = inputMode
-        switch inputMode {
-        case .Hirakana:
-            self.inputModeChangeButton.label.text = "かな"
-        case .Katakana:
-            self.inputModeChangeButton.label.text = "カナ"
-        case .HankakuKana:
-            self.inputModeChangeButton.label.text = "ｶﾅ"
-        }
+        updateControlButtons()
     }
 }
