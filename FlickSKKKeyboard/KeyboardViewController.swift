@@ -444,6 +444,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             case .None:
                 ()
             }
+            self.keyboardMode = .InputMode(mode: self.engine.currentInputMode())
         case .Number:
             self.keyboardMode = .Number
         case .Alphabet:
