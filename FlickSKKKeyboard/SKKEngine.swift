@@ -4,7 +4,6 @@ class SKKEngine {
     private let keyHandler : KeyHandler
     private weak var delegate : SKKDelegate!
 
-    private var inputMode : SKKInputMode = .Hirakana
     private var composeMode : ComposeMode = .DirectInput
 
     private let presenter = ComposeModePresenter()
@@ -12,10 +11,6 @@ class SKKEngine {
     init(delegate : SKKDelegate, dictionary : SKKDictionary){
         self.delegate = delegate
         self.keyHandler = KeyHandler(delegate: delegate, dictionary: dictionary)
-    }
-
-    func currentInputMode() -> SKKInputMode {
-        return self.inputMode
     }
 
     func currentComposeMode() -> ComposeMode {

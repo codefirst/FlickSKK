@@ -144,6 +144,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         }
     }
 
+    var inputMode : SKKInputMode = .Hirakana
+
     convenience override init() {
         self.init(nibName: nil, bundle: nil)
     }
@@ -444,7 +446,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             case .None:
                 ()
             }
-            self.keyboardMode = .InputMode(mode: self.engine.currentInputMode())
+            self.keyboardMode = .InputMode(mode: self.inputMode)
         case .Number:
             self.keyboardMode = .Number
         case .Alphabet:
@@ -525,6 +527,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func changeInputMode(inputMode : SKKInputMode) {
+        self.inputMode = inputMode
         switch inputMode {
         case .Hirakana:
             self.inputModeChangeButton.label.text = "かな"
