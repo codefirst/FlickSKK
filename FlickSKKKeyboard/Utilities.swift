@@ -353,14 +353,14 @@ extension String {
     }
 
     func conv(to : KanaType) -> String {
-        var result = self
+        var result = Array(self)
         let target = ConversionTable[to] ?? ""
         for (type, table) in ConversionTable {
             if type != to {
-                result = implode(Array(self).map({ (c : Character) -> Character in tr(c, table, target) ?? c }))
+                result = result.map({ (c : Character) -> Character in tr(c, table, target) ?? c })
             }
         }
-        return result
+        return implode(result)
     }
 
     func toggleDakuten() -> String? {
