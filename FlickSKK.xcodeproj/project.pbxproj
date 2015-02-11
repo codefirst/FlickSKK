@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1306495B1A871FEE0044B225 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495A1A871FEE0044B225 /* KeyHandler.swift */; };
+		1306495D1A8721180044B225 /* SKKKeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495C1A8721180044B225 /* SKKKeyEvent.swift */; };
+		1306495E1A8723150044B225 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495A1A871FEE0044B225 /* KeyHandler.swift */; };
+		1306495F1A8723170044B225 /* SKKKeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495C1A8721180044B225 /* SKKKeyEvent.swift */; };
 		130CA3901A4EF94C00A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
 		130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */; };
 		130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
@@ -17,19 +21,22 @@
 		133432C61A4D9BA90080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
 		133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
 		133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
-		133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
-		133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
 		1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */; };
+		135A44BB1A881F070089F84E /* ComposeModePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135A44B91A881F070089F84E /* ComposeModePresenter.swift */; };
+		135A44BD1A88203E0089F84E /* ComposeModePresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */; };
+		135A44BF1A8821440089F84E /* ComposeModePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135A44B91A881F070089F84E /* ComposeModePresenter.swift */; };
 		136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
-		136D161519DAEBE90091D6BF /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputMode.swift */; };
 		136F409919E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */; };
 		137AAB451A3C0F3F0092F8A5 /* KeyRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */; };
 		137AAB4E1A3C13970092F8A5 /* KeyRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */; };
 		1388669A1A09202500B7D8A4 /* SKKDictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */; };
 		1388669B1A09204300B7D8A4 /* SKKDictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */; };
 		1388669C1A0920D500B7D8A4 /* SKKDictionaryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */; };
-		1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */; };
-		1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4F19E0EEE200175343 /* BaseSession.swift */; };
+		138968CE1A85E2F400614511 /* SKKEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968CD1A85E2F400614511 /* SKKEngine.swift */; };
+		138968D11A85ED7300614511 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968D01A85ED7300614511 /* ComposeMode.swift */; };
+		138968D91A85F42200614511 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968D01A85ED7300614511 /* ComposeMode.swift */; };
+		138968DB1A85F42500614511 /* SKKEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968CD1A85E2F400614511 /* SKKEngine.swift */; };
+		138968DD1A87139600614511 /* KeyHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968DC1A87139600614511 /* KeyHandlerSpec.swift */; };
 		1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; };
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
@@ -40,18 +47,12 @@
 		13DFEAC819F07A54006D7E40 /* SKKLocalDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */; };
 		13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */; };
 		13DFEACA19F07AC8006D7E40 /* SKKLocalDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */; };
-		13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */; };
 		13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
 		13F9325819E2DBFC00AC5019 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		13F9326119E2DC1700AC5019 /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
-		13F9326219E2DC1700AC5019 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF819D98ADA00B8120D /* KeyEvent.swift */; };
 		13F9326319E2DC1700AC5019 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
 		13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
-		13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161419DAEBE90091D6BF /* InputMode.swift */; };
-		13F9326819E2DC1700AC5019 /* WordRegisterSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */; };
-		13F9326919E2DC1700AC5019 /* SKKSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCFA19D98DAB00B8120D /* SKKSession.swift */; };
-		13F9326A19E2DC1700AC5019 /* BaseSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1393DF4F19E0EEE200175343 /* BaseSession.swift */; };
 		13F9326B19E2DC1700AC5019 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */; };
 		13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
@@ -177,22 +178,24 @@
 
 /* Begin PBXFileReference section */
 		0CA289C0ED7662F2EF0F3718 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1306495A1A871FEE0044B225 /* KeyHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandler.swift; sourceTree = "<group>"; };
+		1306495C1A8721180044B225 /* SKKKeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKKeyEvent.swift; sourceTree = "<group>"; };
 		130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatterSpec.swift; sourceTree = "<group>"; };
 		131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterViewController.swift; sourceTree = "<group>"; };
 		132607C91A3D658000DA9F8C /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKNumberPreprocessor.swift; sourceTree = "<group>"; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
-		133CDCF819D98ADA00B8120D /* KeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyEvent.swift; sourceTree = "<group>"; };
-		133CDCFA19D98DAB00B8120D /* SKKSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSession.swift; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
+		135A44B91A881F070089F84E /* ComposeModePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModePresenter.swift; sourceTree = "<group>"; };
+		135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModePresenterSpec.swift; sourceTree = "<group>"; };
 		136D161019DAA0AE0091D6BF /* SKKInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
-		136D161419DAEBE90091D6BF /* InputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputMode.swift; sourceTree = "<group>"; };
 		136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryUserFileSpec.swift; sourceTree = "<group>"; };
 		137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRepeatTimer.swift; sourceTree = "<group>"; };
 		138866981A09202500B7D8A4 /* SKKDictionaryEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryEntry.swift; sourceTree = "<group>"; };
-		1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterSession.swift; sourceTree = "<group>"; };
-		1393DF4F19E0EEE200175343 /* BaseSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSession.swift; sourceTree = "<group>"; };
+		138968CD1A85E2F400614511 /* SKKEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKEngine.swift; sourceTree = "<group>"; };
+		138968D01A85ED7300614511 /* ComposeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeMode.swift; sourceTree = "<group>"; };
+		138968DC1A87139600614511 /* KeyHandlerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerSpec.swift; sourceTree = "<group>"; };
 		1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Vendor/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
@@ -200,7 +203,6 @@
 		13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryFile.swift; sourceTree = "<group>"; };
 		13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKUserDictionaryFile.swift; sourceTree = "<group>"; };
 		13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKLocalDictionaryFile.swift; sourceTree = "<group>"; };
-		13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKSessionSpec.swift; sourceTree = "<group>"; };
 		13F4525119DC538B001A4A1B /* IOUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUtil.h; sourceTree = "<group>"; };
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -295,22 +297,62 @@
 		133CDCF719D98A4C00B8120D /* SKKBase */ = {
 			isa = PBXGroup;
 			children = (
+				1306495C1A8721180044B225 /* SKKKeyEvent.swift */,
 				133CDCF519D98A3B00B8120D /* SKKDelegate.swift */,
-				133CDCF819D98ADA00B8120D /* KeyEvent.swift */,
 				136D161019DAA0AE0091D6BF /* SKKInputMode.swift */,
 			);
 			name = SKKBase;
 			sourceTree = "<group>";
 		};
-		133CDCFC19D98DB100B8120D /* SKKSession */ = {
+		135A44B41A881DD70089F84E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				136D161419DAEBE90091D6BF /* InputMode.swift */,
-				1393DF4B19E0EDB500175343 /* WordRegisterSession.swift */,
-				133CDCFA19D98DAB00B8120D /* SKKSession.swift */,
-				1393DF4F19E0EEE200175343 /* BaseSession.swift */,
+				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
+				EAB03E3B1A765DAF00F3F28F /* SessionView.swift */,
+				EA985FE519D84AAE0043564C /* KeyPad.swift */,
+				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
+				EA985FE719D84D060043564C /* KeyButton.swift */,
+				EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */,
 			);
-			name = SKKSession;
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		135A44C01A88FB710089F84E /* SKKDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */,
+				136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */,
+			);
+			name = SKKDictionary;
+			sourceTree = "<group>";
+		};
+		135A44C11A88FB7F0089F84E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */,
+				130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		138968C41A85E2BE00614511 /* SKKEngine */ = {
+			isa = PBXGroup;
+			children = (
+				138968CD1A85E2F400614511 /* SKKEngine.swift */,
+				138968D01A85ED7300614511 /* ComposeMode.swift */,
+				1306495A1A871FEE0044B225 /* KeyHandler.swift */,
+				135A44B91A881F070089F84E /* ComposeModePresenter.swift */,
+			);
+			name = SKKEngine;
+			sourceTree = "<group>";
+		};
+		138968D41A85F34200614511 /* SKKEngine */ = {
+			isa = PBXGroup;
+			children = (
+				138968DC1A87139600614511 /* KeyHandlerSpec.swift */,
+				135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */,
+			);
+			name = SKKEngine;
 			sourceTree = "<group>";
 		};
 		1394A9A319E2D81200F01BF0 /* Products */ = {
@@ -428,11 +470,9 @@
 			children = (
 				1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */,
 				132607C91A3D658000DA9F8C /* Quick.xcodeproj */,
-				13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */,
-				13E29D2019E43E9D0097DFCD /* SKKSessionSpec.swift */,
-				1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */,
-				136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */,
-				130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */,
+				135A44C11A88FB7F0089F84E /* Utilities */,
+				135A44C01A88FB710089F84E /* SKKDictionary */,
+				138968D41A85F34200614511 /* SKKEngine */,
 				EAD4B57919D5CB50007B6636 /* Supporting Files */,
 			);
 			path = FlickSKKTests;
@@ -449,16 +489,11 @@
 		EAD4B58A19D5CB8A007B6636 /* FlickSKKKeyboard */ = {
 			isa = PBXGroup;
 			children = (
+				1327F7B01A4FB161009796FB /* Utilities */,
 				133CDCF719D98A4C00B8120D /* SKKBase */,
 				13DFEAC319F079C8006D7E40 /* SKKDictionary */,
-				133CDCFC19D98DB100B8120D /* SKKSession */,
-				1327F7B01A4FB161009796FB /* Utilities */,
-				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
-				EAB03E3B1A765DAF00F3F28F /* SessionView.swift */,
-				EA985FE519D84AAE0043564C /* KeyPad.swift */,
-				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
-				EA985FE719D84D060043564C /* KeyButton.swift */,
-				EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */,
+				138968C41A85E2BE00614511 /* SKKEngine */,
+				135A44B41A881DD70089F84E /* Controller */,
 				EA2F67961A21D9C700DDCBB9 /* Resources */,
 				EAD4B58B19D5CB8A007B6636 /* Supporting Files */,
 			);
@@ -700,23 +735,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				13F9326119E2DC1700AC5019 /* SKKDelegate.swift in Sources */,
-				13F9326219E2DC1700AC5019 /* KeyEvent.swift in Sources */,
 				13F9326319E2DC1700AC5019 /* SKKDictionary.swift in Sources */,
+				1306495F1A8723170044B225 /* SKKKeyEvent.swift in Sources */,
+				138968DB1A85F42500614511 /* SKKEngine.swift in Sources */,
 				13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */,
+				1306495E1A8723150044B225 /* KeyHandler.swift in Sources */,
 				1388669C1A0920D500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
-				13E29D2119E43E9D0097DFCD /* SKKSessionSpec.swift in Sources */,
 				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
+				138968DD1A87139600614511 /* KeyHandlerSpec.swift in Sources */,
 				137AAB4E1A3C13970092F8A5 /* KeyRepeatTimer.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
 				130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */,
 				133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */,
 				130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */,
-				13F9326719E2DC1700AC5019 /* InputMode.swift in Sources */,
 				EAB03E411A76607A00F3F28F /* SessionView.swift in Sources */,
-				13F9326819E2DC1700AC5019 /* WordRegisterSession.swift in Sources */,
-				13F9326919E2DC1700AC5019 /* SKKSession.swift in Sources */,
-				13F9326A19E2DC1700AC5019 /* BaseSession.swift in Sources */,
 				13F9326B19E2DC1700AC5019 /* KeyboardViewController.swift in Sources */,
 				13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */,
 				13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
@@ -725,7 +758,10 @@
 				13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */,
 				13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */,
 				13F9325819E2DBFC00AC5019 /* Utilities.swift in Sources */,
+				138968D91A85F42200614511 /* ComposeMode.swift in Sources */,
 				136F409919E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift in Sources */,
+				135A44BF1A8821440089F84E /* ComposeModePresenter.swift in Sources */,
+				135A44BD1A88203E0089F84E /* ComposeModePresenterSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,24 +774,24 @@
 				13DFEAC819F07A54006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,
 				13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */,
-				133CDCF919D98ADA00B8120D /* KeyEvent.swift in Sources */,
-				1393DF5019E0EEE200175343 /* BaseSession.swift in Sources */,
-				1393DF4C19E0EDB500175343 /* WordRegisterSession.swift in Sources */,
 				EAF1DB7019FBFDFD00816CF5 /* AppGroup.m in Sources */,
 				EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */,
 				EAB03E3C1A765DAF00F3F28F /* SessionView.swift in Sources */,
 				EAD4B58E19D5CB8A007B6636 /* KeyboardViewController.swift in Sources */,
-				136D161519DAEBE90091D6BF /* InputMode.swift in Sources */,
+				1306495B1A871FEE0044B225 /* KeyHandler.swift in Sources */,
 				136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */,
+				138968CE1A85E2F400614511 /* SKKEngine.swift in Sources */,
 				EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */,
+				1306495D1A8721180044B225 /* SKKKeyEvent.swift in Sources */,
 				13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */,
 				133432C11A4D95030080280F /* SKKNumberPreprocessor.swift in Sources */,
-				133CDCFB19D98DAB00B8120D /* SKKSession.swift in Sources */,
 				1388669A1A09202500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				130CA3901A4EF94C00A84D24 /* NumberFormatter.swift in Sources */,
+				138968D11A85ED7300614511 /* ComposeMode.swift in Sources */,
 				133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */,
 				13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,
+				135A44BB1A881F070089F84E /* ComposeModePresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

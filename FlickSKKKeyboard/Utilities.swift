@@ -352,6 +352,17 @@ extension String {
         return implode(Array(self).map({ (c : Character) -> Character in tr(c, x, y) ?? c }))
     }
 
+    func conv(to : KanaType) -> String {
+        var result = Array(self)
+        let target = ConversionTable[to] ?? ""
+        for (type, table) in ConversionTable {
+            if type != to {
+                result = result.map({ (c : Character) -> Character in tr(c, table, target) ?? c })
+            }
+        }
+        return implode(result)
+    }
+
     func toggleDakuten() -> String? {
         let table = [
             ["あ","い","う","え","お",
@@ -416,6 +427,11 @@ extension String {
             ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
             ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]]
         return toggle(self, table)
+    }
+
+    func first() -> Character? {
+        let xs = Array(self)
+        return xs.first
     }
 
     func last() -> String? {
