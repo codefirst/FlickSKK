@@ -125,7 +125,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     var inputProxy: UITextDocumentProxy {
         return self.textDocumentProxy as UITextDocumentProxy
     }
-
+    
+    var spaceButton : KeyButton!
     let shiftButton: KeyButton!
     let keypads: [KeyboardMode:KeyPad]
 
@@ -234,6 +235,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
         self.numberModeButton = keyButton(.Number)
         self.alphabetModeButton = keyButton(.Alphabet)
+        self.spaceButton = keyButton(.Space)
         self.shiftButton = keyButton(.Shift).tap { (kb:KeyButton) in
             kb.imageView.image = UIImage(named: "flickskk-arrow")
         }
@@ -290,7 +292,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             ])
         let rightControl = controlViewWithButtons([
             keyButton(.Backspace),
-            keyButton(.Space),
+            self.spaceButton,
             self.shiftButton,
             keyButton(.Return),
             ])
@@ -485,6 +487,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
     }
+    
+    private func updateSpaceButtonLabel() {
+        let normal = self.spaceButton.key.buttonLabel
+        let nextCandidate = NSLocalizedString("NextCandidate", comment: "")
+        self.spaceButton.label.text = (self.engine.inStatusShowsCandidatesBySpace() ?? false) ? nextCandidate : normal
+    }
 
     func toggleShift() {
         self.shiftEnabled = !self.shiftEnabled
@@ -504,6 +512,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     func composeText(text: String) {
         self.sessionView.composeText = text
+        
+        self.updateSpaceButtonLabel()
     }
 
     func showCandidates(candidates: [String]?) {
@@ -514,6 +524,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         case .None:
             sessionView.candidates = []
         }
+        
+        self.updateSpaceButtonLabel()
     }
 
     private let userInteractionMaskView = UIView()
