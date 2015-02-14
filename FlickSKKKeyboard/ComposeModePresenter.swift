@@ -5,7 +5,7 @@ class ComposeModePresenter {
         switch composeMode {
         case .DirectInput:
             return ""
-        case .KanaCompose(kana: let kana):
+        case .KanaCompose(kana: let kana, candidates: _):
             return "▽\(kana)"
         case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
             return "▼\(candidates[index])"
@@ -17,12 +17,12 @@ class ComposeModePresenter {
     }
 
     // 候補の取得
-    func candidates(composeMode : ComposeMode) -> ([String], Int)? {
+    func candidates(composeMode : ComposeMode) -> (candidates: [String], index: Int?)? {
         switch composeMode {
         case .DirectInput:
             return .None
-        case .KanaCompose(kana: let kana):
-            return .None
+        case .KanaCompose(kana: _, candidates: let candidates):
+            return (candidates, .None)
         case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
             return (candidates, index)
         case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):

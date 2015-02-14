@@ -10,7 +10,7 @@ class ComposeModePresenterSpec : QuickSpec {
                 expect(target.toString(.DirectInput)).to(equal(""))
             }
             it("kana compose mode") {
-                expect(target.toString(.KanaCompose(kana: "こんにちは"))).to(equal("▽こんにちは"))
+                expect(target.toString(.KanaCompose(kana: "こんにちは", candidates: ["foo", "bar"]))).to(equal("▽こんにちは"))
             }
             it("kanji compose mode") {
                 let m = ComposeMode.KanjiCompose(kana: "ほんき", okuri: .None, candidates: ["本気"], index: 0)
@@ -25,7 +25,8 @@ class ComposeModePresenterSpec : QuickSpec {
                 expect(target.toString(m)).to(equal("[登録:ろうたけ*る]あああ"))
             }
             it("word register mode(kana compose)") {
-                let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あ", composeMode: [.KanaCompose(kana: "い")])
+                let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あ",
+                    composeMode: [.KanaCompose(kana: "い", candidates: [])])
                 expect(target.toString(m)).to(equal("[登録:ほんき]あ▽い"))
             }
         }
@@ -35,13 +36,16 @@ class ComposeModePresenterSpec : QuickSpec {
                 expect(target.candidates(.DirectInput)).to(beNil())
             }
             it("kana compose mode") {
-                expect(target.candidates(.KanaCompose(kana: "こんにちは"))).to(beNil())
+                let c = target.candidates(.KanaCompose(kana: "こんにちは", candidates: ["foo", "bar"]))
+                expect(c?.candidates).to(equal(["foo", "bar"]))
+                expect(c?.index).to(beNil())
+
             }
             it("kanji compose mode") {
                 let m = ComposeMode.KanjiCompose(kana: "ほんき", okuri: .None, candidates: ["foo", "bar"], index: 1)
-                let (candidates, index) = target.candidates(m) ?? ([],0)
-                expect(candidates).to(equal(["foo", "bar"]))
-                expect(index).to(equal(1))
+                let c = target.candidates(m)
+                expect(c?.candidates).to(equal(["foo", "bar"]))
+                expect(c?.index).to(equal(1))
 
             }
             it("word register mode(direct)") {
