@@ -52,10 +52,6 @@ class ComposeModePresenterSpec : QuickSpec {
                 let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あああ", composeMode: [.DirectInput])
                 expect(target.candidates(m)).to(beNil())
             }
-            it("word register mode(direct)") {
-                let m = ComposeMode.WordRegister(kana: "ろうたけ", okuri: "る", composeText: "あああ", composeMode: [.DirectInput])
-                expect(target.toString(m)).to(equal("[登録:ろうたけ*る]あああ"))
-            }
             it("word register mode(kana compose)") {
                 let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あ", composeMode: [
                     .KanjiCompose(kana: "ほんき", okuri: .None, candidates: ["foo", "bar"], index: 1)
@@ -63,6 +59,34 @@ class ComposeModePresenterSpec : QuickSpec {
                 let (candidates, index) = target.candidates(m) ?? ([],0)
                 expect(candidates).to(equal(["foo", "bar"]))
                 expect(index).to(equal(1))
+            }
+        }
+
+
+        describe("inStatusShowsCandidatesBySpace") {
+            it("direct input") {
+                expect(target.inStatusShowsCandidatesBySpace(.DirectInput)).to(beFalse())
+            }
+            it("kana compose mode") {
+                let ret = target.inStatusShowsCandidatesBySpace(.KanaCompose(kana: "こんにちは", candidates: ["foo", "bar"]))
+                expect(ret).to(beTrue())
+            }
+            it("kanji compose mode") {
+                let m = ComposeMode.KanjiCompose(kana: "ほんき", okuri: .None, candidates: ["foo", "bar"], index: 1)
+                let ret = target.inStatusShowsCandidatesBySpace(m)
+                expect(ret).to(beTrue())
+            }
+            it("word register mode(direct)") {
+                let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あああ", composeMode: [.DirectInput])
+                let ret = target.inStatusShowsCandidatesBySpace(m)
+                expect(ret).to(beFalse())
+            }
+            it("word register mode(kana compose)") {
+                let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あ", composeMode: [
+                    .KanjiCompose(kana: "ほんき", okuri: .None, candidates: ["foo", "bar"], index: 1)
+                    ])
+                let ret = target.inStatusShowsCandidatesBySpace(m)
+                expect(ret).to(beTrue())
             }
         }
     }
