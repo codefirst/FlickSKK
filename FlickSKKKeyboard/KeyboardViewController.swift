@@ -348,7 +348,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     private func getModifiedTime(path: String) -> NSDate? {
         let fm = NSFileManager.defaultManager()
         if let attrs = fm.attributesOfItemAtPath(path, error: nil) {
-            return attrs[NSFileModificationDate] as NSDate
+            return attrs[NSFileModificationDate] as? NSDate
         } else {
             return nil
         }
