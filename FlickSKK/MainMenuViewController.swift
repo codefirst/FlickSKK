@@ -24,6 +24,7 @@ class MainMenuViewController: UITableViewController {
 
         weak var weakSelf = self
         sections = [
+            (title: nil, rows: [(title: NSLocalizedString("Setup", comment: ""), action: { weakSelf?.gotoSetup(); return})]),
             (title: nil, rows: [(title: NSLocalizedString("How to use", comment: ""), action: { weakSelf?.gotoHowToUse(); return})]),
             // FIXME: 設定項目をなんか増やす
             // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
@@ -67,6 +68,12 @@ class MainMenuViewController: UITableViewController {
     }
 
     // MARK: - Actions
+    func gotoSetup() {
+        if let path = NSBundle.mainBundle().pathForResource("Setup", ofType: "html", inDirectory: "html") {
+            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
+        }
+    }
+
 
     func gotoHowToUse() {
         if let path = NSBundle.mainBundle().pathForResource("HowToUse", ofType: "html", inDirectory: "html") {
