@@ -104,6 +104,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         textField.contentVerticalAlignment = .Center
         textField.returnKeyType = row.returnType
         textField.delegate = self
+        textField.addTarget(self, action: "didChange", forControlEvents: .EditingChanged)
         cell.contentView.addSubview(textField)
 
         return cell
@@ -132,13 +133,22 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         return true
     }
 
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let result = (textField.text as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        doneButton.enabled = !result.isEmpty
-        return true
+    @objc private func didChange() {
+        self.doneButton.enabled = canRegister()
     }
 
     private func canRegister() -> Bool {
-        return !(self.wordField.text.isEmpty && self.yomiField.text.isEmpty)
+        // 登録できる条件
+        // ・登録する単語が入力されている
+        // ・よみが入力されている。SKK的に読みはほぼ任意(例: forallとかもある)なので、あまり前提をおけない。
+        // ・送り仮名が空もしくはひらがな一文字(ローマ字に変換できる)
+        let wordInputed : Bool = !self.wordField.text.isEmpty
+        let yomiInputed : Bool = !self.yomiField.text.isEmpty
+
+        let okuriBlank : Bool = self.okuriField.text.isEmpty
+        let okuri = Array(self.okuriField.text)
+        let okuriInputed = okuri.count == 1 && (okuri[0].toRoman() != .None)
+
+        return wordInputed && yomiInputed && (okuriBlank || okuriInputed)
     }
 }
