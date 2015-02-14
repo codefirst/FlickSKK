@@ -420,7 +420,21 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("か山"))
+                    expect(self.insertedText).to(equal(""))
                     expect(kana(xs[0])).to(equal("あ"))
+                default:
+                    fail()
+                }
+            }
+            it("シフトなし") {
+                let m = handler.handle(.Char(kana: "あ", shift: false), composeMode : composeMode)
+                switch m {
+                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
+                    expect(k).to(equal("まじ"))
+                    expect(okuri).to(beNil())
+                    expect(composeText).to(equal("か山あ"))
+                    expect(self.insertedText).to(equal(""))
+                    expect(xs[0] == .DirectInput).to(beTrue())
                 default:
                     fail()
                 }
