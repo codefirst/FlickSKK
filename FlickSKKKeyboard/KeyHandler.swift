@@ -151,9 +151,10 @@ class KeyHandler {
         level : Level) -> ComposeMode? {
         switch keyEvent {
         case .Char(kana: let str, shift : let shift):
-            // 暗黙的に確定して、次の入力をはじめる
-            insertText(candidates[index], level: level)
-            return self.handle(keyEvent, composeMode: .DirectInput)
+            // 暗黙的に確定する。単語登録中の場合は、levelが更新されるので、次に引き渡す
+            let level = insertText(candidates[index], level: level)
+            // 次の処理を開始する
+            return self.dispatch(keyEvent, composeMode: .DirectInput, level: level)
         case .Space:
             if index + 1 < candidates.count {
                 return .KanjiCompose(kana : kana, okuri : .None, candidates: candidates, index: index + 1)
@@ -202,12 +203,14 @@ class KeyHandler {
         }
     }
 
-    private func insertText(text : String, level : Level) {
+    private func insertText(text : String, level : Level) -> Level {
         switch level {
         case .TopLevel:
             self.delegate.insertText(text)
+            return .TopLevel
         case .Compose(text: let prev, update: let update):
             update(prev + text)
+            return .Compose(text: prev + text, update: update)
         }
     }
 
@@ -217,13 +220,9 @@ class KeyHandler {
        if (composeMode == ComposeMode.DirectInput) && (keyEvent == SKKKeyEvent.Enter) {
            // 辞書登録
            dictionary.register(kana, okuri: okuri, kanji: composeText)
+
            // composeTextを入力する
-           switch level {
-           case .TopLevel:
-               self.delegate.insertText(composeText)
-           case .Compose(text: let text, update: let update):
-               update(text + composeText)
-           }
+           insertText(composeText, level: level)
 
            // 状態遷移
            return .DirectInput
