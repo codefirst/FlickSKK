@@ -66,7 +66,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     private func updateCandidateSelection() {
-        let selectionIndex = self.engine.candidates()?.1
+        let selectionIndex = self.engine.candidates()?.index
         if let index = selectionIndex {
             if index < self.candidates.count {
                 let indexPath = NSIndexPath(forItem: index, inSection: Section.Candidates.rawValue)

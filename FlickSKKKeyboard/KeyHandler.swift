@@ -24,8 +24,8 @@ class KeyHandler {
         switch composeMode {
         case .DirectInput:
             return directInput(keyEvent, level: level) ?? composeMode
-        case .KanaCompose(kana: let kana):
-            return kanaCompose(keyEvent, kana: kana, level: level) ?? composeMode
+        case .KanaCompose(kana: let kana, candidates: let candidates):
+            return kanaCompose(keyEvent, kana: kana, candidates: candidates, level: level) ?? composeMode
         case .KanjiCompose(kana: let kana, okuri: let okuri, candidates: let candidates, index : let index):
             return kanjiCompose(keyEvent,
                 kana: kana, okuri: okuri, candidates: candidates, index: index,
@@ -42,7 +42,7 @@ class KeyHandler {
         case .Char(kana: let kana, shift : let shift) where !shift:
             insertText(kana, level: level)
         case .Char(kana: let kana, shift : _): // shiftが押されている
-            return .KanaCompose(kana : kana)
+            return makeKanaCompose(kana)
         case .Space:
             insertText(" ", level: level)
         case .Enter:
@@ -91,10 +91,14 @@ class KeyHandler {
         return nil
     }
 
-    private func kanaCompose(keyEvent : SKKKeyEvent, kana : String, level: Level) -> ComposeMode? {
+    private func makeKanaCompose(kana : String) -> ComposeMode {
+        return .KanaCompose(kana : kana, candidates: consult(kana, okuri: .None))
+    }
+
+    private func kanaCompose(keyEvent : SKKKeyEvent, kana : String, candidates: [String], level: Level) -> ComposeMode? {
         switch keyEvent {
         case .Char(kana: let str, shift : let shift) where !shift:
-            return .KanaCompose(kana : kana + str)
+            return makeKanaCompose(kana + str)
         case .Char(kana: let str, shift : _): // shiftが押されている
             let candidates = consult(kana, okuri: str)
             if candidates.isEmpty {
@@ -115,16 +119,16 @@ class KeyHandler {
         case .Backspace where kana.isEmpty:
             return .DirectInput
         case .Backspace:
-            return .KanaCompose(kana : kana.butLast())
+            return makeKanaCompose(kana.butLast())
         case .ToggleDakuten(beforeText : _):
             if let s = kana.last()?.toggleDakuten() {
-                return .KanaCompose(kana : kana.butLast() + s)
+                return makeKanaCompose(kana.butLast() + s)
             } else {
                 return nil
             }
         case .ToggleUpperLower(beforeText: _):
             if let s = kana.last()?.toggleUpperLower() {
-                return .KanaCompose(kana : kana.butLast() + s)
+                return makeKanaCompose(kana.butLast() + s)
             } else {
                 return nil
             }
@@ -132,8 +136,13 @@ class KeyHandler {
             let str = kana.conv(kanaType(inputMode))
             insertText(str, level: level)
             return .DirectInput
-        case .Select(_):
-            return nil
+        case .Select(index: let index):
+            if index < candidates.count {
+                insertText(candidates[index], level: level)
+                return .DirectInput
+            } else {
+                return nil
+            }
         }
     }
 
@@ -155,7 +164,7 @@ class KeyHandler {
             insertText(candidates[index], level: level)
             return .DirectInput
         case .Backspace where index == 0:
-            return .KanaCompose(kana : kana)
+            return makeKanaCompose(kana)
         case .Backspace:
             return .KanjiCompose(kana : kana, okuri : .None, candidates: candidates, index: index - 1)
         case .ToggleDakuten(beforeText : _):
@@ -219,7 +228,7 @@ class KeyHandler {
            // 状態遷移
            return .DirectInput
        } else if (composeMode == ComposeMode.DirectInput) && (keyEvent == SKKKeyEvent.Backspace) && (composeText.isEmpty) {
-           return .KanaCompose(kana: kana)
+           return makeKanaCompose(kana)
        } else {
            var text = composeText
            let m = dispatch(keyEvent, composeMode: composeMode, level: .Compose(text: text, update: { str in

@@ -29,6 +29,45 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
             self.inputMode = .Hirakana
         }
 
+        func kana(composeMode : ComposeMode)  -> String? {
+            switch composeMode {
+            case .KanaCompose(kana : let kana, candidates: _):
+                return kana
+            default:
+                return nil
+            }
+        }
+
+        func kanji(composeMode : ComposeMode) -> (String, String)? {
+            switch composeMode {
+            case .KanjiCompose(kana: let kana, okuri : let okuri, candidates: _, index: _):
+                return (kana, okuri ?? "")
+            default:
+                return nil
+            }
+        }
+
+        func candidates(composeMode : ComposeMode) -> [String]? {
+            switch composeMode {
+            case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: _):
+                return candidates
+            case .KanaCompose(kana: _, candidates: let candidates):
+                return candidates
+            default:
+                return nil
+            }
+        }
+
+        func index(composeMode: ComposeMode) -> Int? {
+            switch composeMode {
+            case .KanjiCompose(kana: _, okuri: _, candidates: _, index: let index):
+                return index
+            default:
+                return nil
+            }
+        }
+
+
         context("directInput") {
             it("文字入力(シフトなし)") {
                 handler.handle(.Char(kana: "あ", shift: false), composeMode: .DirectInput)
@@ -65,48 +104,13 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
             it("シフトあり文字入力") {
                 let m = handler.handle(.Char(kana: "あ", shift: true),  composeMode: .DirectInput)
                 expect(self.insertedText).to(equal(""))
-                expect(m == .KanaCompose(kana : "あ")).to(beTrue())
-            }
-        }
-
-        func kana(composeMode : ComposeMode)  -> String? {
-            switch composeMode {
-            case .KanaCompose(kana : let kana):
-                return kana
-            default:
-                return nil
-            }
-        }
-
-        func kanji(composeMode : ComposeMode) -> (String, String)? {
-            switch composeMode {
-            case .KanjiCompose(kana: let kana, okuri : let okuri, candidates: _, index: _):
-                return (kana, okuri ?? "")
-            default:
-                return nil
-            }
-        }
-
-        func candidates(composeMode : ComposeMode) -> [String]? {
-            switch composeMode {
-            case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: _):
-                return candidates
-            default:
-                return nil
-            }
-        }
-
-        func index(composeMode: ComposeMode) -> Int? {
-            switch composeMode {
-            case .KanjiCompose(kana: _, okuri: _, candidates: _, index: let index):
-                return index
-            default:
-                return nil
+                expect(kana(m)).to(equal("あ"))
+                expect(candidates(m)).toNot(beEmpty())
             }
         }
 
         context("kana compose") {
-            let composeMode = ComposeMode.KanaCompose(kana: "かわ")
+            let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: [])
             it("文字入力(シフトなし)") {
                 let m = handler.handle(.Char(kana: "ら", shift: false), composeMode: composeMode)
                 expect(kana(m)).to(equal("かわら"))
@@ -120,7 +124,7 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     expect(candidates(m)).toNot(beEmpty())
                 }
                 it("単語がない場合") {
-                    let m = handler.handle(.Space, composeMode: .KanaCompose(kana: "あああ"))
+                    let m = handler.handle(.Space, composeMode: .KanaCompose(kana: "あああ", candidates: []))
                     switch m {
                     case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
                         expect(kana).to(equal("あああ"))
@@ -143,16 +147,16 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     expect(kana(m)).to(equal("か"))
                 }
                 it("文字がない場合") {
-                    let m = handler.handle(.Backspace, composeMode: .KanaCompose(kana: ""))
+                    let m = handler.handle(.Backspace, composeMode: .KanaCompose(kana: "", candidates: []))
                     expect(m == .DirectInput).to(beTrue())
                 }
             }
             it("大文字変換") {
-                let m = handler.handle(.ToggleUpperLower(beforeText: ""), composeMode: .KanaCompose(kana: "foo"))
+                let m = handler.handle(.ToggleUpperLower(beforeText: ""), composeMode: .KanaCompose(kana: "foo", candidates: []))
                 expect(kana(m)).to(equal("foO"))
             }
             it("濁点変換") {
-                let m = handler.handle(.ToggleDakuten(beforeText: ""), composeMode: .KanaCompose(kana: "か"))
+                let m = handler.handle(.ToggleDakuten(beforeText: ""), composeMode: .KanaCompose(kana: "か", candidates: []))
                 expect(kana(m)).to(equal("が"))
             }
             it("入力モード") {
@@ -370,7 +374,7 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
 
         context("word register with kana mode") {
             let composeMode = ComposeMode.WordRegister(kana: "まじ",
-                okuri: .None, composeText : "か", composeMode: [ .KanaCompose(kana: "あああ") ])
+                okuri: .None, composeText : "か", composeMode: [ .KanaCompose(kana: "あああ", candidates: []) ])
             it("Enter") {
                let m = handler.handle(.Enter, composeMode : composeMode)
                switch m {

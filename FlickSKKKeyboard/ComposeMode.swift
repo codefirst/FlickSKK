@@ -8,7 +8,7 @@
 
 enum ComposeMode {
     case DirectInput
-    case KanaCompose(kana : String)
+    case KanaCompose(kana : String, candidates: [String])
     case KanjiCompose(kana : String, okuri : String?, candidates: [String], index : Int)
     case WordRegister(kana : String, okuri : String?, composeText : String, composeMode : [ComposeMode])
 }
@@ -17,8 +17,8 @@ func ==(l : ComposeMode, r : ComposeMode) -> Bool {
     switch (l,r)  {
     case (.DirectInput, .DirectInput):
         return true
-    case (.KanaCompose(kana: let kana1), .KanaCompose(kana: let kana2)):
-        return kana1 == kana2
+    case (.KanaCompose(kana: let kana1, candidates: let candidates1), .KanaCompose(kana: let kana2, candidates: let candidates2)):
+        return kana1 == kana2 && candidates1 == candidates2
     case (.KanjiCompose(kana : let kana1, okuri : let okuri1, candidates: let candidates1, index: let index1),
         .KanjiCompose(kana : let kana2, okuri : let okuri2, candidates: let candidates2, index: let index2)):
         return kana1 == kana2 && okuri1 == okuri2 && candidates1 == candidates2 && index1 == index2

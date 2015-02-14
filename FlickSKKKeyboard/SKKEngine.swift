@@ -28,7 +28,7 @@ class SKKEngine {
         self.delegate.showCandidates(candidates()?.0)
     }
     
-    func candidates() -> ([String], Int)? {
+    func candidates() -> (candidates: [String], index: Int?)? {
         return self.presenter.candidates(self.composeMode)
     }
 
