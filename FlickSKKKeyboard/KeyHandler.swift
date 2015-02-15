@@ -218,11 +218,14 @@ class KeyHandler {
         kana : String, okuri: String?, composeText: String, composeMode: ComposeMode,
         level : Level) -> ComposeMode {
        if (composeMode == ComposeMode.DirectInput) && (keyEvent == SKKKeyEvent.Enter) {
+           // 送り仮名はローマ字に変換する
+           let okuriRoman = okuri?.first()?.toRoman()?.first().map({c in String(c)})
+
            // 辞書登録
-           dictionary.register(kana, okuri: okuri, kanji: composeText)
+           dictionary.register(kana, okuri: okuriRoman, kanji: composeText)
 
            // composeTextを入力する
-           insertText(composeText, level: level)
+           insertText(composeText + (okuri ?? ""), level: level)
 
            // 状態遷移
            return .DirectInput
