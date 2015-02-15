@@ -93,12 +93,12 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         // label
         let label = UILabel(frame: CGRectMake(20, 5, 130, 45))
         label.text = row.title
-        label.font = UIFont.systemFontOfSize(17.0)
+        label.font = Appearance.normalFont(17.0)
         cell.contentView.addSubview(label)
 
         // text field
         let textField = row.text
-        textField.font = UIFont.systemFontOfSize(17.0)
+        textField.font = Appearance.normalFont(17.0)
         textField.clearButtonMode = .WhileEditing
         textField.placeholder = row.title
         textField.contentVerticalAlignment = .Center

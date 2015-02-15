@@ -151,7 +151,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = UIColor.whiteColor()
         
         self.textLabel.tap { (l: UILabel) in
-            l.font = UIFont.systemFontOfSize(17.0)
+            l.font = Appearance.normalFont(17.0)
             l.textColor = UIColor.blackColor()
             l.backgroundColor = UIColor.clearColor()
             l.textAlignment = .Center
