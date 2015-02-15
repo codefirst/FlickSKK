@@ -320,12 +320,21 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     fail()
                 }
             }
-            it("Enter") {
-                let m = handler.handle(.Enter, composeMode:
-                    .WordRegister(kana: "まじ", okuri: .None, composeText : "本気", composeMode: [ .DirectInput ]))
-                expect(m == .DirectInput).to(beTrue())
-                expect(self.insertedText).to(equal("本気"))
-                expect(dict.find("まじ", okuri: .None)).to(contain("本気"))
+            describe("Enter") {
+                it("送りなし") {
+                    let m = handler.handle(.Enter, composeMode:
+                        .WordRegister(kana: "まじ", okuri: .None, composeText : "本気", composeMode: [ .DirectInput ]))
+                    expect(m == .DirectInput).to(beTrue())
+                    expect(self.insertedText).to(equal("本気"))
+                    expect(dict.find("まじ", okuri: .None)).to(contain("本気"))
+                }
+                it("送りあり") {
+                    let m = handler.handle(.Enter, composeMode:
+                        .WordRegister(kana: "ろうた", okuri: "け", composeText : "臘長", composeMode: [ .DirectInput ]))
+                    expect(m == .DirectInput).to(beTrue())
+                    expect(self.insertedText).to(equal("臘長け"))
+                    expect(dict.find("ろうた", okuri: "k")).to(contain("臘長"))
+                }
             }
             describe("Backspace") {
                 it("index == 0") {
