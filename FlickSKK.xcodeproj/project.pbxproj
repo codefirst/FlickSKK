@@ -37,6 +37,9 @@
 		138968D91A85F42200614511 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968D01A85ED7300614511 /* ComposeMode.swift */; };
 		138968DB1A85F42500614511 /* SKKEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968CD1A85E2F400614511 /* SKKEngine.swift */; };
 		138968DD1A87139600614511 /* KeyHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138968DC1A87139600614511 /* KeyHandlerSpec.swift */; };
+		138EB85F1A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
+		138EB8601A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
+		138EB8611A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
 		1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; };
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
@@ -196,6 +199,7 @@
 		138968CD1A85E2F400614511 /* SKKEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKEngine.swift; sourceTree = "<group>"; };
 		138968D01A85ED7300614511 /* ComposeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeMode.swift; sourceTree = "<group>"; };
 		138968DC1A87139600614511 /* KeyHandlerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerSpec.swift; sourceTree = "<group>"; };
+		138EB85E1A9035D300CB16BC /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Vendor/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
@@ -514,6 +518,7 @@
 			children = (
 				EAF1DB6D19FBFDFD00816CF5 /* AppGroup.h */,
 				EAF1DB6E19FBFDFD00816CF5 /* AppGroup.m */,
+				138EB85E1A9035D300CB16BC /* Appearance.swift */,
 				EAF1DB7119FBFF9900816CF5 /* FlickSKK-Common-Bridging-Header.h */,
 				EA2F67971A21D9D200DDCBB9 /* Resources */,
 			);
@@ -716,6 +721,7 @@
 				1388669B1A09204300B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				EACD52B319F3FECF001FB2A7 /* SKKDictionary.swift in Sources */,
 				EACD52AA19F3FD43001FB2A7 /* UserDictionaryViewController.swift in Sources */,
+				138EB85F1A9035D300CB16BC /* Appearance.swift in Sources */,
 				EAD4B56619D5CB50007B6636 /* AppDelegate.swift in Sources */,
 				EACD52B419F3FEE4001FB2A7 /* SKKUserDictionaryFile.swift in Sources */,
 				EACD52B619F3FEFD001FB2A7 /* SKKLocalDictionaryFile.swift in Sources */,
@@ -743,6 +749,7 @@
 				1388669C1A0920D500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				138968DD1A87139600614511 /* KeyHandlerSpec.swift in Sources */,
+				138EB8601A9035D300CB16BC /* Appearance.swift in Sources */,
 				137AAB4E1A3C13970092F8A5 /* KeyRepeatTimer.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
@@ -788,6 +795,7 @@
 				1388669A1A09202500B7D8A4 /* SKKDictionaryEntry.swift in Sources */,
 				130CA3901A4EF94C00A84D24 /* NumberFormatter.swift in Sources */,
 				138968D11A85ED7300614511 /* ComposeMode.swift in Sources */,
+				138EB8611A9035D300CB16BC /* Appearance.swift in Sources */,
 				133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */,
 				13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,

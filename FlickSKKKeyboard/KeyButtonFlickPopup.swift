@@ -68,7 +68,7 @@ class KeyButtonFlickPopup: UIView {
             l.backgroundColor = KeyButtonHighlightedColor
             l.textColor = UIColor.blackColor()
             l.textAlignment = .Center
-            l.font = UIFont.boldSystemFontOfSize(28.0)
+            l.font = Appearance.boldFont(28.0)
             l.layer.tap { (la:CALayer) in
                 la.cornerRadius = 2.0
                 la.masksToBounds = true

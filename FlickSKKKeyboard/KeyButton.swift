@@ -81,7 +81,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             l.text = self.key.buttonLabel
             l.textColor = UIColor.blackColor()
             l.textAlignment = .Center
-            l.font = UIFont.systemFontOfSize(17.0)
+            l.font = Appearance.normalFont(17.0)
         }
         self.layer.borderColor = UIColor.grayColor().CGColor
         self.layer.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
