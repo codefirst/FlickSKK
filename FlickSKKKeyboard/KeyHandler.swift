@@ -141,7 +141,7 @@ class KeyHandler {
                 insertText(candidates[index], level: level)
                 return .DirectInput
             } else {
-                return nil
+                return .WordRegister(kana : kana, okuri : .None, composeText: "", composeMode : [ .DirectInput ])
             }
         }
     }

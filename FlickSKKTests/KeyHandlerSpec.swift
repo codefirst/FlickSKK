@@ -110,7 +110,7 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
         }
 
         context("kana compose") {
-            let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: [])
+            let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: ["川", "河"])
             it("文字入力(シフトなし)") {
                 let m = handler.handle(.Char(kana: "ら", shift: false), composeMode: composeMode)
                 expect(kana(m)).to(equal("かわら"))
@@ -178,6 +178,25 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
                         expect(kana).to(equal("かわ"))
                         expect(okuri).to(equal("あ"))
+                        expect(composeText).to(equal(""))
+                        expect(composeMode[0] == .DirectInput).to(beTrue())
+                    default:
+                        fail()
+                    }
+                }
+            }
+            describe("候補選択") {
+                it("選択") {
+                    let m = handler.handle(.Select(index: 0), composeMode: composeMode)
+                    expect(self.insertedText).to(equal("川"))
+                    expect(m == .DirectInput).to(beTrue())
+                }
+                it("単語登録モード") {
+                    let m = handler.handle(.Select(index: 2), composeMode: composeMode)
+                    switch m {
+                    case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
+                        expect(kana).to(equal("かわ"))
+                        expect(okuri).to(beNil())
                         expect(composeText).to(equal(""))
                         expect(composeMode[0] == .DirectInput).to(beTrue())
                     default:
