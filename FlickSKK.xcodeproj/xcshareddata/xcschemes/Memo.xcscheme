@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EAD4B55F19D5CB50007B6636"
-               BuildableName = "FlickSKK.app"
-               BlueprintName = "FlickSKK"
-               ReferencedContainer = "container:FlickSKK.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EAD4B57419D5CB50007B6636"
-               BuildableName = "FlickSKKTests.xctest"
-               BlueprintName = "FlickSKKTests"
+               BlueprintIdentifier = "EA349A421A903BDE00084BDE"
+               BuildableName = "Memo.app"
+               BlueprintName = "Memo"
                ReferencedContainer = "container:FlickSKK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,23 +28,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EAD4B57419D5CB50007B6636"
-               BuildableName = "FlickSKKTests.xctest"
-               BlueprintName = "FlickSKKTests"
-               ReferencedContainer = "container:FlickSKK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EAD4B55F19D5CB50007B6636"
-            BuildableName = "FlickSKK.app"
-            BlueprintName = "FlickSKK"
+            BlueprintIdentifier = "EA349A421A903BDE00084BDE"
+            BuildableName = "Memo.app"
+            BlueprintName = "Memo"
             ReferencedContainer = "container:FlickSKK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -77,9 +53,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EAD4B55F19D5CB50007B6636"
-            BuildableName = "FlickSKK.app"
-            BlueprintName = "FlickSKK"
+            BlueprintIdentifier = "EA349A421A903BDE00084BDE"
+            BuildableName = "Memo.app"
+            BlueprintName = "Memo"
             ReferencedContainer = "container:FlickSKK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,9 +71,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EAD4B55F19D5CB50007B6636"
-            BuildableName = "FlickSKK.app"
-            BlueprintName = "FlickSKK"
+            BlueprintIdentifier = "EA349A421A903BDE00084BDE"
+            BuildableName = "Memo.app"
+            BlueprintName = "Memo"
             ReferencedContainer = "container:FlickSKK.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
