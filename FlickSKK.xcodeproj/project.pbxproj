@@ -65,6 +65,11 @@
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
 		EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
+		EA349A481A903BDE00084BDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A471A903BDE00084BDE /* AppDelegate.swift */; };
+		EA349A4A1A903BDE00084BDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A491A903BDE00084BDE /* ViewController.swift */; };
+		EA349A4F1A903BDE00084BDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA349A4E1A903BDE00084BDE /* Images.xcassets */; };
+		EA349A521A903BDE00084BDE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA349A501A903BDE00084BDE /* LaunchScreen.xib */; };
+		EA349A771A9043C200084BDE /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
 		EA56B0231A221CA500954B5F /* KeyboardImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA56B0221A221CA500954B5F /* KeyboardImages.xcassets */; };
 		EA892D5719FBE70400265181 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5519FBE70400265181 /* iTunesArtwork */; };
 		EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5619FBE70400265181 /* iTunesArtwork@2x */; };
@@ -213,6 +218,12 @@
 		EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSpacerView.swift; sourceTree = "<group>"; };
 		EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
+		EA349A431A903BDE00084BDE /* Memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA349A461A903BDE00084BDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA349A471A903BDE00084BDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EA349A491A903BDE00084BDE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EA349A4E1A903BDE00084BDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EA349A511A903BDE00084BDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EA56B0221A221CA500954B5F /* KeyboardImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KeyboardImages.xcassets; sourceTree = "<group>"; };
 		EA892D5519FBE70400265181 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		EA892D5619FBE70400265181 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
@@ -245,6 +256,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EA349A401A903BDE00084BDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAD4B55D19D5CB50007B6636 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -420,6 +438,26 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		EA349A441A903BDE00084BDE /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				EA349A471A903BDE00084BDE /* AppDelegate.swift */,
+				EA349A491A903BDE00084BDE /* ViewController.swift */,
+				EA349A4E1A903BDE00084BDE /* Images.xcassets */,
+				EA349A501A903BDE00084BDE /* LaunchScreen.xib */,
+				EA349A451A903BDE00084BDE /* Supporting Files */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
+		EA349A451A903BDE00084BDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA349A461A903BDE00084BDE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EAD4B55719D5CB50007B6636 = {
 			isa = PBXGroup;
 			children = (
@@ -429,6 +467,7 @@
 				EAD4B56219D5CB50007B6636 /* FlickSKK */,
 				EAD4B57819D5CB50007B6636 /* FlickSKKTests */,
 				EAD4B58A19D5CB8A007B6636 /* FlickSKKKeyboard */,
+				EA349A441A903BDE00084BDE /* Memo */,
 				EAD4B56119D5CB50007B6636 /* Products */,
 				05E418C0F5656118905F318F /* Pods */,
 				6050DDC7DD7FB6FB1BD2A214 /* Frameworks */,
@@ -441,6 +480,7 @@
 				EAD4B56019D5CB50007B6636 /* FlickSKK.app */,
 				EAD4B57519D5CB50007B6636 /* FlickSKKTests.xctest */,
 				EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */,
+				EA349A431A903BDE00084BDE /* Memo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -529,6 +569,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EA349A421A903BDE00084BDE /* Memo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA349A671A903BDE00084BDE /* Build configuration list for PBXNativeTarget "Memo" */;
+			buildPhases = (
+				EA349A3F1A903BDE00084BDE /* Sources */,
+				EA349A401A903BDE00084BDE /* Frameworks */,
+				EA349A411A903BDE00084BDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Memo;
+			productName = Memo;
+			productReference = EA349A431A903BDE00084BDE /* Memo.app */;
+			productType = "com.apple.product-type.application";
+		};
 		EAD4B55F19D5CB50007B6636 /* FlickSKK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAD4B57F19D5CB50007B6636 /* Build configuration list for PBXNativeTarget "FlickSKK" */;
@@ -595,6 +652,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "BAN Jun";
 				TargetAttributes = {
+					EA349A421A903BDE00084BDE = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					EAD4B55F19D5CB50007B6636 = {
 						CreatedOnToolsVersion = 6.0;
 						SystemCapabilities = {
@@ -623,6 +683,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				ja,
+				Base,
 			);
 			mainGroup = EAD4B55719D5CB50007B6636;
 			productRefGroup = EAD4B56119D5CB50007B6636 /* Products */;
@@ -642,6 +703,7 @@
 				EAD4B55F19D5CB50007B6636 /* FlickSKK */,
 				EAD4B57419D5CB50007B6636 /* FlickSKKTests */,
 				EAD4B58819D5CB8A007B6636 /* FlickSKKKeyboard */,
+				EA349A421A903BDE00084BDE /* Memo */,
 			);
 		};
 /* End PBXProject section */
@@ -678,6 +740,15 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EA349A411A903BDE00084BDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA349A521A903BDE00084BDE /* LaunchScreen.xib in Resources */,
+				EA349A4F1A903BDE00084BDE /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAD4B55E19D5CB50007B6636 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -712,6 +783,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EA349A3F1A903BDE00084BDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA349A4A1A903BDE00084BDE /* ViewController.swift in Sources */,
+				EA349A771A9043C200084BDE /* Appearance.swift in Sources */,
+				EA349A481A903BDE00084BDE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EAD4B55C19D5CB50007B6636 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -829,6 +910,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		EA349A501A903BDE00084BDE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA349A511A903BDE00084BDE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		EACD529D19F3F0C4001FB2A7 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -841,6 +930,33 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EA349A5F1A903BDE00084BDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Memo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EA349A601A903BDE00084BDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Memo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		EAD4B57D19D5CB50007B6636 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EAE8EA441A2083BD008316DD /* Config.xcconfig */;
@@ -1023,6 +1139,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EA349A671A903BDE00084BDE /* Build configuration list for PBXNativeTarget "Memo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA349A5F1A903BDE00084BDE /* Debug */,
+				EA349A601A903BDE00084BDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EAD4B55B19D5CB50007B6636 /* Build configuration list for PBXProject "FlickSKK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
