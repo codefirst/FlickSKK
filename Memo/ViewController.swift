@@ -16,8 +16,9 @@ class ViewController: UIViewController {
         
         self.textView.backgroundColor = UIColor.whiteColor()
         self.textView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-        self.textView.font = Appearance.normalFont(20.0)
+        self.textView.font = Appearance.normalFont(18.0)
         self.textView.frame = self.view.bounds
+        self.textView.text = "FlickSKK\n\n日本語入力キーボード FlickSKK。シンプルな日本語入力を、iPhone/iPadで。"
         self.view.addSubview(self.textView)
     }
 }
