@@ -58,6 +58,15 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         self.collectionView.frame = self.bounds
         self.addSubview(self.collectionView)
         
+        let border = UIView().tap { (v: UIView) in
+            v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
+        }
+        let autolayout = self.autolayoutFormat(
+            ["onepx": 1.0 / UIScreen.mainScreen().scale],
+            ["b": border])
+        autolayout("H:|[b]|")
+        autolayout("V:|[b(==onepx)]|")
+        
         self.backgroundColor = UIColor.whiteColor()
     }
     
