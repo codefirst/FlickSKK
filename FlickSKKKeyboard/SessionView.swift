@@ -65,7 +65,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             ["onepx": 1.0 / UIScreen.mainScreen().scale],
             ["b": border])
         autolayout("H:|[b]|")
-        autolayout("V:|[b(==onepx)]|")
+        autolayout("V:|[b(==onepx)]")
         
         self.backgroundColor = UIColor.whiteColor()
     }
