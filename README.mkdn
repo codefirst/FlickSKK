@@ -1,6 +1,6 @@
 # FlickSKK
-[AppStoreにて公開しています。
-](https://itunes.apple.com/jp/app/flickskk/id944678753?mt=8)
+[AppStoreにて公開しています。](https://itunes.apple.com/jp/app/flickskk/id944678753?mt=8)
+通常利用の場合はAppStore版をご利用ください。
 
 ## Overview
 フリック入力対応版のiOS向けSKKです。
@@ -10,55 +10,37 @@
  * iOS8 以降
 
 ## 主な機能
-(TBD)
+[AppStoreの説明](https://itunes.apple.com/jp/app/flickskk/id944678753?mt=8) を参照してください。
 
 ## ビルド方法
 
-### CocoaPodsの導入(必要ならば)
+### CocoaPodsの導入
 
 ```
 $ sudo gem install cocoapods
 ```
 
-### App Identifierの設定
+### ソースコードの取得
+```
+$ git clone https://github.com/codefirst/FlickSKK.git
+$ cd FlickSKK
+```
+
+### 設定ファイルの書き換え
+以下のようにConfig.xcconfigを作成し、適当な内容に書き換えてください。
+特に `APP_IDENTIFIER` を自分のDeveloper ProgramのApp IDへの書き換えは必須です。
 
 ```
 $ cp Config.xcconfig.example Config.xcconfig
 ```
 
-`APP_IDENTIFIER` を自分のDeveloper ProgramのApp IDに書き換えてください。
-
 ### ビルド
 
 ```
-$ git clone https://github.com/codefirst/FlickSKK.git
-$ cd FlickSKK
 $ pod install
 ```
+
 その後、 FlickSKK.*xcworkspace* を開いてビルドしてください。 (注: FlickSKK.*xcodeproj* ではない)
-
-### TestFlightへのリリース
-以下の準備を行なう。
-
- * TestFlightのDesktopAppをインストールする
- * FlickSKKという名前でMobileProvisionを導入する
- * アイコン等をコミットしたbranchを用意する
-
-その後、以下のコマンドでTestFlightへのリリースが行なえる。
-
-```
-$ ./misc/package branch-name
-```
-
-### トラブルシューティング
-#### "ld: library not found for -lz" とエラーがでる
-
-libzがないのが原因です。 適当なlibz.x.x.z.dylib(x.y.zはバージョン番号)へのシンボリックリングを作成すれば回避できます。
-
-```
-$ cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib
-$ ln -s libz.x.y.z.dylib libz.dylib
-```
 
 ## 辞書の作成
 SKK辞書なら利用できます。 ただし、アルファベットのみのエントリ(例: alpha)などは利用しないため取り除くことが望ましいです。
@@ -68,8 +50,17 @@ ruby ./misc/strip.rb /path/to/skk.jisyo > Resources/skk.jisyo
 ```
 
 ## License
-
 FlickSKKはSKK-JISYO.Lを元にしたSKK辞書を同梱しています。
 <https://github.com/codefirst/FlickSKK/blob/master/FlickSKKKeyboard/skk.jisyo>
 
-(TBD)
+それ以外の部分についてのライセンスは未定義です。
+
+## トラブルシューティング
+### "ld: library not found for -lz" とエラーがでる
+
+libzがないのが原因です。 適当なlibz.x.x.z.dylib(x.y.zはバージョン番号)へのシンボリックリングを作成すれば回避できます。
+
+```
+$ cd /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib
+$ ln -s libz.x.y.z.dylib libz.dylib
+```
