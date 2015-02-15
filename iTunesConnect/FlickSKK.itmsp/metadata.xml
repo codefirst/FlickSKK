@@ -73,12 +73,12 @@
                             </keywords>
                             <version_whats_new>・変換候補表示のUIが横並びに変更されました。
 ・▽モードでも変換候補を表示するようになりました。
-・今後の拡張に供え、SKKエンジンが刷新されました。
+・今後の拡張に備え、SKKエンジンが刷新されました。
 ・次候補に送れるときは、「space」ではなく「次候補」と表示するようになりました。
 ・候補リストの上端に境界線が付きました。
-・設定アプリでの単語を登録できる条件が厳しくなりました。
 ・アプリに使い方が追加されました。
-・キーボードのフォントがヒラギノ固定になりました。</version_whats_new>
+・キーボードのフォントがヒラギノ固定になりました。
+・その他、バグ修正。</version_whats_new>
                             <software_url>http://www.codefirst.org/FlickSKK/</software_url>
                             <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
                             <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
