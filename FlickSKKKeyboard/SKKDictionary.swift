@@ -13,15 +13,17 @@ class SKKDictionary : NSObject {
 
     var dictionaries : [ SKKDictionaryFile ] = []
     var userDict : SKKUserDictionaryFile?
+    var learnDict : SKKUserDictionaryFile?
 
     dynamic var isWaitingForLoad : Bool = false
     class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
 
-    init(userDict: String, dicts : [String]){
+    init(userDict: String, learnDict : String, dicts : [String]){
         super.init()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.userDict = SKKUserDictionaryFile(path: userDict)
-            self.dictionaries = [ self.userDict! ] + dicts.map({ x -> SKKDictionaryFile in
+            self.learnDict = SKKUserDictionaryFile(path: learnDict)
+            self.dictionaries = [ self.learnDict!, self.userDict! ] + dicts.map({ x -> SKKDictionaryFile in
                 SKKLocalDictionaryFile(path: x)})
             self.initialized = true
         })
@@ -35,7 +37,7 @@ class SKKDictionary : NSObject {
         }).reduce([],
                   combine: {(x : [String], y : [String]) -> [String] in
             x + y
-        })
+        }).unique()
 
         return xs
     }
@@ -44,6 +46,14 @@ class SKKDictionary : NSObject {
         userDict?.register(normal, okuri: okuri, kanji: kanji)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.userDict?.serialize()
+            ()
+        })
+    }
+
+    func learn(normal : String, okuri: String?, kanji: String) {
+        learnDict?.register(normal, okuri: okuri, kanji: kanji)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.learnDict?.serialize()
             ()
         })
     }

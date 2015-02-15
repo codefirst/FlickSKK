@@ -336,11 +336,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     private func loadDictionary() {
         let userDict = SKKUserDictionaryFile.defaultUserDictionaryPath()
+        let learnDict = SKKUserDictionaryFile.defaultLearnDictionaryPath()
         let mtime = getModifiedTime(userDict)
 
         if kGlobalDictionary == nil || kLoadedTime != mtime {
             let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-            kGlobalDictionary = SKKDictionary(userDict: userDict, dicts: [dict!])
+            kGlobalDictionary = SKKDictionary(userDict: userDict, learnDict: learnDict, dicts: [dict!])
             kLoadedTime = mtime
         }
     }

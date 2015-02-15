@@ -113,6 +113,7 @@ class KeyHandler {
         case .Space:
             return makeKanjiCompose(kana, okuri: .None)
         case .Enter:
+            // かなモードでのEnterは学習しない
             insertText(kana, level: level)
             return .DirectInput
         case .Backspace where kana.isEmpty:
@@ -137,7 +138,7 @@ class KeyHandler {
             return .DirectInput
         case .Select(index: let index):
             if index < candidates.count {
-                insertText(candidates[index], level: level)
+                decide(kana, okuri : .None, text: candidates[index], level: level)
                 return .DirectInput
             } else {
                 return .WordRegister(kana : kana, okuri : .None, composeText: "", composeMode : [ .DirectInput ])
@@ -151,7 +152,7 @@ class KeyHandler {
         switch keyEvent {
         case .Char(kana: let str, shift : let shift):
             // 暗黙的に確定する。単語登録中の場合は、levelが更新されるので、次に引き渡す
-            let level = insertText(candidates[index], level: level)
+            let level = decide(kana, okuri: okuri, text: candidates[index], level: level)
             // 次の処理を開始する
             return self.dispatch(keyEvent, composeMode: .DirectInput, level: level)
         case .Space:
@@ -184,12 +185,17 @@ class KeyHandler {
             return nil
         case .Select(index : let index):
             if index < candidates.count {
-                insertText(candidates[index], level: level)
+                decide(kana, okuri: okuri, text: candidates[index], level: level)
                 return .DirectInput
             } else {
                 return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
             }
         }
+    }
+
+    private func decide(kana : String, okuri : String?, text : String, level : Level) -> Level {
+        self.dictionary.learn(kana, okuri: okuri, kanji: text)
+        return insertText(text, level : level)
     }
 
     private func insertText(text : String, level : Level) -> Level {
@@ -215,7 +221,7 @@ class KeyHandler {
             dictionary.register(kana, okuri: okuriRoman, kanji: composeText)
 
             // composeTextを入力する
-            insertText(composeText + (okuri ?? ""), level: level)
+            decide(kana, okuri : okuri, text: composeText + (okuri ?? ""), level: level)
 
             // 状態遷移
             return .DirectInput
