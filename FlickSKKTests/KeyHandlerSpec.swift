@@ -294,14 +294,14 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
         }
 
         context("word register with direct mode") {
-            let composeMode = ComposeMode.WordRegister(kana: "ろうたけ", okuri: "る", composeText : "", composeMode: [ .DirectInput ])
+            let composeMode = ComposeMode.WordRegister(kana: "ろうた", okuri: "け", composeText : "", composeMode: [ .DirectInput ])
 
             it("文字入力(シフトなし)") {
                 let m = handler.handle(.Char(kana: "に", shift: false), composeMode: composeMode)
                 switch m {
                 case ComposeMode.WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
-                    expect(kana).to(equal("ろうたけ"))
-                    expect(okuri).to(equal("る"))
+                    expect(kana).to(equal("ろうた"))
+                    expect(okuri).to(equal("け"))
                     expect(composeText).to(equal("に"))
                     expect(composeMode[0] == .DirectInput).to(beTrue())
                 default:
@@ -312,8 +312,8 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                 let m = handler.handle(.Space, composeMode: composeMode)
                 switch m {
                 case ComposeMode.WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
-                    expect(kana).to(equal("ろうたけ"))
-                    expect(okuri).to(equal("る"))
+                    expect(kana).to(equal("ろうた"))
+                    expect(okuri).to(equal("け"))
                     expect(composeText).to(equal(" "))
                     expect(composeMode[0] == .DirectInput).to(beTrue())
                 default:
@@ -330,7 +330,7 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
             describe("Backspace") {
                 it("index == 0") {
                     let m = handler.handle(.Backspace, composeMode: composeMode)
-                    expect(kana(m)).to(equal("ろうたけ"))
+                    expect(kana(m)).to(equal("ろうた"))
                 }
                 it("index > 0") {
                     let m = handler.handle(.Backspace,
@@ -381,8 +381,8 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                 let m = handler.handle(.Char(kana: "い", shift: true), composeMode: composeMode)
                 switch m {
                 case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
-                    expect(k).to(equal("ろうたけ"))
-                    expect(okuri).to(equal("る"))
+                    expect(k).to(equal("ろうた"))
+                    expect(okuri).to(equal("け"))
                     expect(composeText).to(equal(""))
                     expect(kana(xs[0])).to(equal("い"))
                 default:
