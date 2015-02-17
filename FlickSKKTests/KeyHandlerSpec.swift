@@ -368,17 +368,31 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     fail()
                 }
             }
-            it("濁点変換") {
-                let m = handler.handle(.ToggleDakuten(beforeText: ""), composeMode:
-                    .WordRegister(kana: "まじ", okuri: .None, composeText : "か", composeMode: [ .DirectInput ]))
-                switch m {
-                case ComposeMode.WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
-                    expect(kana).to(equal("まじ"))
-                    expect(okuri).to(beNil())
-                    expect(composeText).to(equal("が"))
-                    expect(composeMode[0] == .DirectInput).to(beTrue())
-                default:
-                    fail()
+            describe("濁点変換") {
+                it("入力中") {
+                    let m = handler.handle(.ToggleDakuten(beforeText: ""), composeMode:
+                        .WordRegister(kana: "まじ", okuri: .None, composeText : "か", composeMode: [ .DirectInput ]))
+                    switch m {
+                    case ComposeMode.WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
+                        expect(kana).to(equal("まじ"))
+                        expect(okuri).to(beNil())
+                        expect(composeText).to(equal("が"))
+                        expect(composeMode[0] == .DirectInput).to(beTrue())
+                    default:
+                        fail()
+                    }
+                }
+                it("冒頭") {
+                    let m = handler.handle(.ToggleDakuten(beforeText: ""), composeMode:
+                        .WordRegister(kana: "よ", okuri: "ふ", composeText : "", composeMode: [ .DirectInput ]))
+                    if let (kana, okuri) = kanji(m) {
+                        expect(kana).to(equal("よ"))
+                        expect(okuri).to(equal("ぶ"))
+                        expect(candidates(m)).toNot(beEmpty())
+                        expect(index(m)).to(equal(0))
+                    } else {
+                        fail()
+                    }
                 }
             }
             it("入力モード") {
