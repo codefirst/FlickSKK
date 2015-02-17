@@ -30,10 +30,10 @@ class KeyHandler {
             return kanjiCompose(keyEvent,
                 kana: kana, okuri: okuri, candidates: candidates, index: index,
                 level: level) ?? composeMode
-        case .WordRegister(kana: let kana, okuri: let okuri, composeText: let composeText, composeMode: let composeMode):
+        case .WordRegister(kana: let kana, okuri: let okuri, composeText: let composeText, composeMode: let m):
             return wordRegister(keyEvent,
-                kana: kana, okuri: okuri, composeText: composeText, composeMode: composeMode[0],
-                level: level)
+                kana: kana, okuri: okuri, composeText: composeText, composeMode: m[0],
+                level: level) ?? composeMode
         }
     }
 
@@ -95,24 +95,23 @@ class KeyHandler {
         return .KanaCompose(kana : kana, candidates: consult(kana, okuri: .None))
     }
 
+    private func makeKanjiCompose(kana : String, okuri : String?) -> ComposeMode {
+        let candidates = consult(kana, okuri: okuri)
+        if candidates.isEmpty {
+            return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
+        } else {
+            return .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: 0)
+        }
+    }
+
     private func kanaCompose(keyEvent : SKKKeyEvent, kana : String, candidates: [String], level: Level) -> ComposeMode? {
         switch keyEvent {
         case .Char(kana: let str, shift : let shift) where !shift:
             return makeKanaCompose(kana + str)
         case .Char(kana: let str, shift : _): // shiftが押されている
-            let candidates = consult(kana, okuri: str)
-            if candidates.isEmpty {
-                return .WordRegister(kana : kana, okuri : str, composeText: "", composeMode : [ .DirectInput ])
-            } else {
-                return .KanjiCompose(kana : kana, okuri : str, candidates: candidates, index: 0)
-            }
+            return makeKanjiCompose(kana, okuri: str)
         case .Space:
-            let candidates = consult(kana, okuri: .None)
-            if candidates.isEmpty {
-                return .WordRegister(kana : kana, okuri : .None, composeText: "", composeMode : [ .DirectInput ])
-            } else {
-                return .KanjiCompose(kana : kana, okuri : .None, candidates: candidates, index: 0)
-            }
+            return makeKanjiCompose(kana, okuri: .None)
         case .Enter:
             insertText(kana, level: level)
             return .DirectInput
@@ -170,23 +169,13 @@ class KeyHandler {
             return .KanjiCompose(kana : kana, okuri : .None, candidates: candidates, index: index - 1)
         case .ToggleDakuten(beforeText : _):
             if let okuri = okuri?.toggleDakuten() {
-                let candidates = consult(kana, okuri: okuri)
-                if candidates.isEmpty {
-                    return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
-                } else {
-                    return .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: 0)
-                }
+                return makeKanjiCompose(kana, okuri: okuri)
             } else {
                 return nil
             }
         case .ToggleUpperLower(beforeText: _):
             if let okuri = okuri?.toggleUpperLower() {
-                let candidates = consult(kana, okuri: okuri)
-                if candidates.isEmpty {
-                    return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
-                } else {
-                    return .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: 0)
-                }
+                return makeKanjiCompose(kana, okuri: okuri)
             } else {
                 return nil
             }
@@ -216,29 +205,44 @@ class KeyHandler {
 
     private func wordRegister(keyEvent : SKKKeyEvent,
         kana : String, okuri: String?, composeText: String, composeMode: ComposeMode,
-        level : Level) -> ComposeMode {
-       if (composeMode == ComposeMode.DirectInput) && (keyEvent == SKKKeyEvent.Enter) {
-           // 送り仮名はローマ字に変換する
-           let okuriRoman = okuri?.first()?.toRoman()?.first().map({c in String(c)})
+        level : Level) -> ComposeMode? {
+        switch (composeMode, keyEvent) {
+        case (.DirectInput, .Enter):
+            // 送り仮名はローマ字に変換する
+            let okuriRoman = okuri?.first()?.toRoman()?.first().map({c in String(c)})
 
-           // 辞書登録
-           dictionary.register(kana, okuri: okuriRoman, kanji: composeText)
+            // 辞書登録
+            dictionary.register(kana, okuri: okuriRoman, kanji: composeText)
 
-           // composeTextを入力する
-           insertText(composeText + (okuri ?? ""), level: level)
+            // composeTextを入力する
+            insertText(composeText + (okuri ?? ""), level: level)
 
-           // 状態遷移
-           return .DirectInput
-       } else if (composeMode == ComposeMode.DirectInput) && (keyEvent == SKKKeyEvent.Backspace) && (composeText.isEmpty) {
-           return makeKanaCompose(kana)
-       } else {
-           var text = composeText
-           let m = dispatch(keyEvent, composeMode: composeMode, level: .Compose(text: text, update: { str in
-               text = str
-           }))
-           return .WordRegister(kana: kana, okuri: okuri, composeText: text, composeMode: [m])
-       }
-
+            // 状態遷移
+            return .DirectInput
+        case (.DirectInput, .Backspace) where composeText.isEmpty:
+            // 先頭でバックスペース押した場合は、▽モードに戻る
+            return makeKanaCompose(kana)
+        case (.DirectInput, .ToggleDakuten(_)) where composeText.isEmpty:
+            // 先頭で濁点トグルしたら、再変換する
+            if let okuri = okuri?.toggleDakuten() {
+                return makeKanjiCompose(kana, okuri: okuri)
+            } else {
+                return nil
+            }
+        case (.DirectInput, .ToggleUpperLower(_)) where composeText.isEmpty:
+            // 先頭で大文字・小文字トグルしたら、再変換する
+            if let okuri = okuri?.toggleUpperLower() {
+                return makeKanjiCompose(kana, okuri: okuri)
+            } else {
+                return nil
+            }
+        default:
+            var text = composeText
+            let m = dispatch(keyEvent, composeMode: composeMode, level: .Compose(text: text, update: { str in
+                text = str
+            }))
+            return .WordRegister(kana: kana, okuri: okuri, composeText: text, composeMode: [m])
+        }
     }
 
     private func kanaType(inputMode : SKKInputMode) -> KanaType {
