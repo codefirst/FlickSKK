@@ -19,11 +19,13 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
     override func spec() {
         var handler : KeyHandler!
         let bundle = NSBundle(forClass: self.classForCoder)
+        let learn = SKKUserDictionaryFile.defaultLearnDictionaryPath()
         let jisyo = bundle.pathForResource("skk", ofType: "jisyo")
-        let dict = SKKDictionary(userDict: "", dicts:[jisyo!])
+        let dict = SKKDictionary(userDict: "", learnDict : learn, dicts:[jisyo!])
         dict.waitForLoading()
 
         beforeEach {
+            NSFileManager.defaultManager().removeItemAtPath(learn, error: nil)
             handler = KeyHandler(delegate: self, dictionary: dict)
             self.insertedText = ""
             self.inputMode = .Hirakana
@@ -190,6 +192,8 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     let m = handler.handle(.Select(index: 0), composeMode: composeMode)
                     expect(self.insertedText).to(equal("川"))
                     expect(m == .DirectInput).to(beTrue())
+                    // 学習したものが先頭にくる
+                    expect(dict.find("かわ", okuri: nil)[0]).to(equal("川"))
                 }
                 it("単語登録モード") {
                     let m = handler.handle(.Select(index: 2), composeMode: composeMode)
@@ -213,6 +217,8 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                 let m = handler.handle(.Char(kana: "に", shift: false), composeMode: composeMode)
                 expect(self.insertedText).to(equal("川に"))
                 expect(m == .DirectInput).to(beTrue())
+                // 学習したものが先頭にくる
+                expect(dict.find("かわ", okuri: nil)[0]).to(equal("川"))
             }
             describe("Space") {
                 it("単語がある場合") {
@@ -237,6 +243,8 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                 let m = handler.handle(.Enter, composeMode: composeMode)
                 expect(m == .DirectInput).to(beTrue())
                 expect(self.insertedText).to(equal("川"))
+                // 学習したものが先頭にくる
+                expect(dict.find("かわ", okuri: nil)[0]).to(equal("川"))
             }
             describe("Backspace") {
                 it("index == 0") {
@@ -277,6 +285,8 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     let m = handler.handle(.Select(index: 0), composeMode: composeMode)
                     expect(self.insertedText).to(equal("川"))
                     expect(m == .DirectInput).to(beTrue())
+                    // 学習したものが先頭にくる
+                    expect(dict.find("かわ", okuri: nil)[0]).to(equal("川"))
                 }
                 it("単語登録モード") {
                     let m = handler.handle(.Select(index: 2), composeMode: composeMode)
@@ -326,7 +336,7 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                         .WordRegister(kana: "まじ", okuri: .None, composeText : "本気", composeMode: [ .DirectInput ]))
                     expect(m == .DirectInput).to(beTrue())
                     expect(self.insertedText).to(equal("本気"))
-                    expect(dict.find("まじ", okuri: .None)).to(contain("本気"))
+                    expect(dict.find("まじ", okuri: .None)[0]).to(equal("本気"))
                 }
                 it("送りあり") {
                     let m = handler.handle(.Enter, composeMode:
@@ -451,6 +461,8 @@ class KeyHandlerSpec : QuickSpec, SKKDelegate {
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("か山"))
+                    // 学習したものが先頭にくる
+                    expect(dict.find("やま", okuri: nil)[0]).to(equal("山"))
                 default:
                     fail()
                 }

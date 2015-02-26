@@ -462,3 +462,17 @@ extension String {
         }
     }
 }
+
+extension Array {
+    func unique <T: Hashable> () -> [T] {
+        var result = [T]()
+        var addedDict = [T: Bool]()
+        for elem in self {
+            if addedDict[elem as T] == nil {
+                addedDict[elem as T] = true
+                result.append(elem as T)
+            }
+        }
+        return result
+    }
+}
