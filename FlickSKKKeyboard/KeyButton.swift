@@ -40,13 +40,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     }()
     lazy var sequenceLabel: UILabel = { [unowned self] in
         UILabel().tap { (l: UILabel) in
-            if let seq = self.key.sequence {
-                let left = seq.count > 1 ? seq[1] : " "
-                let top = seq.count > 2 ? seq[2] : " "
-                let right = seq.count > 3 ? seq[3] : " "
-                let bottom = seq.count > 4 ? seq[4] : " "
-                l.text = left + bottom + top + right
-            }
+            l.text = self.key.additionalButtonLabel
             l.font = Appearance.normalFont(12)
             l.textColor = UIColor.lightGrayColor()
             l.textAlignment = .Center
@@ -107,13 +101,10 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             })
         }
         switch key {
-        case .Seq(_):
+        case .Seq(_, showSeqs: true):
             let autolayout = self.autolayoutFormat(metrics, ["label": label, "sequence": sequenceLabel])
             autolayout("H:|[label]|")
             autolayout("H:|[sequence]|")
-//            addConstraint(NSLayoutConstraint(
-//                item: label, attribute: .CenterY, relatedBy: .Equal,
-//                toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
             autolayout("V:[label]-2-[sequence]-2-|")
         default:
             let autolayout = self.autolayoutFormat(metrics, ["label": label])
