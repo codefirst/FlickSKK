@@ -13,7 +13,7 @@ private var kGlobalDictionary: SKKDictionary?
 private var kLoadedTime : NSDate? = nil
 
 enum KanaFlickKey: Hashable {
-    case Seq(String)
+    case Seq(String, showSeqs: Bool)
     case Shift
     case Return
     case Backspace
@@ -26,9 +26,10 @@ enum KanaFlickKey: Hashable {
     case Space
     case Nothing
 
+    // メインの「あ」「A」「1」など
     var buttonLabel: String {
         switch self {
-        case let .Seq(s): return String(s[s.startIndex])
+        case let .Seq(s, _): return String(s[s.startIndex])
         case .Shift: return "⇧"
         case .Return: return "⏎"
         case .Backspace: return "⌫"
@@ -42,10 +43,25 @@ enum KanaFlickKey: Hashable {
         case .Nothing: return ""
         }
     }
+    
+    // 残りの「←↓↑→」など
+    var additionalButtonLabel: String? {
+        switch self {
+        case let .Seq(s, true):
+            let seq = Array(s).map{String($0)}
+            let left = seq.count > 1 ? seq[1] : " "
+            let top = seq.count > 2 ? seq[2] : " "
+            let right = seq.count > 3 ? seq[3] : " "
+            let bottom = seq.count > 4 ? seq[4] : " "
+            return left + bottom + top + right // ex. seq "1↓←↑→" -> "←↓↑→"
+        default:
+            return nil
+        }
+    }
 
     var sequence: [String]? {
         switch self {
-        case let .Seq(s): return Array(s).map({ (c : Character) -> String in return String(c)})
+        case let .Seq(s, _): return Array(s).map{String($0)}
         case .InputModeChange: return ["-ignore-","_","かな","カナ","ｶﾅ"]
         default: return nil
         }
@@ -85,7 +101,7 @@ enum KanaFlickKey: Hashable {
 
 func ==(l: KanaFlickKey, r: KanaFlickKey) -> Bool {
     switch (l, r) {
-    case let (.Seq(ls), .Seq(rs)): return ls == rs
+    case let (.Seq(ls, lShowSeqs), .Seq(rs, rShowSeqs)): return ls == rs && lShowSeqs && rShowSeqs
     default: return l.hashValue == r.hashValue
     }
 }
@@ -154,76 +170,78 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.keyboardMode = .InputMode(mode: .Hirakana)
         self.shiftEnabled = false
+        let seq = {(s: String) -> KanaFlickKey in .Seq(s, showSeqs: false)}
+        let seqWithSymbols = {(s: String) -> KanaFlickKey in .Seq(s, showSeqs: true)}
         self.keypads = [
             .InputMode(mode: .Hirakana): KeyPad(keys: [
-                .Seq("あいうえお"),
-                .Seq("かきくけこ"),
-                .Seq("さしすせそ"),
-                .Seq("たちつてと"),
-                .Seq("なにぬねの"),
-                .Seq("はひふへほ"),
-                .Seq("まみむめも"),
-                .Seq("や「ゆ」よ"),
-                .Seq("らりるれろ"),
+                seq("あいうえお"),
+                seq("かきくけこ"),
+                seq("さしすせそ"),
+                seq("たちつてと"),
+                seq("なにぬねの"),
+                seq("はひふへほ"),
+                seq("まみむめも"),
+                seq("や「ゆ」よ"),
+                seq("らりるれろ"),
                 .KomojiDakuten,
-                .Seq("わをんー"),
-                .Seq("、。？！"),
+                seq("わをんー"),
+                seqWithSymbols("、。？！"),
                 ]),
             .InputMode(mode: .Katakana): KeyPad(keys: [
-                .Seq("アイウエオ"),
-                .Seq("カキクケコ"),
-                .Seq("サシスセソ"),
-                .Seq("タチツテト"),
-                .Seq("ナニヌネノ"),
-                .Seq("ハヒフヘホ"),
-                .Seq("マミムメモ"),
-                .Seq("ヤ「ユ」ヨ"),
-                .Seq("ラリルレロ"),
+                seq("アイウエオ"),
+                seq("カキクケコ"),
+                seq("サシスセソ"),
+                seq("タチツテト"),
+                seq("ナニヌネノ"),
+                seq("ハヒフヘホ"),
+                seq("マミムメモ"),
+                seq("ヤ「ユ」ヨ"),
+                seq("ラリルレロ"),
                 .KomojiDakuten,
-                .Seq("ワヲンー"),
-                .Seq("、。？！"),
+                seq("ワヲンー"),
+                seqWithSymbols("、。？！"),
                 ]),
             .InputMode(mode: .HankakuKana): KeyPad(keys: [
-                .Seq("ｱｲｳｴｵ"),
-                .Seq("ｶｷｸｹｺ"),
-                .Seq("ｻｼｽｾｿ"),
-                .Seq("ﾀﾁﾂﾃﾄ"),
-                .Seq("ﾅﾆﾇﾈﾉ"),
-                .Seq("ﾊﾋﾌﾍﾎ"),
-                .Seq("ﾏﾐﾑﾒﾓ"),
-                .Seq("ﾔ「ﾕ」ﾖ"),
-                .Seq("ﾗﾘﾙﾚﾛ"),
+                seq("ｱｲｳｴｵ"),
+                seq("ｶｷｸｹｺ"),
+                seq("ｻｼｽｾｿ"),
+                seq("ﾀﾁﾂﾃﾄ"),
+                seq("ﾅﾆﾇﾈﾉ"),
+                seq("ﾊﾋﾌﾍﾎ"),
+                seq("ﾏﾐﾑﾒﾓ"),
+                seq("ﾔ「ﾕ」ﾖ"),
+                seq("ﾗﾘﾙﾚﾛ"),
                 .KomojiDakuten,
-                .Seq("ﾜｦﾝ-"),
-                .Seq("、。？！"),
+                seq("ﾜｦﾝ-"),
+                seqWithSymbols("、。？！"),
                 ]),
             .Number: KeyPad(keys: [
-                .Seq("1"),
-                .Seq("2"),
-                .Seq("3"),
-                .Seq("4"),
-                .Seq("5"),
-                .Seq("6"),
-                .Seq("7"),
-                .Seq("8"),
-                .Seq("9"),
-                .Seq("()[]"),
-                .Seq("0～⋯"),
-                .Seq(".,-/"),
+                seqWithSymbols("1←↑→↓"),
+                seqWithSymbols("2"),
+                seqWithSymbols("3"),
+                seqWithSymbols("4"),
+                seqWithSymbols("5"),
+                seqWithSymbols("6"),
+                seqWithSymbols("7"),
+                seqWithSymbols("8"),
+                seqWithSymbols("9"),
+                seqWithSymbols("()[]"),
+                seqWithSymbols("0～⋯"),
+                seqWithSymbols(".,-/"),
                 ]),
             .Alphabet: KeyPad(keys: [
-                .Seq("@#/&_"),
-                .Seq("abc"),
-                .Seq("def"),
-                .Seq("ghi"),
-                .Seq("jkl"),
-                .Seq("mno"),
-                .Seq("pqrs"),
-                .Seq("tuv"),
-                .Seq("wxyz"),
+                seqWithSymbols("@#/&_"),
+                seq("abc"),
+                seq("def"),
+                seq("ghi"),
+                seq("jkl"),
+                seq("mno"),
+                seq("pqrs"),
+                seq("tuv"),
+                seq("wxyz"),
                 .UpperLower,
-                .Seq("'\"()"),
-                .Seq(".,?!")
+                seqWithSymbols("'\"()"),
+                seqWithSymbols(".,?!"),
                 ]),
         ]
 
@@ -428,7 +446,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     func keyTapped(key: KanaFlickKey, _ index: Int?) {
         switch key {
-        case let .Seq(s):
+        case let .Seq(s, _):
             let kana = Array(s)[index ?? 0]
             self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled))
             self.prevShiftEnabled = self.shiftEnabled

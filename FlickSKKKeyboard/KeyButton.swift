@@ -38,6 +38,14 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             autolayout("V:|-p-[iv]-p-|")
         }
     }()
+    lazy var sequenceLabel: UILabel = { [unowned self] in
+        UILabel().tap { (l: UILabel) in
+            l.text = self.key.additionalButtonLabel
+            l.font = Appearance.normalFont(12)
+            l.textColor = UIColor.lightGrayColor()
+            l.textAlignment = .Center
+        }
+    }()
 
     var metrics: [String:CGFloat] {
         return ["p": 10]
@@ -92,13 +100,17 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 return ()
             })
         }
-
-        let views = [
-            "label": label,
-        ]
-        let autolayout = self.autolayoutFormat(metrics, views)
-        autolayout("H:|[label]|")
-        autolayout("V:|[label]|")
+        switch key {
+        case .Seq(_, showSeqs: true):
+            let autolayout = self.autolayoutFormat(metrics, ["label": label, "sequence": sequenceLabel])
+            autolayout("H:|[label]|")
+            autolayout("H:|[sequence]|")
+            autolayout("V:[label]-2-[sequence]-2-|")
+        default:
+            let autolayout = self.autolayoutFormat(metrics, ["label": label])
+            autolayout("H:|[label]|")
+            autolayout("V:|[label]|")
+        }
 
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gestureTapped:"))
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
