@@ -20,7 +20,13 @@ class TextEngine {
     // テキストを確定させる。 learnを指定していれば、変換結果の学習も行なう。
     func insert(text : String, learn : (String, String?)?, status : Status) -> Status {
         if let (kana, okuri) = learn {
-            self.dictionary.learn(kana, okuri: okuri, kanji: text)
+            if okuri == nil {
+                self.dictionary.learn(kana, okuri: okuri, kanji: text)
+            } else {
+                // 送り仮名がある場合、textは送り仮名付きになっている。
+                // 辞書には送り仮名以外の部分を登録する必要がある。
+                self.dictionary.learn(kana, okuri: okuri, kanji: text.butLast())
+            }
         }
         return insertText(text, status : status)
     }

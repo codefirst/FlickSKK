@@ -88,9 +88,7 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                     let m = handler.handle(.Select(index: 0), composeMode: composeMode)
                     expect(delegate.insertedText).to(equal("川"))
                     expect(m == .DirectInput).to(beTrue())
-                    // 学習したものが先頭にくる
-                    expect(self.dictionary.find("かわ", okuri: nil)[0]).to(equal("川"))
-                }
+                                   }
                 it("単語登録モード") {
                     let m = handler.handle(.Select(index: 2), composeMode: composeMode)
                     switch m {
@@ -102,6 +100,24 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                     default:
                         fail()
                     }
+                }
+            }
+            describe("学習") {
+                it("送りなし") {
+                    let m = handler.handle(.Select(index: 0), composeMode: composeMode)
+                    // 学習したものが先頭にくる
+                    expect(self.dictionary.find("かわ", okuri: nil)[0]).to(equal("川"))
+                }
+                it("送りあり") {
+                    let composeMode = ComposeMode.KanjiCompose(kana: "い", okuri: "る", candidates: ["入る", "居る"], index: 0)
+                    let m = handler.handle(.Select(index: 1), composeMode: composeMode)
+
+                    // 学習したものが先頭にくる
+                    let xs = self.dictionary.find("い", okuri: "r")
+                    expect(xs).notTo(beEmpty())
+
+                    // 送り仮名は学習しない
+                    expect(xs[0]).to(equal("居"))
                 }
             }
         }
