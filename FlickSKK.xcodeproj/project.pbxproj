@@ -16,7 +16,6 @@
 		130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
 		130CA3981A4EFA4200A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
 		131DBA8F1A42403100756CFA /* WordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */; };
-		132607DC1A3D65C000DA9F8C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; };
 		133432C11A4D95030080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
 		133432C61A4D9BA90080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
 		133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
@@ -46,7 +45,6 @@
 		138EB85F1A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
 		138EB8601A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
 		138EB8611A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
-		1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; };
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
@@ -87,8 +85,6 @@
 		EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5619FBE70400265181 /* iTunesArtwork@2x */; };
 		EA985FE619D84AAE0043564C /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		EA985FE819D84D060043564C /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
-		EA997CBB1A3D8218006D5AA2 /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 132607D91A3D658000DA9F8C /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EA997CBC1A3D8220006D5AA2 /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 1394A9AA19E2D81200F01BF0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EAB03E3C1A765DAF00F3F28F /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* SessionView.swift */; };
 		EAB03E411A76607A00F3F28F /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB03E3B1A765DAF00F3F28F /* SessionView.swift */; };
 		EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EACD529D19F3F0C4001FB2A7 /* Localizable.strings */; };
@@ -112,34 +108,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		132607D81A3D658000DA9F8C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 132607C91A3D658000DA9F8C /* Quick.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5A5D117C19473F2100F6D13D;
-			remoteInfo = "Quick-iOS";
-		};
-		132607DA1A3D658000DA9F8C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 132607C91A3D658000DA9F8C /* Quick.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5A5D118619473F2100F6D13D;
-			remoteInfo = "Quick-iOSTests";
-		};
-		1394A9A919E2D81200F01BF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F1A74291940169200FFFC47;
-			remoteInfo = "Nimble-iOS";
-		};
-		1394A9AB19E2D81200F01BF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1F1A74341940169200FFFC47;
-			remoteInfo = "Nimble-iOSTests";
-		};
 		1394A9B319E2D97200F01BF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EAD4B55819D5CB50007B6636 /* Project object */;
@@ -177,8 +145,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EA997CBC1A3D8220006D5AA2 /* Nimble.framework in Copy Frameworks */,
-				EA997CBB1A3D8218006D5AA2 /* Quick.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,7 +169,6 @@
 		130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatterSpec.swift; sourceTree = "<group>"; };
 		131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterViewController.swift; sourceTree = "<group>"; };
-		132607C91A3D658000DA9F8C /* Quick.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Quick.xcodeproj; path = Vendor/Quick/Quick.xcodeproj; sourceTree = SOURCE_ROOT; };
 		133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKNumberPreprocessor.swift; sourceTree = "<group>"; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
@@ -223,7 +188,6 @@
 		138968CD1A85E2F400614511 /* SKKEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKEngine.swift; sourceTree = "<group>"; };
 		138968D01A85ED7300614511 /* ComposeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeMode.swift; sourceTree = "<group>"; };
 		138EB85E1A9035D300CB16BC /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nimble.xcodeproj; path = Vendor/Nimble/Nimble.xcodeproj; sourceTree = SOURCE_ROOT; };
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
@@ -295,8 +259,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				132607DC1A3D65C000DA9F8C /* Quick.framework in Frameworks */,
-				1394A9B519E2D97D00F01BF0 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,15 +279,6 @@
 				F3DD18F195A212F9D8B92DB9 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		132607CA1A3D658000DA9F8C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				132607D91A3D658000DA9F8C /* Quick.framework */,
-				132607DB1A3D658000DA9F8C /* Quick-iOSTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		1327F7B01A4FB161009796FB /* Utilities */ = {
@@ -413,15 +366,6 @@
 				135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */,
 			);
 			name = SKKEngine;
-			sourceTree = "<group>";
-		};
-		1394A9A319E2D81200F01BF0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1394A9AA19E2D81200F01BF0 /* Nimble.framework */,
-				1394A9AC19E2D81200F01BF0 /* NimbleTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		13DFEAC319F079C8006D7E40 /* SKKDictionary */ = {
@@ -550,8 +494,6 @@
 		EAD4B57819D5CB50007B6636 /* FlickSKKTests */ = {
 			isa = PBXGroup;
 			children = (
-				1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */,
-				132607C91A3D658000DA9F8C /* Quick.xcodeproj */,
 				135A44C11A88FB7F0089F84E /* Utilities */,
 				135A44C01A88FB710089F84E /* SKKDictionary */,
 				138968D41A85F34200614511 /* SKKEngine */,
@@ -726,16 +668,6 @@
 			mainGroup = EAD4B55719D5CB50007B6636;
 			productRefGroup = EAD4B56119D5CB50007B6636 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 1394A9A319E2D81200F01BF0 /* Products */;
-					ProjectRef = 1394A9A219E2D81200F01BF0 /* Nimble.xcodeproj */;
-				},
-				{
-					ProductGroup = 132607CA1A3D658000DA9F8C /* Products */;
-					ProjectRef = 132607C91A3D658000DA9F8C /* Quick.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				EAD4B55F19D5CB50007B6636 /* FlickSKK */,
@@ -745,37 +677,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		132607D91A3D658000DA9F8C /* Quick.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Quick.framework;
-			remoteRef = 132607D81A3D658000DA9F8C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		132607DB1A3D658000DA9F8C /* Quick-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Quick-iOSTests.xctest";
-			remoteRef = 132607DA1A3D658000DA9F8C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1394A9AA19E2D81200F01BF0 /* Nimble.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Nimble.framework;
-			remoteRef = 1394A9A919E2D81200F01BF0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1394A9AC19E2D81200F01BF0 /* NimbleTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NimbleTests.xctest;
-			remoteRef = 1394A9AB19E2D81200F01BF0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		EA349A411A903BDE00084BDE /* Resources */ = {
@@ -1131,7 +1032,6 @@
 				);
 				INFOPLIST_FILE = FlickSKKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlickSKK.app/FlickSKK";
 			};
@@ -1147,7 +1047,6 @@
 				);
 				INFOPLIST_FILE = FlickSKKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PODS_ROOT = "${SRCROOT}/Pods";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlickSKK.app/FlickSKK";
 			};
