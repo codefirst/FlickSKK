@@ -3,6 +3,7 @@
 "Okuri-Ari" = "送りあり";
 "Okuri-Nashi" = "送りなし";
 "Setup" = "初期設定";
+"Reset Learn Dictionary" = "学習結果のリセット";
 "How to use" = "使い方";
 "Register" = "登録";
 "HowToRegisterWordToUserDictionary" = "ユーザー辞書への単語登録はキーボードからも行なえます。\n1. 変換時にspaceをタップして変換候補が無い場合、[登録:]モードに入ります。\n2. 登録したい単語を入力し「⏎」をタップすると登録されます。\n\n※キーボードのフルアクセスが設定アプリで許可されていない場合は、ユーザー辞書の保存やFlickSKKアプリから参照することはできません。";
@@ -11,4 +12,5 @@
 "okuri" = "おくり";
 "yomi" = "よみ";
 "NextCandidate" = "次候補";
-
+"Cancel" = "キャンセル";
+"Reset" = "リセット";

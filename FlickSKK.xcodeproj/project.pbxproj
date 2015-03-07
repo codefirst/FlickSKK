@@ -70,6 +70,8 @@
 		13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE519D84AAE0043564C /* KeyPad.swift */; };
 		13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
+		13FAB2111AAB3AF30014C218 /* DictionaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FAB2101AAB3AF30014C218 /* DictionaryCache.swift */; };
+		13FAB2121AAB3AF30014C218 /* DictionaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FAB2101AAB3AF30014C218 /* DictionaryCache.swift */; };
 		13FFFD471A3D24F70049D45D /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		2CA134E9C453E4BC5F94BF95 /* Pods_FlickSKKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FFB16661B439FA5D824AE2 /* Pods_FlickSKKTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		80E568DB1AA358920029DDBD /* flickskk_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E568DA1AA358920029DDBD /* flickskk_white.png */; };
@@ -202,6 +204,7 @@
 		13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModeFactory.swift; sourceTree = "<group>"; };
 		13F4525119DC538B001A4A1B /* IOUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUtil.h; sourceTree = "<group>"; };
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
+		13FAB2101AAB3AF30014C218 /* DictionaryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryCache.swift; sourceTree = "<group>"; };
 		30FFB16661B439FA5D824AE2 /* Pods_FlickSKKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3844229268B653C0DEAC56F1 /* Pods-FlickSKKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.release.xcconfig"; sourceTree = "<group>"; };
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -314,6 +317,7 @@
 		135A44B41A881DD70089F84E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				13FAB2101AAB3AF30014C218 /* DictionaryCache.swift */,
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
 				EAB03E3B1A765DAF00F3F28F /* SessionView.swift */,
 				EA985FE519D84AAE0043564C /* KeyPad.swift */,
@@ -857,6 +861,7 @@
 				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				138EB8601A9035D300CB16BC /* Appearance.swift in Sources */,
 				137AAB4E1A3C13970092F8A5 /* KeyRepeatTimer.swift in Sources */,
+				13FAB2111AAB3AF30014C218 /* DictionaryCache.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
 				136610BD1AA0100E006AA8F1 /* MockDelegate.swift in Sources */,
@@ -900,6 +905,7 @@
 				1306495B1A871FEE0044B225 /* KeyHandler.swift in Sources */,
 				136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */,
 				138968CE1A85E2F400614511 /* SKKEngine.swift in Sources */,
+				13FAB2121AAB3AF30014C218 /* DictionaryCache.swift in Sources */,
 				13E33E7F1A9E855500CD1140 /* DictionaryEngine.swift in Sources */,
 				EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */,
 				1306495D1A8721180044B225 /* SKKKeyEvent.swift in Sources */,
