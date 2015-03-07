@@ -73,6 +73,7 @@
 		13FFFD471A3D24F70049D45D /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		2CA134E9C453E4BC5F94BF95 /* Pods_FlickSKKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30FFB16661B439FA5D824AE2 /* Pods_FlickSKKTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		80E568DB1AA358920029DDBD /* flickskk_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E568DA1AA358920029DDBD /* flickskk_white.png */; };
+		80EA0A2A1AAB3C1300D7148D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 80EA0A291AAB3C1300D7148D /* Settings.bundle */; };
 		EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */; };
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
@@ -205,6 +206,7 @@
 		3844229268B653C0DEAC56F1 /* Pods-FlickSKKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.release.xcconfig"; sourceTree = "<group>"; };
 		70E538640700B5CE0D567B64 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		80E568DA1AA358920029DDBD /* flickskk_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickskk_white.png; sourceTree = "<group>"; };
+		80EA0A291AAB3C1300D7148D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		EA075F7E19DED7A4009AEF9F /* KeyboardSpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardSpacerView.swift; sourceTree = "<group>"; };
 		EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
@@ -482,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD4B56519D5CB50007B6636 /* AppDelegate.swift */,
+				80EA0A291AAB3C1300D7148D /* Settings.bundle */,
 				EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */,
 				EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */,
 				131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */,
@@ -585,6 +588,7 @@
 				EAD4B55D19D5CB50007B6636 /* Frameworks */,
 				EAD4B55E19D5CB50007B6636 /* Resources */,
 				EAD4B59719D5CB8A007B6636 /* Embed App Extensions */,
+				80EA0A2B1AAB3C8F00D7148D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -706,6 +710,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80EA0A2A1AAB3C1300D7148D /* Settings.bundle in Resources */,
 				EA892D5719FBE70400265181 /* iTunesArtwork in Resources */,
 				EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */,
 				EACD529A19F3F0C4001FB2A7 /* Localizable.strings in Resources */,
@@ -766,6 +771,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		80EA0A2B1AAB3C8F00D7148D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "VERSION_NUMBER=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$INFOPLIST_FILE\")\n/usr/libexec/PlistBuddy ${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}/Settings.bundle/Root.plist -c \"set PreferenceSpecifiers:0:DefaultValue $VERSION_NUMBER\"";
 		};
 		CDB86457836333471C9566EC /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
