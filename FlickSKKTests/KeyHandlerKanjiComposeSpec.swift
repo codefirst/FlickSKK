@@ -27,6 +27,15 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                 it("単語がある場合") {
                     let m = handler.handle(.Space, composeMode: composeMode)
                     let (kana, okuri) = self.kanji(m)!
+                    expect(kana).to(equal("かわ"))
+                    expect(okuri).to(equal(""))
+                    expect(self.index(m)).to(equal(1))
+                }
+                it("送り仮名がある場合") {
+                    let m = handler.handle(.Space, composeMode: ComposeMode.KanjiCompose(kana: "い", okuri: "る", candidates: ["居る", "入る"], index: 0))
+                    let (kana, okuri) = self.kanji(m)!
+                    expect(kana).to(equal("い"))
+                    expect(okuri).to(equal("る"))
                     expect(self.index(m)).to(equal(1))
                 }
                 it("単語がない場合") {

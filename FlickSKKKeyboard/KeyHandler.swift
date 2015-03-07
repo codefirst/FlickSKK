@@ -115,9 +115,9 @@ class KeyHandler {
             return self.dispatch(keyEvent, composeMode: .DirectInput, status: status)
         case .Space:
             if index + 1 < candidates.count {
-                return .KanjiCompose(kana : kana, okuri : .None, candidates: candidates, index: index + 1)
+                return .KanjiCompose(kana : kana, okuri : okuri, candidates: candidates, index: index + 1)
             } else {
-                return .WordRegister(kana : kana, okuri : .None, composeText: "", composeMode : [ .DirectInput ])
+                return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
             }
         case .Enter:
             text.insert(candidates[index], learn: (kana, okuri), status : status)
