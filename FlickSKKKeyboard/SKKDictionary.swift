@@ -18,6 +18,11 @@ class SKKDictionary : NSObject {
     dynamic var isWaitingForLoad : Bool = false
     class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
 
+    class func resetLearnDictionary() {
+        let path = SKKUserDictionaryFile.defaultLearnDictionaryPath()
+        NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+    }
+
     init(userDict: String, learnDict : String, dicts : [String]){
         super.init()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {

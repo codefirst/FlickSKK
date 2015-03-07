@@ -22,7 +22,7 @@ class KeyHandlerBaseSpec : QuickSpec {
     // キーハンドラの取得
     func create(dictionary : SKKDictionary) -> (KeyHandler, MockDelegate) {
         // 学習辞書をリセットする
-        NSFileManager.defaultManager().removeItemAtPath(learnDictionaryPath(), error: nil)
+        SKKDictionary.resetLearnDictionary()
 
         // キーハンドラの生成
         let delegate = MockDelegate()

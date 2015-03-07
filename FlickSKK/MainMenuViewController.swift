@@ -9,7 +9,8 @@
 import UIKit
 
 class MainMenuViewController: UITableViewController {
-    var sections : [(title: String?, rows: [(title: String, action: Void -> Void)])]!
+    typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: Void -> Void)
+    var sections : [(title: String?, rows: [row])]!
 
     convenience override init() {
         self.init(style: .Grouped)
@@ -24,12 +25,13 @@ class MainMenuViewController: UITableViewController {
 
         weak var weakSelf = self
         sections = [
-            (title: nil, rows: [(title: NSLocalizedString("Setup", comment: ""), action: { weakSelf?.gotoSetup(); return})]),
-            (title: nil, rows: [(title: NSLocalizedString("How to use", comment: ""), action: { weakSelf?.gotoHowToUse(); return})]),
+            (title: nil, rows: [item("Setup", action: { weakSelf?.gotoSetup(); return})]),
+            (title: nil, rows: [item("How to use", action: { weakSelf?.gotoHowToUse(); return})]),
             // FIXME: 設定項目をなんか増やす
             // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
-            (title: nil, rows: [(title: NSLocalizedString("User Dictionary", comment: ""), action: { weakSelf?.gotoUserDictionary(); return})]),
-            (title: nil, rows: [(title: NSLocalizedString("License", comment: ""), action: { weakSelf?.gotoLicense(); return})]),
+            (title: nil, rows: [item("User Dictionary", action: { weakSelf?.gotoUserDictionary(); return})]),
+            (title: nil, rows: [item("Reset Learn Dictionary", accessoryType: .None, action: { weakSelf?.reset(); return})]),
+            (title: nil, rows: [item("License", action: { weakSelf?.gotoLicense(); return})])
         ]
     }
 
@@ -57,7 +59,7 @@ class MainMenuViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
         let row = sections[indexPath.section].rows[indexPath.row]
         cell.textLabel?.text = row.title
-        cell.accessoryType = .DisclosureIndicator
+        cell.accessoryType = row.accessoryType
         return cell
     }
 
@@ -65,6 +67,10 @@ class MainMenuViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()
+    }
+
+    private func item(title : String, accessoryType: UITableViewCellAccessoryType = .DisclosureIndicator, action : Void -> Void) -> row {
+        return (title: NSLocalizedString(title, comment: ""), accessoryType: accessoryType, action: action)
     }
 
     // MARK: - Actions
@@ -87,6 +93,15 @@ class MainMenuViewController: UITableViewController {
 
     func gotoUserDictionary() {
         navigationController?.pushViewController(UserDictionaryViewController(), animated: true)
+    }
+
+    func reset() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .Destructive, handler: { action in
+            SKKDictionary.resetLearnDictionary()
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 
     func gotoLicense() {
