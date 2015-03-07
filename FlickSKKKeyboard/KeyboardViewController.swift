@@ -9,8 +9,7 @@
 import UIKit
 
 
-private var kGlobalDictionary: SKKDictionary?
-private var kLoadedTime : NSDate? = nil
+
 
 enum KanaFlickKey: Hashable {
     case Seq(String, showSeqs: Bool)
@@ -163,6 +162,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     var inputMode : SKKInputMode = .Hirakana
 
+    let dictionary : SKKDictionary?
+
     convenience override init() {
         self.init(nibName: nil, bundle: nil)
     }
@@ -264,10 +265,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 return
             }
         }
-        loadDictionary()
-        self.engine = SKKEngine(delegate: self, dictionary: kGlobalDictionary!)
+        dictionary = DictionaryCache.load()
+        self.engine = SKKEngine(delegate: self, dictionary: dictionary!)
         self.sessionView = SessionView(engine: self.engine)
-        kGlobalDictionary!.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
+        dictionary?.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
         updateControlButtons()
     }
 
@@ -276,7 +277,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     deinit {
-        kGlobalDictionary!.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
+        dictionary?.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
     }
 
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
@@ -350,27 +351,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
 //            self.heightConstraint.constant += 100
 //        }
-    }
-
-    private func loadDictionary() {
-        let userDict = SKKUserDictionaryFile.defaultUserDictionaryPath()
-        let learnDict = SKKUserDictionaryFile.defaultLearnDictionaryPath()
-        let mtime = getModifiedTime(userDict)
-
-        if kGlobalDictionary == nil || kLoadedTime != mtime {
-            let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-            kGlobalDictionary = SKKDictionary(userDict: userDict, learnDict: learnDict, dicts: [dict!])
-            kLoadedTime = mtime
-        }
-    }
-
-    private func getModifiedTime(path: String) -> NSDate? {
-        let fm = NSFileManager.defaultManager()
-        if let attrs = fm.attributesOfItemAtPath(path, error: nil) {
-            return attrs[NSFileModificationDate] as? NSDate
-        } else {
-            return nil
-        }
     }
 
     private func setupViewConstraints() {
