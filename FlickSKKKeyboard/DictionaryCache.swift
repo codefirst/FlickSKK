@@ -41,6 +41,16 @@ class DictionaryCache {
         }
     }
 
+    // キャッシュの最終更新日時を更新する
+    func update(path: String, closure : () -> ()) {
+        closure()
+        if let (_, file) = kCache[path] {
+            if let mtime = getModifiedTime(path) {
+                kCache[path] = (mtime, file)
+            }
+        }
+    }
+
     private func getModifiedTime(path: String) -> NSDate? {
         let fm = NSFileManager.defaultManager()
         if let attrs = fm.attributesOfItemAtPath(path, error: nil) {

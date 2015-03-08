@@ -61,8 +61,10 @@ class SKKDictionary : NSObject {
     func register(normal : String, okuri: String?, kanji: String) {
         userDictionary?.register(normal, okuri: okuri, kanji: kanji)
         loader.async {
-            self.userDictionary?.serialize()
-            ()
+            self.cache.update(DictionarySettings.defaultUserDictionaryPath()) {
+                self.userDictionary?.serialize()
+                ()
+            }
         }
     }
 
@@ -70,8 +72,10 @@ class SKKDictionary : NSObject {
     func learn(normal : String, okuri: String?, kanji: String) {
         learnDictionary?.register(normal, okuri: okuri, kanji: kanji)
         loader.async {
-            self.learnDictionary?.serialize()
-            ()
+            self.cache.update(DictionarySettings.defaultLearnDictionaryPath()) {
+                self.learnDictionary?.serialize()
+                ()
+            }
         }
     }
 
