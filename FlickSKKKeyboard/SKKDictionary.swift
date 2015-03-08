@@ -1,39 +1,49 @@
-//
-//  SKKDictionary.swift
-//  FlickSKK
-//
-//  Created by mzp on 2014/09/29.
-//  Copyright (c) 2014年 BAN Jun. All rights reserved.
-//
-
-import Foundation
-
+// FlickSKKで使う辞書のインタフェース
+// メモリを節約するために
+// ・辞書のロードの非同期実行
+// ・ロード結果のキャッシュ
+// などを行なう。
 class SKKDictionary : NSObject {
-    private var initialized = false
+    // すべての辞書(先頭から順に検索される)
+    private var dictionaries : [ SKKDictionaryFile ] = []
 
-    var dictionaries : [ SKKDictionaryFile ] = []
-    var userDict : SKKUserDictionaryFile?
-    var learnDict : SKKUserDictionaryFile?
+    // ユーザ辞書
+    private var userDictionary : SKKUserDictionaryFile?
 
+    // 学習辞書
+    private var learnDictionary : SKKUserDictionaryFile?
+
+    // ロード完了を監視するために Key value observing を使う
     dynamic var isWaitingForLoad : Bool = false
     class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
 
+    private let loader = AsyncLoader()
+    private let cache = DictionaryCache()
+
     class func resetLearnDictionary() {
-        let path = SKKUserDictionaryFile.defaultLearnDictionaryPath()
+        let path = DictionarySettings.defaultLearnDictionaryPath()
         NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
     }
 
-    init(userDict: String, learnDict : String, dicts : [String]){
+    override init() {
         super.init()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.userDict = SKKUserDictionaryFile(path: userDict)
-            self.learnDict = SKKUserDictionaryFile(path: learnDict)
-            self.dictionaries = [ self.learnDict!, self.userDict! ] + dicts.map({ x -> SKKDictionaryFile in
-                SKKLocalDictionaryFile(path: x)})
-            self.initialized = true
-        })
+        loader.load {
+            let dictionary =
+                self.cache.loadLocalDicitonary(DictionarySettings.defaultDicitonaryPath()) {
+                    return SKKLocalDictionaryFile(path: $0)
+                }
+            self.userDictionary  = self.cache.loadUserDicitonary(DictionarySettings.defaultUserDictionaryPath()) {
+                    return SKKUserDictionaryFile(path: $0)
+                }
+            self.learnDictionary =
+                self.cache.loadUserDicitonary(DictionarySettings.defaultLearnDictionaryPath()) {
+                return SKKUserDictionaryFile(path: $0)
+            }
+            self.dictionaries = [ self.learnDictionary!, self.userDictionary!, dictionary ]
+        }
     }
 
+    // 辞書を検索する
     func find(normal : String, okuri : String?) -> [ String ] {
         self.waitForLoading()
 
@@ -47,29 +57,30 @@ class SKKDictionary : NSObject {
         return xs
     }
 
+    // 単語を登録する
     func register(normal : String, okuri: String?, kanji: String) {
-        userDict?.register(normal, okuri: okuri, kanji: kanji)
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.userDict?.serialize()
+        userDictionary?.register(normal, okuri: okuri, kanji: kanji)
+        loader.async {
+            self.userDictionary?.serialize()
             ()
-        })
+        }
     }
 
+    // 確定結果を学習する
     func learn(normal : String, okuri: String?, kanji: String) {
-        learnDict?.register(normal, okuri: okuri, kanji: kanji)
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.learnDict?.serialize()
+        learnDictionary?.register(normal, okuri: okuri, kanji: kanji)
+        loader.async {
+            self.learnDictionary?.serialize()
             ()
-        })
+        }
     }
 
+    // 辞書のロード完了を待つ
     func waitForLoading() {
-        if initialized { return }
+        if loader.initialized { return }
 
         self.isWaitingForLoad = true
-        while !self.initialized {
-            NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: 0.1))
-        }
+        self.loader.wait()
         self.isWaitingForLoad = false
     }
 }

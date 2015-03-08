@@ -3,21 +3,11 @@ import Nimble
 
 class KeyHandlerBaseSpec : QuickSpec {
     lazy var dictionary : SKKDictionary = {
-        let dict = SKKDictionary(userDict: "", learnDict : self.learnDictionaryPath(), dicts:[self.dictionaryPath()])
+        DictionarySettings.bundle = NSBundle(forClass: self.classForCoder)
+        let dict = SKKDictionary()
         dict.waitForLoading()
         return dict
     }()
-
-    // 学習辞書パスの取得
-    func learnDictionaryPath() -> String {
-        return SKKUserDictionaryFile.defaultLearnDictionaryPath()
-    }
-
-    // L辞書パスの取得
-    func dictionaryPath() -> String {
-        let bundle = NSBundle(forClass: self.classForCoder)
-        return bundle.pathForResource("skk", ofType: "jisyo")!
-    }
 
     // キーハンドラの取得
     func create(dictionary : SKKDictionary) -> (KeyHandler, MockDelegate) {

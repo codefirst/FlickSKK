@@ -1,31 +1,47 @@
-private var kGlobalDictionary: SKKDictionary?
-private var kLoadedTime : [String:NSDate] = [:]
+private var kDicitonary : SKKLocalDictionaryFile?
+private var kCache : [String:(NSDate, SKKUserDictionaryFile)] = [:]
 
 // 辞書のロードには時間がかかるので、一度ロードした結果をキャッシュする
 // グローバル変数にいれておけば、次回起動時にも残っている(ことがある)
 class DictionaryCache {
-    class func load() -> SKKDictionary? {
-        let userDict = SKKUserDictionaryFile.defaultUserDictionaryPath()
-        let learnDict = SKKUserDictionaryFile.defaultLearnDictionaryPath()
-
-        // 辞書がロードされていない or ユーザ辞書・学習辞書が更新されている場合は再ロードする
-        if kGlobalDictionary == nil || isUpdated(userDict) || isUpdated(learnDict) {
-            let dict = NSBundle.mainBundle().pathForResource("skk", ofType: "jisyo")
-            kGlobalDictionary = SKKDictionary(userDict: userDict, learnDict: learnDict, dicts: [dict!])
+    // L辞書等のインストール済みの辞書をロードする
+    // FIXME: 現時点では二個以上の辞書ファイルは存在しないと仮定している
+    func loadLocalDicitonary(path: String, closure: String -> SKKLocalDictionaryFile) -> SKKLocalDictionaryFile {
+        if kDicitonary == nil {
+            kDicitonary = closure(path)
         }
-
-        return kGlobalDictionary
+        return kDicitonary!
     }
 
-    private class func isUpdated(path: String) -> Bool {
-        return kLoadedTime[path] != getModifiedTime(path)
+    // ユーザごとに作られる辞書をロードする(例: 単語登録結果、学習結果)
+    func loadUserDicitonary(path: String, closure: String -> SKKUserDictionaryFile) -> SKKUserDictionaryFile {
+        if let mtime = getModifiedTime(path) {
+            if let (original, file) = kCache[path] {
+                if original == mtime {
+                    // キャッシュが有効
+                    NSLog("%@ is cached", path)
+                    return file
+                } else {
+                    // キャシュが無効になっている
+                    NSLog("%@ cache is expired", path)
+                    let newFile = closure(path)
+                    kCache[path] = (mtime, newFile)
+                    return newFile
+                }
+            } else {
+                // キャッシュが存在しない
+                NSLog("%@ is cached", path)
+                let file = closure(path)
+                kCache[path] = (mtime, file)
+                return file
+            }
+        } else {
+            // ロード対象のファイルが存在しない
+            return closure(path)
+        }
     }
 
-    private class func cache(path: String) {
-        kLoadedTime[path] = getModifiedTime(path)
-    }
-
-    private class func getModifiedTime(path: String) -> NSDate? {
+    private func getModifiedTime(path: String) -> NSDate? {
         let fm = NSFileManager.defaultManager()
         if let attrs = fm.attributesOfItemAtPath(path, error: nil) {
             return attrs[NSFileModificationDate] as? NSDate
