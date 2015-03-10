@@ -10,7 +10,7 @@ class TextEngine {
     }
 
     private let dictionary : DictionaryEngine
-    private let delegate : SKKDelegate
+    private weak var delegate : SKKDelegate?
 
     init(delegate : SKKDelegate, dictionary : DictionaryEngine) {
         self.delegate = delegate
@@ -35,7 +35,7 @@ class TextEngine {
     func deleteBackward(status : Status) {
         switch status {
         case .TopLevel:
-            self.delegate.deleteBackward()
+            self.delegate?.deleteBackward()
         case .Compose(text: let text, update: let update):
             let s = text.butLast()
             update(s)
@@ -47,8 +47,8 @@ class TextEngine {
         switch status {
         case .TopLevel:
             if let s = beforeText.last()?.toggleDakuten() {
-                self.delegate.deleteBackward()
-                self.delegate.insertText(s)
+                self.delegate?.deleteBackward()
+                self.delegate?.insertText(s)
             }
         case .Compose(text: let text, update: let update):
             if let s = text.last()?.toggleDakuten() {
@@ -62,8 +62,8 @@ class TextEngine {
         switch status {
         case .TopLevel:
             if let s = beforeText.last()?.toggleUpperLower() {
-                self.delegate.deleteBackward()
-                self.delegate.insertText(s)
+                self.delegate?.deleteBackward()
+                self.delegate?.insertText(s)
             }
         case .Compose(text: let text, update: let update):
             if let s = text.last()?.toggleUpperLower() {
@@ -75,7 +75,7 @@ class TextEngine {
     private func insertText(text : String, status : Status) -> Status {
         switch status {
         case .TopLevel:
-            self.delegate.insertText(text)
+            self.delegate?.insertText(text)
             return .TopLevel
         case .Compose(text: let prev, update: let update):
             update(prev + text)
