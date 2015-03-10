@@ -265,7 +265,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 return
             }
         }
-        dictionary = DictionaryCache.load()
+        dictionary = SKKDictionary()
         self.engine = SKKEngine(delegate: self, dictionary: dictionary!)
         self.sessionView = SessionView(engine: self.engine)
         dictionary?.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)

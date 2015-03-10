@@ -42,7 +42,7 @@ class UserDictionaryViewController: UITableViewController {
     }
 
     private func reloadEntries() {
-        self.entries = SKKUserDictionaryFile.defaultUserDictionary().entries()
+        self.entries = SKKDictionary.defaultUserDictionary().entries()
         self.tableView.reloadData()
     }
 
@@ -93,7 +93,7 @@ class UserDictionaryViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let entry = self.entries[indexPath.row]
-            SKKUserDictionaryFile.defaultUserDictionary().unregister(entry)
+            SKKDictionary.defaultUserDictionary().unregister(entry)
             self.reloadEntries()
         }
     }
@@ -106,7 +106,7 @@ class UserDictionaryViewController: UITableViewController {
     @objc private func openWordRegister() {
         let controller = WordRegisterViewController()
         controller.done = {(word, okuri, yomi) in
-            let dict = SKKUserDictionaryFile.defaultUserDictionary()
+            let dict = SKKDictionary.defaultUserDictionary()
             dict.register(yomi, okuri: okuri, kanji: word)
             dict.serialize()
             self.reloadEntries()

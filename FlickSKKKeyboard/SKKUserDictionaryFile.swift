@@ -12,22 +12,6 @@ import Foundation
  * ユーザ辞書。並び順について仮定を持たない。
  */
 class SKKUserDictionaryFile  : SKKDictionaryFile {
-    class func defaultUserDictionaryPath() -> String {
-        return AppGroup.pathForResource("Library/skk.jisyo") ?? NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
-    }
-    class func defaultUserDictionary() -> SKKUserDictionaryFile {
-        return SKKUserDictionaryFile(path: self.defaultUserDictionaryPath())
-    }
-
-    class func defaultLearnDictionaryPath() -> String {
-        return AppGroup.pathForResource("Library/skk.learn.jisyo") ??
-            NSHomeDirectory().stringByAppendingPathComponent("Library/skk.learn.jisyo")
-    }
-    class func defaultLearnDictionary() -> SKKUserDictionaryFile {
-        return SKKUserDictionaryFile(path: self.defaultUserDictionaryPath())
-    }
-
-
     // REMARK: Swift dictionary is too slow. So, we need use NSMutableDictionary.
     // [String:String]相当の実装になってる
     var okuriAri  = NSMutableDictionary()
