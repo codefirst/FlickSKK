@@ -1,6 +1,0 @@
-language: objective-c
-before_install: gem install cocoapods
-script: xcodebuild clean test -workspace FlickSKK.xcworkspace -scheme FlickSKKKeyboard -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-notifications:
-  webhooks:
-    secure: "IcNyabgovKz2eg/mMyWgPoLtShgTTpgl1+Q9uDGyHj2TY9oyIuvE6c9h6w0gwlR2akaa1b+3xRibvl+3ScRFmS2uPvqycK2SJ3Lnh/nKdt73js1ZGKGDCKaEGmxsGMlFX1lm6+Jt1KZFf9fbtNev4Nwe+McnhCSKhuKxtX1j2vM="
