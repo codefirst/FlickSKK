@@ -146,13 +146,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     let keypads: [KeyboardMode:KeyPad]
 
     let engine : SKKEngine!
+    let shiftRestore : ShiftRestore = ShiftRestore()
 
     var shiftEnabled: Bool {
         didSet {
             updateControlButtons()
         }
     }
-    var prevShiftEnabled: Bool = false
 
     var keyboardMode : KeyboardMode {
         didSet {
@@ -428,13 +428,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         switch key {
         case let .Seq(s, _):
             let kana = Array(s)[index ?? 0]
+            shiftRestore.handleKey(self.shiftEnabled, composeMode: self.engine.currentComposeMode())
             self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled))
-            self.prevShiftEnabled = self.shiftEnabled
-            self.shiftEnabled = false
+            self.shiftEnabled = shiftRestore.shiftEnabled
         case .Backspace:
             self.engine.handle(.Backspace)
-            self.shiftEnabled = self.prevShiftEnabled
-            self.prevShiftEnabled = false
+            shiftRestore.handleBackSpace(self.engine.currentComposeMode())
+            self.shiftEnabled = shiftRestore.shiftEnabled
         case .Return:
             self.engine.handle(.Enter)
         case .Shift: toggleShift()
