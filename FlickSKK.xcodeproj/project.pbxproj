@@ -27,6 +27,10 @@
 		133432C71A4D9BE90080280F /* SKKNumberPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */; };
 		133CDCF619D98A3C00B8120D /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */; };
+		134721771AB8E4DD0047BB27 /* KanaFlickKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */; };
+		134721791AB8E4EB0047BB27 /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721781AB8E4EB0047BB27 /* KeyboardMode.swift */; };
+		1347217D1AB8E7E70047BB27 /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721781AB8E4EB0047BB27 /* KeyboardMode.swift */; };
+		1347217E1AB8E7EC0047BB27 /* KanaFlickKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */; };
 		134DE87B1AAC0CAD00FF9CE5 /* DictionaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FAB2101AAB3AF30014C218 /* DictionaryCache.swift */; };
 		135A44BB1A881F070089F84E /* ComposeModePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135A44B91A881F070089F84E /* ComposeModePresenter.swift */; };
 		135A44BD1A88203E0089F84E /* ComposeModePresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */; };
@@ -186,6 +190,8 @@
 		133432C01A4D95030080280F /* SKKNumberPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKNumberPreprocessor.swift; sourceTree = "<group>"; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
+		134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlickKey.swift; sourceTree = "<group>"; };
+		134721781AB8E4EB0047BB27 /* KeyboardMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardMode.swift; sourceTree = "<group>"; };
 		135A44B91A881F070089F84E /* ComposeModePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModePresenter.swift; sourceTree = "<group>"; };
 		135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModePresenterSpec.swift; sourceTree = "<group>"; };
 		136610B61AA00FFB006AA8F1 /* KeyHandlerDirectInputSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerDirectInputSpec.swift; sourceTree = "<group>"; };
@@ -346,15 +352,41 @@
 			name = SKKBase;
 			sourceTree = "<group>";
 		};
+		1347217A1AB8E59D0047BB27 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EAB03E3B1A765DAF00F3F28F /* SessionView.swift */,
+				EA985FE719D84D060043564C /* KeyButton.swift */,
+				EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		1347217B1AB8E5AA0047BB27 /* FlickKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				134721781AB8E4EB0047BB27 /* KeyboardMode.swift */,
+				134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */,
+				EA985FE519D84AAE0043564C /* KeyPad.swift */,
+			);
+			name = FlickKeyboard;
+			sourceTree = "<group>";
+		};
+		1347217C1AB8E5B30047BB27 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		135A44B41A881DD70089F84E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1347217B1AB8E5AA0047BB27 /* FlickKeyboard */,
+				1347217A1AB8E59D0047BB27 /* View */,
+				1347217C1AB8E5B30047BB27 /* Utilities */,
 				EAD4B58D19D5CB8A007B6636 /* KeyboardViewController.swift */,
-				EAB03E3B1A765DAF00F3F28F /* SessionView.swift */,
-				EA985FE519D84AAE0043564C /* KeyPad.swift */,
-				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
-				EA985FE719D84D060043564C /* KeyButton.swift */,
-				EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -875,6 +907,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1347217D1AB8E7E70047BB27 /* KeyboardMode.swift in Sources */,
+				1347217E1AB8E7EC0047BB27 /* KanaFlickKey.swift in Sources */,
+				13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */,
 				131D013F1AABF1830085E83C /* AsyncLoader.swift in Sources */,
 				136610C31AA032C1006AA8F1 /* KeyHandlerKanjiComposeSpec.swift in Sources */,
 				13F9326119E2DC1700AC5019 /* SKKDelegate.swift in Sources */,
@@ -903,7 +938,6 @@
 				EAB03E411A76607A00F3F28F /* SessionView.swift in Sources */,
 				13F9326B19E2DC1700AC5019 /* KeyboardViewController.swift in Sources */,
 				136610BF1AA01451006AA8F1 /* KeyHandlerBaseSpec.swift in Sources */,
-				13F9326D19E2DC1700AC5019 /* KeyPad.swift in Sources */,
 				13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				13E33E851A9E87CA00CD1140 /* TextEngine.swift in Sources */,
 				13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */,
@@ -926,6 +960,7 @@
 				EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */,
 				137AAB451A3C0F3F0092F8A5 /* KeyRepeatTimer.swift in Sources */,
 				13DFEAC819F07A54006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,
+				134721791AB8E4EB0047BB27 /* KeyboardMode.swift in Sources */,
 				13E33E891A9E8E3D00CD1140 /* ComposeModeFactory.swift in Sources */,
 				13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				131D01401AABF1830085E83C /* AsyncLoader.swift in Sources */,
@@ -953,6 +988,7 @@
 				13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				EA985FE819D84D060043564C /* KeyButton.swift in Sources */,
 				135A44BB1A881F070089F84E /* ComposeModePresenter.swift in Sources */,
+				134721771AB8E4DD0047BB27 /* KanaFlickKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
