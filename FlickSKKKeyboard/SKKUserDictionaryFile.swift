@@ -51,20 +51,30 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         NSLog("loaded (%f) (%d + %d entries from %@)\n", NSDate().timeIntervalSinceDate(now), okuriAri.count, okuriNasi.count, path)
     }
 
+    func entries() -> [SKKDictionaryEntry] {
+        var xs : [SKKDictionaryEntry] = []
+
+        for (k, v) in okuriNasi {
+            for kanji in split(v as String) {
+                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: k as String, okuri: .None))
+            }
+        }
+
+        for (k, v) in okuriAri {
+            let kana = (k as String).butLast()
+            let okuri = (k as String).last()
+            for kanji in split(v as String) {
+                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: kana, okuri: okuri))
+            }
+        }
+
+        sort(&xs)
+        return xs
+    }
+
     func find(normal : String, okuri : String?) -> [ String ] {
         let entry : String? = dictFor(okuri)[normal + (okuri ?? "")] as String?
         return entry.map(split) ?? []
-    }
-
-    private func parse(line : NSString) -> (String, String)? {
-        let range = line.rangeOfString(" ")
-        if range.location == NSNotFound {
-            return .None
-        } else {
-            let kana : NSString = line.substringToIndex(range.location)
-            let kanji : NSString = line.substringFromIndex(range.location + 1)
-            return (kana as String, kanji as String)
-        }
     }
 
     func register(normal : String, okuri: String?, kanji: String) {
@@ -100,42 +110,6 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         }
     }
 
-    private func write(handle : NSFileHandle, str : NSString) {
-        let data = NSData(bytes: str.UTF8String,
-                          length: str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-        handle.writeData(data)
-    }
-
-    private func split(x : String) -> [String] {
-        let xs = x.pathComponents
-        if xs.count <= 2 {
-            return []
-        } else {
-            return Array(xs[1...xs.count-2])
-        }
-    }
-
-    func entries() -> [SKKDictionaryEntry] {
-        var xs : [SKKDictionaryEntry] = []
-
-        for (k, v) in okuriNasi {
-            for kanji in split(v as String) {
-                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: k as String, okuri: .None))
-            }
-        }
-
-        for (k, v) in okuriAri {
-            let kana = (k as String).butLast()
-            let okuri = (k as String).last()
-            for kanji in split(v as String) {
-                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: kana, okuri: okuri))
-            }
-        }
-
-        sort(&xs)
-        return xs
-    }
-
     func unregister(entry : SKKDictionaryEntry) {
         switch entry {
         case .SKKDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
@@ -149,6 +123,32 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
                 dictFor(okuri)[kana + (okuri ?? "")] = words.reduce("", {(x,y) in x + "/" + y }) + "/"
             }
             self.serialize()
+        }
+    }
+
+    private func parse(line : NSString) -> (String, String)? {
+        let range = line.rangeOfString(" ")
+        if range.location == NSNotFound {
+            return .None
+        } else {
+            let kana : NSString = line.substringToIndex(range.location)
+            let kanji : NSString = line.substringFromIndex(range.location + 1)
+            return (kana as String, kanji as String)
+        }
+    }
+
+    private func write(handle : NSFileHandle, str : NSString) {
+        let data = NSData(bytes: str.UTF8String,
+            length: str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+        handle.writeData(data)
+    }
+
+    private func split(x : String) -> [String] {
+        let xs = x.pathComponents
+        if xs.count <= 2 {
+            return []
+        } else {
+            return Array(xs[1...xs.count-2])
         }
     }
 
