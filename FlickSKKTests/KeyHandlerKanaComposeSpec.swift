@@ -50,8 +50,8 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                     let m = handler.handle(.Backspace, composeMode: composeMode)
                     expect(self.kana(m)).to(equal("か"))
                 }
-                it("文字がない場合") {
-                    let m = handler.handle(.Backspace, composeMode: .KanaCompose(kana: "", candidates: []))
+                it("文字がなくなる場合") {
+                    let m = handler.handle(.Backspace, composeMode: .KanaCompose(kana: "か", candidates: []))
                     expect(m == .DirectInput).to(beTrue())
                 }
             }

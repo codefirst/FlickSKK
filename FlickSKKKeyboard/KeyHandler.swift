@@ -73,10 +73,14 @@ class KeyHandler {
             // かなモードでのEnterは学習しない
             text.insert(kana, learn: nil, status: status)
             return .DirectInput
-        case .Backspace where kana.isEmpty:
-            return .DirectInput
         case .Backspace:
-            return factory.kanaCompose(kana.butLast())
+            let str = kana.butLast()
+
+            if str.isEmpty {
+                return .DirectInput
+            } else {
+                return factory.kanaCompose(str)
+            }
         case .ToggleDakuten(beforeText : _):
             if let s = kana.last()?.toggleDakuten() {
                 return factory.kanaCompose(kana.butLast() + s)
