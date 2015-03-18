@@ -20,18 +20,46 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                 dict = SKKUserDictionaryFile(path: path)
             }
 
-            it("can find register entry") {
-                dict.register("まじ", okuri: .None, kanji: "本気")
-                let xs = dict.find("まじ", okuri: .None)
-                expect(xs).to(contain("本気"))
-            }
-            it("can serialize entries") {
-                dict.register("まじ", okuri: .None, kanji: "本気")
-                dict.serialize()
+            describe("register") {
+                it("can find register entry") {
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                    let xs = dict.find("まじ", okuri: .None)
+                    expect(xs).to(contain("本気"))
+                }
 
-                let dict2 = SKKUserDictionaryFile(path: path)
-                let xs = dict2.find("まじ", okuri: .None)
-                expect(xs).to(contain("本気"))
+                it("空文字が登録されない") {
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                    dict.register("まじ", okuri: .None, kanji: "AAA")
+                    let xs = dict.find("まじ", okuri: .None)
+                    expect(xs).toNot(contain(""))
+                }
+
+                it("特殊な文字も登録できる") {
+                    dict.register("まじ", okuri: .None, kanji: "foo/bar;baz[xyzzy]")
+                    let xs = dict.find("まじ", okuri: .None)
+                    expect(xs).to(contain("foo/bar;baz[xyzzy]"))
+                }
+            }
+
+            describe("serialize") {
+                it("can serialize entries") {
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                    dict.serialize()
+
+                    let dict2 = SKKUserDictionaryFile(path: path)
+                    let xs = dict2.find("まじ", okuri: .None)
+                    expect(xs).to(contain("本気"))
+                }
+
+                it("特殊な文字も登録できる") {
+                    dict.register("まじ", okuri: .None, kanji: "foo/bar;baz[xyzzy]")
+                    dict.serialize()
+
+
+                    let dict2 = SKKUserDictionaryFile(path: path)
+                    let xs = dict2.find("まじ", okuri: .None)
+                    expect(xs).to(contain("foo/bar;baz[xyzzy]"))
+                }
             }
             it("return sorted entries") {
                 dict.register("あああ", okuri: .None, kanji: "AAA")
