@@ -4,7 +4,11 @@ SCHEME = "FlickSKK"
 TMP = "tmp"
 ARCHIVE = "$(pwd)/#{TMP}/#{SCHEME}"
 IPA = "#{ARCHIVE}.ipa"
-PRETTY = (%x(which xcpretty); $?) == 0 ? "xcpretty -c" : "cat"
+has_xcpretty = (%x(which xcpretty); $?) == 0
+PRETTY = has_xcpretty ? "xcpretty -c" : "cat"
+TEST_TMP = "$(pwd)/#{TMP}/tests"
+TEST_FORMATTER = has_xcpretty ? "xcpretty -c --report junit --output #{TEST_TMP}/results.xml --report html --output #{TEST_TMP}/results.html" : "cat"
+TEST_SIMULATORS = ["iPhone 6"]
 ALTOOL = "$(xcode-select -p)/../Applications/Application\\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool"
 
 class String
@@ -42,5 +46,16 @@ task :submit => :ipa do
     sh "#{ALTOOL} --upload-app --file #{IPA} --username #{user} --password #{password}", verbose: false
 
     puts "🎉  Submitted!".bold
+end
+
+task :clean_test_results do
+    sh "rm -rf #{TEST_TMP}"
+end
+
+task :test => :clean_test_results do
+    puts "🐬  Testing...".bold
+
+    destinations = TEST_SIMULATORS.map{|d| "-destination \"name=#{d}\""}.join(' ')
+    sh "xcodebuild test -workspace #{WORKSPACE} -scheme #{SCHEME} #{destinations} | #{TEST_FORMATTER} && exit ${PIPESTATUS[0]}"
 end
 
