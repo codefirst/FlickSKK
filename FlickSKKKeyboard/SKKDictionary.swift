@@ -62,7 +62,7 @@ class SKKDictionary : NSObject {
         self.waitForLoading()
         let xs = self.learnDictionary?.findWith(prefix) ?? []
         let ys = self.userDictionary?.findWith(prefix) ?? []
-        return xs + ys
+        return (xs + ys).uniqueBy { x in x.kanji }
     }
 
     // 単語を登録する
