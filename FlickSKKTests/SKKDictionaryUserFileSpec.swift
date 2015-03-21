@@ -39,6 +39,14 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                     let xs = dict.find("まじ", okuri: .None)
                     expect(xs).to(contain("foo/bar;baz[xyzzy]"))
                 }
+
+                it("同じ単語を複数回登録すると先頭に来る") {
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                    dict.register("まじ", okuri: .None, kanji: "AAA")
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                    let xs = dict.find("まじ", okuri: .None)
+                    expect(xs[0]).to(equal("本気"))
+                }
             }
 
             describe("serialize") {

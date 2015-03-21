@@ -17,12 +17,10 @@ class EntryParser {
 
     // 単語を追加
     func append(word : String) -> String {
-        let xs = words()
-        if contains(xs, word) {
-            return self.entry
-        } else {
-            return join([ word ] + xs)
-        }
+        let xs = words().filter({ x in
+            x != word
+        })
+        return join([ word ] + xs)
     }
 
     // 単語の削除
