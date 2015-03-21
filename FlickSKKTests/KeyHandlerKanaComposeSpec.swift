@@ -13,8 +13,10 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
             delegate = d
         }
 
+        let candidates = originals(["川", "河"])
+
         context("kana compose") {
-            let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: ["川", "河"])
+            let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: candidates)
             it("文字入力(シフトなし)") {
                 let m = handler.handle(.Char(kana: "ら", shift: false), composeMode: composeMode)
                 expect(self.kana(m)).to(equal("かわら"))

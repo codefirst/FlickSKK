@@ -61,7 +61,7 @@ class KeyHandler {
     }
 
     // ▽モード
-    private func kanaCompose(keyEvent : SKKKeyEvent, kana : String, candidates: [String], status: TextEngine.Status) -> ComposeMode? {
+    private func kanaCompose(keyEvent : SKKKeyEvent, kana : String, candidates: [Candidate], status: TextEngine.Status) -> ComposeMode? {
         switch keyEvent {
         case .Char(kana: let str, shift : let shift) where !shift:
             return factory.kanaCompose(kana + str)
@@ -99,7 +99,7 @@ class KeyHandler {
             return .DirectInput
         case .Select(index: let index):
             if index < candidates.count {
-                text.insert(candidates[index], learn: (kana, nil), status : status)
+                text.insertCandidate(candidates[index], learn: (kana, nil), status : status)
                 return .DirectInput
             } else {
                 return .WordRegister(kana : kana, okuri : .None, composeText: "", composeMode : [ .DirectInput ])
@@ -109,12 +109,12 @@ class KeyHandler {
 
     // ▼モード
     private func kanjiCompose(keyEvent : SKKKeyEvent,
-        kana : String, okuri : String?, candidates : [String], index : Int,
+        kana : String, okuri : String?, candidates : [Candidate], index : Int,
         status : TextEngine.Status) -> ComposeMode? {
         switch keyEvent {
         case .Char(kana: let str, shift : let shift):
             // 暗黙的に確定する。単語登録中の場合は、statusが更新されるので、次に引き渡す
-            let status = text.insert(candidates[index], learn: (kana, okuri), status : status)
+            let status = text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
             // 次の処理を開始する
             return self.dispatch(keyEvent, composeMode: .DirectInput, status: status)
         case .Space:
@@ -124,7 +124,7 @@ class KeyHandler {
                 return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
             }
         case .Enter:
-            text.insert(candidates[index], learn: (kana, okuri), status : status)
+            text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
             return .DirectInput
         case .Backspace where index == 0:
             return factory.kanaCompose(kana)
@@ -147,7 +147,7 @@ class KeyHandler {
             return nil
         case .Select(index : let index):
             if index < candidates.count {
-                text.insert(candidates[index], learn: (kana, okuri), status : status)
+                text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
                 return .DirectInput
             } else {
                 return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])

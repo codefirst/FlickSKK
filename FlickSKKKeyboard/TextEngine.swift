@@ -18,17 +18,14 @@ class TextEngine {
     }
 
     // テキストを確定させる。 learnを指定していれば、変換結果の学習も行なう。
+    func insertCandidate(candidate : Candidate, learn : (String, String?)?, status : Status) -> Status {
+        let text = self.text(candidate)
+        learnText(learn, candidate: candidate)
+        return insertText(candidate, status : status)
+    }
+
     func insert(text : String, learn : (String, String?)?, status : Status) -> Status {
-        if let (kana, okuri) = learn {
-            if okuri == nil {
-                self.dictionary.learn(kana, okuri: okuri, kanji: text)
-            } else {
-                // 送り仮名がある場合、textは送り仮名付きになっている。
-                // 辞書には送り仮名以外の部分を登録する必要がある。
-                self.dictionary.learn(kana, okuri: okuri, kanji: text.butLast())
-            }
-        }
-        return insertText(text, status : status)
+        return insertCandidate(.Original(kanji: text), learn: learn, status: status)
     }
 
     // 最後の一文字を消す
@@ -72,7 +69,8 @@ class TextEngine {
         }
     }
 
-    private func insertText(text : String, status : Status) -> Status {
+    private func insertText(candidate : Candidate, status : Status) -> Status {
+        let text = self.text(candidate)
         switch status {
         case .TopLevel:
             self.delegate?.insertText(text)
@@ -82,5 +80,33 @@ class TextEngine {
             return .Compose(text: prev + text, update: update)
         }
     }
-}
 
+    private func text(candidate : Candidate) -> String {
+        switch candidate {
+        case .Original(text: let text):
+            return text
+        case .Abbrev(text: let text, original: _):
+            return text
+        }
+    }
+
+    private func learnText(learn : (String, String?)?, candidate: Candidate) {
+        if let (kana, okuri) = learn {
+            func f(kana: String, kanji: String) {
+                if okuri == nil {
+                    self.dictionary.learn(kana, okuri: okuri, kanji: kanji)
+                } else {
+                    // 送り仮名がある場合、textは送り仮名付きになっている。
+                    // 辞書には送り仮名以外の部分を登録する必要がある。
+                    self.dictionary.learn(kana, okuri: okuri, kanji: kanji.butLast())
+                }
+            }
+            switch candidate {
+            case .Original(text: let text):
+                f(kana, text)
+            case .Abbrev(text: let text, orginal: let kana):
+                f(kana, text)
+            }
+        }
+    }
+}

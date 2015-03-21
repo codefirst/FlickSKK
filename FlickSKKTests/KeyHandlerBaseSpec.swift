@@ -39,7 +39,11 @@ class KeyHandlerBaseSpec : QuickSpec {
         }
     }
 
-    func candidates(composeMode : ComposeMode) -> [String]? {
+    func originals(candidates: [String]) -> [Candidate] {
+        return candidates.map { c in .Original(kanji : c) }
+    }
+
+    func candidates(composeMode : ComposeMode) -> [Candidate]? {
         switch composeMode {
         case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: _):
             return candidates

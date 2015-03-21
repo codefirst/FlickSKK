@@ -60,6 +60,8 @@
 		138EB8601A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
 		138EB8611A9035D300CB16BC /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138EB85E1A9035D300CB16BC /* Appearance.swift */; };
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
+		13B824811ABCE8E600F13FC3 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B824801ABCE8E600F13FC3 /* Candidate.swift */; };
+		13B824821ABCE8E600F13FC3 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B824801ABCE8E600F13FC3 /* Candidate.swift */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
@@ -213,6 +215,7 @@
 		138968D01A85ED7300614511 /* ComposeMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeMode.swift; sourceTree = "<group>"; };
 		138EB85E1A9035D300CB16BC /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
+		13B824801ABCE8E600F13FC3 /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
 		13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryFile.swift; sourceTree = "<group>"; };
@@ -431,13 +434,9 @@
 		138968C41A85E2BE00614511 /* SKKEngine */ = {
 			isa = PBXGroup;
 			children = (
+				13B824831ABCE90400F13FC3 /* ComposeMode */,
+				13B824841ABCE92300F13FC3 /* Component */,
 				138968CD1A85E2F400614511 /* SKKEngine.swift */,
-				138968D01A85ED7300614511 /* ComposeMode.swift */,
-				13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */,
-				1306495A1A871FEE0044B225 /* KeyHandler.swift */,
-				13E33E841A9E87CA00CD1140 /* TextEngine.swift */,
-				135A44B91A881F070089F84E /* ComposeModePresenter.swift */,
-				13E33E7D1A9E855500CD1140 /* DictionaryEngine.swift */,
 			);
 			name = SKKEngine;
 			sourceTree = "<group>";
@@ -449,6 +448,27 @@
 				135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */,
 			);
 			name = SKKEngine;
+			sourceTree = "<group>";
+		};
+		13B824831ABCE90400F13FC3 /* ComposeMode */ = {
+			isa = PBXGroup;
+			children = (
+				13B824801ABCE8E600F13FC3 /* Candidate.swift */,
+				138968D01A85ED7300614511 /* ComposeMode.swift */,
+				13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */,
+			);
+			name = ComposeMode;
+			sourceTree = "<group>";
+		};
+		13B824841ABCE92300F13FC3 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				1306495A1A871FEE0044B225 /* KeyHandler.swift */,
+				13E33E841A9E87CA00CD1140 /* TextEngine.swift */,
+				135A44B91A881F070089F84E /* ComposeModePresenter.swift */,
+				13E33E7D1A9E855500CD1140 /* DictionaryEngine.swift */,
+			);
+			name = Component;
 			sourceTree = "<group>";
 		};
 		13DFEAC319F079C8006D7E40 /* SKKDictionary */ = {
@@ -946,6 +966,7 @@
 				13F9326B19E2DC1700AC5019 /* KeyboardViewController.swift in Sources */,
 				136610BF1AA01451006AA8F1 /* KeyHandlerBaseSpec.swift in Sources */,
 				13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
+				13B824811ABCE8E600F13FC3 /* Candidate.swift in Sources */,
 				13E33E851A9E87CA00CD1140 /* TextEngine.swift in Sources */,
 				13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */,
 				13DFEACA19F07AC8006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,
@@ -964,6 +985,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13B824821ABCE8E600F13FC3 /* Candidate.swift in Sources */,
 				EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */,
 				137AAB451A3C0F3F0092F8A5 /* KeyRepeatTimer.swift in Sources */,
 				13DFEAC819F07A54006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,

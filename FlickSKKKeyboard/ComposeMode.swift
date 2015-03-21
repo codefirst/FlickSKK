@@ -8,8 +8,8 @@
 
 enum ComposeMode {
     case DirectInput
-    case KanaCompose(kana : String, candidates: [String])
-    case KanjiCompose(kana : String, okuri : String?, candidates: [String], index : Int)
+    case KanaCompose(kana : String, candidates: [Candidate])
+    case KanjiCompose(kana : String, okuri : String?, candidates: [Candidate], index : Int)
     case WordRegister(kana : String, okuri : String?, composeText : String, composeMode : [ComposeMode])
 }
 

@@ -81,6 +81,20 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         }
     }
 
+    func findWith(prefix: String) -> [(kana: String, kanji: String)] {
+        var xs : [(kana: String, kanji: String)] = []
+        for (normal, entry) in self.okuriNasi {
+            let n = normal as String
+            if n.hasPrefix(prefix) && n != prefix {
+                let parser = EntryParser(entry: (entry as String))
+                for word in parser.words() {
+                    xs.append(kana : n, kanji: word)
+                }
+            }
+        }
+        return xs
+    }
+
     func register(normal : String, okuri: String?, kanji: String) {
         if(kanji.isEmpty) { return }
         let dict : NSMutableDictionary = dictFor(okuri)
