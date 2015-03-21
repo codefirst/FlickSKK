@@ -32,7 +32,7 @@ class DictionaryEngine {
 
         // 通常の検索をする
         for candidate in self.dictionary.find(t, okuri: roman) {
-            candidates.append(.Original(kanji: candidate))
+            candidates.append(.Original(kanji: candidate + (okuri ?? "")))
         }
 
         // 末尾が「っ」の場合は、変換位置を1つ前にする
