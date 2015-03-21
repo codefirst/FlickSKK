@@ -6,12 +6,12 @@ class ComposeModeFactory {
     }
 
     func kanaCompose(kana : String) -> ComposeMode {
-        let candidates = dictionary.find(kana, okuri: nil, aggresive: kana.utf16Count > 1)
+        let candidates = dictionary.find(kana, okuri: nil, dynamic: kana.utf16Count > 1)
         return .KanaCompose(kana : kana, candidates: candidates)
     }
 
     func kanjiCompose(kana : String, okuri : String?) -> ComposeMode {
-        let candidates = dictionary.find(kana, okuri: okuri, aggresive: false)
+        let candidates = dictionary.find(kana, okuri: okuri, dynamic: false)
         if candidates.isEmpty {
             return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
         } else {

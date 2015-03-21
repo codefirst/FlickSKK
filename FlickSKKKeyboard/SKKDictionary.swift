@@ -58,7 +58,7 @@ class SKKDictionary : NSObject {
     }
 
     // アグレッシブ変換用の辞書検索
-    func findAggresive(prefix : String) -> [(kana: String, kanji: String)] {
+    func findDynamic(prefix : String) -> [(kana: String, kanji: String)] {
         self.waitForLoading()
         let xs = self.learnDictionary?.findWith(prefix) ?? []
         let ys = self.userDictionary?.findWith(prefix) ?? []

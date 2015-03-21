@@ -64,6 +64,7 @@
 		13B824821ABCE8E600F13FC3 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B824801ABCE8E600F13FC3 /* Candidate.swift */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
+		13D9B7711ABD191500E63F33 /* SKKDictionarySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D9B7701ABD191500E63F33 /* SKKDictionarySpec.swift */; };
 		13DFEABA19F079C5006D7E40 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
 		13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */; };
 		13DFEAC619F07A3C006D7E40 /* SKKUserDictionaryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */; };
@@ -218,6 +219,7 @@
 		13B824801ABCE8E600F13FC3 /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
+		13D9B7701ABD191500E63F33 /* SKKDictionarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionarySpec.swift; sourceTree = "<group>"; };
 		13DFEAB919F079C5006D7E40 /* SKKDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryFile.swift; sourceTree = "<group>"; };
 		13DFEAC519F07A3C006D7E40 /* SKKUserDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKUserDictionaryFile.swift; sourceTree = "<group>"; };
 		13DFEAC719F07A54006D7E40 /* SKKLocalDictionaryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKLocalDictionaryFile.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 			children = (
 				1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */,
 				136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */,
+				13D9B7701ABD191500E63F33 /* SKKDictionarySpec.swift */,
 			);
 			name = SKKDictionary;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				136610BF1AA01451006AA8F1 /* KeyHandlerBaseSpec.swift in Sources */,
 				13DFEAC919F07AC6006D7E40 /* SKKUserDictionaryFile.swift in Sources */,
 				13B824811ABCE8E600F13FC3 /* Candidate.swift in Sources */,
+				13D9B7711ABD191500E63F33 /* SKKDictionarySpec.swift in Sources */,
 				13E33E851A9E87CA00CD1140 /* TextEngine.swift in Sources */,
 				13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */,
 				13DFEACA19F07AC8006D7E40 /* SKKLocalDictionaryFile.swift in Sources */,

@@ -16,7 +16,7 @@ class DictionaryEngine {
 
     // 辞書を検索する。
     //  ・ っの特殊ルール等を考慮する
-    func find(kana : String, okuri : String?, aggresive: Bool) -> [Candidate] {
+    func find(kana : String, okuri : String?, dynamic: Bool) -> [Candidate] {
         // 結果をストアする
         var candidates : [Candidate] = []
 
@@ -24,8 +24,8 @@ class DictionaryEngine {
         let (t, roman) = normalize(kana, okuri: okuri)
 
         // アグレッシブ変換
-        if aggresive {
-            for candidate in self.dictionary.findAggresive(kana) {
+        if dynamic {
+            for candidate in self.dictionary.findDynamic(kana) {
                 candidates.append(.Abbrev(kanji: candidate.kanji, kana: candidate.kana))
             }
         }
