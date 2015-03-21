@@ -14,6 +14,15 @@ class DictionaryEngine {
         self.dictionary.learn(k, okuri: o, kanji: kanji)
     }
 
+    // q-確定の結果を学習する
+    func abbrev(kana: String, kanji: String) {
+        // 正規化する
+        let (k, _) = normalize(kana, okuri: nil)
+
+        // 学習する
+        self.dictionary.abbrev(k, okuri: nil, kanji: kanji)
+    }
+
     // 辞書を検索する。
     //  ・ っの特殊ルール等を考慮する
     func find(kana : String, okuri : String?, dynamic: Bool) -> [Candidate] {

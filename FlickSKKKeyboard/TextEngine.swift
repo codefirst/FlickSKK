@@ -19,9 +19,13 @@ class TextEngine {
 
     // テキストを確定させる。 learnを指定していれば、変換結果の学習も行なう。
     func insertCandidate(candidate : Candidate, learn : (String, String?)?, status : Status) -> Status {
-        let text = self.text(candidate)
         learnText(learn, candidate: candidate)
-        return insertText(candidate, status : status)
+        return insertText(text(candidate), status : status)
+    }
+
+    func insertAbbrev(kanji : String, kana: String, status : Status) -> Status {
+        dictionary.abbrev(kana, kanji: kanji)
+        return insertText(kanji, status: status)
     }
 
     func insert(text : String, learn : (String, String?)?, status : Status) -> Status {
@@ -69,8 +73,7 @@ class TextEngine {
         }
     }
 
-    private func insertText(candidate : Candidate, status : Status) -> Status {
-        let text = self.text(candidate)
+    private func insertText(text : String, status : Status) -> Status {
         switch status {
         case .TopLevel:
             self.delegate?.insertText(text)

@@ -70,6 +70,14 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                 expect(m == .DirectInput).to(beTrue())
                 expect(delegate.insertedText).to(equal("カワ"))
             }
+            it("略語学習") {
+                let composeMode = ComposeMode.KanaCompose(kana: "はなやまた", candidates: candidates)
+                let m = handler.handle(.InputModeChange(inputMode : .Katakana), composeMode: composeMode)
+                let xs = self.dictionary.findDynamic("はなや").filter { w in
+                    w.kanji == "ハナヤマタ"
+                }
+                expect(xs.count).to(equal(1))
+            }
             describe("シフトあり文字入力") {
                 it("単語がある場合") {
                     let m = handler.handle(.Char(kana: "い", shift: true), composeMode: composeMode)

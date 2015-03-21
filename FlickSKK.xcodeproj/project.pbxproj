@@ -11,6 +11,7 @@
 		1306495D1A8721180044B225 /* SKKKeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495C1A8721180044B225 /* SKKKeyEvent.swift */; };
 		1306495E1A8723150044B225 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495A1A871FEE0044B225 /* KeyHandler.swift */; };
 		1306495F1A8723170044B225 /* SKKKeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495C1A8721180044B225 /* SKKKeyEvent.swift */; };
+		1307DDED1ABD6DCF00678358 /* TextEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307DDEC1ABD6DCF00678358 /* TextEngineSpec.swift */; };
 		130CA3901A4EF94C00A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
 		130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */; };
 		130CA3971A4EFA3F00A84D24 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */; };
@@ -189,6 +190,7 @@
 		0CA289C0ED7662F2EF0F3718 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1306495A1A871FEE0044B225 /* KeyHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandler.swift; sourceTree = "<group>"; };
 		1306495C1A8721180044B225 /* SKKKeyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKKeyEvent.swift; sourceTree = "<group>"; };
+		1307DDEC1ABD6DCF00678358 /* TextEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEngineSpec.swift; sourceTree = "<group>"; };
 		130CA38F1A4EF94C00A84D24 /* NumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFormatterSpec.swift; sourceTree = "<group>"; };
 		131D013E1AABF1830085E83C /* AsyncLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncLoader.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				136610C81AA034BF006AA8F1 /* KeyHandler */,
 				135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */,
 				137B0FC11ABD257600AF08F0 /* DictionaryEngineSpec.swift */,
+				1307DDEC1ABD6DCF00678358 /* TextEngineSpec.swift */,
 			);
 			name = SKKEngine;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				13DFEAC419F07A1F006D7E40 /* SKKDictionaryFile.swift in Sources */,
 				138EB8601A9035D300CB16BC /* Appearance.swift in Sources */,
 				137AAB4E1A3C13970092F8A5 /* KeyRepeatTimer.swift in Sources */,
+				1307DDED1ABD6DCF00678358 /* TextEngineSpec.swift in Sources */,
 				13FAB2111AAB3AF30014C218 /* DictionaryCache.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
