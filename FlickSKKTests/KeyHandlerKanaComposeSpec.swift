@@ -22,6 +22,23 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                 expect(self.kana(m)).to(equal("かわら"))
             }
             describe("Space") {
+                it("partialな候補がある場合") {
+                    self.dictionary.partial("かわなんとか", okuri: .None, kanji: "カワナントカ")
+                    let m = handler.handle(.Space, composeMode: composeMode)
+                    let (kana, okuri) = self.kanji(m)!
+                    if let c = self.candidates(m)?[0] {
+                        switch c {
+                        case let .Partial(kanji: kanji, kana: _):
+                            expect(kanji).to(equal("カワナントカ"))
+                        default:
+                            fail()
+                        }
+
+                    } else {
+                        fail()
+                    }
+                }
+
                 it("単語がある場合") {
                     let m = handler.handle(.Space, composeMode: composeMode)
                     let (kana, okuri) = self.kanji(m)!
