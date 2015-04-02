@@ -26,9 +26,9 @@ class DictionarySettings {
     }
 
     // q確定の結果の学習
-    class func defaultAbbrevDictionaryPath() -> String {
-        return AppGroup.pathForResource("Library/skk.abbrev.jisyo") ??
-            NSHomeDirectory().stringByAppendingPathComponent("Library/abbrev")
+    class func defaultPartialDictionaryPath() -> String {
+        return AppGroup.pathForResource("Library/skk.partial.jisyo") ??
+            NSHomeDirectory().stringByAppendingPathComponent("Library/skk.partial.jisyo")
     }
 
     // 組込みの辞書(L辞書とか)

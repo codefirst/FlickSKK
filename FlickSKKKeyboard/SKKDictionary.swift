@@ -17,7 +17,7 @@ class SKKDictionary : NSObject {
     private var learnDictionary : SKKUserDictionaryFile?
 
     // 略語辞書
-    private var abbrevDictionary : SKKUserDictionaryFile?
+    private var partialDictionary : SKKUserDictionaryFile?
 
     // ロード完了を監視するために Key value observing を使う
     dynamic var isWaitingForLoad : Bool = false
@@ -27,7 +27,7 @@ class SKKDictionary : NSObject {
     private let cache = DictionaryCache()
 
     class func resetLearnDictionary() {
-        for path in [DictionarySettings.defaultLearnDictionaryPath(), DictionarySettings.defaultAbbrevDictionaryPath()] {
+        for path in [DictionarySettings.defaultLearnDictionaryPath(), DictionarySettings.defaultPartialDictionaryPath()] {
             NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
         }
     }
@@ -47,13 +47,13 @@ class SKKDictionary : NSObject {
                 return SKKUserDictionaryFile(path: $0)
             }
 
-            self.abbrevDictionary =
-                self.cache.loadUserDicitonary(DictionarySettings.defaultAbbrevDictionaryPath()){
+            self.partialDictionary =
+                self.cache.loadUserDicitonary(DictionarySettings.defaultPartialDictionaryPath()){
                     return SKKUserDictionaryFile(path: $0)
             }
 
             self.dictionaries = [ self.learnDictionary!, self.userDictionary!, dictionary ]
-            self.dynamicDictionaries = [ self.abbrevDictionary!, self.learnDictionary!, self.userDictionary! ]
+            self.dynamicDictionaries = [ self.partialDictionary!, self.learnDictionary!, self.userDictionary! ]
         }
     }
 
@@ -102,11 +102,11 @@ class SKKDictionary : NSObject {
     }
 
     // InputModeChangeによる確定を学習する
-    func abbrev(kana: String, okuri: String?, kanji: String) {
-        abbrevDictionary?.register(kana, okuri: okuri, kanji: kanji)
+    func partial(kana: String, okuri: String?, kanji: String) {
+        partialDictionary?.register(kana, okuri: okuri, kanji: kanji)
         loader.async {
-            self.cache.update(DictionarySettings.defaultAbbrevDictionaryPath()) {
-                self.abbrevDictionary?.serialize()
+            self.cache.update(DictionarySettings.defaultPartialDictionaryPath()) {
+                self.partialDictionary?.serialize()
                 ()
             }
         }

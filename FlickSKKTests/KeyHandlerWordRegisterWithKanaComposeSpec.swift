@@ -42,7 +42,7 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
 
         context("word register with kanji mode") {
             let composeMode = ComposeMode.WordRegister(kana: "まじ",
-                okuri: .None, composeText : "か", composeMode: [ .KanjiCompose(kana: "やま", okuri : .None, candidates: self.originals(["山"]), index: 0)])
+                okuri: .None, composeText : "か", composeMode: [ .KanjiCompose(kana: "やま", okuri : .None, candidates: self.exacts(["山"]), index: 0)])
             it("Enter") {
                 let m = handler.handle(.Enter, composeMode : composeMode)
                 switch m {

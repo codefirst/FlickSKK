@@ -39,8 +39,8 @@ class KeyHandlerBaseSpec : QuickSpec {
         }
     }
 
-    func originals(candidates: [String]) -> [Candidate] {
-        return candidates.map { c in .Original(kanji : c) }
+    func exacts(candidates: [String]) -> [Candidate] {
+        return candidates.map { c in .Exact(kanji : c) }
     }
 
     func candidates(composeMode : ComposeMode) -> [Candidate]? {

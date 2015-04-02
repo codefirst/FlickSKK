@@ -15,12 +15,12 @@ class DictionaryEngine {
     }
 
     // q-確定の結果を学習する
-    func abbrev(kana: String, kanji: String) {
+    func partial(kana: String, kanji: String) {
         // 正規化する
         let (k, _) = normalize(kana, okuri: nil)
 
         // 学習する
-        self.dictionary.abbrev(k, okuri: nil, kanji: kanji)
+        self.dictionary.partial(k, okuri: nil, kanji: kanji)
     }
 
     // 辞書を検索する。
@@ -35,13 +35,13 @@ class DictionaryEngine {
         // アグレッシブ変換
         if dynamic {
             for candidate in self.dictionary.findDynamic(kana) {
-                candidates.append(.Abbrev(kanji: candidate.kanji, kana: candidate.kana))
+                candidates.append(.Partial(kanji: candidate.kanji, kana: candidate.kana))
             }
         }
 
         // 通常の検索をする
         for candidate in self.dictionary.find(t, okuri: roman) {
-            candidates.append(.Original(kanji: candidate + (okuri ?? "")))
+            candidates.append(.Exact(kanji: candidate + (okuri ?? "")))
         }
 
         // 末尾が「っ」の場合は、変換位置を1つ前にする
@@ -49,7 +49,7 @@ class DictionaryEngine {
             // 「っ」送り仮名の場合の特殊処理
             // https://github.com/codefirst/FlickSKK/issues/27
             for candidate in self.dictionary.find(t.butLast(), okuri: roman) {
-                candidates.append(.Original(kanji: candidate + "っ" + (okuri ?? "")))
+                candidates.append(.Exact(kanji: candidate + "っ" + (okuri ?? "")))
             }
         }
         return candidates

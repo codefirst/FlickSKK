@@ -47,9 +47,9 @@ class ComposeModePresenter {
 
     private func fromCandidate(candidate : Candidate) -> String {
         switch candidate {
-        case .Abbrev(kanji: let kanji, kana: _):
+        case .Partial(kanji: let kanji, kana: _):
             return "#\(kanji)"
-        case .Original(kanji: let kanji):
+        case .Exact(kanji: let kanji):
             return kanji
         }
     }

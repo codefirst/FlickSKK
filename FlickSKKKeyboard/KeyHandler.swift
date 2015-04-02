@@ -95,7 +95,7 @@ class KeyHandler {
             }
         case .InputModeChange(inputMode: let inputMode):
             let str = kana.conv(inputMode.kanaType())
-            text.insertAbbrev(str, kana: kana, status: status)
+            text.insertPartial(str, kana: kana, status: status)
             return .DirectInput
         case .Select(index: let index):
             if index < candidates.count {

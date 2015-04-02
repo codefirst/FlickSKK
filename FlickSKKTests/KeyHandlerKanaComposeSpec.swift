@@ -13,7 +13,7 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
             delegate = d
         }
 
-        let candidates = originals(["川", "河"])
+        let candidates = exacts(["川", "河"])
 
         context("kana compose") {
             let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: candidates)

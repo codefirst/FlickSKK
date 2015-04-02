@@ -16,8 +16,8 @@ class DictionaryCache {
     // ユーザごとに作られる辞書をロードする(例: 単語登録結果、学習結果)
     func loadUserDicitonary(path: String, closure: String -> SKKUserDictionaryFile) -> SKKUserDictionaryFile {
         if let mtime = getModifiedTime(path) {
-            if let (original, file) = kCache[path] {
-                if original == mtime {
+            if let (Exact, file) = kCache[path] {
+                if Exact == mtime {
                     // キャッシュが有効
                     NSLog("%@ is cached", path)
                     return file

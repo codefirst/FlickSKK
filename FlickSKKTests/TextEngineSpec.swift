@@ -19,9 +19,9 @@ class TextEngineSpec : QuickSpec {
             target = TextEngine(delegate: delegate, dictionary: dictionaryEngine)
         }
 
-        describe("#insertAbbrev") {
+        describe("#insertPartial") {
             beforeEach {
-                target.insertAbbrev("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.TopLevel)
+                target.insertPartial("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.TopLevel)
                 ()
             }
 

@@ -13,8 +13,8 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
             delegate = d
         }
 
-        let candidates = originals(["川", "河"])
-        let candidatesWithOkuri = originals(["居る", "入る"])
+        let candidates = exacts(["川", "河"])
+        let candidatesWithOkuri = exacts(["居る", "入る"])
 
         context("kanji compose") {
             let composeMode = ComposeMode.KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 0)

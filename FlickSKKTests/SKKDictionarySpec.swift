@@ -33,9 +33,9 @@ class SKKDictionarySpec : QuickSpec {
             }
         }
 
-        describe("#abbrev") {
+        describe("#partial") {
             beforeEach {
-                self.dictionary.abbrev("ほんき",  okuri: nil, kanji: "ホンキ")
+                self.dictionary.partial("ほんき",  okuri: nil, kanji: "ホンキ")
             }
 
             it("ダイナミック変換できる") {

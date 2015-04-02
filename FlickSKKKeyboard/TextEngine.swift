@@ -23,13 +23,13 @@ class TextEngine {
         return insertText(text(candidate), status : status)
     }
 
-    func insertAbbrev(kanji : String, kana: String, status : Status) -> Status {
-        dictionary.abbrev(kana, kanji: kanji)
+    func insertPartial(kanji : String, kana: String, status : Status) -> Status {
+        dictionary.partial(kana, kanji: kanji)
         return insertText(kanji, status: status)
     }
 
     func insert(text : String, learn : (String, String?)?, status : Status) -> Status {
-        return insertCandidate(.Original(kanji: text), learn: learn, status: status)
+        return insertCandidate(.Exact(kanji: text), learn: learn, status: status)
     }
 
     // 最後の一文字を消す
@@ -86,9 +86,9 @@ class TextEngine {
 
     private func text(candidate : Candidate) -> String {
         switch candidate {
-        case .Original(text: let text):
+        case .Exact(text: let text):
             return text
-        case .Abbrev(text: let text, original: _):
+        case .Partial(text: let text, Exact: _):
             return text
         }
     }
@@ -105,9 +105,9 @@ class TextEngine {
                 }
             }
             switch candidate {
-            case .Original(text: let text):
+            case .Exact(text: let text):
                 f(kana, text)
-            case .Abbrev(text: let text, orginal: let kana):
+            case .Partial(text: let text, orginal: let kana):
                 f(kana, text)
             }
         }
