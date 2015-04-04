@@ -25,6 +25,12 @@ class DictionarySettings {
             NSHomeDirectory().stringByAppendingPathComponent("Library/skk.learn.jisyo")
     }
 
+    // q確定の結果の学習
+    class func defaultPartialDictionaryPath() -> String {
+        return AppGroup.pathForResource("Library/skk.partial.jisyo") ??
+            NSHomeDirectory().stringByAppendingPathComponent("Library/skk.partial.jisyo")
+    }
+
     // 組込みの辞書(L辞書とか)
     class func defaultDicitonaryPath() -> String {
        // 辞書は必ず組込まれているはず

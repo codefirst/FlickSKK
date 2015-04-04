@@ -14,27 +14,45 @@ class DictionaryEngine {
         self.dictionary.learn(k, okuri: o, kanji: kanji)
     }
 
+    // q-確定の結果を学習する
+    func partial(kana: String, kanji: String) {
+        // 正規化する
+        let (k, _) = normalize(kana, okuri: nil)
+
+        // 学習する
+        self.dictionary.partial(k, okuri: nil, kanji: kanji)
+    }
+
     // 辞書を検索する。
     //  ・ っの特殊ルール等を考慮する
-    func find(kana : String, okuri : String?) -> [String] {
+    func find(kana : String, okuri : String?, dynamic: Bool) -> [Candidate] {
+        // 結果をストアする
+        var candidates : [Candidate] = []
+
         // 正規化する
         let (t, roman) = normalize(kana, okuri: okuri)
 
-        // 辞書を検索する
-        var xs = self.dictionary.find(t, okuri: roman).map({ (x : String)  ->  String in
-            return x + (okuri ?? "")
-        })
+        // アグレッシブ変換
+        if dynamic {
+            for candidate in self.dictionary.findDynamic(kana) {
+                candidates.append(.Partial(kanji: candidate.kanji, kana: candidate.kana))
+            }
+        }
+
+        // 通常の検索をする
+        for candidate in self.dictionary.find(t, okuri: roman) {
+            candidates.append(.Exact(kanji: candidate + (okuri ?? "")))
+        }
 
         // 末尾が「っ」の場合は、変換位置を1つ前にする
         if okuri != .None && t.last() == "っ" {
             // 「っ」送り仮名の場合の特殊処理
             // https://github.com/codefirst/FlickSKK/issues/27
-            let ys = self.dictionary.find(t.butLast(), okuri: roman).map({ (y : String)  ->  String in
-                return y + "っ" + (okuri ?? "")
-            })
-            xs += ys
+            for candidate in self.dictionary.find(t.butLast(), okuri: roman) {
+                candidates.append(.Exact(kanji: candidate + "っ" + (okuri ?? "")))
+            }
         }
-        return xs
+        return candidates
     }
 
     // 変換結果を登録する

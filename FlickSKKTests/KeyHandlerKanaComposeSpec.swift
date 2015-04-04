@@ -13,13 +13,32 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
             delegate = d
         }
 
+        let candidates = exacts(["川", "河"])
+
         context("kana compose") {
-            let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: ["川", "河"])
+            let composeMode = ComposeMode.KanaCompose(kana: "かわ", candidates: candidates)
             it("文字入力(シフトなし)") {
                 let m = handler.handle(.Char(kana: "ら", shift: false), composeMode: composeMode)
                 expect(self.kana(m)).to(equal("かわら"))
             }
             describe("Space") {
+                it("partialな候補がある場合") {
+                    self.dictionary.partial("かわなんとか", okuri: .None, kanji: "カワナントカ")
+                    let m = handler.handle(.Space, composeMode: composeMode)
+                    let (kana, okuri) = self.kanji(m)!
+                    if let c = self.candidates(m)?[0] {
+                        switch c {
+                        case let .Partial(kanji: kanji, kana: _):
+                            expect(kanji).to(equal("カワナントカ"))
+                        default:
+                            fail()
+                        }
+
+                    } else {
+                        fail()
+                    }
+                }
+
                 it("単語がある場合") {
                     let m = handler.handle(.Space, composeMode: composeMode)
                     let (kana, okuri) = self.kanji(m)!
@@ -67,6 +86,14 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                 let m = handler.handle(.InputModeChange(inputMode : .Katakana), composeMode: composeMode)
                 expect(m == .DirectInput).to(beTrue())
                 expect(delegate.insertedText).to(equal("カワ"))
+            }
+            it("略語学習") {
+                let composeMode = ComposeMode.KanaCompose(kana: "はなやまた", candidates: candidates)
+                let m = handler.handle(.InputModeChange(inputMode : .Katakana), composeMode: composeMode)
+                let xs = self.dictionary.findDynamic("はなや").filter { w in
+                    w.kanji == "ハナヤマタ"
+                }
+                expect(xs.count).to(equal(1))
             }
             describe("シフトあり文字入力") {
                 it("単語がある場合") {

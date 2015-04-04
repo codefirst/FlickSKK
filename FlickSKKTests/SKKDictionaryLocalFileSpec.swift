@@ -34,6 +34,7 @@ class SKKDictionaryLocalFileSpec : QuickSpec {
                 expect(xs).to(contain("一円"))
                 expect(xs).to(contain("1円"))
             }
+
         }
         describe("okuri-ari") {
             it("can find first entry"){

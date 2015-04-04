@@ -465,12 +465,17 @@ extension String {
 
 extension Array {
     func unique <T: Hashable> () -> [T] {
-        var result = [T]()
+        return uniqueBy { x in x }
+    }
+
+    func uniqueBy <S, T: Hashable> (f : S -> T) -> [S] {
+        var result = [S]()
         var addedDict = [T: Bool]()
         for elem in self {
-            if addedDict[elem as T] == nil {
-                addedDict[elem as T] = true
-                result.append(elem as T)
+            let t : T = f(elem as S)
+            if addedDict[t as T] == nil {
+                addedDict[t as T] = true
+                result.append(elem as S)
             }
         }
         return result

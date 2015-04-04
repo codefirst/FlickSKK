@@ -8,7 +8,7 @@ class ComposeModePresenter {
         case .KanaCompose(kana: let kana, candidates: _):
             return "▽\(kana)"
         case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
-            return "▼\(candidates[index])"
+            return "▼\(fromCandidate(candidates[index]))"
         case .WordRegister(kana : let kana, okuri : let okuri, composeText : let text, composeMode : let m):
             let prefix = kana + (okuri.map({ str in "*" + str }) ?? "")
             let nested = toString(m[0]) ?? ""
@@ -22,9 +22,9 @@ class ComposeModePresenter {
         case .DirectInput:
             return .None
         case .KanaCompose(kana: _, candidates: let candidates):
-            return (candidates, .None)
+            return (candidates.map(fromCandidate), .None)
         case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
-            return (candidates, index)
+            return (candidates.map(fromCandidate), index)
         case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return candidates(m[0])
         }
@@ -42,6 +42,15 @@ class ComposeModePresenter {
         case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return inStatusShowsCandidatesBySpace(m[0]
             )
+        }
+    }
+
+    private func fromCandidate(candidate : Candidate) -> String {
+        switch candidate {
+        case .Partial(kanji: let kanji, kana: _):
+            return "#\(kanji)"
+        case .Exact(kanji: let kanji):
+            return kanji
         }
     }
 }

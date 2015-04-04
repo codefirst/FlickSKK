@@ -20,6 +20,22 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                 dict = SKKUserDictionaryFile(path: path)
             }
 
+            describe("findWith") {
+                beforeEach {
+                    dict.register("まじ", okuri: .None, kanji: "本気")
+                }
+
+                it("前方一致で取得できる") {
+                    let x = dict.findWith("ま")[0]
+                    expect(x.kana).to(equal("まじ"))
+                    expect(x.kanji).to(equal("本気"))
+                }
+                it("完全一致では取得できない") {
+                    let xs = dict.findWith("まじ")
+                    expect(xs).to(beEmpty())
+                }
+            }
+
             describe("register") {
                 it("can find register entry") {
                     dict.register("まじ", okuri: .None, kanji: "本気")

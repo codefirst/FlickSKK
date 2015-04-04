@@ -7,11 +7,17 @@ class SKKDictionary : NSObject {
     // すべての辞書(先頭から順に検索される)
     private var dictionaries : [ SKKDictionaryFile ] = []
 
+    // ダイナミック変換用辞書
+    private var dynamicDictionaries : [ SKKUserDictionaryFile ] = []
+
     // ユーザ辞書
     private var userDictionary : SKKUserDictionaryFile?
 
     // 学習辞書
     private var learnDictionary : SKKUserDictionaryFile?
+
+    // 略語辞書
+    private var partialDictionary : SKKUserDictionaryFile?
 
     // ロード完了を監視するために Key value observing を使う
     dynamic var isWaitingForLoad : Bool = false
@@ -21,8 +27,9 @@ class SKKDictionary : NSObject {
     private let cache = DictionaryCache()
 
     class func resetLearnDictionary() {
-        let path = DictionarySettings.defaultLearnDictionaryPath()
-        NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+        for path in [DictionarySettings.defaultLearnDictionaryPath(), DictionarySettings.defaultPartialDictionaryPath()] {
+            NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+        }
     }
 
     override init() {
@@ -39,7 +46,14 @@ class SKKDictionary : NSObject {
                 self.cache.loadUserDicitonary(DictionarySettings.defaultLearnDictionaryPath()) {
                 return SKKUserDictionaryFile(path: $0)
             }
+
+            self.partialDictionary =
+                self.cache.loadUserDicitonary(DictionarySettings.defaultPartialDictionaryPath()){
+                    return SKKUserDictionaryFile(path: $0)
+            }
+
             self.dictionaries = [ self.learnDictionary!, self.userDictionary!, dictionary ]
+            self.dynamicDictionaries = [ self.partialDictionary!, self.learnDictionary!, self.userDictionary! ]
         }
     }
 
@@ -47,12 +61,20 @@ class SKKDictionary : NSObject {
     func find(normal : String, okuri : String?) -> [ String ] {
         self.waitForLoading()
 
-        let xs : [String] = self.dictionaries.map({(dict : SKKDictionaryFile) -> [String] in
-            dict.find(normal, okuri: okuri)
-        }).reduce([],
-                  combine: {(x : [String], y : [String]) -> [String] in
-            x + y
-        }).unique()
+        let xs : [String] = self.dictionaries.map {
+            $0.find(normal, okuri: okuri)
+        }.reduce([], +).unique()
+
+        return xs
+    }
+
+    // アグレッシブ変換用の辞書検索
+    func findDynamic(prefix : String) -> [(kana: String, kanji: String)] {
+        self.waitForLoading()
+
+        let xs : [(kana : String, kanji: String)] = self.dynamicDictionaries.map {
+            $0.findWith(prefix)
+        }.reduce([], +).uniqueBy { c in c.kanji }
 
         return xs
     }
@@ -74,6 +96,17 @@ class SKKDictionary : NSObject {
         loader.async {
             self.cache.update(DictionarySettings.defaultLearnDictionaryPath()) {
                 self.learnDictionary?.serialize()
+                ()
+            }
+        }
+    }
+
+    // InputModeChangeによる確定を学習する
+    func partial(kana: String, okuri: String?, kanji: String) {
+        partialDictionary?.register(kana, okuri: okuri, kanji: kanji)
+        loader.async {
+            self.cache.update(DictionarySettings.defaultPartialDictionaryPath()) {
+                self.partialDictionary?.serialize()
                 ()
             }
         }
