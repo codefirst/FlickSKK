@@ -25,7 +25,7 @@ class SKKEngine {
         self.delegate.composeText(presenter.toString(self.composeMode))
 
         // 候補表示
-        self.delegate.showCandidates(candidates()?.candidates.map{$0.kanji})
+        self.delegate.showCandidates(candidates()?.candidates)
     }
     
     func candidates() -> (candidates: [Candidate], index: Int?)? {

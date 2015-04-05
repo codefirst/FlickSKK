@@ -406,14 +406,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.updateSpaceButtonLabel()
     }
 
-    func showCandidates(candidates: [String]?) {
-        switch candidates {
-        case .Some(var xs):
-            xs.append("▼単語登録")
-            sessionView.candidates = xs
-        case .None:
-            sessionView.candidates = []
-        }
+    func showCandidates(candidates: [Candidate]?) {
+        sessionView.canEnterWordRegister = candidates != nil
+        sessionView.candidates = candidates ?? []
         
         self.updateSpaceButtonLabel()
     }

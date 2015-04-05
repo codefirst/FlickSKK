@@ -19,7 +19,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             self.collectionView.reloadData()
         }
     }
-    var candidates: [String] = [] {
+    var candidates: [Candidate] = [] {
         didSet {
             self.collectionView.reloadData()
             
@@ -28,6 +28,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             }
         }
     }
+    var canEnterWordRegister = false
     var didSelectCandidateAtIndex: (Int -> Void)? = nil
     
     let collectionView: UICollectionView
@@ -96,17 +97,18 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     // MARK: UICollectionViewDataSource, UICollectionViewDelegate
     
     enum Section: Int {
-        case ComposeText = 0, Candidates
+        case ComposeText = 0, Candidates, EnterWordRegister
     }
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 2 // composeText, candidates
+        return 3 // composeText, candidates, EnterWordRegister
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section(rawValue: section) {
         case .Some(.ComposeText): return self.composeText != nil ? 1 : 0
         case .Some(.Candidates): return self.candidates.count
+        case .Some(.EnterWordRegister): return canEnterWordRegister ? 1 : 0
         case .None: return 0
         }
     }
@@ -115,6 +117,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         switch Section(rawValue: indexPath.section) {
         case .Some(.ComposeText): break
         case .Some(.Candidates): self.didSelectCandidateAtIndex?(indexPath.row)
+        case .Some(.EnterWordRegister): self.didSelectCandidateAtIndex?(candidates.count)
         case .None: break
         }
     }
@@ -127,8 +130,11 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             return cell
         case .Some(.Candidates):
             let index = indexPath.item
-            let candidate = (index < candidates.count) ? candidates[index] : "";
-            cell.textLabel.text = candidate
+            cell.textLabel.text = (index < candidates.count) ? candidates[index].kanji : ""
+            cell.textLabel.textAlignment = .Center
+            return cell
+        case .Some(.EnterWordRegister):
+            cell.textLabel.text = NSLocalizedString("EnterWordRegister", comment: "")
             cell.textLabel.textAlignment = .Center
             return cell
         case .None:
