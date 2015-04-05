@@ -372,12 +372,15 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         case .HankakuKana:
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
+        
+        updateSpaceButtonLabel()
     }
     
     private func updateSpaceButtonLabel() {
         let normal = self.spaceButton.key.buttonLabel
         let nextCandidate = NSLocalizedString("NextCandidate", comment: "")
         self.spaceButton.label.text = (self.engine.inStatusShowsCandidatesBySpace() ?? false) ? nextCandidate : normal
+        self.spaceButton.flicksEnabled = self.engine.hasPartialCandidates
     }
 
     func toggleShift() {

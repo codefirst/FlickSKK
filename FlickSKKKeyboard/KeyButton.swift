@@ -46,6 +46,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             l.textAlignment = .Center
         }
     }()
+    var flicksEnabled: Bool = true
 
     var metrics: [String:CGFloat] {
         return ["p": 10]
@@ -168,6 +169,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             self.highlighted = false
             return
         }
+        
+        if !flicksEnabled { return }
 
         let distance = sqrt(pow(p.x - originOfPanGesture.x, 2) + pow(p.y - originOfPanGesture.y, 2))
         if self.bounds.contains(p) && distance < 12 {
