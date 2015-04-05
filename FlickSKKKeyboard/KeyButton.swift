@@ -181,22 +181,24 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 var direction = KeyButtonFlickDirection.None
                 
                 let angle = Double(atan2(p.y - originOfPanGesture.y, p.x - originOfPanGesture.x))
-                if angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
-                    self.sequenceIndex = min(1, maxIndex)
+                if maxIndex >= 1 && angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
+                    self.sequenceIndex = 1
                     direction = .Left
-                } else if angle < -M_PI_4 {
-                    self.sequenceIndex = min(2, maxIndex)
+                } else if maxIndex >= 2 && angle < -M_PI_4 {
+                    self.sequenceIndex = 2
                     direction = .Up
-                } else if angle < M_PI_4 {
-                    self.sequenceIndex = min(3, maxIndex)
+                } else if maxIndex >= 3 && angle < M_PI_4 {
+                    self.sequenceIndex = 3
                     direction = .Right
-                } else {
-                    self.sequenceIndex = min(4, maxIndex)
+                } else if maxIndex >= 4 {
+                    self.sequenceIndex = 4
                     direction = .Down
                 }
                 
-                let text = String(Array(s)[self.sequenceIndex ?? 0])
-                KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
+                if direction != .None {
+                    let text = String(Array(s)[self.sequenceIndex ?? 0])
+                    KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
+                }
             }
         }
     }
