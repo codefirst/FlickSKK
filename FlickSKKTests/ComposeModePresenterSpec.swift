@@ -15,7 +15,7 @@ class ComposeModePresenterSpec : QuickSpec {
             }
             it("kanji compose mode") {
                 let m = ComposeMode.KanjiCompose(kana: "ほんき", okuri: .None, candidates: candidates, index: 0)
-                expect(target.toString(m)).to(equal("▼本気"))
+                expect(target.toString(m)).to(equal("▼ほんき"))
             }
             it("word register mode(direct)") {
                 let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あああ", composeMode: [.DirectInput])
