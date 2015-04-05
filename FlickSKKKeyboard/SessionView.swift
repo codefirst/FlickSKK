@@ -79,8 +79,11 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         if let index = selectionIndex {
             if index < self.candidates.count {
                 let indexPath = NSIndexPath(forItem: index, inSection: Section.Candidates.rawValue)
-                let scrollPosition = contains(self.collectionView.indexPathsForVisibleItems() as [NSIndexPath], indexPath) ? UICollectionViewScrollPosition.CenteredHorizontally : .None
-                self.collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: scrollPosition)
+                if let la = collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) {
+                    let visible = la.frame.width > 0 && CGRectIntersection(bounds, convertRect(la.frame, fromView: collectionView)).width == la.frame.width
+                    let scrollPosition = visible ? .None : UICollectionViewScrollPosition.CenteredHorizontally
+                    collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: scrollPosition)
+                }
             }
         } else {
             // deselect all
