@@ -7,8 +7,9 @@ class ComposeModePresenter {
             return ""
         case .KanaCompose(kana: let kana, candidates: _):
             return "▽\(kana)"
-        case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
-            return "▼\(fromCandidate(candidates[index]))"
+        case .KanjiCompose(kana: let kana, okuri: let okuri, candidates: let candidates, index: let index):
+            let text = kana + (okuri.map({ str in "*" + str }) ?? "")
+            return "▼\(text)"
         case .WordRegister(kana : let kana, okuri : let okuri, composeText : let text, composeMode : let m):
             let prefix = kana + (okuri.map({ str in "*" + str }) ?? "")
             let nested = toString(m[0]) ?? ""
@@ -17,14 +18,14 @@ class ComposeModePresenter {
     }
 
     // 候補の取得
-    func candidates(composeMode : ComposeMode) -> (candidates: [String], index: Int?)? {
+    func candidates(composeMode : ComposeMode) -> (candidates: [Candidate], index: Int?)? {
         switch composeMode {
         case .DirectInput:
             return .None
         case .KanaCompose(kana: _, candidates: let candidates):
-            return (candidates.map(fromCandidate), .None)
+            return (candidates, .None)
         case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
-            return (candidates.map(fromCandidate), index)
+            return (candidates, index)
         case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return candidates(m[0])
         }
@@ -42,15 +43,6 @@ class ComposeModePresenter {
         case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return inStatusShowsCandidatesBySpace(m[0]
             )
-        }
-    }
-
-    private func fromCandidate(candidate : Candidate) -> String {
-        switch candidate {
-        case .Partial(kanji: let kanji, kana: _):
-            return "#\(kanji)"
-        case .Exact(kanji: let kanji):
-            return kanji
         }
     }
 }

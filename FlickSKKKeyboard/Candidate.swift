@@ -1,6 +1,20 @@
 enum Candidate : Equatable {
     case Partial(kanji: String, kana: String)
     case Exact(kanji : String)
+
+    var kanji: String {
+        switch self {
+        case .Partial(kanji: let kanji, kana: _): return kanji
+        case .Exact(kanji: let kanji): return kanji
+        }
+    }
+    
+    var isPartial: Bool {
+        switch self {
+        case .Partial(kanji: _, kana: _): return true
+        default: return false
+        }
+    }
 }
 
 func ==(l : Candidate, r : Candidate) -> Bool {

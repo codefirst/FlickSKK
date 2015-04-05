@@ -19,7 +19,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             if let s = key.sequence {
                 let text = String(Array(s)[self.sequenceIndex ?? 0])
                 // FIXME: special ignore label
-                if(text != "-ignore-") {
+                if(text != KanaFlickKey.ignoredSequence) {
                     self.label.text = text
                 }
             }
@@ -46,6 +46,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             l.textAlignment = .Center
         }
     }()
+    var flicksEnabled: Bool = true
 
     var metrics: [String:CGFloat] {
         return ["p": 10]
@@ -168,6 +169,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             self.highlighted = false
             return
         }
+        
+        if !flicksEnabled { return }
 
         let distance = sqrt(pow(p.x - originOfPanGesture.x, 2) + pow(p.y - originOfPanGesture.y, 2))
         if self.bounds.contains(p) && distance < 12 {
@@ -179,24 +182,26 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             if let s = key.sequence {
                 let maxIndex = s.count - 1
                 var direction = KeyButtonFlickDirection.None
-
+                
                 let angle = Double(atan2(p.y - originOfPanGesture.y, p.x - originOfPanGesture.x))
-                if angle < -3*M_PI_4 || angle >= 3*M_PI_4 {
-                    self.sequenceIndex = min(1, maxIndex)
+                if maxIndex >= 1 && (angle < -3*M_PI_4 || angle >= 3*M_PI_4) {
+                    self.sequenceIndex = 1
                     direction = .Left
-                } else if angle < -M_PI_4 {
-                    self.sequenceIndex = min(2, maxIndex)
+                } else if maxIndex >= 2 && angle < -M_PI_4 {
+                    self.sequenceIndex = 2
                     direction = .Up
-                } else if angle < M_PI_4 {
-                    self.sequenceIndex = min(3, maxIndex)
+                } else if maxIndex >= 3 && angle < M_PI_4 {
+                    self.sequenceIndex = 3
                     direction = .Right
-                } else {
-                    self.sequenceIndex = min(4, maxIndex)
+                } else if maxIndex >= 4 {
+                    self.sequenceIndex = 4
                     direction = .Down
                 }
-
-                let text = String(Array(s)[self.sequenceIndex ?? 0])
-                KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
+                
+                if direction != .None {
+                    let text = String(Array(s)[self.sequenceIndex ?? 0])
+                    KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
+                }
             }
         }
     }

@@ -336,7 +336,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             self.keyboardMode = .Alphabet
         case .KomojiDakuten: self.toggleKomojiDakuten()
         case .UpperLower: self.toggleUpperLower()
-        case .Space: self.handleSpace()
+        case .Space:
+            if index.map({$0 > 0}) ?? false {
+                self.handleSkipPartialCandidates()
+            } else {
+                self.handleSpace()
+            }
         case .Nothing: break
         }
         updateControlButtons()
@@ -367,12 +372,15 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         case .HankakuKana:
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
+        
+        updateSpaceButtonLabel()
     }
     
     private func updateSpaceButtonLabel() {
         let normal = self.spaceButton.key.buttonLabel
         let nextCandidate = NSLocalizedString("NextCandidate", comment: "")
         self.spaceButton.label.text = (self.engine.inStatusShowsCandidatesBySpace() ?? false) ? nextCandidate : normal
+        self.spaceButton.flicksEnabled = self.engine.hasPartialCandidates
     }
 
     func toggleShift() {
@@ -381,6 +389,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     func handleSpace() {
         engine.handle(.Space)
+    }
+    
+    func handleSkipPartialCandidates() {
+        engine.handle(.SkipPartialCandidates)
     }
 
     func toggleKomojiDakuten() {
@@ -397,14 +409,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.updateSpaceButtonLabel()
     }
 
-    func showCandidates(candidates: [String]?) {
-        switch candidates {
-        case .Some(var xs):
-            xs.append("▼単語登録")
-            sessionView.candidates = xs
-        case .None:
-            sessionView.candidates = []
-        }
+    func showCandidates(candidates: [Candidate]?) {
+        sessionView.canEnterWordRegister = candidates != nil
+        sessionView.candidates = candidates ?? []
         
         self.updateSpaceButtonLabel()
     }

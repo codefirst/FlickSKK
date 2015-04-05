@@ -15,7 +15,7 @@ class ComposeModePresenterSpec : QuickSpec {
             }
             it("kanji compose mode") {
                 let m = ComposeMode.KanjiCompose(kana: "ほんき", okuri: .None, candidates: candidates, index: 0)
-                expect(target.toString(m)).to(equal("▼本気"))
+                expect(target.toString(m)).to(equal("▼ほんき"))
             }
             it("word register mode(direct)") {
                 let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あああ", composeMode: [.DirectInput])
@@ -38,14 +38,14 @@ class ComposeModePresenterSpec : QuickSpec {
             }
             it("kana compose mode") {
                 let c = target.candidates(.KanaCompose(kana: "こんにちは", candidates: candidates))
-                expect(c?.candidates).to(equal(["本気", "#マジ"]))
+                expect(c?.candidates).to(equal(candidates))
                 expect(c?.index).to(beNil())
 
             }
             it("kanji compose mode") {
                 let m = ComposeMode.KanjiCompose(kana: "ほんき", okuri: .None, candidates: candidates, index: 1)
                 let c = target.candidates(m)
-                expect(c?.candidates).to(equal(["本気", "#マジ"]))
+                expect(c?.candidates).to(equal(candidates))
                 expect(c?.index).to(equal(1))
 
             }
@@ -57,8 +57,8 @@ class ComposeModePresenterSpec : QuickSpec {
                 let m = ComposeMode.WordRegister(kana: "ほんき", okuri: nil, composeText: "あ", composeMode: [
                     .KanjiCompose(kana: "ほんき", okuri: .None, candidates: candidates, index: 1)
                 ])
-                let (candidates, index) = target.candidates(m) ?? ([],0)
-                expect(candidates).to(equal(["本気", "#マジ"]))
+                let (cs, index) = target.candidates(m) ?? ([],0)
+                expect(cs).to(equal(candidates))
                 expect(index).to(equal(1))
             }
         }

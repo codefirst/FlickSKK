@@ -19,7 +19,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             self.collectionView.reloadData()
         }
     }
-    var candidates: [String] = [] {
+    var candidates: [Candidate] = [] {
         didSet {
             self.collectionView.reloadData()
             
@@ -28,6 +28,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             }
         }
     }
+    var canEnterWordRegister = false
     var didSelectCandidateAtIndex: (Int -> Void)? = nil
     
     let collectionView: UICollectionView
@@ -79,8 +80,11 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         if let index = selectionIndex {
             if index < self.candidates.count {
                 let indexPath = NSIndexPath(forItem: index, inSection: Section.Candidates.rawValue)
-                let scrollPosition = contains(self.collectionView.indexPathsForVisibleItems() as [NSIndexPath], indexPath) ? UICollectionViewScrollPosition.CenteredHorizontally : .None
-                self.collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: scrollPosition)
+                if let la = collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) {
+                    let visible = la.frame.width > 0 && CGRectIntersection(bounds, convertRect(la.frame, fromView: collectionView)).width == la.frame.width
+                    let scrollPosition = visible ? .None : UICollectionViewScrollPosition.CenteredHorizontally
+                    collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: scrollPosition)
+                }
             }
         } else {
             // deselect all
@@ -93,17 +97,18 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     // MARK: UICollectionViewDataSource, UICollectionViewDelegate
     
     enum Section: Int {
-        case ComposeText = 0, Candidates
+        case ComposeText = 0, Candidates, EnterWordRegister
     }
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 2 // composeText, candidates
+        return 3 // composeText, candidates, EnterWordRegister
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section(rawValue: section) {
         case .Some(.ComposeText): return self.composeText != nil ? 1 : 0
         case .Some(.Candidates): return self.candidates.count
+        case .Some(.EnterWordRegister): return canEnterWordRegister ? 1 : 0
         case .None: return 0
         }
     }
@@ -112,6 +117,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         switch Section(rawValue: indexPath.section) {
         case .Some(.ComposeText): break
         case .Some(.Candidates): self.didSelectCandidateAtIndex?(indexPath.row)
+        case .Some(.EnterWordRegister): self.didSelectCandidateAtIndex?(candidates.count)
         case .None: break
         }
     }
@@ -119,13 +125,19 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     private func configureCell(cell: CandidateCollectionViewCell, forIndexPath indexPath: NSIndexPath) -> CandidateCollectionViewCell {
         switch Section(rawValue: indexPath.section) {
         case .Some(.ComposeText):
+            cell.style = .Default
             cell.textLabel.text = self.composeText ?? ""
             cell.textLabel.textAlignment = .Left
             return cell
         case .Some(.Candidates):
-            let index = indexPath.item
-            let candidate = (index < candidates.count) ? candidates[index] : "";
-            cell.textLabel.text = candidate
+            let candidate: Candidate? = (indexPath.item < candidates.count) ? candidates[indexPath.item] : nil
+            cell.style = (candidate?.isPartial ?? false) ? .PartialCandidate : .Default
+            cell.textLabel.text = candidate?.kanji
+            cell.textLabel.textAlignment = .Center
+            return cell
+        case .Some(.EnterWordRegister):
+            cell.style = .Default
+            cell.textLabel.text = NSLocalizedString("EnterWordRegister", comment: "")
             cell.textLabel.textAlignment = .Center
             return cell
         case .None:
@@ -150,6 +162,25 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 class CandidateCollectionViewCell: UICollectionViewCell {
     let textLabel = UILabel()
     
+    enum Style {
+        case Default, PartialCandidate
+        
+        var textColor: UIColor {
+            switch self {
+            case .Default: return UIColor.blackColor()
+            case .PartialCandidate: return UIColor(white: 0.5, alpha: 1.0)
+            }
+        }
+        var normalBackgroundColor: UIColor { return UIColor.whiteColor() }
+        var highlightedBackgroundColor: UIColor { return UIColor(white: 0.5, alpha: 1.0) }
+        var selectedBackgroundColor: UIColor { return UIColor(white: 0.9, alpha: 1.0) }
+    }
+    var style: Style = .Default {
+        didSet {
+            updateStates()
+        }
+    }
+    
     override convenience init() {
         self.init(frame: CGRectZero)
     }
@@ -161,7 +192,6 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         
         self.textLabel.tap { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
-            l.textColor = UIColor.blackColor()
             l.backgroundColor = UIColor.clearColor()
             l.textAlignment = .Center
             l.lineBreakMode = .ByClipping
@@ -185,9 +215,10 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     
     private func updateStates() {
         UIView.setAnimationsEnabled(false) // disable fade-in
-        self.backgroundColor = highlighted ? UIColor(white: 0.5, alpha: 1.0)
-            : selected ? UIColor(white: 0.9, alpha: 1.0)
-            : UIColor.whiteColor()
+        self.backgroundColor = highlighted ? style.highlightedBackgroundColor
+            : selected ? style.selectedBackgroundColor
+            : style.normalBackgroundColor
+        self.textLabel.textColor = style.textColor
         UIView.setAnimationsEnabled(true)
     }
     

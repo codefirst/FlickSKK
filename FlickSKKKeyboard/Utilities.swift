@@ -480,4 +480,18 @@ extension Array {
         }
         return result
     }
+    
+    func any(f: T -> Bool) -> Bool {
+        for elem in self {
+            if f(elem) { return true }
+        }
+        return false
+    }
+    
+    func index(f: T -> Bool) -> Array.Index? {
+        for i in 0..<self.count {
+            if f(self[i]) { return i }
+        }
+        return nil
+    }
 }

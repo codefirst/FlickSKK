@@ -32,7 +32,7 @@ class DictionaryEngine {
         // 正規化する
         let (t, roman) = normalize(kana, okuri: okuri)
 
-        // アグレッシブ変換
+        // ダイナミック変換
         if dynamic {
             for candidate in self.dictionary.findDynamic(kana) {
                 candidates.append(.Partial(kanji: candidate.kanji, kana: candidate.kana))

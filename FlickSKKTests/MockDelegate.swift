@@ -17,6 +17,6 @@ class MockDelegate : SKKDelegate {
         self.inputMode = inputMode
     }
 
-    func showCandidates(candidates : [String]?) {
+    func showCandidates(candidates : [Candidate]?) {
     }
 }

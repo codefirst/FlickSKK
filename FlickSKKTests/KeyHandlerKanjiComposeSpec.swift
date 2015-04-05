@@ -55,6 +55,47 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                     }
                 }
             }
+            describe("SkipPartialCandidates") {
+                it("partialな候補がある場合はexactまでスキップ") {
+                    let candidates: [Candidate] = [.Partial(kanji: "かわなんとか", kana: "カワナントカ0"), .Partial(kanji: "かわなんとか", kana: "カワナントカ1")] + self.exacts(["川", "河"])
+                    let m = handler.handle(.SkipPartialCandidates, composeMode: ComposeMode.KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 0))
+                    switch m {
+                    case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+                        expect(kana).to(equal("かわ"))
+                        expect(okuri).to(beNil())
+                        expect(candidates).toNot(beEmpty())
+                        expect(index).to(equal(2))
+                    default:
+                        fail()
+                    }
+                }
+                
+                it("partialな候補がなくexactの候補がある場合は通常の変換") {
+                    let m = handler.handle(.SkipPartialCandidates, composeMode: composeMode)
+                    switch m {
+                    case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+                        expect(kana).to(equal("かわ"))
+                        expect(okuri).to(beNil())
+                        expect(candidates).toNot(beEmpty())
+                        expect(index).to(equal(1))
+                    default:
+                        fail()
+                    }
+                }
+                
+                it("partial,exactどちらも候補がない場合は登録") {
+                    let m = handler.handle(.SkipPartialCandidates, composeMode: .KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 1))
+                    switch m {
+                    case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
+                        expect(kana).to(equal("かわ"))
+                        expect(okuri).to(beNil())
+                        expect(composeText).to(equal(""))
+                        expect(composeMode[0] == .DirectInput).to(beTrue())
+                    default:
+                        fail()
+                    }
+                }
+            }
             it("Enter") {
                 let m = handler.handle(.Enter, composeMode: composeMode)
                 expect(m == .DirectInput).to(beTrue())

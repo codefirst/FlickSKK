@@ -22,5 +22,5 @@ protocol SKKDelegate : class {
     func changeInputMode(inputMode : SKKInputMode)
 
     // 変換候補の表示
-    func showCandidates(candidates : [String]?)
+    func showCandidates(candidates : [Candidate]?)
 }
