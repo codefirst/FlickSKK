@@ -56,6 +56,8 @@ class KeyHandler {
             self.delegate.changeInputMode(inputMode)
         case .Select(_):
             ()
+        case .SkipPartialCandidates:
+            ()
         }
         return nil
     }
@@ -104,6 +106,17 @@ class KeyHandler {
             } else {
                 return .WordRegister(kana : kana, okuri : .None, composeText: "", composeMode : [ .DirectInput ])
             }
+        case .SkipPartialCandidates:
+            let nextMode = factory.kanjiCompose(kana, okuri: .None)
+            switch nextMode {
+            case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+                if let index = candidates.index({!$0.isPartial}) {
+                    return .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index)
+                }
+                return nextMode
+            default:
+                return nextMode
+            }
         }
     }
 
@@ -149,6 +162,17 @@ class KeyHandler {
             if index < candidates.count {
                 text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
                 return .DirectInput
+            } else {
+                return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
+            }
+        case .SkipPartialCandidates:
+            var nextIndex = index + 1
+            if let exactIndex = candidates.index({!$0.isPartial}) {
+                nextIndex = max(nextIndex, exactIndex)
+            }
+            
+            if nextIndex < candidates.count {
+                return .KanjiCompose(kana : kana, okuri : okuri, candidates: candidates, index: nextIndex)
             } else {
                 return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
             }

@@ -49,6 +49,7 @@ enum KanaFlickKey: Hashable {
         switch self {
         case let .Seq(s, _): return Array(s).map{String($0)}
         case .InputModeChange: return ["-ignore-","_","かな","カナ","ｶﾅ"]
+        case .Space: return [NSLocalizedString("Space", comment: ""), NSLocalizedString("SkipPartialCandidate", comment: "")]
         default: return nil
         }
     }

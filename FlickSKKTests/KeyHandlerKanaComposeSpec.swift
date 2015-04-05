@@ -8,6 +8,8 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
         var delegate : MockDelegate!
 
         beforeEach {
+            self.dictionary = SKKDictionary()
+            self.dictionary.waitForLoading()
             let (h, d) =  self.create(self.dictionary)
             handler = h
             delegate = d
@@ -47,6 +49,47 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                     expect(self.candidates(m)).toNot(beEmpty())
                 }
                 it("単語がない場合") {
+                    let m = handler.handle(.Space, composeMode: .KanaCompose(kana: "あああ", candidates: []))
+                    switch m {
+                    case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
+                        expect(kana).to(equal("あああ"))
+                        expect(okuri).to(beNil())
+                        expect(composeText).to(equal(""))
+                        expect(composeMode[0] == .DirectInput).to(beTrue())
+                    default:
+                        fail()
+                    }
+                }
+            }
+            describe("SkipPartialCandidates") {
+                it("partialな候補がある場合はexactまでスキップ") {
+                    self.dictionary.partial("かわなんとか", okuri: .None, kanji: "カワナントカ")
+                    let m = handler.handle(.SkipPartialCandidates, composeMode: composeMode)
+                    switch m {
+                    case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+                        expect(kana).to(equal("かわ"))
+                        expect(okuri).to(beNil())
+                        expect(candidates).toNot(beEmpty())
+                        expect(index).to(equal(1))
+                    default:
+                        fail()
+                    }
+                }
+                
+                it("partialな候補がなくexactの候補がある場合は通常の変換") {
+                    let m = handler.handle(.SkipPartialCandidates, composeMode: composeMode)
+                    switch m {
+                    case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+                        expect(kana).to(equal("かわ"))
+                        expect(okuri).to(beNil())
+                        expect(candidates).toNot(beEmpty())
+                        expect(index).to(equal(0))
+                    default:
+                        fail()
+                    }
+                }
+                
+                it("partial,exactどちらも候補がない場合は登録") {
                     let m = handler.handle(.Space, composeMode: .KanaCompose(kana: "あああ", candidates: []))
                     switch m {
                     case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):

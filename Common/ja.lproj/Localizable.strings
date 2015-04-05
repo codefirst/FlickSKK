@@ -12,5 +12,6 @@
 "okuri" = "おくり";
 "yomi" = "よみ";
 "NextCandidate" = "次候補";
+"SkipPartialCandidate" = "≪";
 "Cancel" = "キャンセル";
 "Reset" = "リセット";

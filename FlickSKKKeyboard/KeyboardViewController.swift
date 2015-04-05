@@ -336,7 +336,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             self.keyboardMode = .Alphabet
         case .KomojiDakuten: self.toggleKomojiDakuten()
         case .UpperLower: self.toggleUpperLower()
-        case .Space: self.handleSpace()
+        case .Space:
+            if index.map({$0 > 0}) ?? false {
+                self.handleSkipPartialCandidates()
+            } else {
+                self.handleSpace()
+            }
         case .Nothing: break
         }
         updateControlButtons()
@@ -381,6 +386,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     func handleSpace() {
         engine.handle(.Space)
+    }
+    
+    func handleSkipPartialCandidates() {
+        engine.handle(.SkipPartialCandidates)
     }
 
     func toggleKomojiDakuten() {

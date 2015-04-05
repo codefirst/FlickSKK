@@ -17,6 +17,7 @@ enum SKKKeyEvent {
     case ToggleDakuten(beforeText : String)
     case ToggleUpperLower(beforeText : String)
     case Select(index : Int)
+    case SkipPartialCandidates
 }
 
 func ==(l : SKKKeyEvent, r : SKKKeyEvent) -> Bool {
@@ -38,6 +39,8 @@ func ==(l : SKKKeyEvent, r : SKKKeyEvent) -> Bool {
         return true
     case (.Select(index: let index1), .Select(index: let index2)):
         return index1 == index2
+    case (.SkipPartialCandidates, .SkipPartialCandidates):
+        return true
     default:
         return false
     }

@@ -68,7 +68,7 @@ class SKKDictionary : NSObject {
         return xs
     }
 
-    // アグレッシブ変換用の辞書検索
+    // ダイナミック変換用の辞書検索
     func findDynamic(prefix : String) -> [(kana: String, kanji: String)] {
         self.waitForLoading()
 

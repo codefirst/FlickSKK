@@ -17,14 +17,14 @@ class ComposeModePresenter {
     }
 
     // 候補の取得
-    func candidates(composeMode : ComposeMode) -> (candidates: [String], index: Int?)? {
+    func candidates(composeMode : ComposeMode) -> (candidates: [Candidate], index: Int?)? {
         switch composeMode {
         case .DirectInput:
             return .None
         case .KanaCompose(kana: _, candidates: let candidates):
-            return (candidates.map(fromCandidate), .None)
+            return (candidates, .None)
         case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
-            return (candidates.map(fromCandidate), index)
+            return (candidates, index)
         case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return candidates(m[0])
         }

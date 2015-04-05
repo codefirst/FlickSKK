@@ -25,14 +25,19 @@ class SKKEngine {
         self.delegate.composeText(presenter.toString(self.composeMode))
 
         // 候補表示
-        self.delegate.showCandidates(candidates()?.0)
+        self.delegate.showCandidates(candidates()?.candidates.map{$0.kanji})
     }
     
-    func candidates() -> (candidates: [String], index: Int?)? {
+    func candidates() -> (candidates: [Candidate], index: Int?)? {
         return self.presenter.candidates(self.composeMode)
     }
 
     func inStatusShowsCandidatesBySpace() -> Bool {
         return self.presenter.inStatusShowsCandidatesBySpace(composeMode)
+    }
+    
+    var hasPartialCandidates: Bool {
+        let cs = candidates()?.candidates ?? []
+        return cs.any{$0.isPartial}
     }
 }
