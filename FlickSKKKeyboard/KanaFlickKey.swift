@@ -55,7 +55,7 @@ enum KanaFlickKey: Hashable {
         default: return nil
         }
     }
-    
+
     var isControl: Bool {
         switch self {
         case .Seq(_): return false
