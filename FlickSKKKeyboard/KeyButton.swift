@@ -19,7 +19,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             if let s = key.sequence {
                 let text = String(Array(s)[self.sequenceIndex ?? 0])
                 // FIXME: special ignore label
-                if(text != "-ignore-") {
+                if(text != KanaFlickKey.ignoredSequence) {
                     self.label.text = text
                 }
             }

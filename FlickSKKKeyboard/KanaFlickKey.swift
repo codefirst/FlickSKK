@@ -44,16 +44,18 @@ enum KanaFlickKey: Hashable {
             return nil
         }
     }
+    
+    static let ignoredSequence = "-ignore-"
 
     var sequence: [String]? {
         switch self {
         case let .Seq(s, _): return Array(s).map{String($0)}
-        case .InputModeChange: return ["-ignore-","_","かな","カナ","ｶﾅ"]
-        case .Space: return [NSLocalizedString("Space", comment: ""), NSLocalizedString("SkipPartialCandidate", comment: "")]
+        case .InputModeChange: return [KanaFlickKey.ignoredSequence,"_","かな","カナ","ｶﾅ"]
+        case .Space: return [KanaFlickKey.ignoredSequence, NSLocalizedString("SkipPartialCandidate", comment: "")]
         default: return nil
         }
     }
-
+    
     var isControl: Bool {
         switch self {
         case .Seq(_): return false
