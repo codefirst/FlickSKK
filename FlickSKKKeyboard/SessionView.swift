@@ -125,15 +125,18 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     private func configureCell(cell: CandidateCollectionViewCell, forIndexPath indexPath: NSIndexPath) -> CandidateCollectionViewCell {
         switch Section(rawValue: indexPath.section) {
         case .Some(.ComposeText):
+            cell.style = .Default
             cell.textLabel.text = self.composeText ?? ""
             cell.textLabel.textAlignment = .Left
             return cell
         case .Some(.Candidates):
-            let index = indexPath.item
-            cell.textLabel.text = (index < candidates.count) ? candidates[index].kanji : ""
+            let candidate: Candidate? = (indexPath.item < candidates.count) ? candidates[indexPath.item] : nil
+            cell.style = (candidate?.isPartial ?? false) ? .PartialCandidate : .Default
+            cell.textLabel.text = candidate?.kanji
             cell.textLabel.textAlignment = .Center
             return cell
         case .Some(.EnterWordRegister):
+            cell.style = .Default
             cell.textLabel.text = NSLocalizedString("EnterWordRegister", comment: "")
             cell.textLabel.textAlignment = .Center
             return cell
@@ -159,6 +162,25 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 class CandidateCollectionViewCell: UICollectionViewCell {
     let textLabel = UILabel()
     
+    enum Style {
+        case Default, PartialCandidate
+        
+        var textColor: UIColor {
+            switch self {
+            case .Default: return UIColor.blackColor()
+            case .PartialCandidate: return UIColor(white: 0.5, alpha: 1.0)
+            }
+        }
+        var normalBackgroundColor: UIColor { return UIColor.whiteColor() }
+        var highlightedBackgroundColor: UIColor { return UIColor(white: 0.5, alpha: 1.0) }
+        var selectedBackgroundColor: UIColor { return UIColor(white: 0.9, alpha: 1.0) }
+    }
+    var style: Style = .Default {
+        didSet {
+            updateStates()
+        }
+    }
+    
     override convenience init() {
         self.init(frame: CGRectZero)
     }
@@ -170,7 +192,6 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         
         self.textLabel.tap { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
-            l.textColor = UIColor.blackColor()
             l.backgroundColor = UIColor.clearColor()
             l.textAlignment = .Center
             l.lineBreakMode = .ByClipping
@@ -194,9 +215,10 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     
     private func updateStates() {
         UIView.setAnimationsEnabled(false) // disable fade-in
-        self.backgroundColor = highlighted ? UIColor(white: 0.5, alpha: 1.0)
-            : selected ? UIColor(white: 0.9, alpha: 1.0)
-            : UIColor.whiteColor()
+        self.backgroundColor = highlighted ? style.highlightedBackgroundColor
+            : selected ? style.selectedBackgroundColor
+            : style.normalBackgroundColor
+        self.textLabel.textColor = style.textColor
         UIView.setAnimationsEnabled(true)
     }
     
