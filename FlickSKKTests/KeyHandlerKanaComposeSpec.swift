@@ -140,11 +140,16 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
             }
             describe("シフトあり文字入力") {
                 it("単語がある場合") {
+                    self.dictionary.partial("かわなんとか", okuri: .None, kanji: "カワナントカ")
                     let m = handler.handle(.Char(kana: "い", shift: true), composeMode: composeMode)
                     let (kana, okuri) = self.kanji(m)!
+                    let kanjis = self.candidates(m)?.map({ c in c.kanji })
+
                     expect(kana).to(equal("かわ"))
                     expect(okuri).to(equal("い"))
-                    expect(self.candidates(m)).toNot(beEmpty())
+
+                    expect(kanjis).to(contain("乾い"))
+                    expect(kanjis).toNot(contain("カワナントカ"))
                 }
                 it("単語がない場合") {
                     let m = handler.handle(.Char(kana: "あ", shift: true), composeMode: composeMode)
