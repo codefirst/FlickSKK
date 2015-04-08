@@ -96,17 +96,29 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 seqWithSymbols("、。？！"),
                 ]),
             .Number: KeyPad(keys: [
-                seqWithSymbols("1←↑→↓"),
-                seqWithSymbols("2"),
-                seqWithSymbols("3"),
-                seqWithSymbols("4"),
-                seqWithSymbols("5"),
-                seqWithSymbols("6"),
-                seqWithSymbols("7"),
-                seqWithSymbols("8"),
-                seqWithSymbols("9"),
+                // よく使う記号(アルファベットキーにあわせた)
+                seqWithSymbols("1#@&_"),
+                // 通貨用記号
+                seqWithSymbols("2$￥"),
+                // 引用記号 + チルダ
+                seqWithSymbols("3'\"`~"),
+                // 算術記号(%がmodなのは自明か?)
+                seqWithSymbols("4+*%="),
+                // 矢印。中央においてみた。
+                seqWithSymbols("5←↑→↓"),
+                // あまってる。とりあえずおもしろUnicode記号をいれた
+                seqWithSymbols("6✿☃"),
+                // 括弧系
+                seqWithSymbols("7<{>}"),
+                // 行末記号と区切り文字
+                seqWithSymbols("8?:!;"),
+                // 線だけで構成されているやつ。(標準キーボードにあわせた)
+                seqWithSymbols("9\\^/|"),
+                // 括弧系2(標準キーボードにあわせた)
                 seqWithSymbols("()[]"),
-                seqWithSymbols("0～⋯"),
+                // 行末で使う全角記号
+                seqWithSymbols("0～・⋯"),
+                // 標準キーボードにあわせた
                 seqWithSymbols(".,-/"),
                 ]),
             .Alphabet: KeyPad(keys: [
