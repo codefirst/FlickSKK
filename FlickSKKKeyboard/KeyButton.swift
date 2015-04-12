@@ -72,7 +72,16 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     var normalBackgroundColor: UIColor
     var selectedBackgroundColor: UIColor
-    let repeatTimer : KeyRepeatTimer?
+    lazy var repeatTimer : KeyRepeatTimer? = {
+        if self.key.isRepeat {
+            return KeyRepeatTimer(delayInterval: 0.45, repeatInterval: 0.05, action: {
+                self.tapped?(self.key, self.sequenceIndex)
+                return ()
+            })
+        } else {
+            return nil
+        }
+    }()
 
     init(key: KanaFlickKey) {
         self.key = key
@@ -95,12 +104,6 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         self.layer.borderColor = UIColor.grayColor().CGColor
         self.layer.borderWidth = 1.0 / UIScreen.mainScreen().scale / 2.0
 
-        if key.isRepeat {
-            self.repeatTimer = KeyRepeatTimer(delayInterval: 0.45, repeatInterval: 0.05, action: {
-                self.tapped?(self.key, self.sequenceIndex)
-                return ()
-            })
-        }
         switch key {
         case .Seq(_, showSeqs: true):
             let autolayout = self.autolayoutFormat(metrics, ["label": label, "sequence": sequenceLabel])
