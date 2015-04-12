@@ -24,7 +24,7 @@ class SKKNumberPreprocessor {
         self.numbers = self.findNumbers(value)
         return regexp.stringByReplacingMatchesInString(value,
             options: nil,
-            range: NSMakeRange(0, value.utf16Count),
+            range: NSMakeRange(0, count(value.utf16)),
             withTemplate: "#")
     }
 
@@ -70,7 +70,7 @@ class SKKNumberPreprocessor {
     private func findNumbers(value : String) -> [Int] {
         let xs = regexp.matchesInString(value,
             options: nil,
-            range: NSMakeRange(0, value.utf16Count)) as! [NSTextCheckingResult]
+            range: NSMakeRange(0, count(value.utf16))) as! [NSTextCheckingResult]
         return xs.map({ x in
             let n : NSString = (self.value as NSString).substringWithRange(x.range)
             return n.integerValue

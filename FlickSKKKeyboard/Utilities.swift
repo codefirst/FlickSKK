@@ -454,8 +454,8 @@ extension String {
         case .None:
             return self
         case .Some(let s):
-            if(s.utf16Count <= self.utf16Count) {
-                return self.substringToIndex(advance(self.startIndex, self.utf16Count - s.utf16Count))
+            if(count(s.utf16) <= count(self.utf16)) {
+                return self.substringToIndex(advance(self.startIndex, count(self.utf16) - count(s.utf16)))
             } else {
                 return self
             }
