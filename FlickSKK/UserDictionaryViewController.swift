@@ -12,10 +12,6 @@ import FlickSKKKeyboard
 class UserDictionaryViewController: UITableViewController {
     var entries : [SKKDictionaryEntry] = []
 
-    convenience override init() {
-        self.init(style: .Grouped)
-    }
-
     override init(nibName: String?, bundle: NSBundle?) {
         super.init(nibName: nibName, bundle: bundle)
     }

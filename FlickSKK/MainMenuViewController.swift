@@ -12,7 +12,7 @@ class MainMenuViewController: UITableViewController {
     typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: Void -> Void)
     var sections : [(title: String?, rows: [row])]!
 
-    convenience override init() {
+    convenience init() {
         self.init(style: .Grouped)
     }
 

@@ -46,10 +46,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     let dictionary : SKKDictionary?
 
-    convenience override init() {
-        self.init(nibName: nil, bundle: nil)
-    }
-
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.keyboardMode = .InputMode(mode: .Hirakana)
         self.shiftEnabled = false

@@ -19,11 +19,8 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         rows: [(title: String, text: UITextField, returnType: UIReturnKeyType)]
     )]!
 
-    convenience override init() {
-        self.init(style: .Grouped)
-    }
 
-    override init(nibName: String?, bundle: NSBundle?) {
+    override init!(nibName: String?, bundle: NSBundle?) {
         super.init(nibName: nibName, bundle: bundle)
     }
 

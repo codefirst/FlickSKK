@@ -181,10 +181,6 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    override convenience init() {
-        self.init(frame: CGRectZero)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
