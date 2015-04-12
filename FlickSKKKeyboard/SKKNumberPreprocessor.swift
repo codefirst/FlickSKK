@@ -30,10 +30,10 @@ class SKKNumberPreprocessor {
 
     func postProcess(entry : NSString) -> String {
         var result : NSMutableString =
-            entry.mutableCopy() as NSMutableString
+            entry.mutableCopy() as! NSMutableString
 
         var ret =
-            template.firstMatchInString(result, options: nil, range: NSMakeRange(0, result.length))
+            template.firstMatchInString(result as String, options: nil, range: NSMakeRange(0, result.length))
 
         var index = 0
 
@@ -45,10 +45,10 @@ class SKKNumberPreprocessor {
                 range: x.range,
                 withTemplate: stringFor(numbers[index], entry: matched))
             index += 1
-            ret = template.firstMatchInString(result, options: nil, range: NSMakeRange(0, result.length))
+            ret = template.firstMatchInString(result as String, options: nil, range: NSMakeRange(0, result.length))
         }
 
-        return result
+        return result as String
     }
 
     private func stringFor(n : Int, entry : String) -> String {
@@ -70,7 +70,7 @@ class SKKNumberPreprocessor {
     private func findNumbers(value : String) -> [Int] {
         let xs = regexp.matchesInString(value,
             options: nil,
-            range: NSMakeRange(0, value.utf16Count)) as [NSTextCheckingResult]
+            range: NSMakeRange(0, value.utf16Count)) as! [NSTextCheckingResult]
         return xs.map({ x in
             let n : NSString = (self.value as NSString).substringWithRange(x.range)
             return n.integerValue

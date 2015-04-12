@@ -24,7 +24,7 @@ class KeyboardSpacerView : UIView {
 
         NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillChangeFrameNotification, object: nil, queue: nil) { (n: NSNotification!) -> Void in
             if let userInfo = n.userInfo {
-                if let f = (userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue?)?.CGRectValue() {
+                if let f = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue?)?.CGRectValue() {
                     self.keyboardHeightConstraint?.constant = f.size.height
                 }
             }

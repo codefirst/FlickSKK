@@ -39,7 +39,7 @@ class EntryParser {
     // 単語リストを結合して、SKKのエントリにする
     //  ["a", "b"] => /a/b/
     private func join(xs : [String]) -> String {
-        return xs.reduce("", {(x,y) in x + "/" + self.escape(y) }) + "/"
+        return xs.reduce("", combine: {(x,y) in x + "/" + self.escape(y) }) + "/"
     }
 
     // 特殊な文字は置換する。

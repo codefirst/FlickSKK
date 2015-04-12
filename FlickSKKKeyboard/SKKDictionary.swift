@@ -63,7 +63,7 @@ class SKKDictionary : NSObject {
 
         let xs : [String] = self.dictionaries.map {
             $0.find(normal, okuri: okuri)
-        }.reduce([], +).unique()
+        }.reduce([], combine: +).unique()
 
         return xs
     }
@@ -74,7 +74,7 @@ class SKKDictionary : NSObject {
 
         let xs : [(kana : String, kanji: String)] = self.dynamicDictionaries.map {
             $0.findWith(prefix)
-        }.reduce([], +).uniqueBy { c in c.kanji }
+        }.reduce([], combine: +).uniqueBy { c in c.kanji }
 
         return xs
     }

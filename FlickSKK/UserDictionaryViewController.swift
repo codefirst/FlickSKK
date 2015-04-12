@@ -58,7 +58,7 @@ class UserDictionaryViewController: UITableViewController {
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0: return NSLocalizedString("HowToRegisterWordToUserDictionary", comment: "")
-        case 1: return NSString(format: NSLocalizedString("%d words registered", comment: ""), self.entries.count)
+        case 1: return NSString(format: NSLocalizedString("%d words registered", comment: ""), self.entries.count) as String
         default: return nil
         }
     }

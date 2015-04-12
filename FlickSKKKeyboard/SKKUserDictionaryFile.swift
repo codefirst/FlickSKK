@@ -28,7 +28,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         // TODO: 変なデータが来たら、空で初期化する
         let now = NSDate()
         var isOkuriAri = true
-        IOUtil.each(path, { line -> Void in
+        IOUtil.each(path, with: { line -> Void in
             let s = line as NSString
             // toggle
             if s.hasPrefix(";; okuri-nasi entries.") {
@@ -55,15 +55,15 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         var xs : [SKKDictionaryEntry] = []
 
         for (k, v) in okuriNasi {
-            for kanji in EntryParser(entry: v as String).words() {
-                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: k as String, okuri: .None))
+            for kanji in EntryParser(entry: v as! String).words() {
+                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: k as! String, okuri: .None))
             }
         }
 
         for (k, v) in okuriAri {
-            let kana = (k as String).butLast()
-            let okuri = (k as String).last()
-            for kanji in EntryParser(entry: v as String).words() {
+            let kana = (k as! String).butLast()
+            let okuri = (k as! String).last()
+            for kanji in EntryParser(entry: v as! String).words() {
                 xs.append(.SKKDictionaryEntry(kanji: kanji, kana: kana, okuri: okuri))
             }
         }
@@ -73,7 +73,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     }
 
     func find(normal : String, okuri : String?) -> [ String ] {
-        if let entry = dictFor(okuri)[normal + (okuri ?? "")] as String? {
+        if let entry = dictFor(okuri)[normal + (okuri ?? "")] as! String? {
             let parser = EntryParser(entry: entry)
             return parser.words()
         } else {
@@ -84,9 +84,9 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     func findWith(prefix: String) -> [(kana: String, kanji: String)] {
         var xs : [(kana: String, kanji: String)] = []
         for (normal, entry) in self.okuriNasi {
-            let n = normal as String
+            let n = normal as! String
             if n.hasPrefix(prefix) && n != prefix {
-                let parser = EntryParser(entry: (entry as String))
+                let parser = EntryParser(entry: (entry as! String))
                 for word in parser.words() {
                     xs.append(kana : n, kanji: word)
                 }
@@ -98,7 +98,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     func register(normal : String, okuri: String?, kanji: String) {
         if(kanji.isEmpty) { return }
         let dict : NSMutableDictionary = dictFor(okuri)
-        let entry : String? = dict[normal + (okuri ?? "")] as String?
+        let entry : String? = dict[normal + (okuri ?? "")] as! String?
         let parser = EntryParser(entry: entry ?? "")
         dict[normal + (okuri ?? "")] =  parser.append(kanji)
     }
@@ -109,16 +109,16 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             file.truncateFileAtOffset(0)
             write(file, str: ";; okuri-ari entries.\n")
             for (k,v) in self.okuriAri {
-                let kana = k as String
-                let kanji = v as String
+                let kana = k as! String
+                let kanji = v as! String
                 if !kana.isEmpty {
                     write(file, str: kana + " " + kanji + "\n")
                 }
             }
             write(file, str: ";; okuri-nasi entries.\n")
             for (k,v) in self.okuriNasi {
-                let kana = k as String
-                let kanji = v as String
+                let kana = k as! String
+                let kanji = v as! String
                 if !kana.isEmpty {
                     write(file, str: kana + " " + kanji + "\n")
                 }
@@ -131,7 +131,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         switch entry {
         case .SKKDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
             let key = kana + (okuri ?? "")
-            if let entry = dictFor(okuri)[key] as String? {
+            if let entry = dictFor(okuri)[key] as! String? {
                 let parser = EntryParser(entry: entry)
                 if let x = parser.remove(kanji) {
                     dictFor(okuri)[key] = x

@@ -20,7 +20,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     var numberModeButton : KeyButton!
     var alphabetModeButton : KeyButton!
     var inputProxy: UITextDocumentProxy {
-        return self.textDocumentProxy as UITextDocumentProxy
+        return self.textDocumentProxy as! UITextDocumentProxy
     }
     
     var spaceButton : KeyButton!
@@ -432,7 +432,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func deleteBackward() {
-        (self.textDocumentProxy as UIKeyInput).deleteBackward()
+        (self.textDocumentProxy as! UIKeyInput).deleteBackward()
     }
 
     func changeInputMode(inputMode : SKKInputMode) {

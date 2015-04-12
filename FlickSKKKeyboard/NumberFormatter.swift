@@ -13,7 +13,7 @@ class NumberFormatter {
     }
 
     func asAscii() -> String {
-        return NSString(format: "%d", self.value)
+        return NSString(format: "%d", self.value) as String
     }
 
     func asFullWidth() -> String {

@@ -12,7 +12,7 @@ import UIKit
 
 extension NSObject {
     func tap<T>(block:(T) -> Void) -> Self {
-        block(self as T)
+        block(self as! T)
         return self
     }
 }
@@ -472,10 +472,10 @@ extension Array {
         var result = [S]()
         var addedDict = [T: Bool]()
         for elem in self {
-            let t : T = f(elem as S)
+            let t : T = f(elem as! S)
             if addedDict[t as T] == nil {
                 addedDict[t as T] = true
-                result.append(elem as S)
+                result.append(elem as! S)
             }
         }
         return result
