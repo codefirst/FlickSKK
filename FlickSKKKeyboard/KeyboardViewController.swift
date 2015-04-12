@@ -13,10 +13,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     let keypadAndControlsView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let sessionView: SessionView!
+    var sessionView: SessionView!
 
-    let nextKeyboardButton: KeyButton!
-    let inputModeChangeButton : KeyButton!
+    var nextKeyboardButton: KeyButton!
+    var inputModeChangeButton : KeyButton!
     var numberModeButton : KeyButton!
     var alphabetModeButton : KeyButton!
     var inputProxy: UITextDocumentProxy {
@@ -24,10 +24,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
     
     var spaceButton : KeyButton!
-    let shiftButton: KeyButton!
+    var shiftButton: KeyButton!
     let keypads: [KeyboardMode:KeyPad]
 
-    let engine : SKKEngine!
+    var engine : SKKEngine!
 
     var shiftEnabled: Bool {
         didSet {
@@ -44,7 +44,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     var inputMode : SKKInputMode = .Hirakana
 
-    let dictionary : SKKDictionary?
+    var dictionary : SKKDictionary?
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.keyboardMode = .InputMode(mode: .Hirakana)

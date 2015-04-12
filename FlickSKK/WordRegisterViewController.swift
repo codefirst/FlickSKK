@@ -8,10 +8,10 @@
 
 import UIKit
 class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
-    private let yomiField : UITextField!
-    private let okuriField : UITextField!
-    private let wordField : UITextField!
-    private let doneButton : UIBarButtonItem!
+    private var yomiField : UITextField!
+    private var okuriField : UITextField!
+    private var wordField : UITextField!
+    private var doneButton : UIBarButtonItem!
     var done : ((String, String?, String) -> Void)?
 
     private var sections : [(
