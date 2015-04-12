@@ -118,22 +118,22 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     }
 
     // MARK: - Gestures
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.highlighted = true // set to false on end, cancel, started pan
         self.repeatTimer?.start()
-        super.touchesBegan(touches as Set<NSObject>, withEvent: event)
+        super.touchesBegan(touches, withEvent: event)
     }
 
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.highlighted = false
         self.repeatTimer?.cancel()
-        super.touchesEnded(touches as Set<NSObject>, withEvent: event)
+        super.touchesEnded(touches, withEvent: event)
     }
 
-    override func touchesCancelled(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
 //        self.highlighted = false // surpress flicker (highlighted = false, then true)
         self.repeatTimer?.cancel()
-        super.touchesCancelled(touches as Set<NSObject>, withEvent: event)
+        super.touchesCancelled(touches, withEvent: event)
     }
 
     func gestureTapped(gesture: UITapGestureRecognizer) {
