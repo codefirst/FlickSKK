@@ -7,10 +7,10 @@
 //
 
 import UIKit
-class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
-    private var yomiField : UITextField!
-    private var okuriField : UITextField!
-    private var wordField : UITextField!
+class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate {
+    private let yomiField = UITextField(frame: CGRectZero)
+    private let okuriField = UITextField(frame: CGRectZero)
+    private let wordField = UITextField(frame: CGRectZero)
     private var doneButton : UIBarButtonItem!
     var done : ((String, String?, String) -> Void)?
 
@@ -19,16 +19,8 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         rows: [(title: String, text: UITextField, returnType: UIReturnKeyType)]
     )]!
 
-
-    override init!(nibName: String?, bundle: NSBundle?) {
-        super.init(nibName: nibName, bundle: bundle)
-    }
-
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-        self.yomiField = UITextField(frame: CGRectMake(130, 0, view.frame.width-130, 50))
-        self.okuriField = UITextField(frame: CGRectMake(130, 0, view.frame.width-130, 50))
-        self.wordField = UITextField(frame: CGRectMake(130, 0, view.frame.width-130, 50))
+    init() {
+        super.init(style: .Grouped)
         self.sections = [
             (title: nil, rows: [
                 (title: NSLocalizedString("word", comment: ""), text: wordField, returnType: .Next),
@@ -72,7 +64,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
 
     let kCellID = "Cell"
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -95,6 +87,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
 
         // text field
         let textField = row.text
+        textField.frame = CGRectMake(130, 0, view.frame.width-130, 50)
         textField.font = Appearance.normalFont(17.0)
         textField.clearButtonMode = .WhileEditing
         textField.placeholder = row.title
@@ -107,7 +100,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50.0
     }
 

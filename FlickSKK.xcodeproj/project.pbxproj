@@ -130,6 +130,7 @@
 		EAD4B59919D80AF3007B6636 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		EAF1DB6F19FBFDFD00816CF5 /* AppGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1DB6E19FBFDFD00816CF5 /* AppGroup.m */; };
 		EAF1DB7019FBFDFD00816CF5 /* AppGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF1DB6E19FBFDFD00816CF5 /* AppGroup.m */; };
+		EAF4AF661ADBF50B000C5E05 /* SafeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF4AF651ADBF50B000C5E05 /* SafeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,6 +278,7 @@
 		EAF1DB6D19FBFDFD00816CF5 /* AppGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppGroup.h; path = Common/AppGroup.h; sourceTree = SOURCE_ROOT; };
 		EAF1DB6E19FBFDFD00816CF5 /* AppGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppGroup.m; path = Common/AppGroup.m; sourceTree = SOURCE_ROOT; };
 		EAF1DB7119FBFF9900816CF5 /* FlickSKK-Common-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FlickSKK-Common-Bridging-Header.h"; path = "Common/FlickSKK-Common-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		EAF4AF651ADBF50B000C5E05 /* SafeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeTableViewController.swift; sourceTree = "<group>"; };
 		F3DD18F195A212F9D8B92DB9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FD71814B766075686A2CE75B /* Pods-FlickSKKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -584,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD4B56519D5CB50007B6636 /* AppDelegate.swift */,
+				EAF4AF651ADBF50B000C5E05 /* SafeTableViewController.swift */,
 				80EA0A291AAB3C1300D7148D /* Settings.bundle */,
 				EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */,
 				EACD52A919F3FD43001FB2A7 /* UserDictionaryViewController.swift */,
@@ -937,6 +940,7 @@
 				EACD52B719F3FF0F001FB2A7 /* IOUtil.mm in Sources */,
 				EACD52A119F3F2EC001FB2A7 /* WebViewController.swift in Sources */,
 				EACD52B519F3FEF1001FB2A7 /* SKKDictionaryFile.swift in Sources */,
+				EAF4AF661ADBF50B000C5E05 /* SafeTableViewController.swift in Sources */,
 				EA075F7F19DED7A4009AEF9F /* KeyboardSpacerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

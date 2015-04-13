@@ -8,20 +8,12 @@
 
 import UIKit
 
-class MainMenuViewController: UITableViewController {
+class MainMenuViewController: SafeTableViewController {
     typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: Void -> Void)
     var sections : [(title: String?, rows: [row])]!
 
-    convenience init() {
-        self.init(style: .Grouped)
-    }
-
-    override init(nibName: String?, bundle: NSBundle?) {
-        super.init(nibName: nibName, bundle: bundle)
-    }
-
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
+    init() {
+        super.init(style: .Grouped)
 
         weak var weakSelf = self
         sections = [
@@ -45,7 +37,7 @@ class MainMenuViewController: UITableViewController {
 
     // MARK: - Table View
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -63,7 +55,7 @@ class MainMenuViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()
