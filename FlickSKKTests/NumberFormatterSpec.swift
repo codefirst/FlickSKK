@@ -34,6 +34,7 @@ class NumberFormatterSpec : QuickSpec {
                 expect(NumberFormatter(value: 1024).asKanji()).to(equal("千二十四"))
                 expect(NumberFormatter(value: 30000).asKanji()).to(equal("三万"))
                 expect(NumberFormatter(value: 100000001).asKanji()).to(equal("一億一"))
+                expect(NumberFormatter(value: 1_0000_0000_0001).asKanji()).to(equal("一兆一"))
             }
         }
     }

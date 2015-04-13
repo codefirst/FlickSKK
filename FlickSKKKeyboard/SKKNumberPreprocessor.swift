@@ -8,7 +8,7 @@
 
 class SKKNumberPreprocessor {
     private let value : String
-    private var numbers : [Int] = []
+    private var numbers : [Int64] = []
 
     private let regexp : NSRegularExpression! =
         NSRegularExpression(pattern: "[0-9]+", options: nil, error: nil)
@@ -51,7 +51,7 @@ class SKKNumberPreprocessor {
         return result as String
     }
 
-    private func stringFor(n : Int, entry : String) -> String {
+    private func stringFor(n : Int64, entry : String) -> String {
         let formatter = NumberFormatter(value: n)
         switch entry {
         case "#0":
@@ -67,13 +67,13 @@ class SKKNumberPreprocessor {
         }
     }
 
-    private func findNumbers(value : String) -> [Int] {
+    private func findNumbers(value : String) -> [Int64] {
         let xs = regexp.matchesInString(value,
             options: nil,
             range: NSMakeRange(0, count(value.utf16))) as! [NSTextCheckingResult]
         return xs.map({ x in
             let n : NSString = (self.value as NSString).substringWithRange(x.range)
-            return n.integerValue
+            return n.longLongValue
         })
     }
 }

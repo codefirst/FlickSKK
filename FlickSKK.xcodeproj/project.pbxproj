@@ -80,6 +80,7 @@
 		13E33E881A9E8E3D00CD1140 /* ComposeModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */; };
 		13E33E891A9E8E3D00CD1140 /* ComposeModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */; };
 		13F4525419DC5399001A4A1B /* IOUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13F4525319DC5399001A4A1B /* IOUtil.mm */; };
+		13F456381ADBD863004EB68D /* SKKNumberPreprocessorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F456371ADBD863004EB68D /* SKKNumberPreprocessorSpec.swift */; };
 		13F9325819E2DBFC00AC5019 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		13F9326119E2DC1700AC5019 /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		13F9326319E2DC1700AC5019 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
@@ -232,6 +233,7 @@
 		13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModeFactory.swift; sourceTree = "<group>"; };
 		13F4525119DC538B001A4A1B /* IOUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUtil.h; sourceTree = "<group>"; };
 		13F4525319DC5399001A4A1B /* IOUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOUtil.mm; sourceTree = "<group>"; };
+		13F456371ADBD863004EB68D /* SKKNumberPreprocessorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKNumberPreprocessorSpec.swift; sourceTree = "<group>"; };
 		13FAB2101AAB3AF30014C218 /* DictionaryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryCache.swift; sourceTree = "<group>"; };
 		30FFB16661B439FA5D824AE2 /* Pods_FlickSKKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3844229268B653C0DEAC56F1 /* Pods-FlickSKKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */,
 				136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */,
 				13D9B7701ABD191500E63F33 /* SKKDictionarySpec.swift */,
+				13F456371ADBD863004EB68D /* SKKNumberPreprocessorSpec.swift */,
 			);
 			name = SKKDictionary;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				13FAB2111AAB3AF30014C218 /* DictionaryCache.swift in Sources */,
 				1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */,
 				13F9326619E2DC1700AC5019 /* IOUtil.mm in Sources */,
+				13F456381ADBD863004EB68D /* SKKNumberPreprocessorSpec.swift in Sources */,
 				131D01441AABF60C0085E83C /* DictionarySettings.swift in Sources */,
 				136610BD1AA0100E006AA8F1 /* MockDelegate.swift in Sources */,
 				130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */,
