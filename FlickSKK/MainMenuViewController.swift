@@ -10,21 +10,31 @@ import UIKit
 
 class MainMenuViewController: SafeTableViewController {
     typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: Void -> Void)
-    var sections : [(title: String?, rows: [row])]!
+    lazy var sections : [(title: String?, rows: [row])] = {
+        weak var weakSelf = self
+        return [
+            (title: nil, rows: [self.item("Setup") {
+                weakSelf?.gotoSetup(); return
+            }]),
+            (title: nil, rows: [self.item("How to use") {
+                weakSelf?.gotoHowToUse(); return
+            }]),
+            // FIXME: 設定項目をなんか増やす
+            // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
+            (title: nil, rows: [self.item("User Dictionary") {
+                weakSelf?.gotoUserDictionary(); return
+            }]),
+            (title: nil, rows: [self.item("Reset Learn Dictionary", accessoryType: .None) {
+                weakSelf?.reset(); return
+            }]),
+            (title: nil, rows: [self.item("License") {
+                weakSelf?.gotoLicense(); return
+            }])
+        ]
+    }()
 
     init() {
         super.init(style: .Grouped)
-
-        weak var weakSelf = self
-        sections = [
-            (title: nil, rows: [item("Setup", action: { weakSelf?.gotoSetup(); return})]),
-            (title: nil, rows: [item("How to use", action: { weakSelf?.gotoHowToUse(); return})]),
-            // FIXME: 設定項目をなんか増やす
-            // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
-            (title: nil, rows: [item("User Dictionary", action: { weakSelf?.gotoUserDictionary(); return})]),
-            (title: nil, rows: [item("Reset Learn Dictionary", accessoryType: .None, action: { weakSelf?.reset(); return})]),
-            (title: nil, rows: [item("License", action: { weakSelf?.gotoLicense(); return})])
-        ]
     }
 
     // MARK: View Lifecycle

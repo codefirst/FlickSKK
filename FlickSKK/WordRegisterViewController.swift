@@ -11,25 +11,23 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
     private let yomiField = UITextField(frame: CGRectZero)
     private let okuriField = UITextField(frame: CGRectZero)
     private let wordField = UITextField(frame: CGRectZero)
-    private var doneButton : UIBarButtonItem!
+    private lazy var doneButton : UIBarButtonItem =
+        UIBarButtonItem(title: NSLocalizedString("Register", comment:""),
+            style: .Done, target:self, action: Selector("register"))
     var done : ((String, String?, String) -> Void)?
 
-    private var sections : [(
+    private lazy var sections : [(
         title: String?,
         rows: [(title: String, text: UITextField, returnType: UIReturnKeyType)]
-    )]!
+    )] = [
+        (title: nil, rows: [
+            (title: NSLocalizedString("word", comment: ""), text: self.wordField, returnType: .Next),
+            (title: NSLocalizedString("yomi", comment: ""), text: self.yomiField, returnType: .Next),
+            (title: NSLocalizedString("okuri", comment: ""), text: self.okuriField, returnType: .Default),
+    ])]
 
     init() {
         super.init(style: .Grouped)
-        self.sections = [
-            (title: nil, rows: [
-                (title: NSLocalizedString("word", comment: ""), text: wordField, returnType: .Next),
-                (title: NSLocalizedString("yomi", comment: ""), text: yomiField, returnType: .Next),
-                (title: NSLocalizedString("okuri", comment: ""), text: okuriField, returnType: .Default),
-            ])]
-
-        self.doneButton = UIBarButtonItem(title: NSLocalizedString("Register", comment:""),
-            style: .Done, target:self, action: Selector("register"))
         self.doneButton.enabled = false
         self.navigationItem.rightBarButtonItem = doneButton
     }
