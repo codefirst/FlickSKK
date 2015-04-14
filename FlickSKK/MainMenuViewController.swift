@@ -14,21 +14,21 @@ class MainMenuViewController: SafeTableViewController {
         weak var weakSelf = self
         return [
             (title: nil, rows: [self.item("Setup") {
-                weakSelf?.gotoSetup(); return
+                weakSelf?.gotoSetup()
             }]),
             (title: nil, rows: [self.item("How to use") {
-                weakSelf?.gotoHowToUse(); return
+                weakSelf?.gotoHowToUse()
             }]),
             // FIXME: 設定項目をなんか増やす
             // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
             (title: nil, rows: [self.item("User Dictionary") {
-                weakSelf?.gotoUserDictionary(); return
+                weakSelf?.gotoUserDictionary()
             }]),
             (title: nil, rows: [self.item("Reset Learn Dictionary", accessoryType: .None) {
                 weakSelf?.reset(); return
             }]),
             (title: nil, rows: [self.item("License") {
-                weakSelf?.gotoLicense(); return
+                weakSelf?.gotoLicense()
             }])
         ]
     }()
