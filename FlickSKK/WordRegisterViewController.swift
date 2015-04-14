@@ -113,7 +113,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
                         register()
                     default:
                         // do nothing
-                        ()
+                        break
                     }
                 }
             }

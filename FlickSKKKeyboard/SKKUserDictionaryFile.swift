@@ -45,7 +45,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
                     self.okuriNasi[x] = y
                 }
             case .None:
-                ()
+                break
             }
         })
         NSLog("loaded (%f) (%d + %d entries from %@)\n", NSDate().timeIntervalSinceDate(now), okuriAri.count, okuriNasi.count, path)

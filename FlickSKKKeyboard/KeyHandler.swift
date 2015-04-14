@@ -55,9 +55,9 @@ class KeyHandler {
         case .InputModeChange(inputMode: let inputMode):
             self.delegate?.changeInputMode(inputMode)
         case .Select(_):
-            ()
+            break
         case .SkipPartialCandidates:
-            ()
+            break
         }
         return nil
     }

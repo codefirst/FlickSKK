@@ -339,7 +339,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             case .Some(let m):
                 self.engine.handle(.InputModeChange(inputMode: m))
             case .None:
-                ()
+                break
             }
             self.keyboardMode = .InputMode(mode: self.inputMode)
         case .Number:

@@ -85,7 +85,6 @@ class SKKDictionary : NSObject {
         loader.async {
             self.cache.update(DictionarySettings.defaultUserDictionaryPath()) {
                 self.userDictionary?.serialize()
-                ()
             }
         }
     }
@@ -96,7 +95,6 @@ class SKKDictionary : NSObject {
         loader.async {
             self.cache.update(DictionarySettings.defaultLearnDictionaryPath()) {
                 self.learnDictionary?.serialize()
-                ()
             }
         }
     }
@@ -107,7 +105,6 @@ class SKKDictionary : NSObject {
         loader.async {
             self.cache.update(DictionarySettings.defaultPartialDictionaryPath()) {
                 self.partialDictionary?.serialize()
-                ()
             }
         }
     }
