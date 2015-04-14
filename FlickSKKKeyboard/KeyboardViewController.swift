@@ -9,14 +9,12 @@
 import UIKit
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
-    lazy var heightConstraint : NSLayoutConstraint =
-        NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
+    lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
 
     let keypadAndControlsView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
 
-    lazy var sessionView : SessionView =
-        SessionView(engine: self.engine)
+    lazy var sessionView : SessionView = SessionView(engine: self.engine)
 
     var inputProxy: UITextDocumentProxy {
         return self.textDocumentProxy as! UITextDocumentProxy
@@ -39,35 +37,27 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     // MARK: SKK
-    lazy var engine : SKKEngine =
-        SKKEngine(delegate: self, dictionary: self.dictionary)
+    lazy var engine : SKKEngine = SKKEngine(delegate: self, dictionary: self.dictionary)
 
-    lazy var dictionary : SKKDictionary =
-        SKKDictionary()
+    lazy var dictionary : SKKDictionary = SKKDictionary()
 
     // MARK: Keypads
     let keypads: [KeyboardMode:KeyPad]
 
     // MARK: Buttons
-    lazy var nextKeyboardButton : KeyButton =
-        self.keyButton(.KeyboardChange).tap { (kb:KeyButton) in
-            kb.imageView.image = UIImage(named: "globe")
-        }
+    lazy var nextKeyboardButton : KeyButton = self.keyButton(.KeyboardChange).tap { (kb:KeyButton) in
+        kb.imageView.image = UIImage(named: "globe")
+    }
 
-    lazy var inputModeChangeButton : KeyButton =
-        self.keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
+    lazy var inputModeChangeButton : KeyButton = self.keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
 
-    lazy var numberModeButton : KeyButton =
-        self.keyButton(.Number)
+    lazy var numberModeButton : KeyButton = self.keyButton(.Number)
 
-    lazy var alphabetModeButton : KeyButton =
-        self.keyButton(.Alphabet)
+    lazy var alphabetModeButton : KeyButton = self.keyButton(.Alphabet)
 
-    lazy var spaceButton : KeyButton =
-        self.keyButton(.Space)
+    lazy var spaceButton : KeyButton = self.keyButton(.Space)
 
-    lazy var shiftButton: KeyButton =
-        self.keyButton(.Shift).tap { (kb:KeyButton) in
+    lazy var shiftButton: KeyButton = self.keyButton(.Shift).tap { (kb:KeyButton) in
             kb.imageView.image = UIImage(named: "flickskk-arrow")
         }
 

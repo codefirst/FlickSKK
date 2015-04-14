@@ -9,13 +9,12 @@
 import UIKit
 
 class WebViewController: UIViewController, UIWebViewDelegate {
-    lazy var webView: UIWebView =
-        UIWebView(frame: CGRectZero).tap{ (wv:UIWebView) in
-            wv.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-            wv.scalesPageToFit = true
-            wv.delegate = self
-            wv.dataDetectorTypes = UIDataDetectorTypes.Link
-        }
+    lazy var webView: UIWebView = UIWebView(frame: CGRectZero).tap{ (wv:UIWebView) in
+        wv.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        wv.scalesPageToFit = true
+        wv.delegate = self
+        wv.dataDetectorTypes = UIDataDetectorTypes.Link
+    }
 
     var initialURL: NSURL?
 
