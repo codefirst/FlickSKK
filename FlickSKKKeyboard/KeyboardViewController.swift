@@ -61,14 +61,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.keyButton(.Number)
 
     lazy var alphabetModeButton : KeyButton =
-        self.keyButton(.Shift).tap { (kb:KeyButton) in
-            kb.imageView.image = UIImage(named: "flickskk-arrow")
-        }
+        self.keyButton(.Alphabet)
 
     lazy var spaceButton : KeyButton =
-        self.keyButton(.Shift).tap { (kb:KeyButton) in
-            kb.imageView.image = UIImage(named: "flickskk-arrow")
-        }
+        self.keyButton(.Space)
 
     lazy var shiftButton: KeyButton =
         self.keyButton(.Shift).tap { (kb:KeyButton) in
