@@ -9,7 +9,8 @@
 import UIKit
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
-    var heightConstraint : NSLayoutConstraint!
+    lazy var heightConstraint : NSLayoutConstraint =
+        NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
 
     let keypadAndControlsView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
@@ -195,8 +196,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.heightConstraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
 
         let leftControl = controlViewWithButtons([
             numberModeButton,
