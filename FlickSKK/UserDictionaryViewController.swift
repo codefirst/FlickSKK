@@ -10,7 +10,7 @@ import UIKit
 import FlickSKKKeyboard
 
 class UserDictionaryViewController: SafeTableViewController {
-    var entries : [SKKDictionaryEntry] = []
+    private var entries : [SKKDictionaryEntry] = []
 
     init() {
         super.init(style: .Grouped)
