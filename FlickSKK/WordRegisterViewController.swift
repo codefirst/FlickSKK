@@ -7,40 +7,27 @@
 //
 
 import UIKit
-class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
-    private let yomiField : UITextField!
-    private let okuriField : UITextField!
-    private let wordField : UITextField!
-    private let doneButton : UIBarButtonItem!
+class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate {
+    private let yomiField = UITextField(frame: CGRectZero)
+    private let okuriField = UITextField(frame: CGRectZero)
+    private let wordField = UITextField(frame: CGRectZero)
+    private lazy var doneButton : UIBarButtonItem =
+        UIBarButtonItem(title: NSLocalizedString("Register", comment:""),
+            style: .Done, target:self, action: Selector("register"))
     var done : ((String, String?, String) -> Void)?
 
-    private var sections : [(
+    private lazy var sections : [(
         title: String?,
         rows: [(title: String, text: UITextField, returnType: UIReturnKeyType)]
-    )]!
+    )] = [
+        (title: nil, rows: [
+            (title: NSLocalizedString("word", comment: ""), text: self.wordField, returnType: .Next),
+            (title: NSLocalizedString("yomi", comment: ""), text: self.yomiField, returnType: .Next),
+            (title: NSLocalizedString("okuri", comment: ""), text: self.okuriField, returnType: .Default),
+    ])]
 
-    convenience override init() {
-        self.init(style: .Grouped)
-    }
-
-    override init(nibName: String?, bundle: NSBundle?) {
-        super.init(nibName: nibName, bundle: bundle)
-    }
-
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-        self.yomiField = UITextField(frame: CGRectMake(130, 0, view.frame.width-130, 50))
-        self.okuriField = UITextField(frame: CGRectMake(130, 0, view.frame.width-130, 50))
-        self.wordField = UITextField(frame: CGRectMake(130, 0, view.frame.width-130, 50))
-        self.sections = [
-            (title: nil, rows: [
-                (title: NSLocalizedString("word", comment: ""), text: wordField, returnType: .Next),
-                (title: NSLocalizedString("yomi", comment: ""), text: yomiField, returnType: .Next),
-                (title: NSLocalizedString("okuri", comment: ""), text: okuriField, returnType: .Default),
-            ])]
-
-        self.doneButton = UIBarButtonItem(title: NSLocalizedString("Register", comment:""),
-            style: .Done, target:self, action: Selector("register"))
+    init() {
+        super.init(style: .Grouped)
         self.doneButton.enabled = false
         self.navigationItem.rightBarButtonItem = doneButton
     }
@@ -75,7 +62,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
 
     let kCellID = "Cell"
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -98,6 +85,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
 
         // text field
         let textField = row.text
+        textField.frame = CGRectMake(130, 0, view.frame.width-130, 50)
         textField.font = Appearance.normalFont(17.0)
         textField.clearButtonMode = .WhileEditing
         textField.placeholder = row.title
@@ -110,7 +98,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         return cell
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50.0
     }
 
@@ -125,7 +113,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
                         register()
                     default:
                         // do nothing
-                        ()
+                        break
                     }
                 }
             }

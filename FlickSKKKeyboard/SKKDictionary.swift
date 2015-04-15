@@ -61,9 +61,9 @@ class SKKDictionary : NSObject {
     func find(normal : String, okuri : String?) -> [ String ] {
         self.waitForLoading()
 
-        let xs : [String] = self.dictionaries.map {
+        let xs : [String] = self.dictionaries.flatMap {
             $0.find(normal, okuri: okuri)
-        }.reduce([], +).unique()
+        }.unique()
 
         return xs
     }
@@ -72,9 +72,9 @@ class SKKDictionary : NSObject {
     func findDynamic(prefix : String) -> [(kana: String, kanji: String)] {
         self.waitForLoading()
 
-        let xs : [(kana : String, kanji: String)] = self.dynamicDictionaries.map {
+        let xs : [(kana : String, kanji: String)] = self.dynamicDictionaries.flatMap {
             $0.findWith(prefix)
-        }.reduce([], +).uniqueBy { c in c.kanji }
+        }.uniqueBy { c in c.kanji }
 
         return xs
     }
@@ -85,7 +85,6 @@ class SKKDictionary : NSObject {
         loader.async {
             self.cache.update(DictionarySettings.defaultUserDictionaryPath()) {
                 self.userDictionary?.serialize()
-                ()
             }
         }
     }
@@ -96,7 +95,6 @@ class SKKDictionary : NSObject {
         loader.async {
             self.cache.update(DictionarySettings.defaultLearnDictionaryPath()) {
                 self.learnDictionary?.serialize()
-                ()
             }
         }
     }
@@ -107,7 +105,6 @@ class SKKDictionary : NSObject {
         loader.async {
             self.cache.update(DictionarySettings.defaultPartialDictionaryPath()) {
                 self.partialDictionary?.serialize()
-                ()
             }
         }
     }

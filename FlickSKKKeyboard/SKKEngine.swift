@@ -2,7 +2,7 @@
 
 class SKKEngine {
     private let keyHandler : KeyHandler
-    private weak var delegate : SKKDelegate!
+    private weak var delegate : SKKDelegate?
 
     private var composeMode : ComposeMode = .DirectInput
 
@@ -22,10 +22,10 @@ class SKKEngine {
         self.composeMode = keyHandler.handle(keyEvent, composeMode: composeMode)
 
         // 表示を更新
-        self.delegate.composeText(presenter.toString(self.composeMode))
+        self.delegate?.composeText(presenter.toString(self.composeMode))
 
         // 候補表示
-        self.delegate.showCandidates(candidates()?.candidates)
+        self.delegate?.showCandidates(candidates()?.candidates)
     }
     
     func candidates() -> (candidates: [Candidate], index: Int?)? {

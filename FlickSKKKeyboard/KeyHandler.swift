@@ -1,7 +1,7 @@
 // キー入力を受け取り、次の状態を返す。
 // その際、状態に応じて、テキストの追加・削除を行なう
 class KeyHandler {
-    private weak var delegate : SKKDelegate!
+    private weak var delegate : SKKDelegate?
     private let dictionary : DictionaryEngine
     private let text : TextEngine
     private let factory : ComposeModeFactory
@@ -53,11 +53,11 @@ class KeyHandler {
         case .ToggleUpperLower(beforeText: let beforeText):
             text.toggleUpperLower(beforeText, status : status)
         case .InputModeChange(inputMode: let inputMode):
-            self.delegate.changeInputMode(inputMode)
+            self.delegate?.changeInputMode(inputMode)
         case .Select(_):
-            ()
+            break
         case .SkipPartialCandidates:
-            ()
+            break
         }
         return nil
     }
@@ -156,7 +156,7 @@ class KeyHandler {
                 return nil
             }
         case .InputModeChange(inputMode: let inputMode):
-            self.delegate.changeInputMode(inputMode)
+            self.delegate?.changeInputMode(inputMode)
             return nil
         case .Select(index : let index):
             if index < candidates.count {

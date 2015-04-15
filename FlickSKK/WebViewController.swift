@@ -9,7 +9,13 @@
 import UIKit
 
 class WebViewController: UIViewController, UIWebViewDelegate {
-    var webView: UIWebView!
+    lazy var webView: UIWebView = UIWebView(frame: CGRectZero).tap{ (wv:UIWebView) in
+        wv.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        wv.scalesPageToFit = true
+        wv.delegate = self
+        wv.dataDetectorTypes = UIDataDetectorTypes.Link
+    }
+
     var initialURL: NSURL?
 
     init(URL: NSURL) {
@@ -18,12 +24,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     }
 
     override func loadView() {
-        self.webView = UIWebView(frame: CGRectZero).tap{ (wv:UIWebView) in
-            wv.autoresizingMask = .FlexibleWidth | .FlexibleHeight
-            wv.scalesPageToFit = true
-            wv.delegate = self
-            wv.dataDetectorTypes = UIDataDetectorTypes.Link
-        }
         self.view = self.webView
 
         if let u = initialURL {
@@ -36,7 +36,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if navigationType == UIWebViewNavigationType.LinkClicked {
             // Open in Safari
-            UIApplication.sharedApplication().openURL(request.URL)
+            UIApplication.sharedApplication().openURL(request.URL!)
             return false
         }
         return true

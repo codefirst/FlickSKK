@@ -9,19 +9,11 @@
 import UIKit
 import FlickSKKKeyboard
 
-class UserDictionaryViewController: UITableViewController {
-    var entries : [SKKDictionaryEntry] = []
+class UserDictionaryViewController: SafeTableViewController {
+    private var entries : [SKKDictionaryEntry] = []
 
-    convenience override init() {
-        self.init(style: .Grouped)
-    }
-
-    override init(nibName: String?, bundle: NSBundle?) {
-        super.init(nibName: nibName, bundle: bundle)
-    }
-
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
+    init() {
+        super.init(style: .Grouped)
     }
 
     deinit {
@@ -51,14 +43,14 @@ class UserDictionaryViewController: UITableViewController {
     }
 
     // MARK: - Table View
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2 // description + entries
     }
 
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0: return NSLocalizedString("HowToRegisterWordToUserDictionary", comment: "")
-        case 1: return NSString(format: NSLocalizedString("%d words registered", comment: ""), self.entries.count)
+        case 1: return NSString(format: NSLocalizedString("%d words registered", comment: ""), self.entries.count) as String
         default: return nil
         }
     }
@@ -84,13 +76,13 @@ class UserDictionaryViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         // TODO: something
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let entry = self.entries[indexPath.row]
             SKKDictionary.defaultUserDictionary().unregister(entry)

@@ -9,46 +9,43 @@
 import UIKit
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
-    var heightConstraint : NSLayoutConstraint!
+    lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
 
     let keypadAndControlsView = UIView()
     let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    let sessionView: SessionView!
 
-    let nextKeyboardButton: KeyButton!
-    let inputModeChangeButton : KeyButton!
-    var numberModeButton : KeyButton!
-    var alphabetModeButton : KeyButton!
+    lazy var sessionView : SessionView = SessionView(engine: self.engine)
+
     var inputProxy: UITextDocumentProxy {
-        return self.textDocumentProxy as UITextDocumentProxy
+        return self.textDocumentProxy as! UITextDocumentProxy
     }
-    
-    var spaceButton : KeyButton!
-    let shiftButton: KeyButton!
+
+    // MARK: Status
+    var inputMode : SKKInputMode = .Hirakana
+    var prevShiftEnabled: Bool = false
+    var shiftEnabled: Bool { didSet { updateControlButtons() } }
+    var keyboardMode : KeyboardMode { didSet { updateControlButtons() } }
+
+    // MARK: SKK
+    lazy var engine : SKKEngine = SKKEngine(delegate: self, dictionary: self.dictionary)
+    lazy var dictionary : SKKDictionary = SKKDictionary()
+
+    // MARK: Keypads
     let keypads: [KeyboardMode:KeyPad]
 
-    let engine : SKKEngine!
-
-    var shiftEnabled: Bool {
-        didSet {
-            updateControlButtons()
-        }
+    // MARK: Buttons
+    lazy var inputModeChangeButton : KeyButton = self.keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
+    lazy var numberModeButton : KeyButton = self.keyButton(.Number)
+    lazy var alphabetModeButton : KeyButton = self.keyButton(.Alphabet)
+    lazy var spaceButton : KeyButton = self.keyButton(.Space)
+    lazy var nextKeyboardButton : KeyButton = self.keyButton(.KeyboardChange).tap { (kb:KeyButton) in
+        kb.imageView.image = UIImage(named: "globe")
     }
-    var prevShiftEnabled: Bool = false
-
-    var keyboardMode : KeyboardMode {
-        didSet {
-            updateControlButtons()
-        }
+    lazy var shiftButton: KeyButton = self.keyButton(.Shift).tap { (kb:KeyButton) in
+        kb.imageView.image = UIImage(named: "flickskk-arrow")
     }
 
-    var inputMode : SKKInputMode = .Hirakana
-
-    let dictionary : SKKDictionary?
-
-    convenience override init() {
-        self.init(nibName: nil, bundle: nil)
-    }
+    // MARK: -
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.keyboardMode = .InputMode(mode: .Hirakana)
@@ -130,27 +127,14 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
-        self.nextKeyboardButton = keyButton(.KeyboardChange).tap { (kb:KeyButton) in
-            kb.imageView.image = UIImage(named: "globe")
-        }
-        self.inputModeChangeButton = keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
-        self.numberModeButton = keyButton(.Number)
-        self.alphabetModeButton = keyButton(.Alphabet)
-        self.spaceButton = keyButton(.Space)
-        self.shiftButton = keyButton(.Shift).tap { (kb:KeyButton) in
-            kb.imageView.image = UIImage(named: "flickskk-arrow")
-        }
-
         for keypad in self.keypads.values {
             keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?) in
                 self?.keyTapped(key, index)
                 return
             }
         }
-        dictionary = SKKDictionary()
-        self.engine = SKKEngine(delegate: self, dictionary: dictionary!)
-        self.sessionView = SessionView(engine: self.engine)
-        dictionary?.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
+
+        dictionary.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
         updateControlButtons()
     }
 
@@ -159,7 +143,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     deinit {
-        dictionary?.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
+        dictionary.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
     }
 
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
@@ -182,8 +166,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.heightConstraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
 
         let leftControl = controlViewWithButtons([
             numberModeButton,
@@ -327,7 +309,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             case .Some(let m):
                 self.engine.handle(.InputModeChange(inputMode: m))
             case .None:
-                ()
+                break
             }
             self.keyboardMode = .InputMode(mode: self.inputMode)
         case .Number:
@@ -432,7 +414,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func deleteBackward() {
-        (self.textDocumentProxy as UIKeyInput).deleteBackward()
+        (self.textDocumentProxy as! UIKeyInput).deleteBackward()
     }
 
     func changeInputMode(inputMode : SKKInputMode) {

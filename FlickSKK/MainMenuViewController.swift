@@ -8,31 +8,33 @@
 
 import UIKit
 
-class MainMenuViewController: UITableViewController {
+class MainMenuViewController: SafeTableViewController {
     typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: Void -> Void)
-    var sections : [(title: String?, rows: [row])]!
-
-    convenience override init() {
-        self.init(style: .Grouped)
-    }
-
-    override init(nibName: String?, bundle: NSBundle?) {
-        super.init(nibName: nibName, bundle: bundle)
-    }
-
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-
+    lazy var sections : [(title: String?, rows: [row])] = {
         weak var weakSelf = self
-        sections = [
-            (title: nil, rows: [item("Setup", action: { weakSelf?.gotoSetup(); return})]),
-            (title: nil, rows: [item("How to use", action: { weakSelf?.gotoHowToUse(); return})]),
+        return [
+            (title: nil, rows: [self.item("Setup") {
+                weakSelf?.gotoSetup()
+            }]),
+            (title: nil, rows: [self.item("How to use") {
+                weakSelf?.gotoHowToUse()
+            }]),
             // FIXME: 設定項目をなんか増やす
             // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
-            (title: nil, rows: [item("User Dictionary", action: { weakSelf?.gotoUserDictionary(); return})]),
-            (title: nil, rows: [item("Reset Learn Dictionary", accessoryType: .None, action: { weakSelf?.reset(); return})]),
-            (title: nil, rows: [item("License", action: { weakSelf?.gotoLicense(); return})])
+            (title: nil, rows: [self.item("User Dictionary") {
+                weakSelf?.gotoUserDictionary()
+            }]),
+            (title: nil, rows: [self.item("Reset Learn Dictionary", accessoryType: .None) {
+                weakSelf?.reset(); return
+            }]),
+            (title: nil, rows: [self.item("License") {
+                weakSelf?.gotoLicense()
+            }])
         ]
+    }()
+
+    init() {
+        super.init(style: .Grouped)
     }
 
     // MARK: View Lifecycle
@@ -45,7 +47,7 @@ class MainMenuViewController: UITableViewController {
 
     // MARK: - Table View
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -63,7 +65,7 @@ class MainMenuViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()

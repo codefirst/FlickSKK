@@ -88,7 +88,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             }
         } else {
             // deselect all
-            for indexPath in self.collectionView.indexPathsForSelectedItems() as [NSIndexPath] {
+            for indexPath in self.collectionView.indexPathsForSelectedItems() as! [NSIndexPath] {
                 self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
             }
         }
@@ -146,7 +146,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellID, forIndexPath: indexPath) as CandidateCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellID, forIndexPath: indexPath) as! CandidateCollectionViewCell
         return self.configureCell(cell, forIndexPath: indexPath)
     }
     
@@ -179,10 +179,6 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         didSet {
             updateStates()
         }
-    }
-    
-    override convenience init() {
-        self.init(frame: CGRectZero)
     }
     
     override init(frame: CGRect) {

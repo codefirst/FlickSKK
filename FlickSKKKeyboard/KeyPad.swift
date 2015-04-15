@@ -65,7 +65,7 @@ class KeyPad : UIView {
         autolayoutInKeyPad("V:|[b(==a)][e(==a)][h(==a)][k(==a)]|")
         autolayoutInKeyPad("V:|[c(==a)][f(==a)][i(==a)][l(==a)]|")
 
-        self.keyButtons = (views as NSDictionary).allValues as [KeyButton]
+        self.keyButtons = (views as NSDictionary).allValues as! [KeyButton]
     }
 
     required init(coder aDecoder: NSCoder) {

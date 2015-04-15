@@ -19,7 +19,7 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
         self.path = path
         let now = NSDate()
         var isOkuriAri = true
-        IOUtil.each(path, { line -> Void in
+        IOUtil.each(path, with: { line -> Void in
             let s = line as NSString
             // toggle
             if s.hasPrefix(";; okuri-nasi entries.") {
@@ -51,7 +51,7 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
     }
 
     private func search(target : NSString, xs : NSMutableArray, compare : NSComparisonResult) -> [String] {
-        let preprocessor = SKKNumberPreprocessor(value: target)
+        let preprocessor = SKKNumberPreprocessor(value: target as String)
 
         let line = binarySearch(preprocessor.preProcess(),
             xs: xs,
@@ -70,11 +70,11 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
         if begin + 1 == end { return .None }
 
         let mid = (end - begin) / 2 + begin;
-        let x  = xs[mid] as NSString
-        if x.hasPrefix(target) {
-            return x
+        let x  = xs[mid] as! NSString
+        if x.hasPrefix(target as String) {
+            return x as String
         } else {
-            if target.compare(x, options: .LiteralSearch) == compare {
+            if target.compare(x as String, options: .LiteralSearch) == compare {
                 return binarySearch(target, xs: xs, begin: begin, end: mid, compare : compare)
             } else {
                 return binarySearch(target, xs: xs, begin: mid, end: end, compare : compare)

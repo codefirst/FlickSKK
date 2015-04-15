@@ -8,7 +8,7 @@
 
 class SKKNumberPreprocessor {
     private let value : String
-    private var numbers : [Int] = []
+    private var numbers : [Int64] = []
 
     private let regexp : NSRegularExpression! =
         NSRegularExpression(pattern: "[0-9]+", options: nil, error: nil)
@@ -24,16 +24,16 @@ class SKKNumberPreprocessor {
         self.numbers = self.findNumbers(value)
         return regexp.stringByReplacingMatchesInString(value,
             options: nil,
-            range: NSMakeRange(0, value.utf16Count),
+            range: NSMakeRange(0, count(value.utf16)),
             withTemplate: "#")
     }
 
     func postProcess(entry : NSString) -> String {
         var result : NSMutableString =
-            entry.mutableCopy() as NSMutableString
+            entry.mutableCopy() as! NSMutableString
 
         var ret =
-            template.firstMatchInString(result, options: nil, range: NSMakeRange(0, result.length))
+            template.firstMatchInString(result as String, options: nil, range: NSMakeRange(0, result.length))
 
         var index = 0
 
@@ -45,13 +45,13 @@ class SKKNumberPreprocessor {
                 range: x.range,
                 withTemplate: stringFor(numbers[index], entry: matched))
             index += 1
-            ret = template.firstMatchInString(result, options: nil, range: NSMakeRange(0, result.length))
+            ret = template.firstMatchInString(result as String, options: nil, range: NSMakeRange(0, result.length))
         }
 
-        return result
+        return result as String
     }
 
-    private func stringFor(n : Int, entry : String) -> String {
+    private func stringFor(n : Int64, entry : String) -> String {
         let formatter = NumberFormatter(value: n)
         switch entry {
         case "#0":
@@ -67,13 +67,13 @@ class SKKNumberPreprocessor {
         }
     }
 
-    private func findNumbers(value : String) -> [Int] {
+    private func findNumbers(value : String) -> [Int64] {
         let xs = regexp.matchesInString(value,
             options: nil,
-            range: NSMakeRange(0, value.utf16Count)) as [NSTextCheckingResult]
+            range: NSMakeRange(0, count(value.utf16))) as! [NSTextCheckingResult]
         return xs.map({ x in
             let n : NSString = (self.value as NSString).substringWithRange(x.range)
-            return n.integerValue
+            return n.longLongValue
         })
     }
 }

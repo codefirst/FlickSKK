@@ -7,13 +7,13 @@
 //
 
 class NumberFormatter {
-    let value : Int
-    init(value : Int) {
+    let value : Int64
+    init(value : Int64) {
         self.value = value
     }
 
     func asAscii() -> String {
-        return NSString(format: "%d", self.value)
+        return NSString(format: "%d", self.value) as String
     }
 
     func asFullWidth() -> String {
@@ -51,11 +51,12 @@ class NumberFormatter {
         }
     }
 
-    private func toKanjiDigit(n : Int, at : Int, name: String) -> String {
-        return toKanji_lt_10((n / at) % 10).map({ c in c + name }) ?? ""
+    private func toKanjiDigit(n : Int64, at : Int64, name: String) -> String {
+        let m : Int = Int((n / at) % 10)
+        return toKanji_lt_10(m).map({ c in c + name }) ?? ""
     }
 
-    private func toKanji_lt_10000(n : Int) -> String? { // where n < 10_000
+    private func toKanji_lt_10000(n : Int64) -> String? { // where n < 10_000
         if n == 0 {
             return .None
         } else if n == 1 {
@@ -69,11 +70,11 @@ class NumberFormatter {
         }
     }
 
-    private func toKanjiDigits(n : Int, at : Int, name: String) -> String {
-        return toKanji_lt_10000((n / at) % 1_0000).map({ c in c + name }) ?? ""
+    private func toKanjiDigits(n : Int64, at : Int64, name: String) -> String {
+        return toKanji_lt_10000((n / at) % Int64(1_0000)).map({ c in c + name }) ?? ""
     }
 
-    private func toKanji(n : Int) -> String {
+    private func toKanji(n : Int64) -> String {
         let 兆 = toKanjiDigits(n, at: 1_0000_0000_0000, name: "兆")
         let 億 = toKanjiDigits(n, at: 1_0000_0000, name: "億")
         let 万 = toKanjiDigits(n, at: 1_0000, name: "万")

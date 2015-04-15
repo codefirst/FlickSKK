@@ -12,7 +12,7 @@ import UIKit
 
 extension NSObject {
     func tap<T>(block:(T) -> Void) -> Self {
-        block(self as T)
+        block(self as! T)
         return self
     }
 }
@@ -454,8 +454,8 @@ extension String {
         case .None:
             return self
         case .Some(let s):
-            if(s.utf16Count <= self.utf16Count) {
-                return self.substringToIndex(advance(self.startIndex, self.utf16Count - s.utf16Count))
+            if(count(s.utf16) <= count(self.utf16)) {
+                return self.substringToIndex(advance(self.startIndex, count(self.utf16) - count(s.utf16)))
             } else {
                 return self
             }
@@ -472,10 +472,10 @@ extension Array {
         var result = [S]()
         var addedDict = [T: Bool]()
         for elem in self {
-            let t : T = f(elem as S)
+            let t : T = f(elem as! S)
             if addedDict[t as T] == nil {
                 addedDict[t as T] = true
-                result.append(elem as S)
+                result.append(elem as! S)
             }
         }
         return result
