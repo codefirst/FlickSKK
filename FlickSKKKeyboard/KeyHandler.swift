@@ -170,7 +170,7 @@ class KeyHandler {
             if let exactIndex = candidates.index({!$0.isPartial}) {
                 nextIndex = max(nextIndex, exactIndex)
             }
-            
+
             if nextIndex < candidates.count {
                 return .KanjiCompose(kana : kana, okuri : okuri, candidates: candidates, index: nextIndex)
             } else {

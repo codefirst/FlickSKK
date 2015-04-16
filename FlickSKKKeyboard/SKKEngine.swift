@@ -27,7 +27,7 @@ class SKKEngine {
         // 候補表示
         self.delegate?.showCandidates(candidates()?.candidates)
     }
-    
+
     func candidates() -> (candidates: [Candidate], index: Int?)? {
         return self.presenter.candidates(self.composeMode)
     }
@@ -35,7 +35,7 @@ class SKKEngine {
     func inStatusShowsCandidatesBySpace() -> Bool {
         return self.presenter.inStatusShowsCandidatesBySpace(composeMode)
     }
-    
+
     var hasPartialCandidates: Bool {
         let cs = candidates()?.candidates ?? []
         return cs.any{$0.isPartial}

@@ -193,7 +193,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             autolayout("V:|[right]|")
             self.keypadAndControlsView.addConstraint(NSLayoutConstraint(item: keypad, attribute: .Width, relatedBy: .Equal, toItem: leftControl, attribute: .Width, multiplier: 3.0, constant: 0.0))
         }
-        
+
         sessionView.didSelectCandidateAtIndex = { [weak self] index in
             self?.engine.handle(.Select(index : index))
             return
@@ -354,10 +354,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         case .HankakuKana:
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
-        
+
         updateSpaceButtonLabel()
     }
-    
+
     private func updateSpaceButtonLabel() {
         let normal = self.spaceButton.key.buttonLabel
         let nextCandidate = NSLocalizedString("NextCandidate", comment: "")
@@ -372,7 +372,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     func handleSpace() {
         engine.handle(.Space)
     }
-    
+
     func handleSkipPartialCandidates() {
         engine.handle(.SkipPartialCandidates)
     }
@@ -387,14 +387,14 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     func composeText(text: String) {
         self.sessionView.composeText = text
-        
+
         self.updateSpaceButtonLabel()
     }
 
     func showCandidates(candidates: [Candidate]?) {
         sessionView.canEnterWordRegister = candidates != nil
         sessionView.candidates = candidates ?? []
-        
+
         self.updateSpaceButtonLabel()
     }
 

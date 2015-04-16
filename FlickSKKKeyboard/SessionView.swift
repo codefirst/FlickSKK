@@ -22,7 +22,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     var candidates: [Candidate] = [] {
         didSet {
             self.collectionView.reloadData()
-            
+
             dispatch_async(dispatch_get_main_queue()) {
                 self.updateCandidateSelection()
             }
@@ -30,10 +30,10 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     }
     var canEnterWordRegister = false
     var didSelectCandidateAtIndex: (Int -> Void)? = nil
-    
+
     let collectionView: UICollectionView
     private let collectionViewLayout: UICollectionViewFlowLayout
-    
+
     init(engine: SKKEngine) {
         self.engine = engine
         self.collectionViewLayout = UICollectionViewFlowLayout().tap { (l: UICollectionViewFlowLayout) in
@@ -49,16 +49,16 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
                 cv.showsVerticalScrollIndicator = false
                 cv.backgroundColor = UIColor.whiteColor()
         }
-        
+
         super.init(frame: CGRectZero)
-        
+
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        
+
         self.collectionView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
         self.collectionView.frame = self.bounds
         self.addSubview(self.collectionView)
-        
+
         let border = UIView().tap { (v: UIView) in
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
@@ -67,14 +67,14 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             ["b": border])
         autolayout("H:|[b]|")
         autolayout("V:|[b(==onepx)]")
-        
+
         self.backgroundColor = UIColor.whiteColor()
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func updateCandidateSelection() {
         let selectionIndex = self.engine.candidates()?.index
         if let index = selectionIndex {
@@ -93,9 +93,9 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             }
         }
     }
-    
+
     // MARK: UICollectionViewDataSource, UICollectionViewDelegate
-    
+
     enum Section: Int {
         case ComposeText = 0, Candidates, EnterWordRegister
     }
@@ -103,7 +103,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 3 // composeText, candidates, EnterWordRegister
     }
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section(rawValue: section) {
         case .Some(.ComposeText): return self.composeText != nil ? 1 : 0
@@ -112,7 +112,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         case .None: return 0
         }
     }
-    
+
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         switch Section(rawValue: indexPath.section) {
         case .Some(.ComposeText): break
@@ -121,7 +121,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         case .None: break
         }
     }
-    
+
     private func configureCell(cell: CandidateCollectionViewCell, forIndexPath indexPath: NSIndexPath) -> CandidateCollectionViewCell {
         switch Section(rawValue: indexPath.section) {
         case .Some(.ComposeText):
@@ -144,12 +144,12 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             return cell
         }
     }
-    
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellID, forIndexPath: indexPath) as! CandidateCollectionViewCell
         return self.configureCell(cell, forIndexPath: indexPath)
     }
-    
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         struct Static { static let layoutCell = CandidateCollectionViewCell() }
         let minWidth = CGFloat(44 + 8)
@@ -161,10 +161,10 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 
 class CandidateCollectionViewCell: UICollectionViewCell {
     let textLabel = UILabel()
-    
+
     enum Style {
         case Default, PartialCandidate
-        
+
         var textColor: UIColor {
             switch self {
             case .Default: return UIColor.blackColor()
@@ -180,23 +180,23 @@ class CandidateCollectionViewCell: UICollectionViewCell {
             updateStates()
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.backgroundColor = UIColor.whiteColor()
-        
+
         self.textLabel.tap { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
             l.backgroundColor = UIColor.clearColor()
             l.textAlignment = .Center
             l.lineBreakMode = .ByClipping
         }
-        
+
         let border = UIView().tap { (v: UIView) in
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
-        
+
         let autolayout = self.autolayoutFormat(
             ["p": 4, "onepx": 1.0 / UIScreen.mainScreen().scale],
             ["l": self.textLabel, "b": border])
@@ -208,7 +208,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func updateStates() {
         UIView.setAnimationsEnabled(false) // disable fade-in
         self.backgroundColor = highlighted ? style.highlightedBackgroundColor
@@ -217,13 +217,13 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         self.textLabel.textColor = style.textColor
         UIView.setAnimationsEnabled(true)
     }
-    
+
     override var selected: Bool {
         didSet {
             self.updateStates()
         }
     }
-    
+
     override var highlighted: Bool {
         didSet {
             self.updateStates()

@@ -8,7 +8,7 @@ enum Candidate : Equatable {
         case .Exact(kanji: let kanji): return kanji
         }
     }
-    
+
     var isPartial: Bool {
         switch self {
         case .Partial(kanji: _, kana: _): return true

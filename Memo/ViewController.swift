@@ -10,10 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     let textView = UITextView()
-    
+
     override func loadView() {
         super.loadView()
-        
+
         self.textView.backgroundColor = UIColor.whiteColor()
         self.textView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
         self.textView.font = Appearance.normalFont(18.0)

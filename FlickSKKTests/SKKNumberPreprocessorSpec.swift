@@ -3,7 +3,7 @@ import Nimble
 
 class SKKNUmberPreprocessorSpec : QuickSpec {
     override func spec() {
-        
+
         describe("preProcess") {
             it("数字を#に置き換える") {
                 let target = SKKNumberPreprocessor(value: "15や")

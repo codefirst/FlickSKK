@@ -75,7 +75,7 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                         fail()
                     }
                 }
-                
+
                 it("partialな候補がなくexactの候補がある場合は通常の変換") {
                     let m = handler.handle(.SkipPartialCandidates, composeMode: composeMode)
                     switch m {
@@ -88,7 +88,7 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                         fail()
                     }
                 }
-                
+
                 it("partial,exactどちらも候補がない場合は登録") {
                     let m = handler.handle(.Space, composeMode: .KanaCompose(kana: "あああ", candidates: []))
                     switch m {

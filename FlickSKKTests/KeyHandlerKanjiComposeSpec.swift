@@ -69,7 +69,7 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                         fail()
                     }
                 }
-                
+
                 it("partialな候補がなくexactの候補がある場合は通常の変換") {
                     let m = handler.handle(.SkipPartialCandidates, composeMode: composeMode)
                     switch m {
@@ -82,7 +82,7 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                         fail()
                     }
                 }
-                
+
                 it("partial,exactどちらも候補がない場合は登録") {
                     let m = handler.handle(.SkipPartialCandidates, composeMode: .KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 1))
                     switch m {

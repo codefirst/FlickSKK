@@ -44,7 +44,7 @@ enum KanaFlickKey: Hashable {
             return nil
         }
     }
-    
+
     static let ignoredSequence = "-ignore-"
 
     var sequence: [String]? {

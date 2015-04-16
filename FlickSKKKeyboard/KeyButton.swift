@@ -172,7 +172,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             self.highlighted = false
             return
         }
-        
+
         if !flicksEnabled { return }
 
         let distance = sqrt(pow(p.x - originOfPanGesture.x, 2) + pow(p.y - originOfPanGesture.y, 2))
@@ -200,7 +200,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                     self.sequenceIndex = 4
                     direction = .Down
                 }
-                
+
                 if direction != .None {
                     let text = String(Array(s)[self.sequenceIndex ?? 0])
                     KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
