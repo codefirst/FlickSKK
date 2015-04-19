@@ -72,6 +72,17 @@
                                 <keyword>フリック</keyword>
                                 <keyword>日本語入力</keyword>
                             </keywords>
+                            <version_whats_new>FlickSKK 1.3には、変換候補の補完と記号の追加が含まれます。変更点は以下の通りです。
+
+・変換履歴を学習し、候補の先頭に最後の変換結果が来るようになりました。
+　・変換履歴はFlickSKKアプリからリセットできます。
+・変換中に、変換履歴とユーザー辞書の単語から候補を補完して表示するようになりました。
+　・変換で2文字以上入力中に表示されます。
+　・補完候補は[次候補]を左フリックしてスキップ[≪]できます。
+・数字キーパッド[123]に各種記号を追加しました。
+・フリックに割り当てられている記号が表示されるようになりました。
+・FlickSKKアプリの起動画面が新しくなりました。
+・その他、バグ修正。</version_whats_new>
                             <software_url>http://www.codefirst.org/FlickSKK/</software_url>
                             <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
                             <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
