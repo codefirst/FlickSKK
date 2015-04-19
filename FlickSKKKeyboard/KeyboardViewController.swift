@@ -100,22 +100,22 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 seqWithSymbols("1#@&_"),
                 // 通貨用記号
                 seqWithSymbols("2$￥"),
-                // 引用記号 + チルダ
-                seqWithSymbols("3'\"`~"),
+                // 直線で構成されているやつ。左右キーが対応してるやつなので右端にする。
+                seqWithSymbols("3\\^/|"),
                 // 算術記号(%がmodなのは自明か?)
                 seqWithSymbols("4+*%="),
                 // 矢印。中央においてみた。
                 seqWithSymbols("5←↑→↓"),
-                // あまってる。とりあえずおもしろUnicode記号をいれた
-                seqWithSymbols("6✿☃"),
-                // 括弧系
-                seqWithSymbols("7<{>}"),
+                // 括弧系(1)
+                seqWithSymbols("6([)]"),
+                // 引用記号
+                seqWithSymbols("7'\"`~"),
                 // 行末記号と区切り文字
                 seqWithSymbols("8?:!;"),
-                // 線だけで構成されているやつ。(標準キーボードにあわせた)
-                seqWithSymbols("9\\^/|"),
-                // 括弧系2(標準キーボードにあわせた)
-                seqWithSymbols("()[]"),
+                // 括弧系(2)
+                seqWithSymbols("9<{>}"),
+                // 全角記号
+                seqWithSymbols("☆✿※♪"),
                 // 行末で使う全角記号
                 seqWithSymbols("0～・⋯"),
                 // 標準キーボードにあわせた
