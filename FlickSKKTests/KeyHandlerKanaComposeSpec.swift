@@ -83,7 +83,7 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                         expect(kana).to(equal("かわ"))
                         expect(okuri).to(beNil())
                         expect(candidates).toNot(beEmpty())
-                        expect(index).to(equal(0))
+                        expect(index).to(equal(1))
                     default:
                         fail()
                     }
