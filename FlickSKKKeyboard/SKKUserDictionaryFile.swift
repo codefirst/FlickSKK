@@ -21,10 +21,6 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     init(path : String){
         self.path = path
 
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-            NSFileManager.defaultManager().createFileAtPath(path, contents: nil, attributes:nil)
-        }
-
         // TODO: 変なデータが来たら、空で初期化する
         let now = NSDate()
         var isOkuriAri = true
@@ -104,26 +100,24 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     }
 
     func serialize() {
-        if let file = NSFileHandle(forWritingAtPath: self.path) {
-            // 前回の辞書の内容がのこっているので、いったんファイルの内容を全部消す
-            file.truncateFileAtOffset(0)
-            write(file, str: ";; okuri-ari entries.\n")
+        if let file = LocalFile(path: self.path) {
+            file.writeln(";; okuri-ari entries.")
             for (k,v) in self.okuriAri {
                 let kana = k as! String
                 let kanji = v as! String
                 if !kana.isEmpty {
-                    write(file, str: kana + " " + kanji + "\n")
+                    file.writeln(kana + " " + kanji)
                 }
             }
-            write(file, str: ";; okuri-nasi entries.\n")
+            file.writeln(";; okuri-nasi entries.")
             for (k,v) in self.okuriNasi {
                 let kana = k as! String
                 let kanji = v as! String
                 if !kana.isEmpty {
-                    write(file, str: kana + " " + kanji + "\n")
+                    file.writeln(kana + " " + kanji)
                 }
             }
-            file.closeFile()
+            file.close()
         }
     }
 
@@ -152,12 +146,6 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             let kanji : NSString = line.substringFromIndex(range.location + 1)
             return (kana as String, kanji as String)
         }
-    }
-
-    private func write(handle : NSFileHandle, str : NSString) {
-        let data = NSData(bytes: str.UTF8String,
-            length: str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-        handle.writeData(data)
     }
 
     private func dictFor(okuri: String?) -> NSMutableDictionary {
