@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 
-class SKKNUmberPreprocessorSpec : QuickSpec {
+class SKKNumberPreprocessorSpec : QuickSpec {
     override func spec() {
 
         describe("preProcess") {
