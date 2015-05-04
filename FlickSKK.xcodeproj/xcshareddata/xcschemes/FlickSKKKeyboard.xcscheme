@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "0630"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -68,7 +68,6 @@
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
-      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
@@ -78,6 +77,7 @@
       region = "JP"
       launchAutomaticallySubstyle = "2">
       <PathRunnable
+         runnableDebuggingMode = "0"
          FilePath = "/Users/banjun/Library/Developer/Xcode/DerivedData/FlickSKK-hasgivwzrzxwtngrnsqldokwtyez/Build/Products/FlickSKKKeyboard">
       </PathRunnable>
       <MacroExpansion>
