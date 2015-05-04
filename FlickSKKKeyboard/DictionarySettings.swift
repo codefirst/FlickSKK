@@ -31,6 +31,12 @@ class DictionarySettings {
             NSHomeDirectory().stringByAppendingPathComponent("Library/skk.partial.jisyo")
     }
 
+    // 追加辞書
+    class func additionalDictionaryPath() -> String {
+        return AppGroup.pathForResource("Library/additional") ??
+            NSHomeDirectory().stringByAppendingPathComponent("Library/additional")
+    }
+
     // 組込みの辞書(L辞書とか)
     class func defaultDicitonaryPath() -> String {
        // 辞書は必ず組込まれているはず
