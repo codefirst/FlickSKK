@@ -1,5 +1,5 @@
 private var kDicitonary : SKKLocalDictionaryFile?
-private var kCache : [String:(NSDate, SKKUserDictionaryFile)] = [:]
+private var kCache : [String:(NSDate, Any)] = [:]
 
 // 辞書のロードには時間がかかるので、一度ロードした結果をキャッシュする
 // グローバル変数にいれておけば、次回起動時にも残っている(ことがある)
@@ -14,13 +14,13 @@ class DictionaryCache {
     }
 
     // ユーザごとに作られる辞書をロードする(例: 単語登録結果、学習結果)
-    func loadUserDicitonary(path: String, closure: String -> SKKUserDictionaryFile) -> SKKUserDictionaryFile {
+    func loadUserDicitonary<T>(path: String, closure: String -> T) -> T {
         if let mtime = getModifiedTime(path) {
             if let (Exact, file) = kCache[path] {
                 if Exact == mtime {
                     // キャッシュが有効
                     NSLog("%@ is cached", path)
-                    return file
+                    return file as! T
                 } else {
                     // キャシュが無効になっている
                     NSLog("%@ cache is expired", path)
