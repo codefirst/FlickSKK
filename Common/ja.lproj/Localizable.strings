@@ -17,6 +17,7 @@
 "Reset" = "リセット";
 "EnterWordRegister" = "▼単語登録";
 "Additional Dictionary" = "追加辞書";
-"HowToAddDictionary" = "辞書を追加するには(以下略";
+"HowToAddDictionary" = "SKK Openlabで配布されているSKK辞書を追加できます。 gzip圧縮された辞書には対応していないので、[閲覧]リンクを指定してください。";
 "URL" = "URL";
 "Download" = "追加";
+"OpenSKKDictWiki" = "Openlab SKK辞書Wikiを開く";

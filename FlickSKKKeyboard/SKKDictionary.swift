@@ -41,7 +41,9 @@ class SKKDictionary : NSObject {
             NSLog("%@", e.userInfo ?? [:])
             return []
         } else {
-            return (xs ?? []) as! [String]
+            return (xs ?? []).map {
+                return DictionarySettings.additionalDictionaryPath().stringByAppendingPathComponent($0 as! String)
+            }
         }
     }
 
@@ -62,9 +64,8 @@ class SKKDictionary : NSObject {
                 SKKUserDictionaryFile(path: $0)
             }
 
-            let xs : [SKKDictionaryFile] = SKKDictionary.additionalDictionaries().map { name in
-                let path = DictionarySettings.additionalDictionaryPath().stringByAppendingPathComponent(name)
-                return self.cache.loadUserDicitonary(path) {
+            let xs : [SKKDictionaryFile] = SKKDictionary.additionalDictionaries().map { path in
+                self.cache.loadUserDicitonary(path) {
                     SKKLocalDictionaryFile(path: $0)
                 }
             }

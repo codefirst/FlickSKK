@@ -12,7 +12,10 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
         title: NSLocalizedString("Download", comment:""),
         style: .Done, target:self, action: Selector("download"))
 
-    init() {
+    private let done : Void -> Void
+
+    init(done : Void -> Void) {
+        self.done = done
         super.init(style: .Grouped)
         urlField.text = "http://openlab.jp/skk/skk/dic/SKK-JISYO.okinawa"
         self.doneButton.enabled = canDownload()
@@ -78,6 +81,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
             action.success = {
                 self.navigationController?.popViewControllerAnimated(true)
+                self.done()
             }
             action.error = { e in
                 let alert = UIAlertView()
