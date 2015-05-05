@@ -89,11 +89,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 seq("ﾅﾆﾇﾈﾉ"),
                 seq("ﾊﾋﾌﾍﾎ"),
                 seq("ﾏﾐﾑﾒﾓ"),
-                seq("ﾔ「ﾕ」ﾖ"),
+                seq("ﾔ｢ﾕ｣ﾖ"),
                 seq("ﾗﾘﾙﾚﾛ"),
                 .KomojiDakuten,
                 seq("ﾜｦﾝ-"),
-                seqWithSymbols("、。？！"),
+                seqWithSymbols("､｡?!"),
                 ]),
             .Number: KeyPad(keys: [
                 // よく使う記号(アルファベットキーにあわせた)
