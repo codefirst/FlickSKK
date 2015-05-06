@@ -8,6 +8,9 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
     private let okuriAri : BinarySearch
     private let okuriNasi : BinarySearch
     private let path : String
+    private let filters : [SKKFilter] = [
+        IdFilter(), NumberFilter()
+    ]
     init(path : String){
         self.path = path
         let now = NSDate()
@@ -27,13 +30,11 @@ class SKKLocalDictionaryFile : SKKDictionaryFile {
         }
     }
 
-    private func search(target : NSString, at: BinarySearch) -> [String] {
-        let preprocessor = SKKNumberPreprocessor(value: target as String)
-
-        let line = at.call(preprocessor.preProcess()) ?? ""
-        let entries = EntryParser(entry: line).words()
-
-        return entries.map({ entry in
-            return preprocessor.postProcess(entry) })
+    private func search(target : String, at: BinarySearch) -> [String] {
+        return filters.flatMap { filter in
+            filter.call(target, binarySearch: at) {
+                EntryParser(entry: $0).words()
+            }
+        }
     }
 }

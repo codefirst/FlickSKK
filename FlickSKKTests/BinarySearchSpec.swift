@@ -22,5 +22,12 @@ class BinarySearchSpec : QuickSpec {
                 expect(target.call("Charrying")).to(beNil())
             }
         }
+
+        describe("境界値") {
+            it("1要素の場合") {
+                let target = BinarySearch(entries: ["Alice"], reverse: false)
+                expect(target.call("Ali")).to(equal("Alice"))
+            }
+        }
     }
 }

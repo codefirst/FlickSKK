@@ -30,7 +30,14 @@ class BinarySearch {
 
     private func binarySearch(target : NSString, begin : Int, end : Int) -> String? {
         if begin == end { return .None }
-        if begin + 1 == end { return .None }
+        if begin + 1 == end {
+            let x = entries[begin] as! NSString
+            if x.hasPrefix(target as String) {
+                return x as String
+            } else {
+                return .None
+            }
+        }
 
         let mid = (end - begin) / 2 + begin;
         let x  = entries[mid] as! NSString
