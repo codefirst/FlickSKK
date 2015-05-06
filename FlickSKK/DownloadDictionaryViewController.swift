@@ -14,10 +14,10 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
     private let done : Void -> Void
 
-    init(done : Void -> Void) {
+    init(url : String, done : Void -> Void) {
         self.done = done
         super.init(style: .Grouped)
-        urlField.text = "http://openlab.jp/skk/skk/dic/SKK-JISYO.okinawa"
+        urlField.text = url
         self.doneButton.enabled = canDownload()
         self.navigationItem.rightBarButtonItem = doneButton
     }
