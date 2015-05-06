@@ -15,6 +15,7 @@ class DownloadDictionary {
 
     var success : (Void->Void)?
     var error : (NSError->Void)?
+    var progress : ((Int64, Int64) -> Void)?
 
     init(url : String) {
         self.url = url
@@ -46,7 +47,9 @@ class DownloadDictionary {
     private func save(url : String, path: String, onSuccess : Void -> Void, onError : NSError -> Void) {
         Alamofire.download(.GET, url) { (temporaryURL, response) in
             return NSURL.fileURLWithPath(path, isDirectory: false) ?? temporaryURL
-        }.response {(request, response, _, error) in
+        }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
+            self.progress?(totalBytesRead, totalBytesExpectedToRead)
+        }.response { (request, response, _, error) in
             if let e = error {
                 onError(e)
             } else {

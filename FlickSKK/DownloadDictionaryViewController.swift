@@ -7,11 +7,9 @@ import UIKit
 // とりあえずあとまわしにしている。
 class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDelegate {
     private let urlField = UITextField(frame: CGRectZero)
-
     private lazy var doneButton : UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Download", comment:""),
         style: .Done, target:self, action: Selector("download"))
-
     private let done : Void -> Void
 
     init(url : String, done : Void -> Void) {
@@ -32,6 +30,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,19 +41,14 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
         let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
 
         cell.textLabel?.text = NSLocalizedString("URL", comment:"")
-        cell.accessoryView = makeTextField(urlField)
+        urlField.frame = CGRectMake(0, 0, cell.frame.width - 80, 130)
+        urlField.clearButtonMode = .WhileEditing
+        urlField.placeholder = "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"
+        urlField.contentVerticalAlignment = .Center
+        urlField.delegate = self
+        urlField.addTarget(self, action: "didChange", forControlEvents: .EditingChanged)
+        cell.accessoryView = urlField
         return cell
-    }
-
-    private func makeTextField(textField : UITextField) -> UITextField {
-        textField.frame = CGRectMake(0, 0, 250, 130)
-        textField.font = Appearance.normalFont(14.0)
-        textField.clearButtonMode = .WhileEditing
-        textField.placeholder = "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"
-        textField.contentVerticalAlignment = .Center
-        textField.delegate = self
-        textField.addTarget(self, action: "didChange", forControlEvents: .EditingChanged)
-        return textField
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -77,21 +71,26 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
     @objc private func download() {
         if canDownload() {
+            let vc = HeadUpProgressViewController()
             let action = DownloadDictionary(url: self.urlField.text)
-
+            action.progress = { (current, total) in
+                vc.progress = Float(current) / Float(total)
+            }
             action.success = {
+                vc.close()
                 self.navigationController?.popViewControllerAnimated(true)
                 self.done()
             }
             action.error = { e in
                 let alert = UIAlertView()
                 alert.title = NSLocalizedString("DownloadError", comment:"")
-                alert.message = "\(e.localizedDescription): \(e.userInfo?.description)"
-                alert.addButtonWithTitle("Ok")
+                alert.message = "\(e.localizedDescription)\n\n\(e.userInfo?.description)"
+                alert.addButtonWithTitle("OK")
                 alert.show()
             }
 
             action.call()
+            presentViewController(vc, animated: true, completion: nil)
         }
     }
 }

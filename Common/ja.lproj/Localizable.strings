@@ -24,3 +24,5 @@
 "Download" = "追加";
 "OpenSKKDictWiki" = "Openlab SKK辞書Wikiを開く";
 "%d dictionaries registered" = "%d個の辞書が追加済み";
+"DownloadError" = "ダウンロードに失敗しました";
+"download progress: %s"  = "ダウンロード進捗: %@";

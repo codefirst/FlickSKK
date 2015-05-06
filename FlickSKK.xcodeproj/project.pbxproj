@@ -77,6 +77,7 @@
 		13A454FC19E2DAC30039390A /* UtilitiesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */; };
 		13B824811ABCE8E600F13FC3 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B824801ABCE8E600F13FC3 /* Candidate.swift */; };
 		13B824821ABCE8E600F13FC3 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B824801ABCE8E600F13FC3 /* Candidate.swift */; };
+		13C38FB11AFCEE61004CA747 /* HeadUpProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C38FB01AFCEE61004CA747 /* HeadUpProgressViewController.swift */; };
 		13D118CD19D99923009E9E79 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
 		13D118D019D9994D009E9E79 /* SKKDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D118CE19D9994D009E9E79 /* SKKDictionary.swift */; };
 		13D9B7711ABD191500E63F33 /* SKKDictionarySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D9B7701ABD191500E63F33 /* SKKDictionarySpec.swift */; };
@@ -253,6 +254,7 @@
 		139E2A941AF4A40400848776 /* LocalFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
 		13A454FB19E2DAC30039390A /* UtilitiesSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilitiesSpec.swift; sourceTree = "<group>"; };
 		13B824801ABCE8E600F13FC3 /* Candidate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		13C38FB01AFCEE61004CA747 /* HeadUpProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadUpProgressViewController.swift; sourceTree = "<group>"; };
 		13D118C719D99923009E9E79 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
 		13D118CE19D9994D009E9E79 /* SKKDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionary.swift; sourceTree = "<group>"; };
 		13D9B7701ABD191500E63F33 /* SKKDictionarySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionarySpec.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 		131D89781AF4A00700E5205A /* DownloadDictionary */ = {
 			isa = PBXGroup;
 			children = (
+				13C38FB01AFCEE61004CA747 /* HeadUpProgressViewController.swift */,
 				131386381AF8C738009EA22D /* Tempfile.swift */,
 				1302150C1AF7762500918E98 /* DownloadDictionary.swift */,
 				135CDE681AF71843005C6CF0 /* AdditionalDictionaryViewController.swift */,
@@ -1051,6 +1054,7 @@
 				134DE87B1AAC0CAD00FF9CE5 /* DictionaryCache.swift in Sources */,
 				13E566C91AF6317500592844 /* BinarySearch.swift in Sources */,
 				EACD52B619F3FEFD001FB2A7 /* SKKLocalDictionaryFile.swift in Sources */,
+				13C38FB11AFCEE61004CA747 /* HeadUpProgressViewController.swift in Sources */,
 				EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */,
 				13E566D01AF63BAA00592844 /* SortDictionary.swift in Sources */,
 				131DBA8F1A42403100756CFA /* WordRegisterViewController.swift in Sources */,
