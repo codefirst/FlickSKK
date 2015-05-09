@@ -46,6 +46,7 @@
 		136610C31AA032C1006AA8F1 /* KeyHandlerKanjiComposeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136610C21AA032C1006AA8F1 /* KeyHandlerKanjiComposeSpec.swift */; };
 		136610C51AA03374006AA8F1 /* KeyHandlerWordRegisterWithDirectInputSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136610C41AA03374006AA8F1 /* KeyHandlerWordRegisterWithDirectInputSpec.swift */; };
 		136610C71AA0344A006AA8F1 /* KeyHandlerWordRegisterWithKanaComposeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136610C61AA0344A006AA8F1 /* KeyHandlerWordRegisterWithKanaComposeSpec.swift */; };
+		1369D85C1AFDEBC000E41459 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1369D85B1AFDEBC000E41459 /* AudioToolbox.framework */; };
 		136D161119DAA0AE0091D6BF /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
 		136F409919E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */; };
 		137AAB451A3C0F3F0092F8A5 /* KeyRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */; };
@@ -213,6 +214,7 @@
 		136610C21AA032C1006AA8F1 /* KeyHandlerKanjiComposeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerKanjiComposeSpec.swift; sourceTree = "<group>"; };
 		136610C41AA03374006AA8F1 /* KeyHandlerWordRegisterWithDirectInputSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerWordRegisterWithDirectInputSpec.swift; sourceTree = "<group>"; };
 		136610C61AA0344A006AA8F1 /* KeyHandlerWordRegisterWithKanaComposeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerWordRegisterWithKanaComposeSpec.swift; sourceTree = "<group>"; };
+		1369D85B1AFDEBC000E41459 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		136D161019DAA0AE0091D6BF /* SKKInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
 		136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryUserFileSpec.swift; sourceTree = "<group>"; };
 		137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRepeatTimer.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1369D85C1AFDEBC000E41459 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +502,7 @@
 		6050DDC7DD7FB6FB1BD2A214 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1369D85B1AFDEBC000E41459 /* AudioToolbox.framework */,
 				0CA289C0ED7662F2EF0F3718 /* libPods.a */,
 				30FFB16661B439FA5D824AE2 /* Pods_FlickSKKTests.framework */,
 			);
