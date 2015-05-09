@@ -13,6 +13,8 @@ let KeyButtonHighlightedColor = UIColor(hue: 0.10, saturation: 0.07, brightness:
 
 
 class KeyButton: UIView, UIGestureRecognizerDelegate {
+    private let FORCE_THRESOLD : CGFloat = 45.0
+    private var force : Bool = false
     let key: KanaFlickKey
     var sequenceIndex: Int? {
         didSet {
@@ -52,7 +54,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         return ["p": 10]
     }
 
-    var tapped: ((KanaFlickKey, Int?) -> Void)?
+    var tapped: ((KanaFlickKey, Int?, Bool?) -> Void)?
     var selected: Bool {
         didSet {
             self.backgroundColor = selected ? selectedBackgroundColor : normalBackgroundColor
@@ -75,7 +77,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     lazy var repeatTimer : KeyRepeatTimer? = {
         if self.key.isRepeat {
             return KeyRepeatTimer(delayInterval: 0.45, repeatInterval: 0.05, action: {
-                self.tapped?(self.key, self.sequenceIndex)
+                self.tapped?(self.key, self.sequenceIndex, false)
                 return ()
             })
         } else {
@@ -118,6 +120,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gestureTapped:"))
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
+
     }
 
     // MARK: - Gestures
@@ -125,6 +128,24 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         self.highlighted = true // set to false on end, cancel, started pan
         self.repeatTimer?.start()
         super.touchesBegan(touches, withEvent: event)
+
+        if let t = event.allTouches()?.first {
+            let touch = t as! UITouch
+                        println(touch.majorRadius)
+            self.force = touch.majorRadius >= FORCE_THRESOLD
+        }
+    }
+
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesMoved(touches, withEvent: event)
+
+        if let t = event.allTouches()?.first {
+            let touch = t as! UITouch
+            println(touch.majorRadius)
+            if touch.majorRadius >= FORCE_THRESOLD {
+                force = true
+            }
+        }
     }
 
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -134,7 +155,6 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     }
 
     override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
-//        self.highlighted = false // surpress flicker (highlighted = false, then true)
         self.repeatTimer?.cancel()
         super.touchesCancelled(touches, withEvent: event)
     }
@@ -143,7 +163,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         KeyButtonFlickPopup.sharedInstance.hide()
         self.highlighted = false
         if !self.key.isRepeat {
-            self.tapped?(self.key, self.sequenceIndex)
+            self.tapped?(self.key, self.sequenceIndex, force)
         }
     }
 
@@ -166,7 +186,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             })
             if key.sequence != nil || self.bounds.contains(p) {
                 // always trigger when Seq, and trigger non-Seq (single char) key when touchUpInside
-                self.tapped?(self.key, self.sequenceIndex)
+                self.tapped?(self.key, self.sequenceIndex, force)
             }
             self.sequenceIndex = nil
             self.highlighted = false
