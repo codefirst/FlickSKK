@@ -8,13 +8,13 @@
 
 import Foundation
 import UIKit
+import AudioToolbox
 
 let KeyButtonHighlightedColor = UIColor(hue: 0.10, saturation: 0.07, brightness: 0.96, alpha: 1.0)
 
-
 class KeyButton: UIView, UIGestureRecognizerDelegate {
     private let FORCE_THRESOLD : CGFloat = 45.0
-    private var force : Bool = false
+    private var lastTouch : UITouch?
     let key: KanaFlickKey
     var sequenceIndex: Int? {
         didSet {
@@ -27,6 +27,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             }
         }
     }
+    private var processed = false
 
     let label = UILabel()
     lazy var imageView: UIImageView = { [unowned self] in
@@ -118,34 +119,27 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             autolayout("V:|[label]|")
         }
 
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gestureTapped:"))
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
+        let tap = UITapGestureRecognizer(target: self, action: "gestureTapped:")
+        tap.delegate = self
+        self.addGestureRecognizer(tap)
+
+        let pan = UIPanGestureRecognizer(target: self, action: "gesturePanned:")
+        pan.delegate = self
+        self.addGestureRecognizer(pan)
 
     }
 
     // MARK: - Gestures
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.highlighted = true // set to false on end, cancel, started pan
+        self.processed = false
+        self.sequenceIndex = nil
         self.repeatTimer?.start()
         super.touchesBegan(touches, withEvent: event)
-
-        if let t = event.allTouches()?.first {
-            let touch = t as! UITouch
-                        println(touch.majorRadius)
-            self.force = touch.majorRadius >= FORCE_THRESOLD
-        }
     }
 
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesMoved(touches, withEvent: event)
-
-        if let t = event.allTouches()?.first {
-            let touch = t as! UITouch
-            println(touch.majorRadius)
-            if touch.majorRadius >= FORCE_THRESOLD {
-                force = true
-            }
-        }
     }
 
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -161,15 +155,30 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     func gestureTapped(gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
+        if(processed) { return }
+
+        println(lastTouch?.majorRadius)
+
         self.highlighted = false
         if !self.key.isRepeat {
-            self.tapped?(self.key, self.sequenceIndex, force)
+            self.tapped?(self.key, self.sequenceIndex, forceTouched())
         }
     }
 
     var originOfPanGesture = CGPointZero
 
+
+    func forceTouched() -> Bool {
+        if let l = lastTouch {
+            println(l.majorRadius)
+            return l.majorRadius >= FORCE_THRESOLD
+        } else {
+            return false
+        }
+    }
     func gesturePanned(gesture: UIPanGestureRecognizer) {
+        if(processed) { return }
+
         // FIXME: キーリピート対応について、なにも考慮してない。
         // 動くような気もするけど未確認。
         let p = gesture.locationInView(self)
@@ -178,7 +187,13 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             originOfPanGesture = p
         }
 
-        if gesture.state == UIGestureRecognizerState.Ended {
+        let force = forceTouched()
+
+        if force {
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        }
+
+        if gesture.state == UIGestureRecognizerState.Ended || force {
             let delay = 0.2 * Double(NSEC_PER_SEC)
             let time  = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(time, dispatch_get_main_queue(), {
@@ -190,6 +205,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             }
             self.sequenceIndex = nil
             self.highlighted = false
+            self.processed = force
+            self.lastTouch = nil
             return
         }
 
@@ -228,6 +245,12 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             }
         }
     }
+
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        lastTouch = touch
+        return true
+    }
+
 
     // MARK: -
     required init(coder aDecoder: NSCoder) {
