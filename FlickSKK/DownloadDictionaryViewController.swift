@@ -81,10 +81,10 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
                 self.navigationController?.popViewControllerAnimated(true)
                 self.done()
             }
-            action.error = { e in
+            action.error = { (title, e) in
                 let alert = UIAlertView()
-                alert.title = NSLocalizedString("DownloadError", comment:"")
-                alert.message = "\(e.localizedDescription)\n\n\(e.userInfo?.description)"
+                alert.title = title
+                alert.message = "\(e.localizedDescription)"
                 alert.addButtonWithTitle("OK")
                 alert.show()
             }

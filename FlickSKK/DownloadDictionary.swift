@@ -14,7 +14,7 @@ class DownloadDictionary {
     private let path : String
 
     var success : (Void->Void)?
-    var error : (NSError->Void)?
+    var error : ((String,NSError)->Void)?
     var progress : ((Int64, Int64) -> Void)?
 
     init(url : String) {
@@ -39,7 +39,7 @@ class DownloadDictionary {
                 self.success?()
             },
             onError: { e in
-                error?(e)
+                error?(NSLocalizedString("DownloadError", comment:""), e)
             })
     }
 
@@ -61,13 +61,21 @@ class DownloadDictionary {
     // UTF8でエンコードして、保存する
     private func encodeToUTF8(src : String, dest: String) {
         var error : NSError?
-        if let content = NSString(contentsOfFile: src, encoding: NSJapaneseEUCStringEncoding,  error: &error) {
+        if let content = readFile(src, error: &error) {
             if let file = LocalFile(path: dest) {
                 file.write(content as String)
                 file.close()
             }
         } else if let e = error {
-            self.error?(e)
+            self.error?(NSLocalizedString("EncodingError", comment:""),e)
         }
+    }
+
+    // ファイルをEUC-JPもしくはUTF-8として読み込む
+    // (シミュレータではEUC-JPの読み込みは失敗する)
+    private func readFile(path : String, error: NSErrorPointer) -> NSString? {
+        return NSString(contentsOfFile: path, encoding: NSJapaneseEUCStringEncoding, error: error) ??
+            NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
+
     }
 }

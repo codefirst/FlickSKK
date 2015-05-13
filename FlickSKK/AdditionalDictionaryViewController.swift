@@ -11,6 +11,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         (title: "人名辞書", url: "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"),
         (title: "郵便番号辞書", url: "http://openlab.jp/skk/skk/dic/zipcode/SKK-JISYO.zipcode"),
         (title: "沖縄辞書", url: "http://openlab.jp/skk/skk/dic/SKK-JISYO.okinawa"),
+        (title: "絵文字", url: "https://raw.githubusercontent.com/uasi/skk-emoji-jisyo/master/SKK-JISYO.emoji.utf8"),
         (title: "その他(URL指定)", url: "")
     ]
 
