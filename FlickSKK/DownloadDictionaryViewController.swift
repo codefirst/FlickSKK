@@ -87,6 +87,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
                 alert.message = "\(e.localizedDescription)"
                 alert.addButtonWithTitle("OK")
                 alert.show()
+                vc.close()
             }
 
             action.call()

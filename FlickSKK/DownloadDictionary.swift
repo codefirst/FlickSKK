@@ -33,10 +33,13 @@ class DownloadDictionary {
         save(self.url, path: downloadFile,
             onSuccess: {
                 // UTF8へのエンコード
-                self.encodeToUTF8(downloadFile, dest: utf8File)
-                // 再ソート
-                SortDictionary(path: utf8File).call(self.path)
-                self.success?()
+                if let e = self.encodeToUTF8(downloadFile, dest: utf8File) {
+                    self.error?(NSLocalizedString("EncodingError", comment:""), e)
+                } else {
+                    // 再ソート
+                    SortDictionary(path: utf8File).call(self.path)
+                    self.success?()
+                }
             },
             onError: { e in
                 error?(NSLocalizedString("DownloadError", comment:""), e)
@@ -59,15 +62,16 @@ class DownloadDictionary {
     }
 
     // UTF8でエンコードして、保存する
-    private func encodeToUTF8(src : String, dest: String) {
+    private func encodeToUTF8(src : String, dest: String) -> NSError? {
         var error : NSError?
         if let content = readFile(src, error: &error) {
             if let file = LocalFile(path: dest) {
                 file.write(content as String)
                 file.close()
             }
-        } else if let e = error {
-            self.error?(NSLocalizedString("EncodingError", comment:""),e)
+            return nil
+        } else {
+            return error
         }
     }
 
