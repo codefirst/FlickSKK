@@ -826,7 +826,6 @@
 					};
 					EAD4B55F19D5CB50007B6636 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = VG2YYSKSHY;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -839,7 +838,6 @@
 					};
 					EAD4B58819D5CB8A007B6636 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = VG2YYSKSHY;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
