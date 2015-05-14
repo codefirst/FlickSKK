@@ -76,22 +76,31 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
             action.progress = { (current, total) in
                 vc.progress = Float(current) / Float(total)
             }
-            action.success = {
+            action.success = { info in
                 vc.close()
                 self.navigationController?.popViewControllerAnimated(true)
                 self.done()
+                self.alert(NSLocalizedString("DownloadComplete", comment:""),
+                    message: NSString(format: NSLocalizedString("%d okuri-ari %d okuri-nasi", comment:""), info.okuriAri(), info.okuriNasi()) as String)
+
             }
             action.error = { (title, e) in
-                let alert = UIAlertView()
-                alert.title = title
-                alert.message = "\(e.localizedDescription)"
-                alert.addButtonWithTitle("OK")
-                alert.show()
                 vc.close()
-            }
+                self.alert(title, message: e?.localizedDescription ?? "")
 
+            }
             action.call()
             presentViewController(vc, animated: true, completion: nil)
         }
+    }
+
+    // アラートメッセージを表示する
+    private func alert(title: String, message: String) {
+        // FIXME: UIAlertControllerで書き直す
+        let alert = UIAlertView()
+        alert.title = title
+        alert.message = message
+        alert.addButtonWithTitle("OK")
+        alert.show()
     }
 }

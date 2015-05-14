@@ -4,13 +4,12 @@
 // 辞書の文字コードを変換した後などは、再ソートを行なわないと、正しい変換ができない。
 // skkdic-sortコマンドと同等の処理だが、コードレベルでの共通点はない。
 class SortDictionary {
-    private let path : String
-    init(path: String) {
-        self.path = path
+    private let dictionary : LoadLocalDictionary
+    init(dictionary : LoadLocalDictionary) {
+        self.dictionary = dictionary
     }
 
     func call(dest : String) {
-        let dictionary = LoadLocalDictionary(path: path)
         if let file = LocalFile(path: dest) {
             file.writeln(";; okuri-ari entries.")
             for line in sorted(dictionary.okuriAri(), reverse: true) {

@@ -26,4 +26,5 @@
 "%d dictionaries registered" = "%d個の辞書が追加済み";
 "DownloadError" = "ダウンロードに失敗しました";
 "EncodingError" = "未対応の文字エンコーディングです";
-"download progress: %s"  = "ダウンロード進捗: %@";
+"DownloadComplete" = "辞書追加完了";
+"%d okuri-ari %d okuri-nasi" = "送りあり: %d件、送りなし: %d件を追加しました。";

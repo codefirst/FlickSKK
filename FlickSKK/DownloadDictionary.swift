@@ -13,9 +13,18 @@ class DownloadDictionary {
     private let url : String
     private let path : String
 
-    var success : (Void->Void)?
-    var error : ((String,NSError)->Void)?
+    // MARK: - handler
+    // FIXME: delegateにしたほうがiOSっぽいので直したほうがいい?
+    // 辞書追加に成功した際の処理
+    var success : (DictionaryInfo->Void)?
+
+    // 辞書追加でエラーが発生した際の処理
+    var error : ((String, NSError?)->Void)?
+
+    // ダウンロードが進捗した際の処理
     var progress : ((Int64, Int64) -> Void)?
+
+    // MARK: -
 
     init(url : String) {
         self.url = url
@@ -36,9 +45,15 @@ class DownloadDictionary {
                 if let e = self.encodeToUTF8(downloadFile, dest: utf8File) {
                     self.error?(NSLocalizedString("EncodingError", comment:""), e)
                 } else {
+                    // 辞書のロード
+                    let dictionary = LoadLocalDictionary(path: utf8File)
+
                     // 再ソート
-                    SortDictionary(path: utf8File).call(self.path)
-                    self.success?()
+                    SortDictionary(dictionary: dictionary).call(self.path)
+
+                    // 結果のサマリを渡す
+                    let info = DictionaryInfo(dictionary: dictionary)
+                    self.success?(info)
                 }
             },
             onError: { e in
@@ -47,7 +62,7 @@ class DownloadDictionary {
     }
 
     // URLを特定ファイルに保存する。
-    private func save(url : String, path: String, onSuccess : Void -> Void, onError : NSError -> Void) {
+    private func save(url : String, path: String, onSuccess : Void -> Void, onError : NSError? -> Void) {
         Alamofire.download(.GET, url) { (temporaryURL, response) in
             return NSURL.fileURLWithPath(path, isDirectory: false) ?? temporaryURL
         }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
@@ -56,7 +71,11 @@ class DownloadDictionary {
             if let e = error {
                 onError(e)
             } else {
-                onSuccess()
+                if response?.statusCode == 200 {
+                    onSuccess()
+                } else {
+                    onError(nil)
+                }
             }
         }
     }
