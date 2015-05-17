@@ -32,27 +32,45 @@ class SKKDictionary : NSObject {
         }
     }
 
+    class func additionalDictionaries() -> [String] {
+        var error : NSError?
+        let manager = NSFileManager.defaultManager()
+        let path = DictionarySettings.additionalDictionaryPath()
+        let xs = manager.contentsOfDirectoryAtPath(path, error: &error)
+        if let e = error {
+            NSLog("%@", e.userInfo ?? [:])
+            return []
+        } else {
+            return (xs ?? []).map {
+                return DictionarySettings.additionalDictionaryPath().stringByAppendingPathComponent($0 as! String)
+            }
+        }
+    }
+
     override init() {
         super.init()
         loader.load {
-            let dictionary =
-                self.cache.loadLocalDicitonary(DictionarySettings.defaultDicitonaryPath()) {
-                    return SKKLocalDictionaryFile(path: $0)
-                }
+            let dictionary = self.cache.loadLocalDicitonary(DictionarySettings.defaultDicitonaryPath()) {
+                SKKLocalDictionaryFile(path: $0)
+            }
             self.userDictionary  = self.cache.loadUserDicitonary(DictionarySettings.defaultUserDictionaryPath()) {
-                    return SKKUserDictionaryFile(path: $0)
+                SKKUserDictionaryFile(path: $0)
+            }
+            self.learnDictionary = self.cache.loadUserDicitonary(DictionarySettings.defaultLearnDictionaryPath()) {
+                SKKUserDictionaryFile(path: $0)
+            }
+
+            self.partialDictionary = self.cache.loadUserDicitonary(DictionarySettings.defaultPartialDictionaryPath()){
+                SKKUserDictionaryFile(path: $0)
+            }
+
+            let xs : [SKKDictionaryFile] = SKKDictionary.additionalDictionaries().map { path in
+                self.cache.loadUserDicitonary(path) {
+                    SKKLocalDictionaryFile(path: $0)
                 }
-            self.learnDictionary =
-                self.cache.loadUserDicitonary(DictionarySettings.defaultLearnDictionaryPath()) {
-                return SKKUserDictionaryFile(path: $0)
             }
 
-            self.partialDictionary =
-                self.cache.loadUserDicitonary(DictionarySettings.defaultPartialDictionaryPath()){
-                    return SKKUserDictionaryFile(path: $0)
-            }
-
-            self.dictionaries = [ self.learnDictionary!, self.userDictionary!, dictionary ]
+            self.dictionaries = [ self.learnDictionary!, self.userDictionary!, dictionary ] + xs
             self.dynamicDictionaries = [ self.partialDictionary!, self.learnDictionary!, self.userDictionary! ]
         }
     }

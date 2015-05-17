@@ -21,6 +21,7 @@
         NSString *string = [NSString stringWithCString:line.c_str() encoding: NSUTF8StringEncoding];
         block(string);
     }
+    ifs.close();
 }
 
 @end

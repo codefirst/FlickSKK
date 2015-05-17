@@ -1,3 +1,15 @@
+// SKK辞書の各エントリをパースする。
+//
+// SKKの各エントリは以下のようになっている。
+//
+//   わb /詫;謝罪する/侘;侘び寂び/
+//
+// ここから、「詫」「侘」を取り出す。
+//
+// この際、以下の処理を行なう。
+//
+//  - 現在、サポートされていないため、アノテーションを除去する
+//  - "/" といった登録できない文字のエスケープ解除
 class EntryParser {
     private let entry : String
 
@@ -7,11 +19,8 @@ class EntryParser {
 
     // 登録されている単語一覧を取得
     func words() -> [String] {
-        let xs = self.entry.pathComponents
-        if xs.count <= 2 {
-            return []
-        } else {
-            return Array(xs[1...xs.count-2]).map { x in self.unescape(x) }
+        return rawWords().map {
+            self.unescape(self.stripAnnotation($0))
         }
     }
 
@@ -53,10 +62,30 @@ class EntryParser {
         }
     }
 
+    // 単語ごとに分割する
+    func rawWords() -> [String] {
+        let xs = self.entry.pathComponents
+        if xs.count <= 2 {
+            return []
+        } else {
+            return Array(xs[1...xs.count-2])
+        }
+    }
+
+    // エスケープの解除
     private func unescape(str : String) -> String {
         return EscapeStrings.reduce(str) { (str, x) in
             let (from, to) = x
             return str.stringByReplacingOccurrencesOfString(to, withString: from, options: nil, range: nil)
+        }
+    }
+
+    // アノテーションの除去
+    private func stripAnnotation(str : String) -> String {
+        if let index = find(str, ";") {
+            return str.substringToIndex(index)
+        } else {
+            return str
         }
     }
 }

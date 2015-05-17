@@ -3,6 +3,10 @@ platform :ios, '8.0'
 
 use_frameworks!
 
+target 'FlickSKK' do
+  pod 'Alamofire'
+end
+
 target 'FlickSKKTests' do
   pod 'Quick'
   pod 'Nimble'

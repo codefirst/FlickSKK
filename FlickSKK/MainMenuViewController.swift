@@ -21,6 +21,9 @@ class MainMenuViewController: SafeTableViewController {
             }]),
             // FIXME: 設定項目をなんか増やす
             // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
+            (title: nil, rows: [self.item("Additional Dictionary") {
+                weakSelf?.gotoAdditionalDictionary()
+            }]),
             (title: nil, rows: [self.item("User Dictionary") {
                 weakSelf?.gotoUserDictionary()
             }]),
@@ -91,6 +94,10 @@ class MainMenuViewController: SafeTableViewController {
 
     func gotoSettings() {
 
+    }
+
+    func gotoAdditionalDictionary() {
+        navigationController?.pushViewController(AdditionalDictionaryViewController(), animated: true)
     }
 
     func gotoUserDictionary() {
