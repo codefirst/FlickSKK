@@ -54,7 +54,7 @@ class HeadUpProgressViewController: UIViewController {
         }
     }
 
-    func close() {
-        dismissViewControllerAnimated(true, completion: nil)
+    func close(completion: (() -> Void)? = nil) {
+        dismissViewControllerAnimated(true, completion: completion)
     }
 }

@@ -77,17 +77,18 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
                 vc.progress = Float(current) / Float(total)
             }
             action.success = { info in
-                vc.close()
-                self.navigationController?.popViewControllerAnimated(true)
-                self.done()
-                self.alert(NSLocalizedString("DownloadComplete", comment:""),
-                    message: NSString(format: NSLocalizedString("%d okuri-ari %d okuri-nasi", comment:""), info.okuriAri(), info.okuriNasi()) as String)
-
+                vc.close {
+                    self.alert(NSLocalizedString("DownloadComplete", comment:""),
+                        message: NSString(format: NSLocalizedString("%d okuri-ari %d okuri-nasi", comment:""), info.okuriAri(), info.okuriNasi()) as String) {
+                            self.navigationController?.popViewControllerAnimated(true)
+                            self.done()
+                    }
+                }
             }
             action.error = { (title, e) in
-                vc.close()
-                self.alert(title, message: e?.localizedDescription ?? "")
-
+                vc.close {
+                    self.alert(title, message: e?.localizedDescription ?? "")
+                }
             }
             action.call()
             presentViewController(vc, animated: true, completion: nil)
@@ -95,12 +96,9 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     }
 
     // アラートメッセージを表示する
-    private func alert(title: String, message: String) {
-        // FIXME: UIAlertControllerで書き直す
-        let alert = UIAlertView()
-        alert.title = title
-        alert.message = message
-        alert.addButtonWithTitle("OK")
-        alert.show()
+    private func alert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        ac.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: { _ in completion?() }))
+        presentViewController(ac, animated: true, completion: nil)
     }
 }
