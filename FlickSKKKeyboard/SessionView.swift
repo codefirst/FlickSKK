@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import NorthLayout
 
 private let kCellID = "CellID"
 
@@ -62,7 +62,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         let border = UIView().tap { (v: UIView) in
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
-        let autolayout = self.autolayoutFormat(
+        let autolayout = self.northLayoutFormat(
             ["onepx": 1.0 / UIScreen.mainScreen().scale],
             ["b": border])
         autolayout("H:|[b]|")
@@ -197,7 +197,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
 
-        let autolayout = self.autolayoutFormat(
+        let autolayout = self.northLayoutFormat(
             ["p": 4, "onepx": 1.0 / UIScreen.mainScreen().scale],
             ["l": self.textLabel, "b": border])
         autolayout("H:|[b(==onepx)]-p-[l]-p-|")

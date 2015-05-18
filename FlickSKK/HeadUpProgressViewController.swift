@@ -1,4 +1,5 @@
 import UIKit
+import NorthLayout
 
 // プログレスバーを全面に半透明で表示する。
 //
@@ -31,7 +32,7 @@ class HeadUpProgressViewController: UIViewController {
         
         view.backgroundColor = UIColor(white: 0, alpha: 0.5)
 
-        let autolayout = view.autolayoutFormat(["p":8, "h" : 10], ["progress": progressView])
+        let autolayout = view.northLayoutFormat(["p":8, "h" : 10], ["progress": progressView])
         autolayout("H:|-p-[progress]-p-|")
 
         // 画面中央に表示する

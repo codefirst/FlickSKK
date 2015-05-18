@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import NorthLayout
 
 
 class KeyPad : UIView {
@@ -56,7 +57,7 @@ class KeyPad : UIView {
             "l": keyButton(keys[11]),
         ]
 
-        let autolayoutInKeyPad = self.autolayoutFormat(metrics, views)
+        let autolayoutInKeyPad = self.northLayoutFormat(metrics, views)
         autolayoutInKeyPad("H:|[a][b(==a)][c(==a)]|")
         autolayoutInKeyPad("H:|[d(==a)][e(==a)][f(==a)]|")
         autolayoutInKeyPad("H:|[g(==a)][h(==a)][i(==a)]|")

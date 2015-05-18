@@ -121,6 +121,7 @@
 		22C4D589D09BE72A2BB5C670 /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		80E568DB1AA358920029DDBD /* flickskk_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E568DA1AA358920029DDBD /* flickskk_white.png */; };
 		80EA0A2A1AAB3C1300D7148D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 80EA0A291AAB3C1300D7148D /* Settings.bundle */; };
+		E130AA2B5CE15C1B1F71A87E /* Pods_FlickSKKKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C68278BF8014A23AD739ED6E /* Pods_FlickSKKKeyboard.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EA075F8019DED8C3009AEF9F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B59819D80AF3007B6636 /* Utilities.swift */; };
 		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
 		EA2D4D7F19E173EC00607C35 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
@@ -278,10 +279,13 @@
 		3927343C314CA30425B06CCA /* Pods-FlickSKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.release.xcconfig"; sourceTree = "<group>"; };
 		3F8E386C47EFBEA9835F2AFB /* Pods_FlickSKKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D184B1D0EAEC5D0C5E64CD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		429C09ACD62B218CE757E301 /* Pods-FlickSKKKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard.release.xcconfig"; sourceTree = "<group>"; };
 		5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C3AE9174E82C4214EA41CCE /* Pods-FlickSKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.debug.xcconfig"; sourceTree = "<group>"; };
 		80E568DA1AA358920029DDBD /* flickskk_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickskk_white.png; sourceTree = "<group>"; };
 		80EA0A291AAB3C1300D7148D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		889CF047BFF9BAE353C6FEBB /* Pods-FlickSKKKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
+		C68278BF8014A23AD739ED6E /* Pods_FlickSKKKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
 		EA349A431A903BDE00084BDE /* Memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +353,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E130AA2B5CE15C1B1F71A87E /* Pods_FlickSKKKeyboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +367,8 @@
 				3927343C314CA30425B06CCA /* Pods-FlickSKK.release.xcconfig */,
 				3758E2CE5E666333313C17EA /* Pods-FlickSKKTests.debug.xcconfig */,
 				0BD1525BEE3562FC7DB87AF9 /* Pods-FlickSKKTests.release.xcconfig */,
+				889CF047BFF9BAE353C6FEBB /* Pods-FlickSKKKeyboard.debug.xcconfig */,
+				429C09ACD62B218CE757E301 /* Pods-FlickSKKKeyboard.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -604,6 +611,7 @@
 				40D184B1D0EAEC5D0C5E64CD /* Pods.framework */,
 				5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */,
 				3F8E386C47EFBEA9835F2AFB /* Pods_FlickSKKTests.framework */,
+				C68278BF8014A23AD739ED6E /* Pods_FlickSKKKeyboard.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -834,9 +842,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAD4B59419D5CB8A007B6636 /* Build configuration list for PBXNativeTarget "FlickSKKKeyboard" */;
 			buildPhases = (
+				7BE759E949577AFF355E19DC /* Check Pods Manifest.lock */,
 				EAD4B58519D5CB8A007B6636 /* Sources */,
 				EAD4B58619D5CB8A007B6636 /* Frameworks */,
 				EAD4B58719D5CB8A007B6636 /* Resources */,
+				3FFC4AB8699CC3AF97F3080D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -963,6 +973,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		3FFC4AB8699CC3AF97F3080D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		752D97DA5F4A7A7532E51006 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -979,6 +1004,21 @@
 			showEnvVarsInLog = 0;
 		};
 		7B73828051B3D1AB9FECADDC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7BE759E949577AFF355E19DC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1439,6 +1479,7 @@
 		};
 		EAD4B59519D5CB8A007B6636 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 889CF047BFF9BAE353C6FEBB /* Pods-FlickSKKKeyboard.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
@@ -1460,6 +1501,7 @@
 		};
 		EAD4B59619D5CB8A007B6636 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 429C09ACD62B218CE757E301 /* Pods-FlickSKKKeyboard.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
