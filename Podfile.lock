@@ -1,16 +1,19 @@
 PODS:
   - Alamofire (1.2.1)
   - Nimble (0.4.2)
+  - NorthLayout (0.1.0)
   - Quick (0.3.1)
 
 DEPENDENCIES:
   - Alamofire
   - Nimble
+  - NorthLayout
   - Quick
 
 SPEC CHECKSUMS:
   Alamofire: 1acfdf179aff68b41a48dff70c1ac7fa263e2bcb
   Nimble: 49b7a7da8919f42823d37c6d68cc6d15a7009f32
+  NorthLayout: f1a1753ef83ff5cd363c9fa92d14e72c97a485c9
   Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
 
 COCOAPODS: 0.37.1

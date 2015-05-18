@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NorthLayout
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
@@ -198,7 +199,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 "right": rightControl,
                 "keypad": keypad,
             ]
-            var autolayout = self.keypadAndControlsView.autolayoutFormat(metrics, views)
+            var autolayout = self.keypadAndControlsView.northLayoutFormat(metrics, views)
             autolayout("H:|[left][keypad][right(==left)]|")
             autolayout("V:|[left]|")
             autolayout("V:|[keypad]|")
@@ -244,7 +245,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             "progress": loadingProgressView,
             "keypadAndControls": keypadAndControlsView,
         ]
-        let autolayout = self.inputView.autolayoutFormat(metrics, views)
+        let autolayout = self.inputView.northLayoutFormat(metrics, views)
         autolayout("H:|[sessionView]|")
         autolayout("H:|[progress]")
         autolayout("H:|[keypadAndControls]|")
@@ -265,7 +266,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         ]
 
         return UIView().tap { (c:UIView) in
-            let autolayout = c.autolayoutFormat(self.metrics, views)
+            let autolayout = c.northLayoutFormat(self.metrics, views)
             autolayout("H:|[a]|")
             autolayout("H:|[b]|")
             autolayout("H:|[c]|")

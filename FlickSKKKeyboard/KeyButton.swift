@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import NorthLayout
 
 let KeyButtonHighlightedColor = UIColor(hue: 0.10, saturation: 0.07, brightness: 0.96, alpha: 1.0)
 
@@ -33,7 +34,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
             iv.contentMode = .ScaleAspectFit
 
-            let autolayout = self.autolayoutFormat(self.metrics, ["iv": iv])
+            let autolayout = self.northLayoutFormat(self.metrics, ["iv": iv])
             autolayout("H:|-p-[iv]-p-|")
             autolayout("V:|-p-[iv]-p-|")
         }
@@ -106,12 +107,12 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         switch key {
         case .Seq(_, showSeqs: true):
-            let autolayout = self.autolayoutFormat(metrics, ["label": label, "sequence": sequenceLabel])
+            let autolayout = self.northLayoutFormat(metrics, ["label": label, "sequence": sequenceLabel])
             autolayout("H:|[label]|")
             autolayout("H:|[sequence]|")
             autolayout("V:[label]-2-[sequence]-2-|")
         default:
-            let autolayout = self.autolayoutFormat(metrics, ["label": label])
+            let autolayout = self.northLayoutFormat(metrics, ["label": label])
             autolayout("H:|[label]|")
             autolayout("V:|[label]|")
         }
