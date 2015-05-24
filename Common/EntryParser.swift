@@ -17,6 +17,14 @@ class EntryParser {
         self.entry = entry
     }
 
+    func title() -> String? {
+        if let n = find(self.entry, " ") {
+            return self.entry.substringToIndex(n)
+        } else {
+            return nil
+        }
+    }
+
     // 登録されている単語一覧を取得
     func words() -> [String] {
         return rawWords().map {
