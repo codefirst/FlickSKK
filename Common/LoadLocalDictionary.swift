@@ -44,6 +44,9 @@ class LoadLocalDictionary {
             // skip comment
             if s.hasPrefix(";") { return }
 
+            // skip empty line
+            if s == "" { return }
+
             if isOkuriAri {
                 self.ari.addObject(line)
             } else {

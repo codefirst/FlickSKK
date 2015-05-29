@@ -48,12 +48,18 @@ class DownloadDictionary {
                     // 辞書のロード
                     let dictionary = LoadLocalDictionary(path: utf8File)
 
-                    // 再ソート
-                    SortDictionary(dictionary: dictionary).call(self.path)
+                    // 妥当性のチェック
+                    let validate = ValidateDictionary(dictionary: dictionary)
+                    if validate.call() {
+                        // 再ソート
+                        SortDictionary(dictionary: dictionary).call(self.path)
 
-                    // 結果のサマリを渡す
-                    let info = DictionaryInfo(dictionary: dictionary)
-                    self.success?(info)
+                        // 結果のサマリを渡す
+                        let info = DictionaryInfo(dictionary: dictionary)
+                        self.success?(info)
+                    } else {
+                        self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil)
+                    }
                 }
             },
             onError: { e in
