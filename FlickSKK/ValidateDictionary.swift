@@ -3,9 +3,13 @@
 // 厳密なチェックはできないので、FlickSKK内で扱えるかどうかを簡易的にチェックする
 class ValidateDictionary {
     private let dictionary : LoadLocalDictionary
+    private let total : Int
+    private var current : Int = 0
+    var progress : ((Int, Int) -> Void)?
 
     init(dictionary : LoadLocalDictionary) {
         self.dictionary = dictionary
+        self.total = self.dictionary.count()
     }
 
     func call() -> Bool {
@@ -18,7 +22,13 @@ class ValidateDictionary {
             if entry.title() == nil || entry.words() == [] {
                 return false
             }
+            updateProgress()
         }
         return true
+    }
+
+    private func updateProgress() {
+        current += 1
+        self.progress?(current, total)
     }
 }

@@ -62,4 +62,8 @@ class LoadLocalDictionary {
     func okuriNasi() -> NSArray {
         return nasi
     }
+
+    func count() -> Int {
+        return ari.count + nasi.count
+    }
 }

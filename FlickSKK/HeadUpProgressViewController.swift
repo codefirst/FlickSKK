@@ -7,13 +7,16 @@ import NorthLayout
 // それほどサイズが大きい辞書をDLしないだろうし、たぶん問題になることはすくないはず。
 class HeadUpProgressViewController: UIViewController {
     private let progressView : UIProgressView
+    private let label = UILabel()
 
     var progress : Float? {
         didSet {
             self.updateProgress()
         }
     }
-    
+
+    var text : String?
+
     init() {
         progressView = UIProgressView()
         
@@ -32,11 +35,19 @@ class HeadUpProgressViewController: UIViewController {
         
         view.backgroundColor = UIColor(white: 0, alpha: 0.5)
 
-        let autolayout = view.northLayoutFormat(["p":8, "h" : 10], ["progress": progressView])
+        label.textColor = UIColor.whiteColor()
+        label.textAlignment = .Center
+
+        let autolayout = view.northLayoutFormat(["p":8, "h" : 10],
+            ["progress": progressView, "label" : label])
         autolayout("H:|-p-[progress]-p-|")
+        autolayout("H:|-p-[label]-p-|")
 
         // 画面中央に表示する
         self.view.addConstraint(NSLayoutConstraint(item: progressView, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
+
+        // ラベルをプログレスバーのちょっと下に表示する
+        self.view.addConstraint(NSLayoutConstraint(item: label, attribute: .Top, relatedBy: .Equal, toItem: progressView, attribute: .Bottom, multiplier: 1, constant: 10))
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -51,6 +62,7 @@ class HeadUpProgressViewController: UIViewController {
     private func updateProgress() {
         // メインスレッドで更新しないとプログレスバーが反映されない
         dispatch_async(dispatch_get_main_queue()) {
+            self.label.text = self.text
             self.progressView.setProgress(self.progress ?? 0.0, animated: true)
         }
     }

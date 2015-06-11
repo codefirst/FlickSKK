@@ -29,3 +29,5 @@
 "InvalidDictionary" = "辞書の形式が正しくありません";
 "DownloadComplete" = "辞書追加完了";
 "%d okuri-ari %d okuri-nasi" = "送りあり: %d件、送りなし: %d件を追加しました。";
+"Downloading" = "ダウンロード中";
+"Validating" = "辞書検証中";
