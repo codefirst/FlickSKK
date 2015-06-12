@@ -100,7 +100,7 @@ class SKKDictionary : NSObject {
     // 単語を登録する
     func register(normal : String, okuri: String?, kanji: String) {
         userDictionary?.register(normal, okuri: okuri, kanji: kanji)
-        loader.async {
+        async {
             self.cache.update(DictionarySettings.defaultUserDictionaryPath()) {
                 self.userDictionary?.serialize()
             }
@@ -110,7 +110,7 @@ class SKKDictionary : NSObject {
     // 確定結果を学習する
     func learn(normal : String, okuri: String?, kanji: String) {
         learnDictionary?.register(normal, okuri: okuri, kanji: kanji)
-        loader.async {
+        async {
             self.cache.update(DictionarySettings.defaultLearnDictionaryPath()) {
                 self.learnDictionary?.serialize()
             }
@@ -120,7 +120,7 @@ class SKKDictionary : NSObject {
     // InputModeChangeによる確定を学習する
     func partial(kana: String, okuri: String?, kanji: String) {
         partialDictionary?.register(kana, okuri: okuri, kanji: kanji)
-        loader.async {
+        async {
             self.cache.update(DictionarySettings.defaultPartialDictionaryPath()) {
                 self.partialDictionary?.serialize()
             }

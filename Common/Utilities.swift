@@ -27,6 +27,10 @@ extension UIButton {
     }
 }
 
+// 非同期に処理を実行する
+func async(closure: () -> ()) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), closure)
+}
 
 func dictionaryWithKeyValues<K,V>(pairs: [(K,V)]) -> [K:V] {
     var d: [K:V] = [:]
