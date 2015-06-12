@@ -45,19 +45,21 @@ class DownloadDictionary {
                 if let e = self.encodeToUTF8(downloadFile, dest: utf8File) {
                     self.error?(NSLocalizedString("EncodingError", comment:""), e)
                 } else {
-                    // 辞書のロード
-                    let dictionary = LoadLocalDictionary(path: utf8File)
+                    // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
+                    async {
+                        let dictionary = LoadLocalDictionary(path: utf8File)
 
-                    // 妥当性のチェック
-                    if self.validate(dictionary) {
-                        // 再ソート
-                        SortDictionary(dictionary: dictionary).call(self.path)
+                        // 妥当性のチェック
+                        if self.validate(dictionary) {
+                            // 再ソート
+                            SortDictionary(dictionary: dictionary).call(self.path)
 
-                        // 結果のサマリを渡す
-                        let info = DictionaryInfo(dictionary: dictionary)
-                        self.success?(info)
-                    } else {
-                        self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil)
+                            // 結果のサマリを渡す
+                            let info = DictionaryInfo(dictionary: dictionary)
+                            self.success?(info)
+                        } else {
+                            self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil)
+                        }
                     }
                 }
             },

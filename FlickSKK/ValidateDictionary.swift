@@ -29,6 +29,8 @@ class ValidateDictionary {
 
     private func updateProgress() {
         current += 1
-        self.progress?(current, total)
+        if current % 100 == 0 {
+            self.progress?(current, total)
+        }
     }
 }

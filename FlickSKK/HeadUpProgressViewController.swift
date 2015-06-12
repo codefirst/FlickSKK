@@ -11,7 +11,9 @@ class HeadUpProgressViewController: UIViewController {
 
     var progress : Float? {
         didSet {
-            self.updateProgress()
+            if oldValue != progress {
+                self.updateProgress()
+            }
         }
     }
 
@@ -41,13 +43,11 @@ class HeadUpProgressViewController: UIViewController {
         let autolayout = view.northLayoutFormat(["p":8, "h" : 10],
             ["progress": progressView, "label" : label])
         autolayout("H:|-p-[progress]-p-|")
+        autolayout("V:[progress]-p-[label]")
         autolayout("H:|-p-[label]-p-|")
 
         // 画面中央に表示する
         self.view.addConstraint(NSLayoutConstraint(item: progressView, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
-
-        // ラベルをプログレスバーのちょっと下に表示する
-        self.view.addConstraint(NSLayoutConstraint(item: label, attribute: .Top, relatedBy: .Equal, toItem: progressView, attribute: .Bottom, multiplier: 1, constant: 10))
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,6 +64,15 @@ class HeadUpProgressViewController: UIViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.label.text = self.text
             self.progressView.setProgress(self.progress ?? 0.0, animated: true)
+        }
+    }
+
+    // アニメーションなしで進捗をリセットする
+    func reset() {
+        // メインスレッドで更新しないとプログレスバーが反映されない
+        dispatch_async(dispatch_get_main_queue()) {
+            self.progressView.setProgress(0.0, animated: false)
+            self.progress = 0.0
         }
     }
 
