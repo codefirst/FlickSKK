@@ -73,8 +73,11 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
         if canDownload() {
             let vc = HeadUpProgressViewController()
             let action = DownloadDictionary(url: self.urlField.text)
-            action.progress = { (current, total) in
-                vc.progress = Float(current) / Float(total)
+
+            var oldTitle : String? = nil
+            action.progress = { (title, progress) in
+                vc.text = title
+                vc.progress = progress
             }
             action.success = { info in
                 vc.close {

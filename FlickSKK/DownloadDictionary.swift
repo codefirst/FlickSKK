@@ -22,7 +22,7 @@ class DownloadDictionary {
     var error : ((String, NSError?)->Void)?
 
     // ダウンロードが進捗した際の処理
-    var progress : ((Int64, Int64) -> Void)?
+    var progress : ((String, Float) -> Void)?
 
     // MARK: -
 
@@ -45,20 +45,21 @@ class DownloadDictionary {
                 if let e = self.encodeToUTF8(downloadFile, dest: utf8File) {
                     self.error?(NSLocalizedString("EncodingError", comment:""), e)
                 } else {
-                    // 辞書のロード
-                    let dictionary = LoadLocalDictionary(path: utf8File)
+                    // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
+                    async {
+                        let dictionary = LoadLocalDictionary(path: utf8File)
 
-                    // 妥当性のチェック
-                    let validate = ValidateDictionary(dictionary: dictionary)
-                    if validate.call() {
-                        // 再ソート
-                        SortDictionary(dictionary: dictionary).call(self.path)
+                        // 妥当性のチェック
+                        if self.validate(dictionary) {
+                            // 再ソート
+                            SortDictionary(dictionary: dictionary).call(self.path)
 
-                        // 結果のサマリを渡す
-                        let info = DictionaryInfo(dictionary: dictionary)
-                        self.success?(info)
-                    } else {
-                        self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil)
+                            // 結果のサマリを渡す
+                            let info = DictionaryInfo(dictionary: dictionary)
+                            self.success?(info)
+                        } else {
+                            self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil)
+                        }
                     }
                 }
             },
@@ -72,7 +73,8 @@ class DownloadDictionary {
         Alamofire.download(.GET, url) { (temporaryURL, response) in
             return NSURL.fileURLWithPath(path, isDirectory: false) ?? temporaryURL
         }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
-            self.progress?(totalBytesRead, totalBytesExpectedToRead)
+            let progress = Float(totalBytesRead) / Float(totalBytesExpectedToRead)
+            self.progress?(NSLocalizedString("Downloading", comment:""), progress / 2)
         }.response { (request, response, _, error) in
             if let e = error {
                 onError(e)
@@ -106,5 +108,16 @@ class DownloadDictionary {
         return NSString(contentsOfFile: path, encoding: NSJapaneseEUCStringEncoding, error: error) ??
             NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
 
+    }
+
+    // 辞書の検証をする
+    // 検証の進捗状況は逐次表示する
+    private func validate(dictionary : LoadLocalDictionary) -> Bool {
+        let validate = ValidateDictionary(dictionary: dictionary)
+        validate.progress = { (current, total) in
+            let progress = Float(current) / Float(total)
+            self.progress?(NSLocalizedString("Validating", comment:""), progress / 2 + 0.5)
+        }
+        return validate.call()
     }
 }
