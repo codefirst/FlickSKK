@@ -22,7 +22,7 @@ class DownloadDictionary {
     var error : ((String, NSError?)->Void)?
 
     // ダウンロードが進捗した際の処理
-    var progress : ((String, Int64, Int64) -> Void)?
+    var progress : ((String, Float) -> Void)?
 
     // MARK: -
 
@@ -73,7 +73,8 @@ class DownloadDictionary {
         Alamofire.download(.GET, url) { (temporaryURL, response) in
             return NSURL.fileURLWithPath(path, isDirectory: false) ?? temporaryURL
         }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
-            self.progress?(NSLocalizedString("Downloading", comment:""), totalBytesRead, totalBytesExpectedToRead)
+            let progress = Float(totalBytesRead) / Float(totalBytesExpectedToRead)
+            self.progress?(NSLocalizedString("Downloading", comment:""), progress / 2)
         }.response { (request, response, _, error) in
             if let e = error {
                 onError(e)
@@ -114,8 +115,8 @@ class DownloadDictionary {
     private func validate(dictionary : LoadLocalDictionary) -> Bool {
         let validate = ValidateDictionary(dictionary: dictionary)
         validate.progress = { (current, total) in
-            self.progress?(NSLocalizedString("Validating", comment:""), Int64(current), Int64(total))
-            return
+            let progress = Float(current) / Float(total)
+            self.progress?(NSLocalizedString("Validating", comment:""), progress / 2 + 0.5)
         }
         return validate.call()
     }

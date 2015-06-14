@@ -11,9 +11,7 @@ class HeadUpProgressViewController: UIViewController {
 
     var progress : Float? {
         didSet {
-            if oldValue != progress {
-                self.updateProgress()
-            }
+            self.updateProgress()
         }
     }
 
@@ -64,15 +62,6 @@ class HeadUpProgressViewController: UIViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.label.text = self.text
             self.progressView.setProgress(self.progress ?? 0.0, animated: true)
-        }
-    }
-
-    // アニメーションなしで進捗をリセットする
-    func reset() {
-        // メインスレッドで更新しないとプログレスバーが反映されない
-        dispatch_async(dispatch_get_main_queue()) {
-            self.progressView.setProgress(0.0, animated: false)
-            self.progress = 0.0
         }
     }
 
