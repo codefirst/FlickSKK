@@ -12,4 +12,5 @@ end
 target 'FlickSKKTests' do
   pod 'Quick'
   pod 'Nimble'
+  pod 'NorthLayout'
 end
