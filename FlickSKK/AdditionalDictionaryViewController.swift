@@ -5,15 +5,7 @@ import UIKit
 //
 // 辞書の更新は、URLをどこに保持するかが難しいので、現バージョンは対応しない。
 class AdditionalDictionaryViewController: SafeTableViewController {
-    private var entries : [String] = []
-
-    private let dictionaries : [(title: String, url: String)] = [
-        (title: "人名辞書", url: "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"),
-        (title: "郵便番号辞書", url: "http://openlab.jp/skk/skk/dic/zipcode/SKK-JISYO.zipcode"),
-        (title: "沖縄辞書", url: "http://openlab.jp/skk/skk/dic/SKK-JISYO.okinawa"),
-        (title: "絵文字", url: "https://raw.githubusercontent.com/uasi/skk-emoji-jisyo/master/SKK-JISYO.emoji.utf8"),
-        (title: "その他(URL指定)", url: "")
-    ]
+    private var entries : [AdditionalDictionaries.Entry] = []
 
     init() {
         super.init(style: .Grouped)
@@ -36,7 +28,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
     // MARK: - Entries
 
     private func reloadEntries() {
-        self.entries = SKKDictionary.additionalDictionaries()
+        self.entries = AdditionalDictionaries().enabledDictionaries()
          self.tableView.reloadData()
     }
 
@@ -46,31 +38,14 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     // MARK: - Table View
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3 // entries + quickadd + link
-    }
-
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0: return NSLocalizedString("HowToAddDictionary", comment: "")
-        case 1: return NSLocalizedString("UsefulDictionary", comment: "")
-        case 2: return NSLocalizedString("LinkToOpenlab", comment: "")
-        default: return nil
-        }
-    }
-
-    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch section {
-        case 0: return NSString(format: NSLocalizedString("%d dictionaries registered", comment: ""), self.entries.count) as String
-        default: return nil
-        }
+        return 2 // entries + add
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return self.entries.count
-        case 1: return self.dictionaries.count
-        case 2: return 1
-        default: return 0
+        case 1: return 1
+        default: fatalError("section > 1 has not been implemented")
         }
     }
 
@@ -81,13 +56,12 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         switch indexPath.section {
         case 0:
             cell.selectionStyle = .None
-            cell.textLabel?.text = self.entries[indexPath.row].lastPathComponent
+            cell.textLabel?.text = self.entries[indexPath.row].title
         case 1:
-            cell.textLabel?.text = self.dictionaries[indexPath.row].title
-        case 2:
-            cell.textLabel?.text = NSLocalizedString("OpenSKKDictWiki", comment: "")
+            cell.textLabel?.text = NSLocalizedString("Add New Dictionary", comment: "")
+            cell.accessoryType = .DisclosureIndicator
         default:
-            fatalError("section > 2 has not been implemented")
+            fatalError("section > 1 has not been implemented")
         }
 
         return cell
@@ -98,12 +72,9 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
         switch indexPath.section {
         case 1:
-            self.navigationController?.pushViewController(DownloadDictionaryViewController(url: dictionaries[indexPath.row].url,
-                done: {
+            self.navigationController?.pushViewController(SelectDictionaryViewController(             done: {
                     self.reloadEntries()
             }), animated: true)
-        case 2:
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://openlab.ring.gr.jp/skk/wiki/wiki.cgi?page=SKK%BC%AD%BD%F1")!)
         default:
             ()
         }
@@ -111,8 +82,9 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 && editingStyle == .Delete {
-            let path = self.entries[indexPath.row]
-            NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+            if let path = self.entries[indexPath.row].path {
+                NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+            }
             self.reloadEntries()
         }
     }
