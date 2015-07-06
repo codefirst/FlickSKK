@@ -13,20 +13,12 @@ class MainMenuViewController: SafeTableViewController {
     lazy var sections : [(title: String?, rows: [row])] = {
         weak var weakSelf = self
         return [
-            (title: nil, rows: [self.item("Setup") {
-                weakSelf?.gotoSetup()
-            }]),
-            (title: nil, rows: [self.item("How to use") {
-                weakSelf?.gotoHowToUse()
-            }]),
-            // FIXME: 設定項目をなんか増やす
-            // (title: nil, rows: [(title: NSLocalizedString("Settings", comment: ""), action: { weakSelf?.gotoSettings(); return})]),
-            (title: nil, rows: [self.item("Additional Dictionary") {
-                weakSelf?.gotoAdditionalDictionary()
-            }]),
-            (title: nil, rows: [self.item("User Dictionary") {
-                weakSelf?.gotoUserDictionary()
-            }]),
+            (title: nil, rows: [
+                self.item("Setup") { weakSelf?.gotoSetup() },
+                self.item("How to use") { weakSelf?.gotoHowToUse() }]),
+            (title: nil, rows: [
+                self.item("User Dictionary") { weakSelf?.gotoUserDictionary() },
+                self.item("Additional Dictionary") { weakSelf?.gotoAdditionalDictionary() }]),
             (title: nil, rows: [self.item("Reset Learn Dictionary", accessoryType: .None) {
                 weakSelf?.reset(); return
             }]),
