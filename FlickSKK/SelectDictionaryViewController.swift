@@ -10,6 +10,7 @@ class SelectDictionaryViewController: SafeTableViewController {
     init(done : Void -> Void) {
         self.done = done
         super.init(style: .Grouped)
+        self.title =  NSLocalizedString("Add New Dictionary", comment: "")
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -23,7 +24,7 @@ class SelectDictionaryViewController: SafeTableViewController {
 
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return NSLocalizedString("Suggested Dictionary", comment: "")
+        case 0: return ""
         case 1: return NSLocalizedString("Other Dictionary", comment: "")
         default: fatalError("section > 1 has not been implemented")
         }

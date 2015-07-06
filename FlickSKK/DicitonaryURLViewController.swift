@@ -11,6 +11,7 @@ class DictionaryURLViewController : SafeTableViewController, UITextFieldDelegate
     init(done : String -> Void) {
         self.done = done
         super.init(style: .Grouped)
+        self.title = NSLocalizedString("Specify URL", comment: "")
         self.doneButton.enabled = canDownload()
         self.navigationItem.rightBarButtonItem = doneButton
     }
