@@ -17,8 +17,8 @@
 "Reset" = "リセット";
 "EnterWordRegister" = "▼単語登録";
 "Additional Dictionary" = "追加辞書";
-"No dictionaries" = "ダウンロード済み辞書はありません";
-"EnableDictionaries" = "ダウンロード済み辞書";
+"No dictionaries" = "追加の辞書はありません";
+"%d dictionaries is enabled" = "%d個の辞書を追加済み";
 "AvailableDictionaries" = "辞書をダウンロード";
 "URL" = "URL";
 "Download" = "追加";

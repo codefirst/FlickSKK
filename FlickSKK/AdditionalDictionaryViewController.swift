@@ -41,17 +41,12 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     // MARK: - Table View
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2 // entries + quickadd + link
+        return 2 // entries + quickadd
     }
 
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
-            if self.entries.isEmpty {
-                return NSLocalizedString("No dictionaries", comment: "")
-            } else {
-                return NSLocalizedString("EnableDictionaries", comment: "")
-            }
+        case 0: return nil
         case 1: return NSLocalizedString("AvailableDictionaries", comment: "")
         default: return nil
         }
@@ -59,7 +54,12 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
-        case 0: return nil
+        case 0:
+            if self.entries.isEmpty {
+                return NSLocalizedString("No dictionaries", comment: "")
+            } else {
+                return NSString(format: NSLocalizedString("%d dictionaries is enabled", comment: ""), self.entries.count) as String
+            }
         default: return nil
         }
     }
