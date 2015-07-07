@@ -90,6 +90,7 @@
 		136610C51AA03374006AA8F1 /* KeyHandlerWordRegisterWithDirectInputSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136610C41AA03374006AA8F1 /* KeyHandlerWordRegisterWithDirectInputSpec.swift */; };
 		136610C71AA0344A006AA8F1 /* KeyHandlerWordRegisterWithKanaComposeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136610C61AA0344A006AA8F1 /* KeyHandlerWordRegisterWithKanaComposeSpec.swift */; };
 		136F409919E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */; };
+		137660D71B4B268C009499CD /* AdditionalDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137660D61B4B268C009499CD /* AdditionalDictionaries.swift */; };
 		13787CEC1B12110C00400A4A /* Tempfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131386381AF8C738009EA22D /* Tempfile.swift */; };
 		13787CED1B12110C00400A4A /* SafeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF4AF651ADBF50B000C5E05 /* SafeTableViewController.swift */; };
 		13787CEE1B12110C00400A4A /* SortDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B74CD41B040EC200EBA709 /* SortDictionary.swift */; };
@@ -271,6 +272,7 @@
 		136610C61AA0344A006AA8F1 /* KeyHandlerWordRegisterWithKanaComposeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerWordRegisterWithKanaComposeSpec.swift; sourceTree = "<group>"; };
 		136D161019DAA0AE0091D6BF /* SKKInputMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
 		136F409819E9D5ED009E3983 /* SKKDictionaryUserFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryUserFileSpec.swift; sourceTree = "<group>"; };
+		137660D61B4B268C009499CD /* AdditionalDictionaries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDictionaries.swift; sourceTree = "<group>"; };
 		137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyRepeatTimer.swift; sourceTree = "<group>"; };
 		137B0FC11ABD257600AF08F0 /* DictionaryEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryEngineSpec.swift; sourceTree = "<group>"; };
 		138968CD1A85E2F400614511 /* SKKEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKEngine.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 		13C3EAB11B040BCC00DB4AD8 /* DownloadDictionary */ = {
 			isa = PBXGroup;
 			children = (
+				137660D61B4B268C009499CD /* AdditionalDictionaries.swift */,
 				135182271B1224BA00774954 /* ValidateDictionary.swift */,
 				13B74CD41B040EC200EBA709 /* SortDictionary.swift */,
 				1302150C1AF7762500918E98 /* DownloadDictionary.swift */,
@@ -1143,6 +1146,7 @@
 				13787CF21B12110C00400A4A /* WordRegisterViewController.swift in Sources */,
 				135181EF1B12139000774954 /* IOUtil.mm in Sources */,
 				13787CF31B12110C00400A4A /* HeadUpProgressViewController.swift in Sources */,
+				137660D71B4B268C009499CD /* AdditionalDictionaries.swift in Sources */,
 				13787CF41B12110C00400A4A /* AdditionalDictionaryViewController.swift in Sources */,
 				13787CF51B12110C00400A4A /* DownloadDictionaryViewController.swift in Sources */,
 				135181E61B12139000774954 /* DictionarySettings.swift in Sources */,
