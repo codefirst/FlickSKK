@@ -99,7 +99,7 @@
 		13787CF21B12110C00400A4A /* WordRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */; };
 		13787CF31B12110C00400A4A /* HeadUpProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C38FB01AFCEE61004CA747 /* HeadUpProgressViewController.swift */; };
 		13787CF41B12110C00400A4A /* AdditionalDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135CDE681AF71843005C6CF0 /* AdditionalDictionaryViewController.swift */; };
-		13787CF51B12110C00400A4A /* DownloadDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135CDE6A1AF71A56005C6CF0 /* DownloadDictionaryViewController.swift */; };
+		13787CF51B12110C00400A4A /* DicitonaryURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135CDE6A1AF71A56005C6CF0 /* DicitonaryURLViewController.swift */; };
 		13787CF61B12110C00400A4A /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56719D5CB50007B6636 /* MainMenuViewController.swift */; };
 		13787CF71B12110C00400A4A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACD52A019F3F2EC001FB2A7 /* WebViewController.swift */; };
 		13787CF81B12110C00400A4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD4B56519D5CB50007B6636 /* AppDelegate.swift */; };
@@ -136,6 +136,8 @@
 		13E33E851A9E87CA00CD1140 /* TextEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E841A9E87CA00CD1140 /* TextEngine.swift */; };
 		13E33E881A9E8E3D00CD1140 /* ComposeModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */; };
 		13E566CC1AF6360300592844 /* BinarySearchSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E566CB1AF6360300592844 /* BinarySearchSpec.swift */; };
+		13E86DCA1B49E5E100B327C4 /* SelectDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E86DC91B49E5E100B327C4 /* SelectDictionaryViewController.swift */; };
+		13E86DCE1B49E71A00B327C4 /* AdditionalDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E86DCD1B49E71A00B327C4 /* AdditionalDictionaries.swift */; };
 		13F456381ADBD863004EB68D /* NumberFliterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F456371ADBD863004EB68D /* NumberFliterSpec.swift */; };
 		13F9326119E2DC1700AC5019 /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
@@ -261,7 +263,7 @@
 		135A44B91A881F070089F84E /* ComposeModePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModePresenter.swift; sourceTree = "<group>"; };
 		135A44BC1A88203E0089F84E /* ComposeModePresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModePresenterSpec.swift; sourceTree = "<group>"; };
 		135CDE681AF71843005C6CF0 /* AdditionalDictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDictionaryViewController.swift; sourceTree = "<group>"; };
-		135CDE6A1AF71A56005C6CF0 /* DownloadDictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDictionaryViewController.swift; sourceTree = "<group>"; };
+		135CDE6A1AF71A56005C6CF0 /* DicitonaryURLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DicitonaryURLViewController.swift; sourceTree = "<group>"; };
 		136610B61AA00FFB006AA8F1 /* KeyHandlerDirectInputSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerDirectInputSpec.swift; sourceTree = "<group>"; };
 		136610BC1AA0100E006AA8F1 /* MockDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDelegate.swift; sourceTree = "<group>"; };
 		136610BE1AA01451006AA8F1 /* KeyHandlerBaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyHandlerBaseSpec.swift; sourceTree = "<group>"; };
@@ -286,6 +288,8 @@
 		13E33E841A9E87CA00CD1140 /* TextEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEngine.swift; sourceTree = "<group>"; };
 		13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModeFactory.swift; sourceTree = "<group>"; };
 		13E566CB1AF6360300592844 /* BinarySearchSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchSpec.swift; sourceTree = "<group>"; };
+		13E86DC91B49E5E100B327C4 /* SelectDictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDictionaryViewController.swift; sourceTree = "<group>"; };
+		13E86DCD1B49E71A00B327C4 /* AdditionalDictionaries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDictionaries.swift; sourceTree = "<group>"; };
 		13F456371ADBD863004EB68D /* NumberFliterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFliterSpec.swift; sourceTree = "<group>"; };
 		3758E2CE5E666333313C17EA /* Pods-FlickSKKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3927343C314CA30425B06CCA /* Pods-FlickSKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.release.xcconfig"; sourceTree = "<group>"; };
@@ -595,7 +599,8 @@
 			children = (
 				13C38FB01AFCEE61004CA747 /* HeadUpProgressViewController.swift */,
 				135CDE681AF71843005C6CF0 /* AdditionalDictionaryViewController.swift */,
-				135CDE6A1AF71A56005C6CF0 /* DownloadDictionaryViewController.swift */,
+				13E86DC91B49E5E100B327C4 /* SelectDictionaryViewController.swift */,
+				135CDE6A1AF71A56005C6CF0 /* DicitonaryURLViewController.swift */,
 			);
 			name = AdditionalDictionary;
 			sourceTree = "<group>";
@@ -624,6 +629,7 @@
 		13C3EAB11B040BCC00DB4AD8 /* DownloadDictionary */ = {
 			isa = PBXGroup;
 			children = (
+				13E86DCD1B49E71A00B327C4 /* AdditionalDictionaries.swift */,
 				135182271B1224BA00774954 /* ValidateDictionary.swift */,
 				13B74CD41B040EC200EBA709 /* SortDictionary.swift */,
 				1302150C1AF7762500918E98 /* DownloadDictionary.swift */,
@@ -1141,10 +1147,11 @@
 				13787CF11B12110C00400A4A /* UserDictionaryViewController.swift in Sources */,
 				135181E01B12139000774954 /* BinarySearch.swift in Sources */,
 				13787CF21B12110C00400A4A /* WordRegisterViewController.swift in Sources */,
+				13E86DCE1B49E71A00B327C4 /* AdditionalDictionaries.swift in Sources */,
 				135181EF1B12139000774954 /* IOUtil.mm in Sources */,
 				13787CF31B12110C00400A4A /* HeadUpProgressViewController.swift in Sources */,
 				13787CF41B12110C00400A4A /* AdditionalDictionaryViewController.swift in Sources */,
-				13787CF51B12110C00400A4A /* DownloadDictionaryViewController.swift in Sources */,
+				13787CF51B12110C00400A4A /* DicitonaryURLViewController.swift in Sources */,
 				135181E61B12139000774954 /* DictionarySettings.swift in Sources */,
 				135182281B1224BA00774954 /* ValidateDictionary.swift in Sources */,
 				13787CF61B12110C00400A4A /* MainMenuViewController.swift in Sources */,
@@ -1154,6 +1161,7 @@
 				135181FE1B12139000774954 /* NumberFormatter.swift in Sources */,
 				135181F51B12139000774954 /* LoadLocalDictionary.swift in Sources */,
 				13787CF71B12110C00400A4A /* WebViewController.swift in Sources */,
+				13E86DCA1B49E5E100B327C4 /* SelectDictionaryViewController.swift in Sources */,
 				13787CF81B12110C00400A4A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

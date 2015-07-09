@@ -45,7 +45,8 @@ class DownloadDictionary {
                 if let e = self.encodeToUTF8(downloadFile, dest: utf8File) {
                     self.error?(NSLocalizedString("EncodingError", comment:""), e)
                 } else {
-                    // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
+                    // メインスレッドはプログレスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
+                    // FIXME: コールバックはメインスレッドにもどしたほうがいい?
                     async {
                         let dictionary = LoadLocalDictionary(path: utf8File)
 

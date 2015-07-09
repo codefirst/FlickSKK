@@ -17,13 +17,10 @@
 "Reset" = "リセット";
 "EnterWordRegister" = "▼単語登録";
 "Additional Dictionary" = "追加辞書";
-"HowToAddDictionary" = "現在、有効な辞書一覧です。削除は左スワイプで行なえます。";
-"UsefulDictionary" = "よく使われる辞書です。URL指定で任意の辞書を追加することもできます。";
-"LinkToOpenlab" = "SKK辞書はOpenlabで配布されています。 gzip圧縮された辞書には対応していないので、[閲覧]リンクを指定してください。";
-"URL" = "URL";
-"Download" = "追加";
-"OpenSKKDictWiki" = "Openlab SKK辞書Wikiを開く";
-"%d dictionaries registered" = "%d個の辞書が追加済み";
+"Add New Dictionary" = "辞書を追加";
+"Suggested Dictionary" = "推奨辞書";
+"Other Dictionary" = "その他の辞書";
+"Specify URL" = "URL指定";
 "DownloadError" = "ダウンロードに失敗しました";
 "EncodingError" = "未対応の文字エンコーディングです";
 "InvalidDictionary" = "辞書の形式が正しくありません";

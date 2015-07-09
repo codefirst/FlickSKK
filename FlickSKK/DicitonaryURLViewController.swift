@@ -1,21 +1,17 @@
 import UIKit
 
-// URL指定で追加辞書のダウンロードを行なうための画面。
-// ダウンロード処理自体は DownloadDictionary にまかせているので、画面表示だけを行なえばいい。
-//
-// プログレスバーでの進捗表示をしようかと思ったが、3G回線でもほぼ待ち時間なしでダウンロードできたので
-// とりあえずあとまわしにしている。
-class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDelegate {
+// 追加辞書をダウンロードするURLを指定する画面。
+class DictionaryURLViewController : SafeTableViewController, UITextFieldDelegate {
     private let urlField = UITextField(frame: CGRectZero)
     private lazy var doneButton : UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Download", comment:""),
         style: .Done, target:self, action: Selector("download"))
-    private let done : Void -> Void
+    private let done : String -> Void
 
-    init(url : String, done : Void -> Void) {
+    init(done : String -> Void) {
         self.done = done
         super.init(style: .Grouped)
-        urlField.text = url
+        self.title = NSLocalizedString("Specify URL", comment: "")
         self.doneButton.enabled = canDownload()
         self.navigationItem.rightBarButtonItem = doneButton
     }
@@ -30,7 +26,6 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
-
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,37 +66,8 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
     @objc private func download() {
         if canDownload() {
-            let vc = HeadUpProgressViewController()
-            let action = DownloadDictionary(url: self.urlField.text)
-
-            var oldTitle : String? = nil
-            action.progress = { (title, progress) in
-                vc.text = title
-                vc.progress = progress
-            }
-            action.success = { info in
-                vc.close {
-                    self.alert(NSLocalizedString("DownloadComplete", comment:""),
-                        message: NSString(format: NSLocalizedString("%d okuri-ari %d okuri-nasi", comment:""), info.okuriAri(), info.okuriNasi()) as String) {
-                            self.navigationController?.popViewControllerAnimated(true)
-                            self.done()
-                    }
-                }
-            }
-            action.error = { (title, e) in
-                vc.close {
-                    self.alert(title, message: e?.localizedDescription ?? "")
-                }
-            }
-            action.call()
-            presentViewController(vc, animated: true, completion: nil)
+            self.navigationController?.popViewControllerAnimated(true)
+            self.done(self.urlField.text)
         }
-    }
-
-    // アラートメッセージを表示する
-    private func alert(title: String, message: String, completion: (() -> Void)? = nil) {
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: { _ in completion?() }))
-        presentViewController(ac, animated: true, completion: nil)
     }
 }
