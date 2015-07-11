@@ -6,7 +6,7 @@ class ComposeModeFactory {
     }
 
     func kanaCompose(kana : String) -> ComposeMode {
-        let candidates = dictionary.find(kana, okuri: nil, dynamic: count(kana.utf16) > 1)
+        let candidates = dictionary.peek(kana, okuri: nil, dynamic: count(kana.utf16) > 1)
         return .KanaCompose(kana : kana, candidates: candidates)
     }
 

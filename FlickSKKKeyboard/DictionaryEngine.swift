@@ -23,6 +23,15 @@ class DictionaryEngine {
         self.dictionary.partial(k, okuri: nil, kanji: kanji)
     }
 
+    // 辞書を検索するが、辞書ロードが完了していなければ空配列を返す
+    func peek(kana : String, okuri : String?, dynamic: Bool) -> [Candidate] {
+        if self.dictionary.isInitialized() {
+            return find(kana, okuri: okuri, dynamic: dynamic)
+        } else {
+            return []
+        }
+    }
+
     // 辞書を検索する。
     //  ・ っの特殊ルール等を考慮する
     func find(kana : String, okuri : String?, dynamic: Bool) -> [Candidate] {

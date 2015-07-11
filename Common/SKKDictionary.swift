@@ -136,6 +136,11 @@ class SKKDictionary : NSObject {
         self.isWaitingForLoad = false
     }
 
+    // 辞書ロードが完了しているかチェックする
+    func isInitialized() -> Bool {
+        return self.loader.initialized
+    }
+
     // ユーザ辞書を取得する(設定アプリ用)
     class func defaultUserDictionary() -> SKKUserDictionaryFile {
         let path = DictionarySettings.defaultUserDictionaryPath()
