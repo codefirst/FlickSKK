@@ -66,6 +66,11 @@
 
 登録した単語は、FlickSKKアプリの「ユーザー辞書」から確認できます。ただし、フルアクセスの許可が必要です。
 
+■5. 追加辞書
+外部のSKK辞書を利用できます。
+
+FlickSKKアプリの「追加辞書」から追加・削除が行なえます。ただし、フルアクセスの許可が必要です。
+
 ■5. 補完候補
 変換中に2文字以上入力中の場合、変換履歴とユーザー辞書の単語から候補を補完して表示します。
 
@@ -77,6 +82,7 @@
                                 <keyword>フリック</keyword>
                                 <keyword>日本語入力</keyword>
                             </keywords>
+                            <version_whats_new>外部のSKK辞書を追加できるようになりました。</version_whats_new>
                             <software_url>http://www.codefirst.org/FlickSKK/</software_url>
                             <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
                             <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
