@@ -154,6 +154,7 @@
 		EA349A4A1A903BDE00084BDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A491A903BDE00084BDE /* ViewController.swift */; };
 		EA349A4F1A903BDE00084BDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA349A4E1A903BDE00084BDE /* Images.xcassets */; };
 		EA349A521A903BDE00084BDE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA349A501A903BDE00084BDE /* LaunchScreen.xib */; };
+		EA3B0ECB1B6608BA0067D124 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135182161B12140C00774954 /* Appearance.swift */; };
 		EA56B0231A221CA500954B5F /* KeyboardImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA56B0221A221CA500954B5F /* KeyboardImages.xcassets */; };
 		EA892D5719FBE70400265181 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5519FBE70400265181 /* iTunesArtwork */; };
 		EA892D5819FBE70400265181 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = EA892D5619FBE70400265181 /* iTunesArtwork@2x */; };
@@ -1116,6 +1117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA349A4A1A903BDE00084BDE /* ViewController.swift in Sources */,
+				EA3B0ECB1B6608BA0067D124 /* Appearance.swift in Sources */,
 				EA349A481A903BDE00084BDE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
