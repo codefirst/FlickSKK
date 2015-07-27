@@ -165,10 +165,10 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     enum Style {
         case Default, PartialCandidate
 
-        var textColor: UIColor {
+        var textAlpha: CGFloat {
             switch self {
-            case .Default: return UIColor.blackColor()
-            case .PartialCandidate: return UIColor(white: 0.5, alpha: 1.0)
+            case .Default: return 1.0
+            case .PartialCandidate: return 0.5
             }
         }
         var normalBackgroundColor: UIColor { return UIColor.whiteColor() }
@@ -188,6 +188,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
 
         self.textLabel.tap { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
+            l.textColor = UIColor.blackColor()
             l.backgroundColor = UIColor.clearColor()
             l.textAlignment = .Center
             l.lineBreakMode = .ByClipping
@@ -214,7 +215,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         self.backgroundColor = highlighted ? style.highlightedBackgroundColor
             : selected ? style.selectedBackgroundColor
             : style.normalBackgroundColor
-        self.textLabel.textColor = style.textColor
+        textLabel.alpha = style.textAlpha
         UIView.setAnimationsEnabled(true)
     }
 
