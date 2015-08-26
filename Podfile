@@ -14,3 +14,9 @@ target 'FlickSKKTests' do
   pod 'Nimble'
   pod 'NorthLayout'
 end
+
+post_install do |installer|
+  require 'fileutils'
+  FileUtils.cp_r('Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-Acknowledgements.plist', 'FlickSKK/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end
+
