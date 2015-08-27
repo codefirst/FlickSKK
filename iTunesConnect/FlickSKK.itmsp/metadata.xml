@@ -82,6 +82,8 @@ FlickSKKアプリの「追加辞書」から追加・削除が行なえます。
                                 <keyword>フリック</keyword>
                                 <keyword>日本語入力</keyword>
                             </keywords>
+                            <version_whats_new>• 補完候補が絵文字のときも薄く表示
+• 設定アプリに謝辞を追加</version_whats_new>
                             <software_url>http://www.codefirst.org/FlickSKK/</software_url>
                             <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
                             <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
