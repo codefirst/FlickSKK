@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package xmlns="http://apple.com/itunes/importer" version="software5.2">
-    <!-- This document was generated on Jul 11, 2015 12:35:51 AM for mzpppp@gmail.com <mzpppp@gmail.com>. -->
+    <!-- This document was generated on Aug 27, 2015 5:49:11 AM for banjun <banjun+adc@gmail.com>. -->
     <!-- NOTE: metadata_token is generated on lookup.  Modifying the value of this will result in an import error -->
-    <metadata_token>1436600151390-5ac4c2ceab797bdb3f6c465df1a17d4e45829d2550af8966cd507bf3cdcfafe2</metadata_token>
+    <metadata_token>1440679751058-0fd8067b1a9967b5e91af199295f0af61e8fbb206f3fcdb0a3c6bca1428bb101</metadata_token>
     <provider>JUNBAN198441466</provider>
     <team_id>FPZK4WRGW7</team_id>
     <software>
@@ -13,9 +13,186 @@
         </read_only_info>
         <software_metadata>
             <versions>
+                <version string="1.4.1">
+                    <locales>
+                        <locale name="ja">
+                            <title>FlickSKK</title>
+                            <description>日本語入力キーボード FlickSKK。シンプル日本語入力を、iPhone/iPadで。
+
+●FlickSKKの特長
+■1. SKKならではのシンプルな日本語変換
+・単文節変換および暗黙の確定による効率的な入力
+・3つの入力モードのサポート: 「ひらかな」モード、「カタカナ」モード、「半角カタカナ」モード
+・ひらかな確定、カタカナ確定、半角カナ確定機能
+・インラインでの単語登録
+
+
+■2. iPhoneらしいフリック入力
+・フリック入力による自然な入力をサポート
+
+
+●使い方
+■1. 単文節変換
+「⇧」の直後に入力された文字を文節の始まりとして認識します。
+
+例えば「変換」は、以下のように入力できます。
+
+1. 「⇧」、「へ」、「ん」、「か」、「ん」と押します。
+2. 「次候補」を押して変換候補から入力したい単語を選択します。
+3. 「⏎」で変換を確定します。
+
+
+■2. 送り仮名変換
+変換中の「⇧」は、送り仮名の開始として認識されます。
+
+例えば「晴れ」は、以下のように入力できます。
+
+1. 「⇧」、「は」、「⇧」、「れ」と押します。
+2. 「次候補」を押して変換候補から入力したい単語を選択します。
+3. 「⏎」で変換を確定します。
+
+
+■3. カタカナ入力
+「かな」を横にフリックすると、カタカナ入力モードになります。
+また、変換中に同じ操作をすると、カタカナとして確定されます。
+
+同様に、「かな」を上にフリックするとひらかな入力モードに、下にフリックすると半角カナ入力モードになります。
+
+
+■4. 辞書登録
+辞書に登録されていない単語を変換しようとすると、辞書登録モードになります。
+
+変換後の単語を入力し、「⏎」を押すことで辞書登録ができます。
+
+登録した単語は、FlickSKKアプリの「ユーザー辞書」から確認できます。ただし、フルアクセスの許可が必要です。
+
+■5. 追加辞書
+外部のSKK辞書を利用できます。
+
+FlickSKKアプリの「追加辞書」から追加・削除が行なえます。ただし、フルアクセスの許可が必要です。
+
+■5. 補完候補
+変換中に2文字以上入力中の場合、変換履歴とユーザー辞書の単語から候補を補完して表示します。
+
+補完候補は[次候補]を左フリックしてスキップ[≪]できます。</description>
+                            <keywords>
+                                <keyword>SKK</keyword>
+                                <keyword>Keyboard</keyword>
+                                <keyword>キーボード</keyword>
+                                <keyword>フリック</keyword>
+                                <keyword>日本語入力</keyword>
+                            </keywords>
+                            <software_url>http://www.codefirst.org/FlickSKK/</software_url>
+                            <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
+                            <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
+                            <software_screenshots>
+                                <software_screenshot display_target="iOS-3.5-in" position="1">
+                                    <size>73215</size>
+                                    <file_name>iPhone-3.5inch-1.png</file_name>
+                                    <checksum type="md5">3943aa133fdfe7a607027c1e66c5b3b5</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-3.5-in" position="2">
+                                    <size>73987</size>
+                                    <file_name>iPhone-3.5inch-2.png</file_name>
+                                    <checksum type="md5">6d77651d138d8d47779f07eed2951a45</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-3.5-in" position="3">
+                                    <size>67822</size>
+                                    <file_name>iPhone-3.5inch-3.png</file_name>
+                                    <checksum type="md5">7cebdebd62d232f43e79f6356c3c4d3c</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-3.5-in" position="4">
+                                    <size>117615</size>
+                                    <file_name>iPhone-3.5inch-4.png</file_name>
+                                    <checksum type="md5">99a656c7780fa74170b7a7212de46b39</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-iPad" position="1">
+                                    <size>125315</size>
+                                    <file_name>iPad-1.png</file_name>
+                                    <checksum type="md5">4ec0baad03ff49ac65815f8cf972d3a4</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-iPad" position="2">
+                                    <size>121558</size>
+                                    <file_name>iPad-2.png</file_name>
+                                    <checksum type="md5">11cd03bf7b536dd6521b88ed5556e0bb</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-iPad" position="3">
+                                    <size>118395</size>
+                                    <file_name>iPad-3.png</file_name>
+                                    <checksum type="md5">babefc6f82f242e6d6154cab447ec9cf</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-iPad" position="4">
+                                    <size>192160</size>
+                                    <file_name>iPad-4.png</file_name>
+                                    <checksum type="md5">5b691424245b2c87d840544428b6b65e</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4-in" position="1">
+                                    <size>76145</size>
+                                    <file_name>iPhone-4.0inch-1.png</file_name>
+                                    <checksum type="md5">fbee7b899ed82109f122fa714a715046</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4-in" position="2">
+                                    <size>79684</size>
+                                    <file_name>iPhone-4.0inch-2.png</file_name>
+                                    <checksum type="md5">9f1ead4b229dde8a7f8d43e4d797561c</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4-in" position="3">
+                                    <size>70742</size>
+                                    <file_name>iPhone-4.0inch-3.png</file_name>
+                                    <checksum type="md5">dc4f1ce5160eb5d0ca8379c4129321a6</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4-in" position="4">
+                                    <size>125143</size>
+                                    <file_name>iPhone-4.0inch-4.png</file_name>
+                                    <checksum type="md5">81963f96360490878b9b4f9500eb558c</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-5.5-in" position="1">
+                                    <size>150411</size>
+                                    <file_name>iPhone-5.5inch-1.png</file_name>
+                                    <checksum type="md5">437e2978523d0a2c123fce2efaffb723</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-5.5-in" position="2">
+                                    <size>155662</size>
+                                    <file_name>iPhone-5.5inch-2.png</file_name>
+                                    <checksum type="md5">76b7bd2b755d03e144953d1b04010210</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-5.5-in" position="3">
+                                    <size>142937</size>
+                                    <file_name>iPhone-5.5inch-3.png</file_name>
+                                    <checksum type="md5">d411828eee44350d52854423423a1156</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-5.5-in" position="4">
+                                    <size>266519</size>
+                                    <file_name>iPhone-5.5inch-4.png</file_name>
+                                    <checksum type="md5">9f34f529b616fa31a3b99f4b7b2792f9</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4.7-in" position="1">
+                                    <size>82533</size>
+                                    <file_name>iPhone-4.7inch-1.png</file_name>
+                                    <checksum type="md5">8c3366bde85b40b5a186199bba1f5c7b</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4.7-in" position="2">
+                                    <size>86813</size>
+                                    <file_name>iPhone-4.7inch-2.png</file_name>
+                                    <checksum type="md5">b3dd4e7099be5b93e09b2aea6a78b61d</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4.7-in" position="3">
+                                    <size>77455</size>
+                                    <file_name>iPhone-4.7inch-3.png</file_name>
+                                    <checksum type="md5">58c2ce8573ae2fb55b2a88b002297428</checksum>
+                                </software_screenshot>
+                                <software_screenshot display_target="iOS-4.7-in" position="4">
+                                    <size>142215</size>
+                                    <file_name>iPhone-4.7inch-4.png</file_name>
+                                    <checksum type="md5">374c67cfd3ffae8106f615101ade4701</checksum>
+                                </software_screenshot>
+                            </software_screenshots>
+                        </locale>
+                    </locales>
+                </version>
                 <version string="1.4.0">
                     <locales>
-                        <locale name="ja-JP">
+                        <locale name="ja">
                             <title>FlickSKK</title>
                             <description>日本語入力キーボード FlickSKK。シンプル日本語入力を、iPhone/iPadで。
 
@@ -191,189 +368,6 @@ FlickSKKアプリの「追加辞書」から追加・削除が行なえます。
                         </locale>
                     </locales>
                 </version>
-                <version string="1.3.0">
-                    <locales>
-                        <locale name="ja-JP">
-                            <title>FlickSKK</title>
-                            <description>日本語入力キーボード FlickSKK。シンプル日本語入力を、iPhone/iPadで。
-
-●FlickSKKの特長
-■1. SKKならではのシンプルな日本語変換
-・単文節変換および暗黙の確定による効率的な入力
-・3つの入力モードのサポート: 「ひらかな」モード、「カタカナ」モード、「半角カタカナ」モード
-・ひらかな確定、カタカナ確定、半角カナ確定機能
-・インラインでの単語登録
-
-
-■2. iPhoneらしいフリック入力
-・フリック入力による自然な入力をサポート
-
-
-●使い方
-■1. 単文節変換
-「⇧」の直後に入力された文字を文節の始まりとして認識します。
-
-例えば「変換」は、以下のように入力できます。
-
-1. 「⇧」、「へ」、「ん」、「か」、「ん」と押します。
-2. 「次候補」を押して変換候補から入力したい単語を選択します。
-3. 「⏎」で変換を確定します。
-
-
-■2. 送り仮名変換
-変換中の「⇧」は、送り仮名の開始として認識されます。
-
-例えば「晴れ」は、以下のように入力できます。
-
-1. 「⇧」、「は」、「⇧」、「れ」と押します。
-2. 「次候補」を押して変換候補から入力したい単語を選択します。
-3. 「⏎」で変換を確定します。
-
-
-■3. カタカナ入力
-「かな」を横にフリックすると、カタカナ入力モードになります。
-また、変換中に同じ操作をすると、カタカナとして確定されます。
-
-同様に、「かな」を上にフリックするとひらかな入力モードに、下にフリックすると半角カナ入力モードになります。
-
-
-■4. 辞書登録
-辞書に登録されていない単語を変換しようとすると、辞書登録モードになります。
-
-変換後の単語を入力し、「⏎」を押すことで辞書登録ができます。
-
-登録した単語は、FlickSKKアプリの「ユーザー辞書」から確認できます。ただし、フルアクセスの許可が必要です。
-
-■5. 補完候補
-変換中に2文字以上入力中の場合、変換履歴とユーザー辞書の単語から候補を補完して表示します。
-
-補完候補は[次候補]を左フリックしてスキップ[≪]できます。</description>
-                            <keywords>
-                                <keyword>SKK</keyword>
-                                <keyword>Keyboard</keyword>
-                                <keyword>キーボード</keyword>
-                                <keyword>フリック</keyword>
-                                <keyword>日本語入力</keyword>
-                            </keywords>
-                            <version_whats_new>FlickSKK 1.3には、変換候補の補完と記号の追加が含まれます。変更点は以下の通りです。
-
-・変換履歴を学習し、候補の先頭に最後の変換結果が来るようになりました。
-　・変換履歴はFlickSKKアプリからリセットできます。
-・変換中に、変換履歴とユーザー辞書の単語から候補を補完して表示するようになりました。
-　・変換で2文字以上入力中に表示されます。
-　・補完候補は[次候補]を左フリックしてスキップ[≪]できます。
-・数字キーパッド[123]に各種記号を追加しました。
-・フリックに割り当てられている記号が表示されるようになりました。
-・FlickSKKアプリの起動画面が新しくなりました。
-・その他、バグ修正。</version_whats_new>
-                            <software_url>http://www.codefirst.org/FlickSKK/</software_url>
-                            <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
-                            <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
-                            <software_screenshots>
-                                <software_screenshot display_target="iOS-3.5-in" position="1">
-                                    <size>73215</size>
-                                    <file_name>iPhone-3.5inch-1.png</file_name>
-                                    <checksum type="md5">3943aa133fdfe7a607027c1e66c5b3b5</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-3.5-in" position="2">
-                                    <size>73987</size>
-                                    <file_name>iPhone-3.5inch-2.png</file_name>
-                                    <checksum type="md5">6d77651d138d8d47779f07eed2951a45</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-3.5-in" position="3">
-                                    <size>67822</size>
-                                    <file_name>iPhone-3.5inch-3.png</file_name>
-                                    <checksum type="md5">7cebdebd62d232f43e79f6356c3c4d3c</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-3.5-in" position="4">
-                                    <size>117615</size>
-                                    <file_name>iPhone-3.5inch-4.png</file_name>
-                                    <checksum type="md5">99a656c7780fa74170b7a7212de46b39</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-iPad" position="1">
-                                    <size>125315</size>
-                                    <file_name>iPad-1.png</file_name>
-                                    <checksum type="md5">4ec0baad03ff49ac65815f8cf972d3a4</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-iPad" position="2">
-                                    <size>121558</size>
-                                    <file_name>iPad-2.png</file_name>
-                                    <checksum type="md5">11cd03bf7b536dd6521b88ed5556e0bb</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-iPad" position="3">
-                                    <size>118395</size>
-                                    <file_name>iPad-3.png</file_name>
-                                    <checksum type="md5">babefc6f82f242e6d6154cab447ec9cf</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-iPad" position="4">
-                                    <size>192160</size>
-                                    <file_name>iPad-4.png</file_name>
-                                    <checksum type="md5">5b691424245b2c87d840544428b6b65e</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4-in" position="1">
-                                    <size>76145</size>
-                                    <file_name>iPhone-4.0inch-1.png</file_name>
-                                    <checksum type="md5">fbee7b899ed82109f122fa714a715046</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4-in" position="2">
-                                    <size>79684</size>
-                                    <file_name>iPhone-4.0inch-2.png</file_name>
-                                    <checksum type="md5">9f1ead4b229dde8a7f8d43e4d797561c</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4-in" position="3">
-                                    <size>70742</size>
-                                    <file_name>iPhone-4.0inch-3.png</file_name>
-                                    <checksum type="md5">dc4f1ce5160eb5d0ca8379c4129321a6</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4-in" position="4">
-                                    <size>125143</size>
-                                    <file_name>iPhone-4.0inch-4.png</file_name>
-                                    <checksum type="md5">81963f96360490878b9b4f9500eb558c</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-5.5-in" position="1">
-                                    <size>150411</size>
-                                    <file_name>iPhone-5.5inch-1.png</file_name>
-                                    <checksum type="md5">437e2978523d0a2c123fce2efaffb723</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-5.5-in" position="2">
-                                    <size>155662</size>
-                                    <file_name>iPhone-5.5inch-2.png</file_name>
-                                    <checksum type="md5">76b7bd2b755d03e144953d1b04010210</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-5.5-in" position="3">
-                                    <size>142937</size>
-                                    <file_name>iPhone-5.5inch-3.png</file_name>
-                                    <checksum type="md5">d411828eee44350d52854423423a1156</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-5.5-in" position="4">
-                                    <size>266519</size>
-                                    <file_name>iPhone-5.5inch-4.png</file_name>
-                                    <checksum type="md5">9f34f529b616fa31a3b99f4b7b2792f9</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4.7-in" position="1">
-                                    <size>82533</size>
-                                    <file_name>iPhone-4.7inch-1.png</file_name>
-                                    <checksum type="md5">8c3366bde85b40b5a186199bba1f5c7b</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4.7-in" position="2">
-                                    <size>86813</size>
-                                    <file_name>iPhone-4.7inch-2.png</file_name>
-                                    <checksum type="md5">b3dd4e7099be5b93e09b2aea6a78b61d</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4.7-in" position="3">
-                                    <size>77455</size>
-                                    <file_name>iPhone-4.7inch-3.png</file_name>
-                                    <checksum type="md5">58c2ce8573ae2fb55b2a88b002297428</checksum>
-                                </software_screenshot>
-                                <software_screenshot display_target="iOS-4.7-in" position="4">
-                                    <size>142215</size>
-                                    <file_name>iPhone-4.7inch-4.png</file_name>
-                                    <checksum type="md5">374c67cfd3ffae8106f615101ade4701</checksum>
-                                </software_screenshot>
-                            </software_screenshots>
-                        </locale>
-                    </locales>
-                </version>
             </versions>
             <products>
                 <product>
@@ -384,7 +378,7 @@ FlickSKKアプリの「追加辞書」から追加・削除が行なえます。
                         <!--The following <interval> element represents a snapshot of present and future pricing and availability information.
 In other words, past data may not be reflected by this interval.-->
                         <interval>
-                            <start_date>2015-07-11</start_date>
+                            <start_date>2015-08-27</start_date>
                             <wholesale_price_tier>0</wholesale_price_tier>
                         </interval>
                     </intervals>
