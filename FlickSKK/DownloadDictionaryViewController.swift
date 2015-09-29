@@ -90,7 +90,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
             }
             action.error = { (title, e) in
                 vc.close {
-                    self.alert(title, message: e?.localizedDescription ?? "")
+                    self.alert(title, message: e.map { String($0) } ?? "" )
                 }
             }
             action.call()

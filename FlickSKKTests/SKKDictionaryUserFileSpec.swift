@@ -16,7 +16,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
 
         describe("SKK dictionary") {
             beforeEach {
-                NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+                try! NSFileManager.defaultManager().removeItemAtPath(path)
                 dict = SKKUserDictionaryFile(path: path)
             }
 

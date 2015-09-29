@@ -19,7 +19,7 @@ class DownloadDictionary {
     var success : (DictionaryInfo->Void)?
 
     // 辞書追加でエラーが発生した際の処理
-    var error : ((String, NSError?)->Void)?
+    var error : ((String, ErrorType?)->Void)?
 
     // ダウンロードが進捗した際の処理
     var progress : ((String, Float) -> Void)?
@@ -44,10 +44,10 @@ class DownloadDictionary {
         // ダウンロード
         save(self.url, path: downloadFile,
             onSuccess: {
-                // UTF8へのエンコード
-                if let e = self.encodeToUTF8(downloadFile, dest: utf8File) {
-                    self.error?(NSLocalizedString("EncodingError", comment:""), e)
-                } else {
+                do {
+                    // UTF8へのエンコード
+                    try self.encodeToUTF8(downloadFile, dest: utf8File)
+
                     // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
                     async {
                         let dictionary = LoadLocalDictionary(path: utf8File)
@@ -64,6 +64,8 @@ class DownloadDictionary {
                             self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil)
                         }
                     }
+                } catch let e {
+                    self.error?(NSLocalizedString("EncodingError", comment:""), e)
                 }
             },
             onError: { e in
@@ -72,7 +74,7 @@ class DownloadDictionary {
     }
 
     // URLを特定ファイルに保存する。
-    private func save(url : String, path: String, onSuccess : Void -> Void, onError : NSError? -> Void) {
+    private func save(url : String, path: String, onSuccess : Void -> Void, onError : ErrorType? -> Void) {
         Alamofire.download(.GET, url) { (temporaryURL, response) in
             return NSURL.fileURLWithPath(path, isDirectory: false) ?? temporaryURL
         }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
@@ -92,31 +94,21 @@ class DownloadDictionary {
     }
 
     // UTF8でエンコードして、保存する
-    private func encodeToUTF8(src : String, dest: String) -> NSError? {
-        var error : NSError?
-        do {
-            let content = try readFile(src)
-            if let file = LocalFile(path: dest) {
-                file.write(content as String)
-                file.close()
-            }
-            return nil
-        } catch let error1 as NSError {
-            error = error1
-            return error
+    private func encodeToUTF8(src : String, dest: String) throws {
+        let content = try readFile(src)
+        if let file = LocalFile(path: dest) {
+            defer { file.close() }
+            file.write(content as String)
         }
     }
 
     // ファイルをEUC-JPもしくはUTF-8として読み込む
     // (シミュレータではEUC-JPの読み込みは失敗する)
     private func readFile(path : String) throws -> NSString {
-        var error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
-        if var value = NSString(contentsOfFile: path, encoding: NSJapaneseEUCStringEncoding) ??
-                    NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) {
-            return value
+        if let content = try? NSString(contentsOfFile: path, encoding: NSJapaneseEUCStringEncoding) {
+            return content
         }
-        throw error
-
+        return try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
     }
 
     // 辞書の検証をする
