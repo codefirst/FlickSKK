@@ -88,7 +88,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             }
         } else {
             // deselect all
-            for indexPath in self.collectionView.indexPathsForSelectedItems() as! [NSIndexPath] {
+            for indexPath in self.collectionView.indexPathsForSelectedItems() ?? [] {
                 self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
             }
         }
