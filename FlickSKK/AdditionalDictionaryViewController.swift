@@ -12,7 +12,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         super.init(style: .Grouped)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -108,7 +108,10 @@ class AdditionalDictionaryViewController: SafeTableViewController {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 && editingStyle == .Delete {
             if let path = self.entries[indexPath.row].path {
-                NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+                do {
+                    try NSFileManager.defaultManager().removeItemAtPath(path)
+                } catch _ {
+                }
                 self.reloadEntries()
             }
         }

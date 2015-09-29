@@ -10,7 +10,7 @@ import UIKit
 
 class WebViewController: UIViewController, UIWebViewDelegate {
     lazy var webView: UIWebView = UIWebView(frame: CGRectZero).tap{ (wv:UIWebView) in
-        wv.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        wv.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         wv.scalesPageToFit = true
         wv.delegate = self
         wv.dataDetectorTypes = UIDataDetectorTypes.Link
@@ -50,7 +50,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
 
     // MARK: -
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

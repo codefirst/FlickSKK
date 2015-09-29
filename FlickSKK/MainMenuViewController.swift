@@ -73,14 +73,14 @@ class MainMenuViewController: SafeTableViewController {
     // MARK: - Actions
     func gotoSetup() {
         if let path = NSBundle.mainBundle().pathForResource("Setup", ofType: "html", inDirectory: "html") {
-            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
+            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
         }
     }
 
 
     func gotoHowToUse() {
         if let path = NSBundle.mainBundle().pathForResource("HowToUse", ofType: "html", inDirectory: "html") {
-            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
+            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
         }
     }
 
@@ -107,13 +107,13 @@ class MainMenuViewController: SafeTableViewController {
 
     func gotoLicense() {
         if let path = NSBundle.mainBundle().pathForResource("License", ofType: "html", inDirectory: "html") {
-            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)!), animated: true)
+            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
         }
     }
 
     // MARK: -
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

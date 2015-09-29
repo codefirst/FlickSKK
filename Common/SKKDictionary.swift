@@ -28,7 +28,10 @@ class SKKDictionary : NSObject {
 
     class func resetLearnDictionary() {
         for path in [DictionarySettings.defaultLearnDictionaryPath(), DictionarySettings.defaultPartialDictionaryPath()] {
-            NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+            do {
+                try NSFileManager.defaultManager().removeItemAtPath(path)
+            } catch _ {
+            }
         }
     }
 
@@ -36,7 +39,13 @@ class SKKDictionary : NSObject {
         var error : NSError?
         let manager = NSFileManager.defaultManager()
         let path = DictionarySettings.additionalDictionaryPath()
-        let xs = manager.contentsOfDirectoryAtPath(path, error: &error)
+        let xs: [AnyObject]?
+        do {
+            xs = try manager.contentsOfDirectoryAtPath(path)
+        } catch let error1 as NSError {
+            error = error1
+            xs = nil
+        }
         if let e = error {
             NSLog("%@", e.userInfo ?? [:])
             return []

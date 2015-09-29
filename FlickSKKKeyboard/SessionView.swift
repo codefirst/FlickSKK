@@ -55,7 +55,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
 
-        self.collectionView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        self.collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.collectionView.frame = self.bounds
         self.addSubview(self.collectionView)
 
@@ -71,7 +71,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         self.backgroundColor = UIColor.whiteColor()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -206,7 +206,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         autolayout("V:|[l]|")
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

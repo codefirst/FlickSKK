@@ -30,7 +30,10 @@ class DownloadDictionary {
         self.url = url
 
         let dir = DictionarySettings.additionalDictionaryPath()
-        NSFileManager.defaultManager().createDirectoryAtPath(dir, withIntermediateDirectories: true, attributes: nil, error: nil)
+        do {
+            try NSFileManager.defaultManager().createDirectoryAtPath(dir, withIntermediateDirectories: true, attributes: nil)
+        } catch _ {
+        }
         self.path = dir.stringByAppendingPathComponent(url.lastPathComponent)
     }
 
@@ -91,22 +94,28 @@ class DownloadDictionary {
     // UTF8でエンコードして、保存する
     private func encodeToUTF8(src : String, dest: String) -> NSError? {
         var error : NSError?
-        if let content = readFile(src, error: &error) {
+        do {
+            let content = try readFile(src)
             if let file = LocalFile(path: dest) {
                 file.write(content as String)
                 file.close()
             }
             return nil
-        } else {
+        } catch let error1 as NSError {
+            error = error1
             return error
         }
     }
 
     // ファイルをEUC-JPもしくはUTF-8として読み込む
     // (シミュレータではEUC-JPの読み込みは失敗する)
-    private func readFile(path : String, error: NSErrorPointer) -> NSString? {
-        return NSString(contentsOfFile: path, encoding: NSJapaneseEUCStringEncoding, error: error) ??
-            NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: error)
+    private func readFile(path : String) throws -> NSString {
+        var error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
+        if var value = NSString(contentsOfFile: path, encoding: NSJapaneseEUCStringEncoding) ??
+                    NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) {
+            return value
+        }
+        throw error
 
     }
 

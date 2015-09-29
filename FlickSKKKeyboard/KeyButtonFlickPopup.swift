@@ -10,7 +10,7 @@ import UIKit
 
 
 
-enum KeyButtonFlickDirection : Printable {
+enum KeyButtonFlickDirection : CustomStringConvertible {
     case None, Left, Up, Right, Down
 
     var description: String {
@@ -175,7 +175,7 @@ class KeyButtonFlickPopup: UIView {
     }
 
     // MARK: - private methods
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

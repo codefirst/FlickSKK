@@ -34,7 +34,7 @@ enum KanaFlickKey: Hashable {
     var additionalButtonLabel: String? {
         switch self {
         case let .Seq(s, true):
-            let seq = Array(s).map{String($0)}
+            let seq = Array(s.characters).map{String($0)}
             let left = seq.count > 1 ? seq[1] : " "
             let top = seq.count > 2 ? seq[2] : " "
             let right = seq.count > 3 ? seq[3] : " "
@@ -49,7 +49,7 @@ enum KanaFlickKey: Hashable {
 
     var sequence: [String]? {
         switch self {
-        case let .Seq(s, _): return Array(s).map{String($0)}
+        case let .Seq(s, _): return Array(s.characters).map{String($0)}
         case .InputModeChange: return [KanaFlickKey.ignoredSequence,"_","かな","カナ","ｶﾅ"]
         case .Space: return [KanaFlickKey.ignoredSequence, NSLocalizedString("SkipPartialCandidate", comment: "")]
         default: return nil

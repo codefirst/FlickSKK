@@ -36,7 +36,7 @@ class AdditionalDictionaries {
     func availableDictionaries() -> [Entry] {
         let names = dictionaryFiles.map { $0.lastPathComponent }
         return defaultDictionaries.filter { entry in
-            !contains(names, entry.url.lastPathComponent)
+            !names.contains(entry.url.lastPathComponent)
         }
     }
 

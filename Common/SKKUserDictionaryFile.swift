@@ -64,7 +64,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             }
         }
 
-        sort(&xs)
+        xs.sortInPlace()
         return xs
     }
 

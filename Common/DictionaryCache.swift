@@ -53,7 +53,7 @@ class DictionaryCache {
 
     private func getModifiedTime(path: String) -> NSDate? {
         let fm = NSFileManager.defaultManager()
-        if let attrs = fm.attributesOfItemAtPath(path, error: nil) {
+        if let attrs = try? fm.attributesOfItemAtPath(path) {
             return attrs[NSFileModificationDate] as? NSDate
         } else {
             return nil

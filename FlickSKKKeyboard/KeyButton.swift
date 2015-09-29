@@ -122,19 +122,19 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     }
 
     // MARK: - Gestures
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.highlighted = true // set to false on end, cancel, started pan
         self.repeatTimer?.start()
         super.touchesBegan(touches, withEvent: event)
     }
 
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.highlighted = false
         self.repeatTimer?.cancel()
         super.touchesEnded(touches, withEvent: event)
     }
 
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
 //        self.highlighted = false // surpress flicker (highlighted = false, then true)
         self.repeatTimer?.cancel()
         super.touchesCancelled(touches, withEvent: event)
@@ -211,7 +211,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     }
 
     // MARK: -
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

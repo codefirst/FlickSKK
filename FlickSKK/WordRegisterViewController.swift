@@ -32,7 +32,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         self.navigationItem.rightBarButtonItem = doneButton
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -43,11 +43,11 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
             if !self.okuriField.text.isEmpty {
                 let text = okuriField.text
                 // 1文字目
-                let first = Array(text)[0]
+                let first = Array(text.characters)[0]
                 // ローマ字変換
                 if let roman = first.toRoman() {
                     // 1文字目を取得
-                    okuri = String(Array(roman)[0])
+                    okuri = String(Array(roman.characters)[0])
                 } else {
                     okuri = String(first)
                 }
@@ -104,7 +104,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         for section in self.sections {
-            for (index,row) in enumerate(section.rows) {
+            for (index,row) in section.enumerate() {
                 if textField == row.text {
                     switch row.returnType {
                     case .Next:
@@ -134,7 +134,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         let yomiInputed : Bool = !self.yomiField.text.isEmpty
 
         let okuriBlank : Bool = self.okuriField.text.isEmpty
-        let okuri = Array(self.okuriField.text)
+        let okuri = Array(self.okuriField.text.characters)
         let okuriInputed = okuri.count == 1 && (okuri[0].toRoman() != .None)
 
         return wordInputed && yomiInputed && (okuriBlank || okuriInputed)

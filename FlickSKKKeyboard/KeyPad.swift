@@ -39,7 +39,7 @@ class KeyPad : UIView {
     }
 
     func addKeypadKeys() {
-        if (keys.count != 12) { println("fatal: cannot add keys not having 12 keys to keypad"); return; }
+        if (keys.count != 12) { print("fatal: cannot add keys not having 12 keys to keypad"); return; }
 
 
         let views: [String:UIView] = [
@@ -69,7 +69,7 @@ class KeyPad : UIView {
         self.keyButtons = (views as NSDictionary).allValues as! [KeyButton]
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
