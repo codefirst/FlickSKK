@@ -40,8 +40,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         if canRegister() {
             var okuri : String? = nil
 
-            if !self.okuriField.text.isEmpty {
-                let text = okuriField.text
+            if let text = self.okuriField.text {
                 // 1文字目
                 let first = Array(text.characters)[0]
                 // ローマ字変換
@@ -53,9 +52,9 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
                 }
             }
             self.done?(
-                self.wordField.text,
+                self.wordField.text ?? "",
                 okuri,
-                self.yomiField.text)
+                self.yomiField.text ?? "")
             self.navigationController?.popViewControllerAnimated(true)
         }
     }
@@ -104,7 +103,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         for section in self.sections {
-            for (index,row) in section.enumerate() {
+            for (index,row) in section.rows.enumerate() {
                 if textField == row.text {
                     switch row.returnType {
                     case .Next:
@@ -130,12 +129,12 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         // ・登録する単語が入力されている
         // ・よみが入力されている。SKK的に読みはほぼ任意(例: forallとかもある)なので、あまり前提をおけない。
         // ・送り仮名が空もしくはひらがな一文字(ローマ字に変換できる)
-        let wordInputed : Bool = !self.wordField.text.isEmpty
-        let yomiInputed : Bool = !self.yomiField.text.isEmpty
+        let wordInputed : Bool = self.wordField.text != nil
+        let yomiInputed : Bool = yomiField.text != nil
 
-        let okuriBlank : Bool = self.okuriField.text.isEmpty
-        let okuri = Array(self.okuriField.text.characters)
-        let okuriInputed = okuri.count == 1 && (okuri[0].toRoman() != .None)
+        let okuriBlank : Bool = self.okuriField.text?.isEmpty ?? true
+        let okuri = self.okuriField.text?.characters
+        let okuriInputed = okuri?.count == 1 && (okuri?.first?.toRoman() != nil)
 
         return wordInputed && yomiInputed && (okuriBlank || okuriInputed)
     }

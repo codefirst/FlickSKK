@@ -66,13 +66,13 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     }
 
     private func canDownload() -> Bool {
-        return !self.urlField.text.isEmpty
+        return self.urlField.text != nil
     }
 
     @objc private func download() {
         if canDownload() {
             let vc = HeadUpProgressViewController()
-            let action = DownloadDictionary(url: self.urlField.text)
+            let action = DownloadDictionary(url: self.urlField.text ?? "")
 
             var oldTitle : String? = nil
             action.progress = { (title, progress) in
