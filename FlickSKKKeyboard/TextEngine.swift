@@ -86,10 +86,10 @@ class TextEngine {
 
     private func text(candidate : Candidate) -> String {
         switch candidate {
-        case .Exact(text: let text):
-            return text
-        case .Partial(text: let text, Exact: _):
-            return text
+        case .Exact(kanji: let kanji):
+            return kanji
+        case .Partial(kanji: let kanji, kana: _):
+            return kanji
         }
     }
 
@@ -105,10 +105,10 @@ class TextEngine {
                 }
             }
             switch candidate {
-            case .Exact(text: let text):
-                f(kana, text)
-            case .Partial(text: let text, orginal: let kana):
-                f(kana, text)
+            case .Exact(kanji: let kanji):
+                f(kana, kanji: kanji)
+            case .Partial(kanji: let kanji, kana: let kana):
+                f(kana, kanji: kanji)
             }
         }
     }
