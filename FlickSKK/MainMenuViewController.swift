@@ -53,7 +53,7 @@ class MainMenuViewController: SafeTableViewController {
     let kCellID = "Cell"
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
         let row = sections[indexPath.section].rows[indexPath.row]
         cell.textLabel?.text = row.title
         cell.accessoryType = row.accessoryType

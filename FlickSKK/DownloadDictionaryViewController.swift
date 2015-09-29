@@ -38,7 +38,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
 
         cell.textLabel?.text = NSLocalizedString("URL", comment:"")
         urlField.frame = CGRectMake(0, 0, cell.frame.width - 80, 130)

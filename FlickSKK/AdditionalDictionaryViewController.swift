@@ -74,7 +74,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     private let kCellID = "Cell"
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
 
         switch indexPath.section {
         case 0:
