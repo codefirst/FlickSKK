@@ -4,11 +4,12 @@ import Nimble
 class LoadLocalDicitonarySpec : QuickSpec {
     override func spec() {
         context("正常なファイル") {
-            let path = DictionarySettings.defaultUserDictionaryPath()
+            let url = DictionarySettings.defaultUserDictionaryURL()
 
             var dictionary : LoadLocalDictionary!
             beforeEach {
-                if let file = LocalFile(path: path) {
+                if let file = LocalFile(url: url) {
+                    defer { file.close() }
                     file.clear()
 
                     file.writeln(";; this is dictionary for spec")
@@ -19,10 +20,8 @@ class LoadLocalDicitonarySpec : QuickSpec {
                     file.writeln(";; okuri-nasi entries.")
                     file.writeln("! /！/感嘆符/")
                     file.writeln("!! /！！/")
-                    file.close()
-
-                    dictionary = LoadLocalDictionary(path: path)
                 }
+                dictionary = LoadLocalDictionary(url: url)
             }
 
             it("okuri ari") {

@@ -12,8 +12,8 @@ import Nimble
 class SKKDictionaryLocalFileSpec : QuickSpec {
     override func spec() {
         let bundle = NSBundle(forClass: self.classForCoder)
-        let jisyo = bundle.pathForResource("skk", ofType: "jisyo")
-        let dict = SKKLocalDictionaryFile(path: jisyo!)
+        let jisyo = bundle.URLForResource("skk", withExtension: "jisyo")
+        let dict = SKKLocalDictionaryFile(url: jisyo!)
         describe("okuri-nasi") {
             it("can find at first entry") {
                 let xs = dict.find("あいかた", okuri: .None)

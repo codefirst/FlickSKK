@@ -5,7 +5,12 @@
 class LocalFile {
     private let handle : NSFileHandle?
 
-    init?(path : String) {
+    init?(url : NSURL) {
+        guard let path = url.path else {
+            self.handle = nil
+            return nil
+        }
+
         if !NSFileManager.defaultManager().fileExistsAtPath(path) {
             NSFileManager.defaultManager().createFileAtPath(path, contents: nil, attributes:nil)
         }

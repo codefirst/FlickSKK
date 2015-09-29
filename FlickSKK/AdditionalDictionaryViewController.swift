@@ -107,11 +107,8 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 && editingStyle == .Delete {
-            if let path = self.entries[indexPath.row].path {
-                do {
-                    try NSFileManager.defaultManager().removeItemAtPath(path)
-                } catch _ {
-                }
+            if let local = self.entries[indexPath.row].local {
+                let _ = try? NSFileManager.defaultManager().removeItemAtURL(local)
                 self.reloadEntries()
             }
         }

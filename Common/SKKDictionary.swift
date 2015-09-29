@@ -27,55 +27,43 @@ class SKKDictionary : NSObject {
     private let cache = DictionaryCache()
 
     class func resetLearnDictionary() {
-        for path in [DictionarySettings.defaultLearnDictionaryPath(), DictionarySettings.defaultPartialDictionaryPath()] {
-            do {
-                try NSFileManager.defaultManager().removeItemAtPath(path)
-            } catch _ {
-            }
+        for url in [DictionarySettings.defaultLearnDictionaryURL(), DictionarySettings.defaultPartialDictionaryURL()] {
+            let _ = try? NSFileManager.defaultManager().removeItemAtURL(url)
         }
     }
 
-    class func additionalDictionaries() -> [String] {
-        var error : NSError?
-        let manager = NSFileManager.defaultManager()
-        let path = DictionarySettings.additionalDictionaryPath()
-        let xs: [AnyObject]?
+    class func additionalDictionaries() -> [NSURL] {
         do {
-            xs = try manager.contentsOfDirectoryAtPath(path)
-        } catch let error1 as NSError {
-            error = error1
-            xs = nil
-        }
-        if let e = error {
-            NSLog("%@", e.userInfo ?? [:])
+            let manager = NSFileManager.defaultManager()
+            let url = DictionarySettings.additionalDictionaryURL()
+            return try manager.contentsOfDirectoryAtURL(url,
+                includingPropertiesForKeys: nil,
+                options: [])
+        } catch {
             return []
-        } else {
-            return (xs ?? []).map {
-                return DictionarySettings.additionalDictionaryPath().stringByAppendingPathComponent($0 as! String)
-            }
         }
     }
 
     override init() {
         super.init()
         loader.load {
-            let dictionary = self.cache.loadLocalDicitonary(DictionarySettings.defaultDicitonaryPath()) {
-                SKKLocalDictionaryFile(path: $0)
+            let dictionary = self.cache.loadLocalDicitonary(DictionarySettings.defaultDicitonaryURL()) {
+                SKKLocalDictionaryFile(url: $0)
             }
-            self.userDictionary  = self.cache.loadUserDicitonary(DictionarySettings.defaultUserDictionaryPath()) {
-                SKKUserDictionaryFile(path: $0)
+            self.userDictionary  = self.cache.loadUserDicitonary(DictionarySettings.defaultUserDictionaryURL()) {
+                SKKUserDictionaryFile(url: $0)
             }
-            self.learnDictionary = self.cache.loadUserDicitonary(DictionarySettings.defaultLearnDictionaryPath()) {
-                SKKUserDictionaryFile(path: $0)
-            }
-
-            self.partialDictionary = self.cache.loadUserDicitonary(DictionarySettings.defaultPartialDictionaryPath()){
-                SKKUserDictionaryFile(path: $0)
+            self.learnDictionary = self.cache.loadUserDicitonary(DictionarySettings.defaultLearnDictionaryURL()) {
+                SKKUserDictionaryFile(url: $0)
             }
 
-            let xs : [SKKDictionaryFile] = SKKDictionary.additionalDictionaries().map { path in
-                self.cache.loadUserDicitonary(path) {
-                    SKKLocalDictionaryFile(path: $0)
+            self.partialDictionary = self.cache.loadUserDicitonary(DictionarySettings.defaultPartialDictionaryURL()){
+                SKKUserDictionaryFile(url: $0)
+            }
+
+            let xs : [SKKDictionaryFile] = SKKDictionary.additionalDictionaries().map { url in
+                self.cache.loadUserDicitonary(url) {
+                    SKKLocalDictionaryFile(url: $0)
                 }
             }
 
@@ -110,7 +98,7 @@ class SKKDictionary : NSObject {
     func register(normal : String, okuri: String?, kanji: String) {
         userDictionary?.register(normal, okuri: okuri, kanji: kanji)
         async {
-            self.cache.update(DictionarySettings.defaultUserDictionaryPath()) {
+            self.cache.update(DictionarySettings.defaultUserDictionaryURL()) {
                 self.userDictionary?.serialize()
             }
         }
@@ -120,7 +108,7 @@ class SKKDictionary : NSObject {
     func learn(normal : String, okuri: String?, kanji: String) {
         learnDictionary?.register(normal, okuri: okuri, kanji: kanji)
         async {
-            self.cache.update(DictionarySettings.defaultLearnDictionaryPath()) {
+            self.cache.update(DictionarySettings.defaultLearnDictionaryURL()) {
                 self.learnDictionary?.serialize()
             }
         }
@@ -130,7 +118,7 @@ class SKKDictionary : NSObject {
     func partial(kana: String, okuri: String?, kanji: String) {
         partialDictionary?.register(kana, okuri: okuri, kanji: kanji)
         async {
-            self.cache.update(DictionarySettings.defaultPartialDictionaryPath()) {
+            self.cache.update(DictionarySettings.defaultPartialDictionaryURL()) {
                 self.partialDictionary?.serialize()
             }
         }
@@ -147,7 +135,7 @@ class SKKDictionary : NSObject {
 
     // ユーザ辞書を取得する(設定アプリ用)
     class func defaultUserDictionary() -> SKKUserDictionaryFile {
-        let path = DictionarySettings.defaultUserDictionaryPath()
-        return SKKUserDictionaryFile(path: path)
+        let url = DictionarySettings.defaultUserDictionaryURL()
+        return SKKUserDictionaryFile(url: url)
     }
 }

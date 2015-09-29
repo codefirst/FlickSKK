@@ -72,7 +72,7 @@ class EntryParser {
 
     // 単語ごとに分割する
     func rawWords() -> [String] {
-        let xs = self.entry.pathComponents
+        let xs = self.entry.componentsSeparatedByString("/")
         if xs.count <= 2 {
             return []
         } else {

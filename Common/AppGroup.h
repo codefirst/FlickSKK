@@ -13,5 +13,5 @@
 + (NSString *)appGroupID;
 + (NSString *)initialText;
 + (NSString *)pathForResource:(NSString *)subpath;
-
++ (NSURL *)urlForResource:(NSString *)subpath;
 @end

@@ -27,8 +27,12 @@ static NSString * const kInitalText = STR2(INITIAL_TEXT);
 
 + (NSString *)pathForResource:(NSString *)subpath
 {
-    NSString *containerPath = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:[self appGroupID]].path;
-    return [containerPath stringByAppendingPathComponent:subpath];
+    return [self urlForResource:subpath].path;
+}
+
++ (NSURL *)urlForResource:(NSString *)subpath {
+    NSURL *container = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:[self appGroupID]];
+    return [container URLByAppendingPathComponent:subpath];
 }
 
 @end

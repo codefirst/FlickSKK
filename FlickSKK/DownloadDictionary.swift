@@ -10,8 +10,8 @@ import Alamofire
 // もしかしたらダウンロード済みの辞書を統合したほうが高速化ができるかもしれないが、
 // とりあえず現バージョンでは対応しない。
 class DownloadDictionary {
-    private let url : String
-    private let path : String
+    private let remote : NSURL
+    private let local : NSURL
 
     // MARK: - handler
     // FIXME: delegateにしたほうがiOSっぽいので直したほうがいい?
@@ -26,15 +26,12 @@ class DownloadDictionary {
 
     // MARK: -
 
-    init(url : String) {
-        self.url = url
+    init(url : NSURL) {
+        self.remote = url
 
-        let dir = DictionarySettings.additionalDictionaryPath()
-        do {
-            try NSFileManager.defaultManager().createDirectoryAtPath(dir, withIntermediateDirectories: true, attributes: nil)
-        } catch _ {
-        }
-        self.path = dir.stringByAppendingPathComponent(url.lastPathComponent)
+        let local = DictionarySettings.additionalDictionaryURL()
+        try! NSFileManager.defaultManager().createDirectoryAtURL(local, withIntermediateDirectories: true, attributes: nil)
+        self.local = local
     }
 
     func call() {
@@ -42,7 +39,7 @@ class DownloadDictionary {
         let utf8File = Tempfile.temp()
 
         // ダウンロード
-        save(self.url, path: downloadFile,
+        save(self.remote, path: downloadFile,
             onSuccess: {
                 do {
                     // UTF8へのエンコード
@@ -50,12 +47,12 @@ class DownloadDictionary {
 
                     // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
                     async {
-                        let dictionary = LoadLocalDictionary(path: utf8File)
+                        let dictionary = LoadLocalDictionary(url: utf8File)
 
                         // 妥当性のチェック
                         if self.validate(dictionary) {
                             // 再ソート
-                            SortDictionary(dictionary: dictionary).call(self.path)
+                            SortDictionary(dictionary: dictionary).call(self.local)
 
                             // 結果のサマリを渡す
                             let info = DictionaryInfo(dictionary: dictionary)
@@ -74,9 +71,9 @@ class DownloadDictionary {
     }
 
     // URLを特定ファイルに保存する。
-    private func save(url : String, path: String, onSuccess : Void -> Void, onError : ErrorType? -> Void) {
+    private func save(url : NSURL, path: NSURL, onSuccess : Void -> Void, onError : ErrorType? -> Void) {
         Alamofire.download(.GET, url) { (temporaryURL, response) in
-            return NSURL.fileURLWithPath(path, isDirectory: false) ?? temporaryURL
+            return path ?? temporaryURL
         }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
             let progress = Float(totalBytesRead) / Float(totalBytesExpectedToRead)
             self.progress?(NSLocalizedString("Downloading", comment:""), progress / 2)
@@ -94,9 +91,9 @@ class DownloadDictionary {
     }
 
     // UTF8でエンコードして、保存する
-    private func encodeToUTF8(src : String, dest: String) throws {
+    private func encodeToUTF8(src : NSURL, dest: NSURL) throws {
         let content = try readFile(src)
-        if let file = LocalFile(path: dest) {
+        if let file = LocalFile(url: dest) {
             defer { file.close() }
             file.write(content as String)
         }
@@ -104,11 +101,11 @@ class DownloadDictionary {
 
     // ファイルをEUC-JPもしくはUTF-8として読み込む
     // (シミュレータではEUC-JPの読み込みは失敗する)
-    private func readFile(path : String) throws -> NSString {
-        if let content = try? NSString(contentsOfFile: path, encoding: NSJapaneseEUCStringEncoding) {
+    private func readFile(url : NSURL) throws -> NSString {
+        if let content = try? NSString(contentsOfURL: url, encoding: NSJapaneseEUCStringEncoding) {
             return content
         }
-        return try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        return try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding)
     }
 
     // 辞書の検証をする
