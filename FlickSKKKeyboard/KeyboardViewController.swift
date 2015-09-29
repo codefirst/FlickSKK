@@ -245,12 +245,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             "progress": loadingProgressView,
             "keypadAndControls": keypadAndControlsView,
         ]
-        let autolayout = self.inputView.northLayoutFormat(metrics, views)
-        autolayout("H:|[sessionView]|")
-        autolayout("H:|[progress]")
-        autolayout("H:|[keypadAndControls]|")
-        autolayout("V:|[sessionView(==30)][keypadAndControls]|")
-        autolayout("V:|[progress(==sessionView)]")
+        if let autolayout = self.inputView?.northLayoutFormat(metrics, views) {
+            autolayout("H:|[sessionView]|")
+            autolayout("H:|[progress]")
+            autolayout("H:|[keypadAndControls]|")
+            autolayout("V:|[sessionView(==30)][keypadAndControls]|")
+            autolayout("V:|[progress(==sessionView)]")
+        }
 
         self.view.addConstraint(heightConstraint);
     }
