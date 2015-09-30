@@ -26,10 +26,10 @@ class LoadLocalDicitonarySpec : QuickSpec {
             }
 
             it("okuri ari") {
-                expect(dictionary.okuriAri).to(contain("をs /惜/"))
-                expect(dictionary.okuriAri).to(contain("われらg /我等/"))
-                expect(dictionary.okuriAri).notTo(contain(";; okuri-ari entries."))
-                expect(dictionary.okuriAri).notTo(contain(""))
+                expect(dictionary.okuriAri()).to(contain("をs /惜/"))
+                expect(dictionary.okuriAri()).to(contain("われらg /我等/"))
+                expect(dictionary.okuriAri()).notTo(contain(";; okuri-ari entries."))
+                expect(dictionary.okuriAri()).notTo(contain(""))
             }
 
             it("okuri nasi") {
