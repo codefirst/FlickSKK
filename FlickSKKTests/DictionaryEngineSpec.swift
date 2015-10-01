@@ -18,7 +18,7 @@ class DictionaryEngineSpec : QuickSpec {
 
         describe("#find") {
             it("送り仮名を補う") {
-                let xs = dictionaryEngine.find("おく", okuri: "る", dynamic: false)
+                dictionaryEngine.find("おく", okuri: "る", dynamic: false)
             }
         }
     }

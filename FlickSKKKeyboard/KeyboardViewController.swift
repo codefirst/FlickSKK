@@ -199,7 +199,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 "right": rightControl,
                 "keypad": keypad,
             ]
-            var autolayout = self.keypadAndControlsView.northLayoutFormat(metrics, views)
+            let autolayout = self.keypadAndControlsView.northLayoutFormat(metrics, views)
             autolayout("H:|[left][keypad][right(==left)]|")
             autolayout("V:|[left]|")
             autolayout("V:|[keypad]|")
