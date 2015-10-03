@@ -31,7 +31,7 @@ class DownloadDictionary {
 
         let local = DictionarySettings.additionalDictionaryURL()
         try! NSFileManager.defaultManager().createDirectoryAtURL(local, withIntermediateDirectories: true, attributes: nil)
-        self.local = local
+        self.local = local.URLByAppendingPathComponent(url.lastPathComponent ?? "skk.jisyo")
     }
 
     func call() {
