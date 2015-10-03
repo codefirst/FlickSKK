@@ -66,7 +66,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     }
 
     private func canDownload() -> Bool {
-        return self.urlField.text != nil
+        return self.urlField.text?.isEmpty == false
     }
 
     @objc private func download() {

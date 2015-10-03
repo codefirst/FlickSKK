@@ -40,7 +40,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         if canRegister() {
             var okuri : String? = nil
 
-            if let text = self.okuriField.text {
+            if let text = self.okuriField.text where !text.isEmpty {
                 // 1文字目
                 let first = Array(text.characters)[0]
                 // ローマ字変換
