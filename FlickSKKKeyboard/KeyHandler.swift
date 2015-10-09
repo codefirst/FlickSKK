@@ -109,7 +109,7 @@ class KeyHandler {
         case .SkipPartialCandidates:
             let nextMode = factory.kanjiCompose(kana, okuri: .None)
             switch nextMode {
-            case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+            case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: _):
                 if let index = candidates.index({!$0.isPartial}) {
                     return .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index)
                 }
@@ -125,7 +125,7 @@ class KeyHandler {
         kana : String, okuri : String?, candidates : [Candidate], index : Int,
         status : TextEngine.Status) -> ComposeMode? {
         switch keyEvent {
-        case .Char(kana: let str, shift : let shift):
+        case .Char(kana: _, shift : _):
             // 暗黙的に確定する。単語登録中の場合は、statusが更新されるので、次に引き渡す
             let status = text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
             // 次の処理を開始する

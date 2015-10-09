@@ -12,7 +12,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         super.init(style: .Grouped)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -74,7 +74,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     private let kCellID = "Cell"
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
 
         switch indexPath.section {
         case 0:
@@ -107,8 +107,8 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 && editingStyle == .Delete {
-            if let path = self.entries[indexPath.row].path {
-                NSFileManager.defaultManager().removeItemAtPath(path, error: nil)
+            if let local = self.entries[indexPath.row].local {
+                let _ = try? NSFileManager.defaultManager().removeItemAtURL(local)
                 self.reloadEntries()
             }
         }

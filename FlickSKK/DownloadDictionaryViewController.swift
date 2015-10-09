@@ -12,15 +12,15 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
         style: .Done, target:self, action: Selector("download"))
     private let done : Void -> Void
 
-    init(url : String, done : Void -> Void) {
+    init(url : NSURL?, done : Void -> Void) {
         self.done = done
         super.init(style: .Grouped)
-        urlField.text = url
+        urlField.text = url?.absoluteString ?? ""
         self.doneButton.enabled = canDownload()
         self.navigationItem.rightBarButtonItem = doneButton
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -38,7 +38,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
 
         cell.textLabel?.text = NSLocalizedString("URL", comment:"")
         urlField.frame = CGRectMake(0, 0, cell.frame.width - 80, 130)
@@ -66,15 +66,16 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     }
 
     private func canDownload() -> Bool {
-        return !self.urlField.text.isEmpty
+        return self.urlField.text?.isEmpty == false
     }
 
     @objc private func download() {
         if canDownload() {
-            let vc = HeadUpProgressViewController()
-            let action = DownloadDictionary(url: self.urlField.text)
+            guard let url = self.urlField.text.flatMap({ NSURL(string: $0)}) else { return }
 
-            var oldTitle : String? = nil
+            let vc = HeadUpProgressViewController()
+            let action = DownloadDictionary(url: url)
+
             action.progress = { (title, progress) in
                 vc.text = title
                 vc.progress = progress
@@ -90,7 +91,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
             }
             action.error = { (title, e) in
                 vc.close {
-                    self.alert(title, message: e?.localizedDescription ?? "")
+                    self.alert(title, message: e.map { String($0) } ?? "" )
                 }
             }
             action.call()

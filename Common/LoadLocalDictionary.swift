@@ -33,7 +33,9 @@ class LoadLocalDictionary {
     private var ari : NSMutableArray = NSMutableArray()
     private var nasi : NSMutableArray = NSMutableArray()
 
-    init(path : String) {
+    init(url : NSURL) {
+        guard let path = url.path else { return }
+
         var isOkuriAri = true
         IOUtil.each(path, with: { line -> Void in
             let s = line as NSString

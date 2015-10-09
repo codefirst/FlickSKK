@@ -15,31 +15,35 @@ class DictionarySettings {
     }
 
     // ユーザ辞書(単語登録)
-    class func defaultUserDictionaryPath() -> String {
-        return AppGroup.pathForResource("Library/skk.jisyo") ?? NSHomeDirectory().stringByAppendingPathComponent("Library/skk.jisyo")
+    class func defaultUserDictionaryURL() -> NSURL {
+        return AppGroup.urlForResource("Library/skk.jisyo") ?? home("Library/skk.jisyo")
     }
 
     // 変換結果の学習
-    class func defaultLearnDictionaryPath() -> String {
-        return AppGroup.pathForResource("Library/skk.learn.jisyo") ??
-            NSHomeDirectory().stringByAppendingPathComponent("Library/skk.learn.jisyo")
+    class func defaultLearnDictionaryURL() -> NSURL {
+        return AppGroup.urlForResource("Library/skk.learn.jisyo") ??
+            home("Library/skk.learn.jisyo")
     }
 
     // q確定の結果の学習
-    class func defaultPartialDictionaryPath() -> String {
-        return AppGroup.pathForResource("Library/skk.partial.jisyo") ??
-            NSHomeDirectory().stringByAppendingPathComponent("Library/skk.partial.jisyo")
+    class func defaultPartialDictionaryURL() -> NSURL {
+        return AppGroup.urlForResource("Library/skk.partial.jisyo") ??
+            home("Library/skk.partial.jisyo")
     }
 
     // 追加辞書
-    class func additionalDictionaryPath() -> String {
-        return AppGroup.pathForResource("Library/additional") ??
-            NSHomeDirectory().stringByAppendingPathComponent("Library/additional")
+    class func additionalDictionaryURL() -> NSURL {
+        return AppGroup.urlForResource("Library/additional") ??
+            home("Library/additional")
     }
 
     // 組込みの辞書(L辞書とか)
-    class func defaultDicitonaryPath() -> String {
+    class func defaultDicitonaryURL() -> NSURL {
        // 辞書は必ず組込まれているはず
-       return (DictionarySettings.bundle ?? NSBundle.mainBundle()).pathForResource("skk", ofType: "jisyo")!
+       return (DictionarySettings.bundle ?? NSBundle.mainBundle()).URLForResource("skk", withExtension: "jisyo")!
+    }
+
+    class func home(path : String) -> NSURL {
+        return NSURL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).URLByAppendingPathComponent(path)
     }
 }

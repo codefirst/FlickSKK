@@ -24,7 +24,7 @@ class SafeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         viewDidLoad()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -35,7 +35,7 @@ class SafeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let selected = tableView.indexPathForSelectedRow() {
+        if let selected = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(selected, animated: animated)
         }
         tableView.reloadData()

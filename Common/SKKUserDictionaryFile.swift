@@ -16,35 +16,36 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     // [String:String]相当の実装になってる
     var okuriAri  = NSMutableDictionary()
     var okuriNasi = NSMutableDictionary()
-    private let path : String
+    private let url : NSURL
 
-    init(path : String){
-        self.path = path
-
+    init(url : NSURL){
+        self.url = url
         // TODO: 変なデータが来たら、空で初期化する
         let now = NSDate()
         var isOkuriAri = true
-        IOUtil.each(path, with: { line -> Void in
-            let s = line as NSString
-            // toggle
-            if s.hasPrefix(";; okuri-nasi entries.") {
-                isOkuriAri = false
-            }
-            // skip comment
-            if(s.hasPrefix(";")) { return }
-
-            switch self.parse(s) {
-            case .Some(let x,let y):
-                if isOkuriAri {
-                    self.okuriAri[x] = y
-                } else {
-                    self.okuriNasi[x] = y
+        if let path = url.path {
+            IOUtil.each(path, with: { line -> Void in
+                let s = line as NSString
+                // toggle
+                if s.hasPrefix(";; okuri-nasi entries.") {
+                    isOkuriAri = false
                 }
-            case .None:
-                break
-            }
-        })
-        NSLog("loaded (%f) (%d + %d entries from %@)\n", NSDate().timeIntervalSinceDate(now), okuriAri.count, okuriNasi.count, path)
+                // skip comment
+                if(s.hasPrefix(";")) { return }
+
+                switch self.parse(s) {
+                case .Some(let x,let y):
+                    if isOkuriAri {
+                        self.okuriAri[x] = y
+                    } else {
+                        self.okuriNasi[x] = y
+                    }
+                case .None:
+                    break
+                }
+            })
+        }
+        NSLog("loaded (%f) (%d + %d entries from %@)\n", NSDate().timeIntervalSinceDate(now), okuriAri.count, okuriNasi.count, url)
     }
 
     func entries() -> [SKKDictionaryEntry] {
@@ -64,7 +65,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             }
         }
 
-        sort(&xs)
+        xs.sortInPlace()
         return xs
     }
 
@@ -100,7 +101,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     }
 
     func serialize() {
-        if let file = LocalFile(path: self.path) {
+        if let file = LocalFile(url: self.url) {
             file.writeln(";; okuri-ari entries.")
             for (k,v) in self.okuriAri {
                 let kana = k as! String

@@ -64,7 +64,7 @@ class UserDictionaryViewController: SafeTableViewController {
 
     private let kCellID = "Cell"
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) as? UITableViewCell ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
         cell.selectionStyle = .None
 
         switch self.entries[indexPath.row] {
@@ -91,7 +91,7 @@ class UserDictionaryViewController: SafeTableViewController {
     }
 
     // MARK: -
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

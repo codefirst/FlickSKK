@@ -7,7 +7,7 @@ class ComposeModePresenter {
             return ""
         case .KanaCompose(kana: let kana, candidates: _):
             return "▽\(kana)"
-        case .KanjiCompose(kana: let kana, okuri: let okuri, candidates: let candidates, index: let index):
+        case .KanjiCompose(kana: let kana, okuri: let okuri, candidates: _, index: _):
             let text = kana + (okuri.map({ str in "*" + str }) ?? "")
             return "▼\(text)"
         case .WordRegister(kana : let kana, okuri : let okuri, composeText : let text, composeMode : let m):
@@ -38,7 +38,7 @@ class ComposeModePresenter {
             return false
         case .KanaCompose(_):
             return true
-        case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
+        case .KanjiCompose(kana: _, okuri: _, candidates: _, index: _):
             return true
         case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return inStatusShowsCandidatesBySpace(m[0]

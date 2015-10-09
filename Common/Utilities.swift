@@ -18,10 +18,10 @@ extension NSObject {
 }
 
 extension UIButton {
-    func setBackgroundImage(#color: UIColor, forState state: UIControlState) {
+    func setBackgroundImage(color color: UIColor, forState state: UIControlState) {
         UIGraphicsBeginImageContext(CGSizeMake(1, 1))
         color.setFill()
-        UIRectFillUsingBlendMode(CGRectMake(0, 0, 1, 1), kCGBlendModeCopy)
+        UIRectFillUsingBlendMode(CGRectMake(0, 0, 1, 1), CGBlendMode.Copy)
         self.setBackgroundImage(UIGraphicsGetImageFromCurrentImageContext(), forState: state)
         UIGraphicsEndImageContext()
     }
@@ -42,8 +42,8 @@ func dictionaryWithKeyValues<K,V>(pairs: [(K,V)]) -> [K:V] {
 
 func toggle(s : String, table : [[String]]) -> String? {
     let skip : String = "ー"
-    for (i,t) in enumerate(table) {
-        for (j, x) in enumerate(t) {
+    for (i,t) in table.enumerate() {
+        for (j, x) in t.enumerate() {
             if s == x {
                 var next = table[(i + 1) % table.count][j]
                 if next == skip {
@@ -65,7 +65,7 @@ func tr(c : Character, from : String, to : String) -> Character? {
      */
     let r = (from as NSString).rangeOfString(String(c))
     if r.location != NSNotFound {
-        return Array(to)[r.location]
+        return Array(to.characters)[r.location]
     }
     return .None
 }
@@ -333,15 +333,15 @@ extension String {
     func conv(from : KanaType, to : KanaType) -> String {
         let x = ConversionTable[from] ?? ""
         let y = ConversionTable[to] ?? ""
-        return implode(Array(self).map({ (c : Character) -> Character in tr(c, x, y) ?? c }))
+        return implode(Array(self.characters).map({ (c : Character) -> Character in tr(c, from: x, to: y) ?? c }))
     }
 
     func conv(to : KanaType) -> String {
-        var result = Array(self)
+        var result = Array(self.characters)
         let target = ConversionTable[to] ?? ""
         for (type, table) in ConversionTable {
             if type != to {
-                result = result.map({ (c : Character) -> Character in tr(c, table, target) ?? c })
+                result = result.map({ (c : Character) -> Character in tr(c, from: table, to: target) ?? c })
             }
         }
         return implode(result)
@@ -403,23 +403,23 @@ extension String {
              "ー","ー","ﾂﾞ","ー","ー",
              "ﾊﾟ","ﾋﾟ","ﾌﾟ","ﾍﾟ","ﾎﾟ",
              "ー","ー","ー"]]
-        return toggle(self, table)
+        return toggle(self, table: table)
     }
 
     func toggleUpperLower() -> String? {
         let table = [
             ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
             ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]]
-        return toggle(self, table)
+        return toggle(self, table: table)
     }
 
     func first() -> Character? {
-        let xs = Array(self)
+        let xs = Array(self.characters)
         return xs.first
     }
 
     func last() -> String? {
-        let xs = Array(self)
+        let xs = Array(self.characters)
         switch xs.last {
         case .Some(let last):
             if (last == "ﾞ" || last == "ﾟ") && xs.count > 1 {
@@ -438,8 +438,8 @@ extension String {
         case .None:
             return self
         case .Some(let s):
-            if(count(s.utf16) <= count(self.utf16)) {
-                return self.substringToIndex(advance(self.startIndex, count(self.utf16) - count(s.utf16)))
+            if(s.utf16.count <= self.utf16.count) {
+                return self.substringToIndex(self.startIndex.advancedBy(self.utf16.count - s.utf16.count))
             } else {
                 return self
             }
@@ -465,14 +465,14 @@ extension Array {
         return result
     }
 
-    func any(f: T -> Bool) -> Bool {
+    func any(f: Element -> Bool) -> Bool {
         for elem in self {
             if f(elem) { return true }
         }
         return false
     }
 
-    func index(f: T -> Bool) -> Array.Index? {
+    func index(f: Element -> Bool) -> Array.Index? {
         for i in 0..<self.count {
             if f(self[i]) { return i }
         }

@@ -19,7 +19,7 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
             it("Enter") {
                 let m = handler.handle(.Enter, composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
+                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("かあああ"))
@@ -30,7 +30,7 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
             it("InputModeChange") {
                 let m = handler.handle(.InputModeChange(inputMode: .Katakana), composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
+                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("かアアア"))
@@ -46,7 +46,7 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
             it("Enter") {
                 let m = handler.handle(.Enter, composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
+                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("か山"))

@@ -9,8 +9,8 @@ class SortDictionary {
         self.dictionary = dictionary
     }
 
-    func call(dest : String) {
-        if let file = LocalFile(path: dest) {
+    func call(dest : NSURL) {
+        if let file = LocalFile(url: dest) {
             file.writeln(";; okuri-ari entries.")
             for line in sorted(dictionary.okuriAri(), reverse: true) {
                 let line2 = line as! String

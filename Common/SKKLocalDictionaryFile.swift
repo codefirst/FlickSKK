@@ -7,14 +7,14 @@
 class SKKLocalDictionaryFile : SKKDictionaryFile {
     private let okuriAri : BinarySearch
     private let okuriNasi : BinarySearch
-    private let path : String
+    private let url : NSURL
     private let filters : [SKKFilter] = [
         IdFilter(), NumberFilter()
     ]
-    init(path : String){
-        self.path = path
+    init(url : NSURL){
+        self.url = url
         let now = NSDate()
-        let dictionary = LoadLocalDictionary(path: path)
+        let dictionary = LoadLocalDictionary(url: url)
 
         self.okuriAri = BinarySearch(entries: dictionary.okuriAri(), reverse: true)
         self.okuriNasi = BinarySearch(entries: dictionary.okuriNasi(), reverse: false)

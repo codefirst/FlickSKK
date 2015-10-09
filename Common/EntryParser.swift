@@ -18,7 +18,7 @@ class EntryParser {
     }
 
     func title() -> String? {
-        if let n = find(self.entry, " ") {
+        if let n = self.entry.characters.indexOf(" ") {
             return self.entry.substringToIndex(n)
         } else {
             return nil
@@ -66,13 +66,13 @@ class EntryParser {
     private func escape(str : String) -> String {
         return EscapeStrings.reduce(str) { (str, x) in
             let (from, to) = x
-            return str.stringByReplacingOccurrencesOfString(from, withString: to, options: nil, range: nil)
+            return str.stringByReplacingOccurrencesOfString(from, withString: to, options: [], range: nil)
         }
     }
 
     // 単語ごとに分割する
     func rawWords() -> [String] {
-        let xs = self.entry.pathComponents
+        let xs = self.entry.componentsSeparatedByString("/")
         if xs.count <= 2 {
             return []
         } else {
@@ -84,13 +84,13 @@ class EntryParser {
     private func unescape(str : String) -> String {
         return EscapeStrings.reduce(str) { (str, x) in
             let (from, to) = x
-            return str.stringByReplacingOccurrencesOfString(to, withString: from, options: nil, range: nil)
+            return str.stringByReplacingOccurrencesOfString(to, withString: from, options: [], range: nil)
         }
     }
 
     // アノテーションの除去
     private func stripAnnotation(str : String) -> String {
-        if let index = find(str, ";") {
+        if let index = str.characters.indexOf(";") {
             return str.substringToIndex(index)
         } else {
             return str

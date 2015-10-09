@@ -1,62 +1,60 @@
 private var kDicitonary : SKKLocalDictionaryFile?
-private var kCache : [String:(NSDate, Any)] = [:]
+private var kCache : [NSURL:(NSDate, Any)] = [:]
 
 // 辞書のロードには時間がかかるので、一度ロードした結果をキャッシュする
 // グローバル変数にいれておけば、次回起動時にも残っている(ことがある)
 class DictionaryCache {
     // L辞書等のインストール済みの辞書をロードする
     // FIXME: 現時点では二個以上の辞書ファイルは存在しないと仮定している
-    func loadLocalDicitonary(path: String, closure: String -> SKKLocalDictionaryFile) -> SKKLocalDictionaryFile {
+    func loadLocalDicitonary(url: NSURL, closure: NSURL -> SKKLocalDictionaryFile) -> SKKLocalDictionaryFile {
         if kDicitonary == nil {
-            kDicitonary = closure(path)
+            kDicitonary = closure(url)
         }
         return kDicitonary!
     }
 
     // ユーザごとに作られる辞書をロードする(例: 単語登録結果、学習結果)
-    func loadUserDicitonary<T>(path: String, closure: String -> T) -> T {
-        if let mtime = getModifiedTime(path) {
-            if let (Exact, file) = kCache[path] {
+    func loadUserDicitonary<T>(url: NSURL, closure: NSURL -> T) -> T {
+        if let mtime = getModifiedTime(url) {
+            if let (Exact, file) = kCache[url] {
                 if Exact == mtime {
                     // キャッシュが有効
-                    NSLog("%@ is cached", path)
+                    NSLog("%@ is cached", url)
                     return file as! T
                 } else {
                     // キャシュが無効になっている
-                    NSLog("%@ cache is expired", path)
-                    let newFile = closure(path)
-                    kCache[path] = (mtime, newFile)
+                    NSLog("%@ cache is expired", url)
+                    let newFile = closure(url)
+                    kCache[url] = (mtime, newFile)
                     return newFile
                 }
             } else {
                 // キャッシュが存在しない
-                NSLog("%@ is cached", path)
-                let file = closure(path)
-                kCache[path] = (mtime, file)
+                NSLog("%@ is cached", url)
+                let file = closure(url)
+                kCache[url] = (mtime, file)
                 return file
             }
         } else {
             // ロード対象のファイルが存在しない
-            return closure(path)
+            return closure(url)
         }
     }
 
     // キャッシュの最終更新日時を更新する
-    func update(path: String, closure : () -> ()) {
+    func update(url: NSURL, closure : () -> ()) {
         closure()
-        if let (_, file) = kCache[path] {
-            if let mtime = getModifiedTime(path) {
-                kCache[path] = (mtime, file)
+        if let (_, file) = kCache[url] {
+            if let mtime = getModifiedTime(url) {
+                kCache[url] = (mtime, file)
             }
         }
     }
 
-    private func getModifiedTime(path: String) -> NSDate? {
+    private func getModifiedTime(url: NSURL) -> NSDate? {
         let fm = NSFileManager.defaultManager()
-        if let attrs = fm.attributesOfItemAtPath(path, error: nil) {
-            return attrs[NSFileModificationDate] as? NSDate
-        } else {
-            return nil
-        }
+        guard let path = url.path else { return nil }
+        guard let attrs = try? fm.attributesOfItemAtPath(path) else { return nil }
+        return attrs[NSFileModificationDate] as? NSDate
     }
 }

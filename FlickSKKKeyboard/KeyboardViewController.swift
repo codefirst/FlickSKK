@@ -18,7 +18,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var sessionView : SessionView = SessionView(engine: self.engine)
 
     var inputProxy: UITextDocumentProxy {
-        return self.textDocumentProxy as! UITextDocumentProxy
+        return self.textDocumentProxy 
     }
 
     // MARK: Status
@@ -147,11 +147,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             }
         }
 
-        dictionary.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions.allZeros, context: nil)
+        dictionary.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions(), context: nil)
         updateControlButtons()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -159,7 +159,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         dictionary.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
     }
 
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if let dict = object as? SKKDictionary {
             if dict.isWaitingForLoad {
                 self.disableAllKeys()
@@ -199,7 +199,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 "right": rightControl,
                 "keypad": keypad,
             ]
-            var autolayout = self.keypadAndControlsView.northLayoutFormat(metrics, views)
+            let autolayout = self.keypadAndControlsView.northLayoutFormat(metrics, views)
             autolayout("H:|[left][keypad][right(==left)]|")
             autolayout("V:|[left]|")
             autolayout("V:|[keypad]|")
@@ -232,7 +232,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     private func setupViewConstraints() {
         if CGRectIsEmpty(view.frame) {
-            println("\(__FUNCTION__): empty view. ignored.")
+            print("\(__FUNCTION__): empty view. ignored.")
             return
         }
 
@@ -245,18 +245,19 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             "progress": loadingProgressView,
             "keypadAndControls": keypadAndControlsView,
         ]
-        let autolayout = self.inputView.northLayoutFormat(metrics, views)
-        autolayout("H:|[sessionView]|")
-        autolayout("H:|[progress]")
-        autolayout("H:|[keypadAndControls]|")
-        autolayout("V:|[sessionView(==30)][keypadAndControls]|")
-        autolayout("V:|[progress(==sessionView)]")
+        if let autolayout = self.inputView?.northLayoutFormat(metrics, views) {
+            autolayout("H:|[sessionView]|")
+            autolayout("H:|[progress]")
+            autolayout("H:|[keypadAndControls]|")
+            autolayout("V:|[sessionView(==30)][keypadAndControls]|")
+            autolayout("V:|[progress(==sessionView)]")
+        }
 
         self.view.addConstraint(heightConstraint);
     }
 
     func controlViewWithButtons(buttons: [UIView]) -> UIView {
-        if (buttons.count != 4) { println("fatal: cannot add buttons not having 4 buttons to control"); return UIView(); }
+        if (buttons.count != 4) { print("fatal: cannot add buttons not having 4 buttons to control"); return UIView(); }
 
         let views = [
             "a": buttons[0],
@@ -275,11 +276,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         }
     }
 
-    override func textWillChange(textInput: UITextInput) {
+    override func textWillChange(textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
     }
 
-    override func textDidChange(textInput: UITextInput) {
+    override func textDidChange(textInput: UITextInput?) {
         // The app has just changed the document's contents, the document context has been updated.
 
         updateControlButtons()
@@ -304,7 +305,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     func keyTapped(key: KanaFlickKey, _ index: Int?) {
         switch key {
         case let .Seq(s, _):
-            let kana = Array(s)[index ?? 0]
+            let kana = Array(s.characters)[index ?? 0]
             self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled))
             self.prevShiftEnabled = self.shiftEnabled
             self.shiftEnabled = false
@@ -413,7 +414,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 
     private let userInteractionMaskView = UIView()
     private func disableAllKeys() {
-        userInteractionMaskView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        userInteractionMaskView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         userInteractionMaskView.frame = self.view.bounds
         userInteractionMaskView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
         if userInteractionMaskView.superview == nil {
@@ -427,7 +428,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func deleteBackward() {
-        (self.textDocumentProxy as! UIKeyInput).deleteBackward()
+        (self.textDocumentProxy as UIKeyInput).deleteBackward()
     }
 
     func changeInputMode(inputMode : SKKInputMode) {
