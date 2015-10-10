@@ -19,6 +19,9 @@ profile
 #CocoaPod
 Pods/*
 
+#RubyGems
+/.bundle/
+
 #other
 tmp/
 
