@@ -14,16 +14,16 @@
 
 ## ビルド方法
 
-### CocoaPodsの導入
-
-```
-$ sudo gem install cocoapods
-```
-
 ### ソースコードの取得
 ```
 $ git clone https://github.com/codefirst/FlickSKK.git
 $ cd FlickSKK
+```
+
+### CocoaPodsの導入
+
+```
+$ bundle install
 ```
 
 ### 設定ファイルの書き換え
@@ -37,7 +37,7 @@ $ cp Config.xcconfig.example Config.xcconfig
 ### ビルド
 
 ```
-$ pod install
+$ bundle exec pod install
 ```
 
 その後、 FlickSKK.*xcworkspace* を開いてビルドしてください。 (注: FlickSKK.*xcodeproj* ではない)
