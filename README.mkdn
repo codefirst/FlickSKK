@@ -27,11 +27,10 @@ $ bundle install
 ```
 
 ### 設定ファイルの書き換え
-以下のようにConfig.xcconfigを作成し、適当な内容に書き換えてください。
-特に `APP_IDENTIFIER` を自分のDeveloper ProgramのApp IDへの書き換えは必須です。
+以下のようにAppGroup用のApp IDを指定します。 このApp IDは、自分のDeveloper ProgramのApp IDである必要があります。
 
 ```
-$ cp Config.xcconfig.example Config.xcconfig
+$ bundle exec pod app-group GROUP_NAME
 ```
 
 ### ビルド
