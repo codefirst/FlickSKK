@@ -145,10 +145,10 @@
 		13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
 		13FFFD471A3D24F70049D45D /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
-		22C4D589D09BE72A2BB5C670 /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		22C4D589D09BE72A2BB5C670 /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; };
 		80E568DB1AA358920029DDBD /* flickskk_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E568DA1AA358920029DDBD /* flickskk_white.png */; };
 		80EA0A2A1AAB3C1300D7148D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 80EA0A291AAB3C1300D7148D /* Settings.bundle */; };
-		D383C4BFBDEAFB6914009B9E /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D383C4BFBDEAFB6914009B9E /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; };
 		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
 		EA349A481A903BDE00084BDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A471A903BDE00084BDE /* AppDelegate.swift */; };
 		EA349A4A1A903BDE00084BDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A491A903BDE00084BDE /* ViewController.swift */; };
@@ -162,7 +162,7 @@
 		EACD52A419F3F58B001FB2A7 /* html in Resources */ = {isa = PBXBuildFile; fileRef = EACD52A319F3F58B001FB2A7 /* html */; };
 		EAD4B56D19D5CB50007B6636 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAD4B56C19D5CB50007B6636 /* Images.xcassets */; };
 		EAD4B59119D5CB8A007B6636 /* FlickSKKKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EAD4B58919D5CB8A007B6636 /* FlickSKKKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		FAD7AF1F1AF86EB539B0B3E3 /* Pods_FlickSKKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8E386C47EFBEA9835F2AFB /* Pods_FlickSKKTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FAD7AF1F1AF86EB539B0B3E3 /* Pods_FlickSKKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8E386C47EFBEA9835F2AFB /* Pods_FlickSKKTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -864,6 +864,7 @@
 				EAD4B58619D5CB8A007B6636 /* Frameworks */,
 				EAD4B58719D5CB8A007B6636 /* Resources */,
 				3FFC4AB8699CC3AF97F3080D /* Copy Pods Resources */,
+				01C455B6402DA7EDE93A80E1 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -978,6 +979,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		01C455B6402DA7EDE93A80E1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		351977BFA91B57BB334C0647 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
