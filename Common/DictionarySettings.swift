@@ -1,3 +1,5 @@
+import AppGroup
+
 // 辞書のパスを管理する
 class DictionarySettings {
     // テスト時は違うBundleからロードする

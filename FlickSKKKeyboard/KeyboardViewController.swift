@@ -8,6 +8,7 @@
 
 import UIKit
 import NorthLayout
+import AppGroup
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
@@ -211,7 +212,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             self?.engine.handle(.Select(index : index))
             return
         }
-        sessionView.composeText = AppGroup.initialText()
+        sessionView.composeText = AppGroup.appGroupID()
 
         updateControlButtons()
 

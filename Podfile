@@ -20,3 +20,4 @@ post_install do |installer|
   FileUtils.cp_r('Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-Acknowledgements.plist', 'FlickSKK/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
 end
 
+plugin 'cocoapods-app_group'
