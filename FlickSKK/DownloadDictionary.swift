@@ -66,7 +66,7 @@ class DownloadDictionary {
                 }
             },
             onError: { e in
-                error?(NSLocalizedString("DownloadError", comment:""), e)
+                self.error?(NSLocalizedString("DownloadError", comment:""), e)
             })
     }
 
