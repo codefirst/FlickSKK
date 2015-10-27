@@ -1,16 +1,16 @@
 PODS:
   - Alamofire (2.0.2)
   - AppGroup (1.0.0)
-  - Nimble (2.0.0-rc.3)
+  - Nimble (3.0.0)
   - NorthLayout (2.0.0)
-  - Quick (0.7.0)
+  - Quick (0.8.0)
 
 DEPENDENCIES:
   - Alamofire
   - AppGroup (from `/Users/mzp/git/FlickSKK/Pods/CocoaPodsAppGroup/`)
-  - Nimble (= 2.0.0-rc.3)
+  - Nimble (= 3.0.0)
   - NorthLayout
-  - Quick (~> 0.7.0)
+  - Quick (~> 0.8.0)
 
 EXTERNAL SOURCES:
   AppGroup:
@@ -18,9 +18,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  Nimble: 9dff98ee195ffe7351d3b2fb01d3a1420fd97948
   AppGroup: 3d2d571fb8ad1e4b19d127a6ebddaf52b6a4c44a
+  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   NorthLayout: 52739ecae3c9c5877770869d4277c308512f9fd5
-  Quick: 906d8aa995ee0afa96f1f7f01170f40fccfa5898
+  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
 
 COCOAPODS: 0.39.0

@@ -10,8 +10,8 @@ target 'FlickSKK' do
 end
 
 target 'FlickSKKTests' do
-  pod 'Quick', '~> 0.7.0'
-  pod 'Nimble', '2.0.0-rc.3'
+  pod 'Quick', '~> 0.8.0'
+  pod 'Nimble', '3.0.0'
   pod 'NorthLayout'
 end
 
