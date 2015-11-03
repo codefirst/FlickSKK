@@ -142,11 +142,10 @@
 		13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
 		13FFFD471A3D24F70049D45D /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
-		22C4D589D09BE72A2BB5C670 /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; };
+		5F257844159BF4486EBB171C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D184B1D0EAEC5D0C5E64CD /* Pods.framework */; };
 		80E568DB1AA358920029DDBD /* flickskk_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E568DA1AA358920029DDBD /* flickskk_white.png */; };
 		80EA0A2A1AAB3C1300D7148D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 80EA0A291AAB3C1300D7148D /* Settings.bundle */; };
-		D383C4BFBDEAFB6914009B9E /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; };
-		DD125A9B1BA0E0D56591B71C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D184B1D0EAEC5D0C5E64CD /* Pods.framework */; };
+		9DB9E5AC72A72193B3E19E0C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D184B1D0EAEC5D0C5E64CD /* Pods.framework */; };
 		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
 		EA349A481A903BDE00084BDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A471A903BDE00084BDE /* AppDelegate.swift */; };
 		EA349A4A1A903BDE00084BDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A491A903BDE00084BDE /* ViewController.swift */; };
@@ -286,14 +285,14 @@
 		13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModeFactory.swift; sourceTree = "<group>"; };
 		13E566CB1AF6360300592844 /* BinarySearchSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchSpec.swift; sourceTree = "<group>"; };
 		13F456371ADBD863004EB68D /* NumberFliterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFliterSpec.swift; sourceTree = "<group>"; };
+		1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3758E2CE5E666333313C17EA /* Pods-FlickSKKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3927343C314CA30425B06CCA /* Pods-FlickSKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.release.xcconfig"; sourceTree = "<group>"; };
 		3F8E386C47EFBEA9835F2AFB /* Pods_FlickSKKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D184B1D0EAEC5D0C5E64CD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C3AE9174E82C4214EA41CCE /* Pods-FlickSKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.debug.xcconfig"; sourceTree = "<group>"; };
 		80E568DA1AA358920029DDBD /* flickskk_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickskk_white.png; sourceTree = "<group>"; };
 		80EA0A291AAB3C1300D7148D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C68278BF8014A23AD739ED6E /* Pods_FlickSKKKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
@@ -339,8 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22C4D589D09BE72A2BB5C670 /* Pods_FlickSKK.framework in Frameworks */,
-				DD125A9B1BA0E0D56591B71C /* Pods.framework in Frameworks */,
+				9DB9E5AC72A72193B3E19E0C /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,7 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D383C4BFBDEAFB6914009B9E /* Pods_FlickSKK.framework in Frameworks */,
+				5F257844159BF4486EBB171C /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,10 +364,10 @@
 		1182C2F1CCB46F64322BD2FB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6C3AE9174E82C4214EA41CCE /* Pods-FlickSKK.debug.xcconfig */,
-				3927343C314CA30425B06CCA /* Pods-FlickSKK.release.xcconfig */,
 				3758E2CE5E666333313C17EA /* Pods-FlickSKKTests.debug.xcconfig */,
 				0BD1525BEE3562FC7DB87AF9 /* Pods-FlickSKKTests.release.xcconfig */,
+				1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */,
+				B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -982,7 +980,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		351977BFA91B57BB334C0647 /* Check Pods Manifest.lock */ = {
@@ -1012,7 +1010,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		752D97DA5F4A7A7532E51006 /* Embed Pods Frameworks */ = {
@@ -1085,7 +1083,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C1A4C272C2DBC05A1079A697 /* Copy Pods Resources */ = {
@@ -1443,7 +1441,7 @@
 		};
 		EAD4B58019D5CB50007B6636 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C3AE9174E82C4214EA41CCE /* Pods-FlickSKK.debug.xcconfig */;
+			baseConfigurationReference = 1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
@@ -1459,7 +1457,7 @@
 		};
 		EAD4B58119D5CB50007B6636 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3927343C314CA30425B06CCA /* Pods-FlickSKK.release.xcconfig */;
+			baseConfigurationReference = B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
@@ -1512,7 +1510,7 @@
 		};
 		EAD4B59519D5CB8A007B6636 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C3AE9174E82C4214EA41CCE /* Pods-FlickSKK.debug.xcconfig */;
+			baseConfigurationReference = 1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
@@ -1535,7 +1533,7 @@
 		};
 		EAD4B59619D5CB8A007B6636 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3927343C314CA30425B06CCA /* Pods-FlickSKK.release.xcconfig */;
+			baseConfigurationReference = B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
