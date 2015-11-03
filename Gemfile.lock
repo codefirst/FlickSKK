@@ -23,7 +23,7 @@ GEM
       molinillo (~> 0.4.0)
       nap (~> 1.0)
       xcodeproj (~> 0.28.2)
-    cocoapods-app_group (0.2.0)
+    cocoapods-app_group (0.3.0)
     cocoapods-core (0.39.0)
       activesupport (>= 4.0.2)
       fuzzy_match (~> 2.0.4)
