@@ -7,18 +7,18 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AppGroup (from `Pods/CocoaPodsAppGroup`)
+  - AppGroup (from `Pods/CocoaPodsAppGroup/AppGroup.podspec.json`)
   - Nimble (= 3.0.0)
   - NorthLayout
   - Quick (~> 0.8.0)
 
 EXTERNAL SOURCES:
   AppGroup:
-    :path: Pods/CocoaPodsAppGroup
+    :podspec: Pods/CocoaPodsAppGroup/AppGroup.podspec.json
 
 SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  AppGroup: b7218541630a7f75a3255b901b17ac629fe3be07
+  AppGroup: e2b8247a43e9381f825b247ac86cf5c930bf4f70
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   NorthLayout: 52739ecae3c9c5877770869d4277c308512f9fd5
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
