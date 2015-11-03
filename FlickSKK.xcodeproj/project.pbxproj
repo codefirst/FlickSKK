@@ -854,6 +854,7 @@
 				EAD4B58719D5CB8A007B6636 /* Resources */,
 				3FFC4AB8699CC3AF97F3080D /* Copy Pods Resources */,
 				01C455B6402DA7EDE93A80E1 /* Embed Pods Frameworks */,
+				EA17B1F81BE8B80700BEFF70 /* Workaround for disallowed Frameworks in appex error */,
 			);
 			buildRules = (
 			);
@@ -1114,6 +1115,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA17B1F81BE8B80700BEFF70 /* Workaround for disallowed Frameworks in appex error */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Workaround for disallowed Frameworks in appex error";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
