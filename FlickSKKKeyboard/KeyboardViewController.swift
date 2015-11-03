@@ -212,7 +212,6 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             self?.engine.handle(.Select(index : index))
             return
         }
-        sessionView.composeText = AppGroup.appGroupID()
 
         updateControlButtons()
 
