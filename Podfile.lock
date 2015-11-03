@@ -7,18 +7,18 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AppGroup (from `/Users/mzp/git/FlickSKK/Pods/CocoaPodsAppGroup/`)
+  - AppGroup (from `Pods/CocoaPodsAppGroup`)
   - Nimble (= 3.0.0)
   - NorthLayout
   - Quick (~> 0.8.0)
 
 EXTERNAL SOURCES:
   AppGroup:
-    :path: "/Users/mzp/git/FlickSKK/Pods/CocoaPodsAppGroup/"
+    :path: Pods/CocoaPodsAppGroup
 
 SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  AppGroup: 4dd06a5f93b4a1bd210a3c09e02356a55b68473e
+  AppGroup: b7218541630a7f75a3255b901b17ac629fe3be07
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   NorthLayout: 52739ecae3c9c5877770869d4277c308512f9fd5
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
