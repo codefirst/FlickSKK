@@ -40,16 +40,13 @@ func dictionaryWithKeyValues<K,V>(pairs: [(K,V)]) -> [K:V] {
     return d
 }
 
-func toggle(s : String, table : [[String]]) -> String? {
-    let skip : String = "ー"
+func toggle(s : String, table : [[String?]]) -> String? {
     for (i,t) in table.enumerate() {
         for (j, x) in t.enumerate() {
             if s == x {
-                var next = table[(i + 1) % table.count][j]
-                if next == skip {
-                    next = table[(i + 2) % table.count][j]
+                if let next = table[(i + 1) % table.count][j] ?? table[(i + 2) % table.count][j] {
+                    return .Some(next)
                 }
-                return .Some(next)
             }
         }
     }
@@ -348,7 +345,7 @@ extension String {
     }
 
     func toggleDakuten() -> String? {
-        let table = [
+        let table : [[String?]] = [
             ["あ","い","う","え","お",
              "か","き","く","け","こ",
              "さ","し","す","せ","そ",
@@ -385,29 +382,29 @@ extension String {
              "ﾀﾞ","ﾁﾞ","ｯ","ﾃﾞ","ﾄﾞ",
       	     "ﾊﾞ","ﾋﾞ","ﾌﾞ","ﾍﾞ","ﾎﾞ",
 	         "ｬ","ｭ","ｮ"],
-            ["ー","ー","ゔ","ー","ー",
-             "ー","ー","ー","ー","ー",
-             "ー","ー","ー","ー","ー",
-             "ー","ー","づ","ー","ー",
+            [nil,nil,"ゔ",nil,nil,
+             nil,nil,nil,nil,nil,
+             nil,nil,nil,nil,nil,
+             nil,nil,"づ",nil,nil,
              "ぱ","ぴ","ぷ","ぺ","ぽ",
-             "ー","ー","ー",
-             "ー","ー","ヴ","ー","ー",
-             "ー","ー","ー","ー","ー",
-             "ー","ー","ー","ー","ー",
-             "ー","ー","ヅ","ー","ー",
+             nil,nil,nil,
+             nil,nil,"ヴ",nil,nil,
+             nil,nil,nil,nil,nil,
+             nil,nil,nil,nil,nil,
+             nil,nil,"ヅ",nil,nil,
              "パ","ピ","プ","ペ","ポ",
-             "ー","ー","ー",
-             "ー","ー","ー","ー","ー",
-             "ー","ー","ー","ー","ー",
-             "ー","ー","ー","ー","ー",
-             "ー","ー","ﾂﾞ","ー","ー",
+             nil,nil,nil,
+             nil,nil,nil,nil,nil,
+             nil,nil,nil,nil,nil,
+             nil,nil,nil,nil,nil,
+             nil,nil,"ﾂﾞ",nil,nil,
              "ﾊﾟ","ﾋﾟ","ﾌﾟ","ﾍﾟ","ﾎﾟ",
-             "ー","ー","ー"]]
+             nil,nil,nil]]
         return toggle(self, table: table)
     }
 
     func toggleUpperLower() -> String? {
-        let table = [
+        let table : [[String?]] = [
             ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
             ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]]
         return toggle(self, table: table)
