@@ -12,6 +12,7 @@
 		1307DDED1ABD6DCF00678358 /* TextEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307DDEC1ABD6DCF00678358 /* TextEngineSpec.swift */; };
 		130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */; };
 		133E689E1BEF1DCA00D65F58 /* ForceTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133E689D1BEF1DCA00D65F58 /* ForceTouch.swift */; };
+		133E68A31BEF43B900D65F58 /* PanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133E68A21BEF43B900D65F58 /* PanGestureRecognizer.swift */; };
 		1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */; };
 		1347217D1AB8E7E70047BB27 /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721781AB8E4EB0047BB27 /* KeyboardMode.swift */; };
 		1347217E1AB8E7EC0047BB27 /* KanaFlickKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */; };
@@ -230,6 +231,8 @@
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
 		133E689D1BEF1DCA00D65F58 /* ForceTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceTouch.swift; sourceTree = "<group>"; };
 		133E68A11BEF2E6D00D65F58 /* Haptic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Haptic.h; sourceTree = "<group>"; };
+		133E68A21BEF43B900D65F58 /* PanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanGestureRecognizer.swift; sourceTree = "<group>"; };
+		133E68A41BEF4CEB00D65F58 /* PanGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanGesture.h; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
 		134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlickKey.swift; sourceTree = "<group>"; };
 		134721781AB8E4EB0047BB27 /* KeyboardMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardMode.swift; sourceTree = "<group>"; };
@@ -421,6 +424,7 @@
 			children = (
 				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
 				133E689D1BEF1DCA00D65F58 /* ForceTouch.swift */,
+				133E68A21BEF43B900D65F58 /* PanGestureRecognizer.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -433,6 +437,7 @@
 				135182201B1214A800774954 /* SKKDictionary */,
 				135181C91B12139000774954 /* FlickSKK-Common-Bridging-Header.h */,
 				133E68A11BEF2E6D00D65F58 /* Haptic.h */,
+				133E68A41BEF4CEB00D65F58 /* PanGesture.h */,
 				135181CD1B12139000774954 /* Localizable.strings */,
 				135181D91B12139000774954 /* Utilities.swift */,
 			);
@@ -1288,6 +1293,7 @@
 				13787D2F1B12127800400A4A /* SKKEngine.swift in Sources */,
 				135181F71B12139000774954 /* LoadLocalDictionary.swift in Sources */,
 				13787D301B12127800400A4A /* KeyboardMode.swift in Sources */,
+				133E68A31BEF43B900D65F58 /* PanGestureRecognizer.swift in Sources */,
 				135181E21B12139000774954 /* BinarySearch.swift in Sources */,
 				13787D311B12127800400A4A /* KanaFlickKey.swift in Sources */,
 				135182121B12139000774954 /* SKKUserDictionaryFile.swift in Sources */,
