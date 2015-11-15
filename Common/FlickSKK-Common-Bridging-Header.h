@@ -3,3 +3,4 @@
 //
 
 #import "IOUtil.h"
+#import "Haptic.h"

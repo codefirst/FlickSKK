@@ -227,6 +227,7 @@
 		131386381AF8C738009EA22D /* Tempfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tempfile.swift; sourceTree = "<group>"; };
 		131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterViewController.swift; sourceTree = "<group>"; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
+		133E68A11BEF2E6D00D65F58 /* Haptic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Haptic.h; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
 		134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlickKey.swift; sourceTree = "<group>"; };
 		134721781AB8E4EB0047BB27 /* KeyboardMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardMode.swift; sourceTree = "<group>"; };
@@ -428,6 +429,7 @@
 				1351821B1B12143000774954 /* IO */,
 				135182201B1214A800774954 /* SKKDictionary */,
 				135181C91B12139000774954 /* FlickSKK-Common-Bridging-Header.h */,
+				133E68A11BEF2E6D00D65F58 /* Haptic.h */,
 				135181CD1B12139000774954 /* Localizable.strings */,
 				135181D91B12139000774954 /* Utilities.swift */,
 			);
