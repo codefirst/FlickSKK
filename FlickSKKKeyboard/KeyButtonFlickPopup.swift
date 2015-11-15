@@ -27,12 +27,8 @@ enum KeyButtonFlickDirection : CustomStringConvertible {
 
 class KeyButtonFlickPopup: UIView {
     // MARK: Singleton
-    class var sharedInstance: KeyButtonFlickPopup {
-        struct Static {
-            static let instance = KeyButtonFlickPopup(frame: CGRectZero)
-        }
-        return Static.instance
-    }
+    static let sharedInstance: KeyButtonFlickPopup = KeyButtonFlickPopup(frame: CGRectZero)
+
     // MARK: -
 
     weak var parentView: UIView? {

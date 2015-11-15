@@ -71,8 +71,11 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         }
     }
 
-    var normalBackgroundColor: UIColor
-    var selectedBackgroundColor: UIColor
+    private lazy var normalBackgroundColor: UIColor = {
+        self.key.isControl ? UIColor.lightGrayColor() : UIColor(white: 1.0, alpha: 1.0)
+    }()
+    private let selectedBackgroundColor: UIColor =  UIColor(white: 0.95, alpha: 1.0)
+
     lazy var repeatTimer : KeyRepeatTimer? = {
         if self.key.isRepeat {
             return KeyRepeatTimer(delayInterval: 0.45, repeatInterval: 0.05, action: {
@@ -86,8 +89,6 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     init(key: KanaFlickKey) {
         self.key = key
-        self.normalBackgroundColor = key.isControl ? UIColor.lightGrayColor() : UIColor(white: 1.0, alpha: 1.0)
-        self.selectedBackgroundColor = UIColor(white: 0.95, alpha: 1.0)
         self.selected = false
         self.enabled = true
         self.highlighted = false
