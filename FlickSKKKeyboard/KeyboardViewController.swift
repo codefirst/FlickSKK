@@ -142,8 +142,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
         for keypad in self.keypads.values {
-            keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?) in
-                self?.keyTapped(key, index)
+            keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?, force:Bool?) in
+                self?.keyTapped(key, index, force)
                 return
             }
         }
@@ -289,8 +289,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     private func keyButton(key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
-            b.tapped = { (key:KanaFlickKey, index:Int?) in
-                weakSelf?.keyTapped(key, index)
+            b.tapped = { (key:KanaFlickKey, index:Int?, force:Bool?) in
+                weakSelf?.keyTapped(key, index, force)
                 return
             }
         }
@@ -302,11 +302,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.updateControlButtons()
     }
 
-    func keyTapped(key: KanaFlickKey, _ index: Int?) {
+    func keyTapped(key: KanaFlickKey, _ index: Int?, _ force: Bool?) {
         switch key {
         case let .Seq(s, _):
             let kana = Array(s.characters)[index ?? 0]
-            self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled))
+            self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled || (force ?? false)))
             self.prevShiftEnabled = self.shiftEnabled
             self.shiftEnabled = false
         case .Backspace:
