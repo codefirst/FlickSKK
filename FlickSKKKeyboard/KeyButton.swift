@@ -202,7 +202,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         if !flicksEnabled { return }
 
         let distance = sqrt(pow(p.x - originOfPanGesture.x, 2) + pow(p.y - originOfPanGesture.y, 2))
-        if self.bounds.contains(p) && distance < 12 {
+        if distance < 12 {
             self.sequenceIndex = (key.sequence != nil ? 0 : nil)
             KeyButtonFlickPopup.sharedInstance.hide()
             self.highlighted = true
