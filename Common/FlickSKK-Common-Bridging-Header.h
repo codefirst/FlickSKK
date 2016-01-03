@@ -3,3 +3,6 @@
 //
 
 #import "IOUtil.h"
+#import "Haptic.h"
+#import "PanGesture.h"
+#import "UIImage+ImageEffects.h"

@@ -26,6 +26,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             }
         }
     }
+    private var processed = false
 
     let label = UILabel()
     lazy var imageView: UIImageView = { [unowned self] in
@@ -53,7 +54,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         return ["p": 10]
     }
 
-    var tapped: ((KanaFlickKey, Int?) -> Void)?
+    var tapped: ((KanaFlickKey, Int?, Bool?) -> Void)?
     var selected: Bool {
         didSet {
             self.backgroundColor = selected ? selectedBackgroundColor : normalBackgroundColor
@@ -79,7 +80,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     lazy var repeatTimer : KeyRepeatTimer? = {
         if self.key.isRepeat {
             return KeyRepeatTimer(delayInterval: 0.45, repeatInterval: 0.05, action: {
-                self.tapped?(self.key, self.sequenceIndex)
+                self.tapped?(self.key, self.sequenceIndex, false)
+                ForceTouch.sharedInstance.end()
                 return ()
             })
         } else {
@@ -119,39 +121,57 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         }
 
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "gestureTapped:"))
-        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "gesturePanned:"))
+
+        let pan = PanGestureRecognizer(target: self, action: "gesturePanned:")
+        pan.delegate = self
+        self.addGestureRecognizer(pan)
     }
 
     // MARK: - Gestures
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.highlighted = true // set to false on end, cancel, started pan
+        self.processed = false
+        self.sequenceIndex = nil
         self.repeatTimer?.start()
+
+        ForceTouch.sharedInstance.fires(touches, source: self)
         super.touchesBegan(touches, withEvent: event)
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.highlighted = false
         self.repeatTimer?.cancel()
+        ForceTouch.sharedInstance.end()
         super.touchesEnded(touches, withEvent: event)
+    }
+
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        ForceTouch.sharedInstance.fires(touches, source: self)
     }
 
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
 //        self.highlighted = false // surpress flicker (highlighted = false, then true)
         self.repeatTimer?.cancel()
+        ForceTouch.sharedInstance.end()
         super.touchesCancelled(touches, withEvent: event)
     }
 
     func gestureTapped(gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
+        if(processed) { return }
+
         self.highlighted = false
         if !self.key.isRepeat {
-            self.tapped?(self.key, self.sequenceIndex)
+            self.tapped?(self.key, self.sequenceIndex, ForceTouch.sharedInstance.forceTouched())
+            ForceTouch.sharedInstance.end()
         }
     }
 
     var originOfPanGesture = CGPointZero
 
     func gesturePanned(gesture: UIPanGestureRecognizer) {
+        if(processed) { return }
+
         // FIXME: キーリピート対応について、なにも考慮してない。
         // 動くような気もするけど未確認。
         let p = gesture.locationInView(self)
@@ -160,7 +180,9 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             originOfPanGesture = p
         }
 
-        if gesture.state == UIGestureRecognizerState.Ended {
+        let force = ForceTouch.sharedInstance.forceTouched()
+
+        if gesture.state == UIGestureRecognizerState.Ended || force {
             let delay = 0.2 * Double(NSEC_PER_SEC)
             let time  = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(time, dispatch_get_main_queue(), {
@@ -168,17 +190,19 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
             })
             if key.sequence != nil || self.bounds.contains(p) {
                 // always trigger when Seq, and trigger non-Seq (single char) key when touchUpInside
-                self.tapped?(self.key, self.sequenceIndex)
+                self.tapped?(self.key, self.sequenceIndex, force)
+                ForceTouch.sharedInstance.end()
             }
             self.sequenceIndex = nil
             self.highlighted = false
+            self.processed = force
             return
         }
 
         if !flicksEnabled { return }
 
         let distance = sqrt(pow(p.x - originOfPanGesture.x, 2) + pow(p.y - originOfPanGesture.y, 2))
-        if self.bounds.contains(p) && distance < 12 {
+        if distance < 12 {
             self.sequenceIndex = (key.sequence != nil ? 0 : nil)
             KeyButtonFlickPopup.sharedInstance.hide()
             self.highlighted = true
@@ -209,6 +233,13 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 }
             }
         }
+    }
+
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        if(!processed) {
+            ForceTouch.sharedInstance.fire(touch, source: self)
+        }
+        return true
     }
 
     // MARK: -

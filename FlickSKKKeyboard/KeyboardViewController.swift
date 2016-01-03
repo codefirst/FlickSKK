@@ -47,6 +47,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         kb.imageView.image = UIImage(named: "flickskk-arrow")
     }
 
+    // MARK: blur effect
+    private let effect = UIImageView()
+    private var screenshot : UIImage?
+
     // MARK: -
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -142,8 +146,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
         for keypad in self.keypads.values {
-            keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?) in
-                self?.keyTapped(key, index)
+            keypad.tapped = { [weak self] (key:KanaFlickKey, index:Int?, force:Bool?) in
+                self?.keyTapped(key, index, force)
                 return
             }
         }
@@ -240,10 +244,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             return
         }
 
+        effect.userInteractionEnabled = false
         let views = [
             "sessionView": sessionView,
             "progress": loadingProgressView,
             "keypadAndControls": keypadAndControlsView,
+            "z": effect // 最後にaddSubviewされたいので、末尾っぽい名前にする
         ]
         if let autolayout = self.inputView?.northLayoutFormat(metrics, views) {
             autolayout("H:|[sessionView]|")
@@ -251,9 +257,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             autolayout("H:|[keypadAndControls]|")
             autolayout("V:|[sessionView(==30)][keypadAndControls]|")
             autolayout("V:|[progress(==sessionView)]")
+            autolayout("H:|[z]|")
+            autolayout("V:|[z]|")
         }
 
-        self.view.addConstraint(heightConstraint);
+        self.view.addConstraint(heightConstraint)
+        setupForceTouch()
     }
 
     func controlViewWithButtons(buttons: [UIView]) -> UIView {
@@ -289,8 +298,8 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     private func keyButton(key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
-            b.tapped = { (key:KanaFlickKey, index:Int?) in
-                weakSelf?.keyTapped(key, index)
+            b.tapped = { (key:KanaFlickKey, index:Int?, force:Bool?) in
+                weakSelf?.keyTapped(key, index, force)
                 return
             }
         }
@@ -302,11 +311,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.updateControlButtons()
     }
 
-    func keyTapped(key: KanaFlickKey, _ index: Int?) {
+    func keyTapped(key: KanaFlickKey, _ index: Int?, _ force: Bool?) {
         switch key {
         case let .Seq(s, _):
             let kana = Array(s.characters)[index ?? 0]
-            self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled))
+            self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled || (force ?? false)))
             self.prevShiftEnabled = self.shiftEnabled
             self.shiftEnabled = false
         case .Backspace:
@@ -434,5 +443,60 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     func changeInputMode(inputMode : SKKInputMode) {
         self.inputMode = inputMode
         updateControlButtons()
+    }
+
+    // MARK: force touch
+    private func setupForceTouch() {
+        var maskImage : UIImage?
+
+        ForceTouch.sharedInstance.startSession = { view in
+            self.screenshot = self.obtainScreenshot()
+            self.effect.hidden = false
+            maskImage = self.maskImage(view)
+        }
+
+        ForceTouch.sharedInstance.applyBlur = { r in
+            if let mask = maskImage {
+                self.applyBlur(r * 10, mask: mask)
+            }
+        }
+
+        ForceTouch.sharedInstance.endSession = {
+            self.effect.hidden = true
+            self.effect.image = nil
+            self.screenshot = nil
+            maskImage = nil
+        }
+    }
+
+    private func applyBlur(radius : CGFloat, mask : UIImage) {
+        let blur = screenshot?.applyBlurWithRadius(radius, tintColor: nil, saturationDeltaFactor: 1.0, maskImage: nil)
+        let masked = blur?.mask(mask)
+        effect.image = masked
+    }
+
+    private func maskImage(view : UIView) -> UIImage? {
+        if let size = self.screenshot?.size {
+            UIGraphicsBeginImageContext(size)
+            defer { UIGraphicsEndImageContext() }
+
+            let context = UIGraphicsGetCurrentContext();
+            CGContextSetFillColorWithColor(context, UIColor.blackColor().CGColor)
+            CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height))
+
+            CGContextSetFillColorWithColor(context, UIColor.whiteColor().CGColor)
+            CGContextFillRect(context, self.view.convertRect(view.bounds, fromView: view))
+
+            return UIGraphicsGetImageFromCurrentImageContext()
+        } else {
+            return nil
+        }
+    }
+
+    private func obtainScreenshot() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, true, 1)
+        defer { UIGraphicsEndImageContext() }
+        self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }

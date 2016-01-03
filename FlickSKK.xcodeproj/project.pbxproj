@@ -11,6 +11,8 @@
 		1306495F1A8723170044B225 /* SKKKeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495C1A8721180044B225 /* SKKKeyEvent.swift */; };
 		1307DDED1ABD6DCF00678358 /* TextEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307DDEC1ABD6DCF00678358 /* TextEngineSpec.swift */; };
 		130CA3961A4EF99800A84D24 /* NumberFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CA3951A4EF99800A84D24 /* NumberFormatterSpec.swift */; };
+		133E689E1BEF1DCA00D65F58 /* ForceTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133E689D1BEF1DCA00D65F58 /* ForceTouch.swift */; };
+		133E68A31BEF43B900D65F58 /* PanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133E68A21BEF43B900D65F58 /* PanGestureRecognizer.swift */; };
 		1341A24919E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */; };
 		1347217D1AB8E7E70047BB27 /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721781AB8E4EB0047BB27 /* KeyboardMode.swift */; };
 		1347217E1AB8E7EC0047BB27 /* KanaFlickKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */; };
@@ -134,6 +136,8 @@
 		13E33E851A9E87CA00CD1140 /* TextEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E841A9E87CA00CD1140 /* TextEngine.swift */; };
 		13E33E881A9E8E3D00CD1140 /* ComposeModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */; };
 		13E566CC1AF6360300592844 /* BinarySearchSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E566CB1AF6360300592844 /* BinarySearchSpec.swift */; };
+		13F420FA1BF2AE49008B619B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F420F91BF2AE49008B619B /* UIImage+ImageEffects.m */; };
+		13F420FB1BF2AE49008B619B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F420F91BF2AE49008B619B /* UIImage+ImageEffects.m */; };
 		13F456381ADBD863004EB68D /* NumberFliterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F456371ADBD863004EB68D /* NumberFliterSpec.swift */; };
 		13F9326119E2DC1700AC5019 /* SKKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133CDCF519D98A3B00B8120D /* SKKDelegate.swift */; };
 		13F9326419E2DC1700AC5019 /* SKKInputMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136D161019DAA0AE0091D6BF /* SKKInputMode.swift */; };
@@ -227,6 +231,10 @@
 		131386381AF8C738009EA22D /* Tempfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tempfile.swift; sourceTree = "<group>"; };
 		131DBA8E1A42403100756CFA /* WordRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordRegisterViewController.swift; sourceTree = "<group>"; };
 		133CDCF519D98A3B00B8120D /* SKKDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDelegate.swift; sourceTree = "<group>"; };
+		133E689D1BEF1DCA00D65F58 /* ForceTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceTouch.swift; sourceTree = "<group>"; };
+		133E68A11BEF2E6D00D65F58 /* Haptic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Haptic.h; sourceTree = "<group>"; };
+		133E68A21BEF43B900D65F58 /* PanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanGestureRecognizer.swift; sourceTree = "<group>"; };
+		133E68A41BEF4CEB00D65F58 /* PanGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PanGesture.h; sourceTree = "<group>"; };
 		1341A24819E96A7F00EE8AFA /* SKKDictionaryLocalFileSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKDictionaryLocalFileSpec.swift; sourceTree = "<group>"; };
 		134721761AB8E4DD0047BB27 /* KanaFlickKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlickKey.swift; sourceTree = "<group>"; };
 		134721781AB8E4EB0047BB27 /* KeyboardMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardMode.swift; sourceTree = "<group>"; };
@@ -284,6 +292,8 @@
 		13E33E841A9E87CA00CD1140 /* TextEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEngine.swift; sourceTree = "<group>"; };
 		13E33E871A9E8E3C00CD1140 /* ComposeModeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModeFactory.swift; sourceTree = "<group>"; };
 		13E566CB1AF6360300592844 /* BinarySearchSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchSpec.swift; sourceTree = "<group>"; };
+		13F420F81BF2AE49008B619B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		13F420F91BF2AE49008B619B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		13F456371ADBD863004EB68D /* NumberFliterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFliterSpec.swift; sourceTree = "<group>"; };
 		1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3758E2CE5E666333313C17EA /* Pods-FlickSKKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -417,6 +427,8 @@
 			isa = PBXGroup;
 			children = (
 				137AAB441A3C0F3F0092F8A5 /* KeyRepeatTimer.swift */,
+				133E689D1BEF1DCA00D65F58 /* ForceTouch.swift */,
+				133E68A21BEF43B900D65F58 /* PanGestureRecognizer.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -428,6 +440,10 @@
 				1351821B1B12143000774954 /* IO */,
 				135182201B1214A800774954 /* SKKDictionary */,
 				135181C91B12139000774954 /* FlickSKK-Common-Bridging-Header.h */,
+				133E68A11BEF2E6D00D65F58 /* Haptic.h */,
+				133E68A41BEF4CEB00D65F58 /* PanGesture.h */,
+				13F420F81BF2AE49008B619B /* UIImage+ImageEffects.h */,
+				13F420F91BF2AE49008B619B /* UIImage+ImageEffects.m */,
 				135181CD1B12139000774954 /* Localizable.strings */,
 				135181D91B12139000774954 /* Utilities.swift */,
 			);
@@ -1165,6 +1181,7 @@
 				135181DD1B12139000774954 /* AsyncLoader.swift in Sources */,
 				13787CF01B12110C00400A4A /* DictionaryInfo.swift in Sources */,
 				135182071B12139000774954 /* SKKDictionaryFile.swift in Sources */,
+				13F420FA1BF2AE49008B619B /* UIImage+ImageEffects.m in Sources */,
 				13787CF11B12110C00400A4A /* UserDictionaryViewController.swift in Sources */,
 				135181E01B12139000774954 /* BinarySearch.swift in Sources */,
 				13787CF21B12110C00400A4A /* WordRegisterViewController.swift in Sources */,
@@ -1279,9 +1296,11 @@
 				135181EE1B12139000774954 /* IdFilter.swift in Sources */,
 				13787D2D1B12127800400A4A /* ComposeModePresenter.swift in Sources */,
 				13787D2E1B12127800400A4A /* DictionaryEngine.swift in Sources */,
+				133E689E1BEF1DCA00D65F58 /* ForceTouch.swift in Sources */,
 				13787D2F1B12127800400A4A /* SKKEngine.swift in Sources */,
 				135181F71B12139000774954 /* LoadLocalDictionary.swift in Sources */,
 				13787D301B12127800400A4A /* KeyboardMode.swift in Sources */,
+				133E68A31BEF43B900D65F58 /* PanGestureRecognizer.swift in Sources */,
 				135181E21B12139000774954 /* BinarySearch.swift in Sources */,
 				13787D311B12127800400A4A /* KanaFlickKey.swift in Sources */,
 				135182121B12139000774954 /* SKKUserDictionaryFile.swift in Sources */,
@@ -1293,6 +1312,7 @@
 				135181E51B12139000774954 /* DictionaryCache.swift in Sources */,
 				13787D351B12127800400A4A /* KeyButtonFlickPopup.swift in Sources */,
 				13787D361B12127800400A4A /* KeyRepeatTimer.swift in Sources */,
+				13F420FB1BF2AE49008B619B /* UIImage+ImageEffects.m in Sources */,
 				13787D371B12127800400A4A /* KeyboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
