@@ -84,8 +84,8 @@ FlickSKKアプリの「追加辞書」から追加・削除が行なえます。
                             </keywords>
                             <version_whats_new>• 補完候補が絵文字のときも薄く表示
 • 設定アプリに謝辞を追加</version_whats_new>
-                            <software_url>http://www.codefirst.org/FlickSKK/</software_url>
-                            <privacy_url>http://www.codefirst.org/privacy_policy.html</privacy_url>
+                            <software_url>https://www.codefirst.org/FlickSKK/</software_url>
+                            <privacy_url>https://www.codefirst.org/privacy_policy.html</privacy_url>
                             <support_url>https://github.com/codefirst/FlickSKK/issues</support_url>
                             <software_screenshots>
                                 <software_screenshot display_target="iOS-3.5-in" position="1">
