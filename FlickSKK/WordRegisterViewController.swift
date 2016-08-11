@@ -13,7 +13,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
     private let wordField = UITextField(frame: CGRectZero)
     private lazy var doneButton : UIBarButtonItem =
         UIBarButtonItem(title: NSLocalizedString("Register", comment:""),
-            style: .Done, target:self, action: Selector("register"))
+            style: .Done, target:self, action: #selector(WordRegisterViewController.register))
     var done : ((String, String?, String) -> Void)?
 
     private lazy var sections : [(
@@ -91,7 +91,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         textField.contentVerticalAlignment = .Center
         textField.returnKeyType = row.returnType
         textField.delegate = self
-        textField.addTarget(self, action: "didChange", forControlEvents: .EditingChanged)
+        textField.addTarget(self, action: #selector(WordRegisterViewController.didChange as (WordRegisterViewController) -> () -> ()), forControlEvents: .EditingChanged)
         cell.contentView.addSubview(textField)
 
         return cell

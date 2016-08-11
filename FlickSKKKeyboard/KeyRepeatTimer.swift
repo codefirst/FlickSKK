@@ -31,7 +31,7 @@ class KeyRepeatTimer : NSObject {
             fireDate: NSDate(timeIntervalSinceNow: self.delayInterval),
             interval: self.repeatInterval,
             target: self,
-            selector: Selector("repeat"),
+            selector: #selector(KeyRepeatTimer.`repeat`),
             userInfo: nil,
             repeats: true)
         NSRunLoop.currentRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)

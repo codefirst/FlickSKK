@@ -9,7 +9,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     private let urlField = UITextField(frame: CGRectZero)
     private lazy var doneButton : UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Download", comment:""),
-        style: .Done, target:self, action: Selector("download"))
+        style: .Done, target:self, action: #selector(DownloadDictionaryViewController.download))
     private let done : Void -> Void
 
     init(url : NSURL?, done : Void -> Void) {
@@ -46,7 +46,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
         urlField.placeholder = "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"
         urlField.contentVerticalAlignment = .Center
         urlField.delegate = self
-        urlField.addTarget(self, action: "didChange", forControlEvents: .EditingChanged)
+        urlField.addTarget(self, action: #selector(DownloadDictionaryViewController.didChange as (DownloadDictionaryViewController) -> () -> ()), forControlEvents: .EditingChanged)
         cell.accessoryView = urlField
         return cell
     }

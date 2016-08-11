@@ -25,12 +25,12 @@ class UserDictionaryViewController: SafeTableViewController {
 
         self.title = NSLocalizedString("User Dictionary", comment: "")
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("openWordRegister"))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(UserDictionaryViewController.openWordRegister))
         self.navigationItem.rightBarButtonItem = addButton
 
         self.reloadEntries()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
     private func reloadEntries() {

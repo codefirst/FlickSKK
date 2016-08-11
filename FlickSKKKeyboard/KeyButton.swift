@@ -135,7 +135,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         super.touchesEnded(touches, withEvent: event)
     }
 
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent?) {
 //        self.highlighted = false // surpress flicker (highlighted = false, then true)
         self.repeatTimer?.cancel()
         super.touchesCancelled(touches, withEvent: event)

@@ -16,8 +16,8 @@ class SKKDictionaryUserFileSpec : QuickSpec {
 
         describe("SKK dictionary") {
             beforeEach {
-                let _ = try? NSFileManager.defaultManager().removeItemAtURL(url)
-                dict = SKKUserDictionaryFile(url: url)
+                let _ = try? NSFileManager.defaultManager().removeItemAtURL(url!)
+                dict = SKKUserDictionaryFile(url: url!)
             }
 
             describe("findWith") {
@@ -70,7 +70,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                     dict.register("まじ", okuri: .None, kanji: "本気")
                     dict.serialize()
 
-                    let dict2 = SKKUserDictionaryFile(url: url)
+                    let dict2 = SKKUserDictionaryFile(url: url!)
                     let xs = dict2.find("まじ", okuri: .None)
                     expect(xs).to(contain("本気"))
                 }
@@ -80,7 +80,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                     dict.serialize()
 
 
-                    let dict2 = SKKUserDictionaryFile(url: url)
+                    let dict2 = SKKUserDictionaryFile(url: url!)
                     let xs = dict2.find("まじ", okuri: .None)
                     expect(xs).to(contain("foo/bar;baz[xyzzy]"))
                 }
@@ -104,7 +104,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                     dict.register("まじ", okuri: .None, kanji: "本気")
                     dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: .None))
 
-                    let dict2 = SKKUserDictionaryFile(url: url)
+                    let dict2 = SKKUserDictionaryFile(url: url!)
                     let xs = dict2.find("まじ", okuri: .None)
                     expect(xs).notTo(contain("本気"))
                 }
@@ -115,7 +115,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
 
                     dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: .None))
 
-                    let dict2 = SKKUserDictionaryFile(url: url)
+                    let dict2 = SKKUserDictionaryFile(url: url!)
                     let xs = dict2.find("まじ", okuri: .None)
                     expect(xs).to(contain("AAA"))
                 }
@@ -124,7 +124,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
                     dict.register("まじ", okuri: "a", kanji: "本気")
                     dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: "a"))
 
-                    let dict2 = SKKUserDictionaryFile(url: url)
+                    let dict2 = SKKUserDictionaryFile(url: url!)
                     let xs = dict2.find("まじ", okuri: "a")
                     expect(xs).notTo(contain("本気"))
                 }
@@ -135,7 +135,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
 
                     dict.unregister(.SKKDictionaryEntry(kanji: "本気", kana: "まじ", okuri: "a"))
 
-                    let dict2 = SKKUserDictionaryFile(url: url)
+                    let dict2 = SKKUserDictionaryFile(url: url!)
                     let xs = dict2.find("まじ", okuri: "a")
                     expect(xs).to(contain("AAA"))
                 }

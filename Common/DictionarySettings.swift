@@ -46,6 +46,6 @@ class DictionarySettings {
     }
 
     class func home(path : String) -> NSURL {
-        return NSURL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).URLByAppendingPathComponent(path)
+        return NSURL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).URLByAppendingPathComponent(path)!
     }
 }
