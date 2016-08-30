@@ -21,7 +21,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 let text = String(Array(s)[self.sequenceIndex ?? 0])
                 // FIXME: special ignore label
                 if(text != KanaFlickKey.ignoredSequence) {
-                    self.label.text = text
+// avoid iOS 10 layout performance issue: self.label.text = text
                 }
             }
         }
