@@ -6,17 +6,17 @@ import UIKit
 // プログレスバーでの進捗表示をしようかと思ったが、3G回線でもほぼ待ち時間なしでダウンロードできたので
 // とりあえずあとまわしにしている。
 class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDelegate {
-    private let urlField = UITextField(frame: CGRectZero)
-    private lazy var doneButton : UIBarButtonItem = UIBarButtonItem(
+    fileprivate let urlField = UITextField(frame: CGRect.zero)
+    fileprivate lazy var doneButton : UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Download", comment:""),
-        style: .Done, target:self, action: Selector("download"))
-    private let done : Void -> Void
+        style: .done, target:self, action: #selector(DownloadDictionaryViewController.download))
+    fileprivate let done : (Void) -> Void
 
-    init(url : NSURL?, done : Void -> Void) {
+    init(url : URL?, done : @escaping (Void) -> Void) {
         self.done = done
-        super.init(style: .Grouped)
+        super.init(style: .grouped)
         urlField.text = url?.absoluteString ?? ""
-        self.doneButton.enabled = canDownload()
+        self.doneButton.isEnabled = canDownload()
         self.navigationItem.rightBarButtonItem = doneButton
     }
 
@@ -28,50 +28,50 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
     let kCellID = "Cell"
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         return 1
 
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellID) ?? UITableViewCell(style: .default, reuseIdentifier: kCellID)
 
         cell.textLabel?.text = NSLocalizedString("URL", comment:"")
-        urlField.frame = CGRectMake(0, 0, cell.frame.width - 80, 130)
-        urlField.clearButtonMode = .WhileEditing
+        urlField.frame = CGRect(x: 0, y: 0, width: cell.frame.width - 80, height: 130)
+        urlField.clearButtonMode = .whileEditing
         urlField.placeholder = "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"
-        urlField.contentVerticalAlignment = .Center
+        urlField.contentVerticalAlignment = .center
         urlField.delegate = self
-        urlField.addTarget(self, action: "didChange", forControlEvents: .EditingChanged)
+        urlField.addTarget(self, action: #selector(DownloadDictionaryViewController.didChange as (DownloadDictionaryViewController) -> () -> ()), for: .editingChanged)
         cell.accessoryView = urlField
         return cell
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 50.0
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         download()
         return true
     }
 
     // MARK: done button
-    @objc private func didChange() {
-        self.doneButton.enabled = canDownload()
+    @objc fileprivate func didChange() {
+        self.doneButton.isEnabled = canDownload()
     }
 
-    private func canDownload() -> Bool {
+    fileprivate func canDownload() -> Bool {
         return self.urlField.text?.isEmpty == false
     }
 
-    @objc private func download() {
+    @objc fileprivate func download() {
         if canDownload() {
-            guard let url = self.urlField.text.flatMap({ NSURL(string: $0)}) else { return }
+            guard let url = self.urlField.text.flatMap({ URL(string: $0)}) else { return }
 
             let vc = HeadUpProgressViewController()
             let action = DownloadDictionary(url: url)
@@ -84,7 +84,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
                 vc.close {
                     self.alert(NSLocalizedString("DownloadComplete", comment:""),
                         message: NSString(format: NSLocalizedString("%d okuri-ari %d okuri-nasi", comment:""), info.okuriAri(), info.okuriNasi()) as String) {
-                            self.navigationController?.popViewControllerAnimated(true)
+                            self.navigationController?.popViewController(animated: true)
                             self.done()
                     }
                 }
@@ -95,14 +95,14 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
                 }
             }
             action.call()
-            presentViewController(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
         }
     }
 
     // アラートメッセージを表示する
-    private func alert(title: String, message: String, completion: (() -> Void)? = nil) {
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Default, handler: { _ in completion?() }))
-        presentViewController(ac, animated: true, completion: nil)
+    fileprivate func alert(_ title: String, message: String, completion: (() -> Void)? = nil) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { _ in completion?() }))
+        present(ac, animated: true, completion: nil)
     }
 }

@@ -5,7 +5,7 @@ class ComposeModePresenterSpec : QuickSpec {
 
     override func spec() {
         let target = ComposeModePresenter()
-        let candidates : [Candidate] = [ .Exact(kanji: "本気"), .Partial(kanji: "マジ", kana: "まじ") ]
+        let candidates : [Candidate] = [ .exact(kanji: "本気"), .partial(kanji: "マジ", kana: "まじ") ]
         describe("toString") {
             it("direct input") {
                 expect(target.toString(.DirectInput)).to(equal(""))

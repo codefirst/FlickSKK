@@ -30,10 +30,10 @@
 //
 // といったことを行なっている。
 class LoadLocalDictionary {
-    private var ari : NSMutableArray = NSMutableArray()
-    private var nasi : NSMutableArray = NSMutableArray()
+    fileprivate var ari : NSMutableArray = NSMutableArray()
+    fileprivate var nasi : NSMutableArray = NSMutableArray()
 
-    init(url : NSURL) {
+    init(url : URL) {
         guard let path = url.path else { return }
 
         var isOkuriAri = true
@@ -50,9 +50,9 @@ class LoadLocalDictionary {
             if s == "" { return }
 
             if isOkuriAri {
-                self.ari.addObject(line)
+                self.ari.add(line)
             } else {
-                self.nasi.addObject(line)
+                self.nasi.add(line)
             }
         })
     }

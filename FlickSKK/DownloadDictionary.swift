@@ -10,28 +10,28 @@ import Alamofire
 // もしかしたらダウンロード済みの辞書を統合したほうが高速化ができるかもしれないが、
 // とりあえず現バージョンでは対応しない。
 class DownloadDictionary {
-    private let remote : NSURL
-    private let local : NSURL
+    fileprivate let remote : URL
+    fileprivate let local : URL
 
     // MARK: - handler
     // FIXME: delegateにしたほうがiOSっぽいので直したほうがいい?
     // 辞書追加に成功した際の処理
-    var success : (DictionaryInfo->Void)?
+    var success : ((DictionaryInfo)->Void)?
 
     // 辞書追加でエラーが発生した際の処理
-    var error : ((String, ErrorType?)->Void)?
+    var error : ((String, Error?)->Void)?
 
     // ダウンロードが進捗した際の処理
     var progress : ((String, Float) -> Void)?
 
     // MARK: -
 
-    init(url : NSURL) {
+    init(url : URL) {
         self.remote = url
 
         let local = DictionarySettings.additionalDictionaryURL()
-        try! NSFileManager.defaultManager().createDirectoryAtURL(local, withIntermediateDirectories: true, attributes: nil)
-        self.local = local.URLByAppendingPathComponent(url.lastPathComponent ?? "skk.jisyo")
+        try! FileManager.default.createDirectory(at: local as URL, withIntermediateDirectories: true, attributes: nil)
+        self.local = local.appendingPathComponent(url.lastPathComponent ?? "skk.jisyo")!
     }
 
     func call() {
@@ -39,11 +39,11 @@ class DownloadDictionary {
         let utf8File = Tempfile.temp()
 
         // ダウンロード
-        save(self.remote, path: downloadFile,
+        save(self.remote, path: downloadFile as URL,
             onSuccess: {
                 do {
                     // UTF8へのエンコード
-                    try self.encodeToUTF8(downloadFile, dest: utf8File)
+                    try self.encodeToUTF8(downloadFile as URL, dest: utf8File as URL)
 
                     // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
                     async {
@@ -71,7 +71,7 @@ class DownloadDictionary {
     }
 
     // URLを特定ファイルに保存する。
-    private func save(url : NSURL, path: NSURL, onSuccess : Void -> Void, onError : ErrorType? -> Void) {
+    fileprivate func save(_ url : URL, path: URL, onSuccess : @escaping (Void) -> Void, onError : @escaping (Error?) -> Void) {
         Alamofire.download(.GET, url) { (temporaryURL, response) in
             return path ?? temporaryURL
         }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
@@ -91,7 +91,7 @@ class DownloadDictionary {
     }
 
     // UTF8でエンコードして、保存する
-    private func encodeToUTF8(src : NSURL, dest: NSURL) throws {
+    fileprivate func encodeToUTF8(_ src : URL, dest: URL) throws {
         let content = try readFile(src)
         if let file = LocalFile(url: dest) {
             defer { file.close() }
@@ -101,16 +101,16 @@ class DownloadDictionary {
 
     // ファイルをEUC-JPもしくはUTF-8として読み込む
     // (シミュレータではEUC-JPの読み込みは失敗する)
-    private func readFile(url : NSURL) throws -> NSString {
-        if let content = try? NSString(contentsOfURL: url, encoding: NSJapaneseEUCStringEncoding) {
+    fileprivate func readFile(_ url : URL) throws -> NSString {
+        if let content = try? NSString(contentsOf: url, encoding: String.Encoding.japaneseEUC.rawValue) {
             return content
         }
-        return try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding)
+        return try NSString(contentsOf: url, encoding: String.Encoding.utf8.rawValue)
     }
 
     // 辞書の検証をする
     // 検証の進捗状況は逐次表示する
-    private func validate(dictionary : LoadLocalDictionary) -> Bool {
+    fileprivate func validate(_ dictionary : LoadLocalDictionary) -> Bool {
         let validate = ValidateDictionary(dictionary: dictionary)
         validate.progress = { (current, total) in
             let progress = Float(current) / Float(total)

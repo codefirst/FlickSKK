@@ -11,7 +11,7 @@ import Nimble
 
 class SKKDictionaryLocalFileSpec : QuickSpec {
     override func spec() {
-        let bundle = NSBundle(forClass: self.classForCoder)
+        let bundle = Bundle(forClass: self.classForCoder)
         let jisyo = bundle.URLForResource("skk", withExtension: "jisyo")
         let dict = SKKLocalDictionaryFile(url: jisyo!)
         describe("okuri-nasi") {

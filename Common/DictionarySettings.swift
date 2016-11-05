@@ -4,10 +4,10 @@ import AppGroup
 class DictionarySettings {
     // テスト時は違うBundleからロードする
     // FIXME: もっといい感じに書きたい
-    private struct ClassProperty {
-        static var bundle : NSBundle?
+    fileprivate struct ClassProperty {
+        static var bundle : Bundle?
     }
-    class var bundle: NSBundle? {
+    class var bundle: Bundle? {
         get {
             return ClassProperty.bundle
         }
@@ -17,35 +17,35 @@ class DictionarySettings {
     }
 
     // ユーザ辞書(単語登録)
-    class func defaultUserDictionaryURL() -> NSURL {
-        return AppGroup.urlForResource("Library/skk.jisyo") ?? home("Library/skk.jisyo")
+    class func defaultUserDictionaryURL() -> URL {
+        return AppGroup.url(forResource: "Library/skk.jisyo") ?? home("Library/skk.jisyo")
     }
 
     // 変換結果の学習
-    class func defaultLearnDictionaryURL() -> NSURL {
-        return AppGroup.urlForResource("Library/skk.learn.jisyo") ??
+    class func defaultLearnDictionaryURL() -> URL {
+        return AppGroup.url(forResource: "Library/skk.learn.jisyo") ??
             home("Library/skk.learn.jisyo")
     }
 
     // q確定の結果の学習
-    class func defaultPartialDictionaryURL() -> NSURL {
-        return AppGroup.urlForResource("Library/skk.partial.jisyo") ??
+    class func defaultPartialDictionaryURL() -> URL {
+        return AppGroup.url(forResource: "Library/skk.partial.jisyo") ??
             home("Library/skk.partial.jisyo")
     }
 
     // 追加辞書
-    class func additionalDictionaryURL() -> NSURL {
-        return AppGroup.urlForResource("Library/additional") ??
+    class func additionalDictionaryURL() -> URL {
+        return AppGroup.url(forResource: "Library/additional") ??
             home("Library/additional")
     }
 
     // 組込みの辞書(L辞書とか)
-    class func defaultDicitonaryURL() -> NSURL {
+    class func defaultDicitonaryURL() -> URL {
        // 辞書は必ず組込まれているはず
-       return (DictionarySettings.bundle ?? NSBundle.mainBundle()).URLForResource("skk", withExtension: "jisyo")!
+       return (DictionarySettings.bundle ?? Bundle.main).url(forResource: "skk", withExtension: "jisyo")!
     }
 
-    class func home(path : String) -> NSURL {
-        return NSURL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).URLByAppendingPathComponent(path)
+    class func home(_ path : String) -> URL {
+        return URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).appendingPathComponent(path)
     }
 }

@@ -7,7 +7,7 @@
 //
 // 上記例は特殊だが、zipcode辞書等では発生しうる。
 class IdFilter : SKKFilter {
-    func call(target: String, binarySearch: BinarySearch, parse: String -> [String]) -> [String] {
+    func call(_ target: String, binarySearch: BinarySearch, parse: (String) -> [String]) -> [String] {
         if let line = binarySearch.call(target) {
             return parse(line)
         } else {

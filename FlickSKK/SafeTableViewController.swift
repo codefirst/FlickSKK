@@ -18,7 +18,7 @@ class SafeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     init(style: UITableViewStyle) {
         super.init(nibName: nil, bundle: nil)
 
-        view = UITableView(frame: CGRectZero, style: style)
+        view = UITableView(frame: CGRect.zero, style: style)
         tableView.delegate = self
         tableView.dataSource = self
         viewDidLoad()
@@ -32,26 +32,26 @@ class SafeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         // do nothing
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         if let selected = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selected, animated: animated)
+            tableView.deselectRow(at: selected, animated: animated)
         }
         tableView.reloadData()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         tableView.flashScrollIndicators()
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         fatalError("tableView(tableView:cellForRowAtIndexPath:) has not been implemented")
     }
 }

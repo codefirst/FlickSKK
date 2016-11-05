@@ -3,7 +3,7 @@ import Nimble
 
 class DictionaryEngineSpec : QuickSpec {
     lazy var dictionary : SKKDictionary = {
-        DictionarySettings.bundle = NSBundle(forClass: self.classForCoder)
+        DictionarySettings.bundle = Bundle(forClass: self.classForCoder)
         let dict = SKKDictionary()
         dict.waitForLoading()
         return dict

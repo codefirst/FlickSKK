@@ -1,16 +1,16 @@
 // ComposeModeを表示する
 class ComposeModePresenter {
     // 表示用文字列(▽あああ、みたいなやつ)
-    func toString(composeMode : ComposeMode) -> String {
+    func toString(_ composeMode : ComposeMode) -> String {
         switch composeMode {
-        case .DirectInput:
+        case .directInput:
             return ""
-        case .KanaCompose(kana: let kana, candidates: _):
+        case .kanaCompose(kana: let kana, candidates: _):
             return "▽\(kana)"
-        case .KanjiCompose(kana: let kana, okuri: let okuri, candidates: _, index: _):
+        case .kanjiCompose(kana: let kana, okuri: let okuri, candidates: _, index: _):
             let text = kana + (okuri.map({ str in "*" + str }) ?? "")
             return "▼\(text)"
-        case .WordRegister(kana : let kana, okuri : let okuri, composeText : let text, composeMode : let m):
+        case .wordRegister(kana : let kana, okuri : let okuri, composeText : let text, composeMode : let m):
             let prefix = kana + (okuri.map({ str in "*" + str }) ?? "")
             let nested = toString(m[0]) ?? ""
             return "[登録:\(prefix)]\(text)\(nested)"
@@ -18,29 +18,29 @@ class ComposeModePresenter {
     }
 
     // 候補の取得
-    func candidates(composeMode : ComposeMode) -> (candidates: [Candidate], index: Int?)? {
+    func candidates(_ composeMode : ComposeMode) -> (candidates: [Candidate], index: Int?)? {
         switch composeMode {
-        case .DirectInput:
-            return .None
-        case .KanaCompose(kana: _, candidates: let candidates):
-            return (candidates, .None)
-        case .KanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
+        case .directInput:
+            return .none
+        case .kanaCompose(kana: _, candidates: let candidates):
+            return (candidates, .none)
+        case .kanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
             return (candidates, index)
-        case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
+        case .wordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return candidates(m[0])
         }
     }
 
     // スペースか次候補か
-    func inStatusShowsCandidatesBySpace(composeMode : ComposeMode) -> Bool {
+    func inStatusShowsCandidatesBySpace(_ composeMode : ComposeMode) -> Bool {
         switch composeMode {
-        case .DirectInput:
+        case .directInput:
             return false
-        case .KanaCompose(_):
+        case .kanaCompose(_):
             return true
-        case .KanjiCompose(kana: _, okuri: _, candidates: _, index: _):
+        case .kanjiCompose(kana: _, okuri: _, candidates: _, index: _):
             return true
-        case .WordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
+        case .wordRegister(kana : _, okuri : _, composeText : _, composeMode : let m):
             return inStatusShowsCandidatesBySpace(m[0]
             )
         }

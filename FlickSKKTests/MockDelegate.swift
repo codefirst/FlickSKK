@@ -1,8 +1,8 @@
 class MockDelegate : SKKDelegate {
     var insertedText = ""
-    var inputMode : SKKInputMode = .Hirakana
+    var inputMode : SKKInputMode = .hirakana
 
-    func insertText(text : String) {
+    func insertText(_ text : String) {
         self.insertedText += text
     }
 
@@ -10,13 +10,13 @@ class MockDelegate : SKKDelegate {
         self.insertedText = self.insertedText.butLast()
     }
 
-    func composeText(text : String) {
+    func composeText(_ text : String) {
     }
 
-    func changeInputMode(inputMode: SKKInputMode) {
+    func changeInputMode(_ inputMode: SKKInputMode) {
         self.inputMode = inputMode
     }
 
-    func showCandidates(candidates : [Candidate]?) {
+    func showCandidates(_ candidates : [Candidate]?) {
     }
 }

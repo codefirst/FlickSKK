@@ -1,12 +1,12 @@
 // SKKのメインエンジン
 
 class SKKEngine {
-    private let keyHandler : KeyHandler
-    private weak var delegate : SKKDelegate?
+    fileprivate let keyHandler : KeyHandler
+    fileprivate weak var delegate : SKKDelegate?
 
-    private var composeMode : ComposeMode = .DirectInput
+    fileprivate var composeMode : ComposeMode = .directInput
 
-    private let presenter = ComposeModePresenter()
+    fileprivate let presenter = ComposeModePresenter()
 
     init(delegate : SKKDelegate, dictionary : SKKDictionary){
         self.delegate = delegate
@@ -17,7 +17,7 @@ class SKKEngine {
         return self.composeMode
     }
 
-    func handle(keyEvent : SKKKeyEvent) {
+    func handle(_ keyEvent : SKKKeyEvent) {
         // 状態遷移
         self.composeMode = keyHandler.handle(keyEvent, composeMode: composeMode)
 

@@ -10,17 +10,17 @@ import Foundation
 
 protocol SKKDelegate : class {
     // 確定文字の表示
-    func insertText(text : String)
+    func insertText(_ text : String)
 
     // 削除
     func deleteBackward()
 
     // 未確定文字の表示
-    func composeText(text : String)
+    func composeText(_ text : String)
 
     // 入力モードの変更
-    func changeInputMode(inputMode : SKKInputMode)
+    func changeInputMode(_ inputMode : SKKInputMode)
 
     // 変換候補の表示
-    func showCandidates(candidates : [Candidate]?)
+    func showCandidates(_ candidates : [Candidate]?)
 }

@@ -16,12 +16,12 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     // [String:String]相当の実装になってる
     var okuriAri  = NSMutableDictionary()
     var okuriNasi = NSMutableDictionary()
-    private let url : NSURL
+    fileprivate let url : URL
 
-    init(url : NSURL){
+    init(url : URL){
         self.url = url
         // TODO: 変なデータが来たら、空で初期化する
-        let now = NSDate()
+        let now = Date()
         var isOkuriAri = true
         if let path = url.path {
             IOUtil.each(path, with: { line -> Void in
@@ -34,18 +34,18 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
                 if(s.hasPrefix(";")) { return }
 
                 switch self.parse(s) {
-                case .Some(let x,let y):
+                case .some(let x,let y):
                     if isOkuriAri {
                         self.okuriAri[x] = y
                     } else {
                         self.okuriNasi[x] = y
                     }
-                case .None:
+                case .none:
                     break
                 }
             })
         }
-        NSLog("loaded (%f) (%d + %d entries from %@)\n", NSDate().timeIntervalSinceDate(now), okuriAri.count, okuriNasi.count, url)
+        NSLog("loaded (%f) (%d + %d entries from %@)\n", Date().timeIntervalSince(now), okuriAri.count, okuriNasi.count, url)
     }
 
     func entries() -> [SKKDictionaryEntry] {
@@ -53,7 +53,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
 
         for (k, v) in okuriNasi {
             for kanji in EntryParser(entry: v as! String).words() {
-                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: k as! String, okuri: .None))
+                xs.append(.skkDictionaryEntry(kanji: kanji, kana: k as! String, okuri: .none))
             }
         }
 
@@ -61,15 +61,15 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             let kana = (k as! String).butLast()
             let okuri = (k as! String).last()
             for kanji in EntryParser(entry: v as! String).words() {
-                xs.append(.SKKDictionaryEntry(kanji: kanji, kana: kana, okuri: okuri))
+                xs.append(.skkDictionaryEntry(kanji: kanji, kana: kana, okuri: okuri))
             }
         }
 
-        xs.sortInPlace()
+        xs.sort()
         return xs
     }
 
-    func find(normal : String, okuri : String?) -> [ String ] {
+    func find(_ normal : String, okuri : String?) -> [ String ] {
         if let entry = dictFor(okuri)[normal + (okuri ?? "")] as! String? {
             let parser = EntryParser(entry: entry)
             return parser.words()
@@ -78,7 +78,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         }
     }
 
-    func findWith(prefix: String) -> [(kana: String, kanji: String)] {
+    func findWith(_ prefix: String) -> [(kana: String, kanji: String)] {
         var xs : [(kana: String, kanji: String)] = []
         for (normal, entry) in self.okuriNasi {
             let n = normal as! String
@@ -92,7 +92,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         return xs
     }
 
-    func register(normal : String, okuri: String?, kanji: String) {
+    func register(_ normal : String, okuri: String?, kanji: String) {
         if(kanji.isEmpty) { return }
         let dict : NSMutableDictionary = dictFor(okuri)
         let entry : String? = dict[normal + (okuri ?? "")] as! String?
@@ -122,35 +122,35 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
         }
     }
 
-    func unregister(entry : SKKDictionaryEntry) {
+    func unregister(_ entry : SKKDictionaryEntry) {
         switch entry {
-        case .SKKDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
+        case .skkDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
             let key = kana + (okuri ?? "")
             if let entry = dictFor(okuri)[key] as! String? {
                 let parser = EntryParser(entry: entry)
                 if let x = parser.remove(kanji) {
                     dictFor(okuri)[key] = x
                 } else {
-                    dictFor(okuri).removeObjectForKey(key)
+                    dictFor(okuri).removeObject(forKey: key)
                 }
                 self.serialize()
             }
         }
     }
 
-    private func parse(line : NSString) -> (String, String)? {
-        let range = line.rangeOfString(" ")
+    fileprivate func parse(_ line : NSString) -> (String, String)? {
+        let range = line.range(of: " ")
         if range.location == NSNotFound {
-            return .None
+            return .none
         } else {
-            let kana : NSString = line.substringToIndex(range.location)
-            let kanji : NSString = line.substringFromIndex(range.location + 1)
+            let kana : NSString = line.substring(to: range.location) as NSString
+            let kanji : NSString = line.substring(from: range.location + 1) as NSString
             return (kana as String, kanji as String)
         }
     }
 
-    private func dictFor(okuri: String?) -> NSMutableDictionary {
-        if okuri == .None {
+    fileprivate func dictFor(_ okuri: String?) -> NSMutableDictionary {
+        if okuri == .none {
             return self.okuriNasi
         } else {
             return self.okuriAri

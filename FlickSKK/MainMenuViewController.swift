@@ -9,7 +9,7 @@
 import UIKit
 
 class MainMenuViewController: SafeTableViewController {
-    typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: Void -> Void)
+    typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: (Void) -> Void)
     lazy var sections : [(title: String?, rows: [row])] = {
         weak var weakSelf = self
         return [
@@ -19,7 +19,7 @@ class MainMenuViewController: SafeTableViewController {
             (title: nil, rows: [
                 self.item("User Dictionary") { weakSelf?.gotoUserDictionary() },
                 self.item("Additional Dictionary") { weakSelf?.gotoAdditionalDictionary() }]),
-            (title: nil, rows: [self.item("Reset Learn Dictionary", accessoryType: .None) {
+            (title: nil, rows: [self.item("Reset Learn Dictionary", accessoryType: .none) {
                 weakSelf?.reset(); return
             }]),
             (title: nil, rows: [self.item("License") {
@@ -29,7 +29,7 @@ class MainMenuViewController: SafeTableViewController {
     }()
 
     init() {
-        super.init(style: .Grouped)
+        super.init(style: .grouped)
     }
 
     // MARK: View Lifecycle
@@ -42,45 +42,45 @@ class MainMenuViewController: SafeTableViewController {
 
     // MARK: - Table View
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         return sections.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rows.count
     }
 
     let kCellID = "Cell"
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellID) ?? UITableViewCell(style: .default, reuseIdentifier: kCellID)
         let row = sections[indexPath.section].rows[indexPath.row]
         cell.textLabel?.text = row.title
         cell.accessoryType = row.accessoryType
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()
     }
 
-    private func item(title : String, accessoryType: UITableViewCellAccessoryType = .DisclosureIndicator, action : Void -> Void) -> row {
+    fileprivate func item(_ title : String, accessoryType: UITableViewCellAccessoryType = .disclosureIndicator, action : @escaping (Void) -> Void) -> row {
         return (title: NSLocalizedString(title, comment: ""), accessoryType: accessoryType, action: action)
     }
 
     // MARK: - Actions
     func gotoSetup() {
-        if let path = NSBundle.mainBundle().pathForResource("Setup", ofType: "html", inDirectory: "html") {
-            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
+        if let path = Bundle.main.path(forResource: "Setup", ofType: "html", inDirectory: "html") {
+            navigationController?.pushViewController(WebViewController(URL: URL(fileURLWithPath: path)), animated: true)
         }
     }
 
 
     func gotoHowToUse() {
-        if let path = NSBundle.mainBundle().pathForResource("HowToUse", ofType: "html", inDirectory: "html") {
-            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
+        if let path = Bundle.main.path(forResource: "HowToUse", ofType: "html", inDirectory: "html") {
+            navigationController?.pushViewController(WebViewController(URL: URL(fileURLWithPath: path)), animated: true)
         }
     }
 
@@ -97,17 +97,17 @@ class MainMenuViewController: SafeTableViewController {
     }
 
     func reset() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .Destructive, handler: { action in
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .destructive, handler: { action in
             SKKDictionary.resetLearnDictionary()
         }))
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
     func gotoLicense() {
-        if let path = NSBundle.mainBundle().pathForResource("License", ofType: "html", inDirectory: "html") {
-            navigationController?.pushViewController(WebViewController(URL: NSURL(fileURLWithPath: path)), animated: true)
+        if let path = Bundle.main.path(forResource: "License", ofType: "html", inDirectory: "html") {
+            navigationController?.pushViewController(WebViewController(URL: URL(fileURLWithPath: path)), animated: true)
         }
     }
 

@@ -8,10 +8,10 @@
 import UIKit
 
 class Appearance {
-    class func normalFont(size : CGFloat) -> UIFont {
+    class func normalFont(_ size : CGFloat) -> UIFont {
       return UIFont(name: "HiraKakuProN-W3", size: size)!
     }
-    class func boldFont(size : CGFloat) -> UIFont {
+    class func boldFont(_ size : CGFloat) -> UIFont {
       return UIFont(name: "HiraKakuProN-W6", size: size)!
     }
 }

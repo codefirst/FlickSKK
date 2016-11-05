@@ -5,32 +5,32 @@
 //  - 各単語がソートされている。
 // といった特徴を持つ。
 class SKKLocalDictionaryFile : SKKDictionaryFile {
-    private let okuriAri : BinarySearch
-    private let okuriNasi : BinarySearch
-    private let url : NSURL
-    private let filters : [SKKFilter] = [
+    fileprivate let okuriAri : BinarySearch
+    fileprivate let okuriNasi : BinarySearch
+    fileprivate let url : URL
+    fileprivate let filters : [SKKFilter] = [
         IdFilter(), NumberFilter()
     ]
-    init(url : NSURL){
+    init(url : URL){
         self.url = url
-        let now = NSDate()
+        let now = Date()
         let dictionary = LoadLocalDictionary(url: url)
 
         self.okuriAri = BinarySearch(entries: dictionary.okuriAri(), reverse: true)
         self.okuriNasi = BinarySearch(entries: dictionary.okuriNasi(), reverse: false)
-        NSLog("loaded (%f)\n", NSDate().timeIntervalSinceDate(now))
+        NSLog("loaded (%f)\n", Date().timeIntervalSince(now))
     }
 
-    func find(normal : String, okuri : String?) -> [ String ] {
+    func find(_ normal : String, okuri : String?) -> [ String ] {
         switch okuri {
-        case .None:
+        case .none:
             return search(normal + " ", at: self.okuriNasi)
-        case .Some(let okuri):
+        case .some(let okuri):
             return search(normal + okuri + " ", at: self.okuriAri)
         }
     }
 
-    private func search(target : String, at: BinarySearch) -> [String] {
+    fileprivate func search(_ target : String, at: BinarySearch) -> [String] {
         return filters.flatMap { filter in
             filter.call(target, binarySearch: at) {
                 EntryParser(entry: $0).words()

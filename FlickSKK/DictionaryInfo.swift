@@ -1,5 +1,5 @@
 class DictionaryInfo {
-    private let dictionary : LoadLocalDictionary
+    fileprivate let dictionary : LoadLocalDictionary
 
     init(dictionary : LoadLocalDictionary) {
         self.dictionary = dictionary

@@ -881,6 +881,7 @@
 					};
 					EAD4B55F19D5CB50007B6636 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -889,10 +890,12 @@
 					};
 					EAD4B57419D5CB50007B6636 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0810;
 						TestTargetID = EAD4B55F19D5CB50007B6636;
 					};
 					EAD4B58819D5CB8A007B6636 = {
 						CreatedOnToolsVersion = 6.0;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1468,6 +1471,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1483,6 +1487,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1503,6 +1508,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER).$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlickSKK.app/FlickSKK";
 			};
 			name = Debug;
@@ -1520,6 +1526,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER).$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlickSKK.app/FlickSKK";
 			};
 			name = Release;
@@ -1545,6 +1552,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1563,6 +1571,7 @@
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

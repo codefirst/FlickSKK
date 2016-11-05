@@ -4,12 +4,12 @@
 // 辞書の文字コードを変換した後などは、再ソートを行なわないと、正しい変換ができない。
 // skkdic-sortコマンドと同等の処理だが、コードレベルでの共通点はない。
 class SortDictionary {
-    private let dictionary : LoadLocalDictionary
+    fileprivate let dictionary : LoadLocalDictionary
     init(dictionary : LoadLocalDictionary) {
         self.dictionary = dictionary
     }
 
-    func call(dest : NSURL) {
+    func call(_ dest : URL) {
         if let file = LocalFile(url: dest) {
             file.writeln(";; okuri-ari entries.")
             for line in sorted(dictionary.okuriAri(), reverse: true) {
@@ -26,15 +26,15 @@ class SortDictionary {
         }
     }
 
-    private func sorted(xs : NSArray, reverse: Bool) -> NSArray {
-        return xs.sortedArrayUsingComparator({ (x1, y1) -> NSComparisonResult in
+    fileprivate func sorted(_ xs : NSArray, reverse: Bool) -> NSArray {
+        return xs.sortedArray(comparator: { (x1, y1) -> ComparisonResult in
             let x2 = x1 as! NSString
             let y2 = y1 as! NSString
             if reverse {
-                return y2.compare(x2 as String, options: .LiteralSearch)
+                return y2.compare(x2 as String, options: .literal)
             } else {
-                return x2.compare(y2 as String, options: .LiteralSearch)
+                return x2.compare(y2 as String, options: .literal)
             }
-        })
+        }) as NSArray
     }
 }

@@ -9,16 +9,16 @@
 import UIKit
 
 class WebViewController: UIViewController, UIWebViewDelegate {
-    lazy var webView: UIWebView = UIWebView(frame: CGRectZero).tap{ (wv:UIWebView) in
-        wv.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    lazy var webView: UIWebView = UIWebView(frame: CGRect.zero).tap{ (wv:UIWebView) in
+        wv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         wv.scalesPageToFit = true
         wv.delegate = self
-        wv.dataDetectorTypes = UIDataDetectorTypes.Link
+        wv.dataDetectorTypes = UIDataDetectorTypes.link
     }
 
-    var initialURL: NSURL?
+    var initialURL: URL?
 
-    init(URL: NSURL) {
+    init(URL: Foundation.URL) {
         self.initialURL = URL
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,23 +27,23 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         self.view = self.webView
 
         if let u = initialURL {
-            self.webView.loadRequest(NSURLRequest(URL: u))
+            self.webView.loadRequest(URLRequest(url: u))
         }
     }
 
     // MARK: WebView Delegate
 
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if navigationType == UIWebViewNavigationType.LinkClicked {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if navigationType == UIWebViewNavigationType.linkClicked {
             // Open in Safari
-            UIApplication.sharedApplication().openURL(request.URL!)
+            UIApplication.shared.openURL(request.url!)
             return false
         }
         return true
     }
 
-    func webViewDidFinishLoad(webView: UIWebView) {
-        if let title = self.webView.stringByEvaluatingJavaScriptFromString("document.title") {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if let title = self.webView.stringByEvaluatingJavaScript(from: "document.title") {
             self.title = title
         }
     }

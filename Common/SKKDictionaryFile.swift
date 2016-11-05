@@ -9,5 +9,5 @@
 import Foundation
 
 protocol SKKDictionaryFile {
-    func find(normal : String, okuri : String?) -> [ String ]
+    func find(_ normal : String, okuri : String?) -> [ String ]
 }

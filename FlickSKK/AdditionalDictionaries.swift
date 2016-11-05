@@ -2,33 +2,33 @@
 //
 // 設定画面で表示したりする、有効な辞書一覧や追加できる辞書一覧を取得する。
 class AdditionalDictionaries {
-    typealias Entry = (title: String, url: NSURL?, local: NSURL?)
+    typealias Entry = (title: String, url: URL?, local: URL?)
 
-    private let defaultDictionaries : [Entry] = [
+    fileprivate let defaultDictionaries : [Entry] = [
         (title: "人名辞書",
-            url: NSURL(string: "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"),
+            url: URL(string: "http://openlab.jp/skk/skk/dic/SKK-JISYO.jinmei"),
             local: nil),
         (title: "郵便番号辞書",
-            url: NSURL(string: "http://openlab.jp/skk/skk/dic/zipcode/SKK-JISYO.zipcode"),
+            url: URL(string: "http://openlab.jp/skk/skk/dic/zipcode/SKK-JISYO.zipcode"),
             local: nil),
         (title: "沖縄辞書",
-            url: NSURL(string: "http://openlab.jp/skk/skk/dic/SKK-JISYO.okinawa"),
+            url: URL(string: "http://openlab.jp/skk/skk/dic/SKK-JISYO.okinawa"),
             local: nil),
         (title: "絵文字辞書",
-            url: NSURL(string: "https://raw.githubusercontent.com/uasi/skk-emoji-jisyo/master/SKK-JISYO.emoji.utf8"),
+            url: URL(string: "https://raw.githubusercontent.com/uasi/skk-emoji-jisyo/master/SKK-JISYO.emoji.utf8"),
             local: nil),
         (title: "その他(URL指定)", url: nil, local: nil)
     ]
 
     // すでに追加した辞書のファイル名
-    private lazy var dictionaryFiles = SKKDictionary.additionalDictionaries()
+    fileprivate lazy var dictionaryFiles = SKKDictionary.additionalDictionaries()
 
     // 有効になった(追加した)辞書一覧の取得
     func enabledDictionaries() -> [Entry] {
         return dictionaryFiles.map { url in
-            self.dictionaryForURL(url).map {
-                self.copy($0, local: url)
-                } ?? (title: url.lastPathComponent ?? "-", url: nil, local: url)
+            self.dictionaryForURL(url as URL).map {
+                self.copy($0, local: url as URL)
+                } ?? (title: url.lastPathComponent ?? "-", url: nil, local: url as URL)
         }
     }
 
@@ -40,7 +40,7 @@ class AdditionalDictionaries {
         }
     }
 
-    private func dictionaryForURL(url : NSURL) -> Entry? {
+    fileprivate func dictionaryForURL(_ url : URL) -> Entry? {
         let name = url.lastPathComponent
         for entry in defaultDictionaries {
             if entry.url?.lastPathComponent == name {
@@ -50,7 +50,7 @@ class AdditionalDictionaries {
         return nil
     }
 
-    private func copy(entry : Entry, local : NSURL) -> Entry {
+    fileprivate func copy(_ entry : Entry, local : URL) -> Entry {
         // XXX: 名前付きタプルのうち、一部だけを書き換える。そのうちシンタックスが搭載されると信じてる。
         return (title: entry.title, url: entry.url, local: local)
     }

@@ -9,18 +9,18 @@
 
 import Foundation
 enum SKKInputMode {
-    case Hirakana
-    case Katakana
-    case HankakuKana
+    case hirakana
+    case katakana
+    case hankakuKana
 
     func kanaType() -> KanaType {
         switch self {
-        case .Hirakana:
-            return .Hirakana
-        case .Katakana:
-            return .Katakana
-        case .HankakuKana:
-            return .HankakuKana
+        case .hirakana:
+            return .hirakana
+        case .katakana:
+            return .katakana
+        case .hankakuKana:
+            return .hankakuKana
         }
     }
 }

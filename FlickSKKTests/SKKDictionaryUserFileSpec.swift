@@ -11,7 +11,7 @@ import Nimble
 
 class SKKDictionaryUserFileSpec : QuickSpec {
     override func spec() {
-        let url = NSURL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).URLByAppendingPathComponent("Library/skk-test.jisyo")
+        let url = URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true).appendingPathComponent("Library/skk-test.jisyo")
         var dict: SKKUserDictionaryFile!
 
         describe("SKK dictionary") {

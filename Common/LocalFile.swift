@@ -3,19 +3,19 @@
 //
 // 「ローカル」という命名はiCloud対応を意識してのことだが、現時点で特にそのような仕組みは実装していない。
 class LocalFile {
-    private let handle : NSFileHandle?
+    fileprivate let handle : FileHandle?
 
-    init?(url : NSURL) {
+    init?(url : URL) {
         guard let path = url.path else {
             self.handle = nil
             return nil
         }
 
-        if !NSFileManager.defaultManager().fileExistsAtPath(path) {
-            NSFileManager.defaultManager().createFileAtPath(path, contents: nil, attributes:nil)
+        if !FileManager.default.fileExists(atPath: path) {
+            FileManager.default.createFile(atPath: path, contents: nil, attributes:nil)
         }
 
-        if let handle = NSFileHandle(forWritingAtPath: path) {
+        if let handle = FileHandle(forWritingAtPath: path) {
             self.handle = handle
             // ファイルを開くと内容を空にするようにする。
             clear()
@@ -25,15 +25,15 @@ class LocalFile {
         }
     }
 
-    func writeln(str : String) {
+    func writeln(_ str : String) {
         write(str + "\n")
     }
 
-    func write(str : String) {
+    func write(_ str : String) {
         let s = str as NSString
-        let data = NSData(bytes: s.UTF8String,
-            length: s.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-        handle?.writeData(data)
+        let data = Data(bytes: UnsafePointer<UInt8>(s.utf8String!),
+            count: s.lengthOfBytes(using: String.Encoding.utf8.rawValue))
+        handle?.write(data)
     }
 
     func close() {
@@ -41,6 +41,6 @@ class LocalFile {
     }
 
     func clear() {
-        self.handle?.truncateFileAtOffset(0)
+        self.handle?.truncateFile(atOffset: 0)
     }
 }

@@ -24,11 +24,11 @@ class KeyPad : UIView {
     init(keys: [KanaFlickKey]) {
         self.keys = keys
         self.keyButtons = []
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         self.addKeypadKeys()
     }
 
-    private func keyButton(key: KanaFlickKey) -> KeyButton {
+    fileprivate func keyButton(_ key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
             b.tapped = { (key:KanaFlickKey, index:Int?) in

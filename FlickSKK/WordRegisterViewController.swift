@@ -8,27 +8,27 @@
 
 import UIKit
 class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate {
-    private let yomiField = UITextField(frame: CGRectZero)
-    private let okuriField = UITextField(frame: CGRectZero)
-    private let wordField = UITextField(frame: CGRectZero)
-    private lazy var doneButton : UIBarButtonItem =
+    fileprivate let yomiField = UITextField(frame: CGRect.zero)
+    fileprivate let okuriField = UITextField(frame: CGRect.zero)
+    fileprivate let wordField = UITextField(frame: CGRect.zero)
+    fileprivate lazy var doneButton : UIBarButtonItem =
         UIBarButtonItem(title: NSLocalizedString("Register", comment:""),
-            style: .Done, target:self, action: Selector("register"))
+            style: .done, target:self, action: Selector("register"))
     var done : ((String, String?, String) -> Void)?
 
-    private lazy var sections : [(
+    fileprivate lazy var sections : [(
         title: String?,
         rows: [(title: String, text: UITextField, returnType: UIReturnKeyType)]
     )] = [
         (title: nil, rows: [
-            (title: NSLocalizedString("word", comment: ""), text: self.wordField, returnType: .Next),
-            (title: NSLocalizedString("yomi", comment: ""), text: self.yomiField, returnType: .Next),
-            (title: NSLocalizedString("okuri", comment: ""), text: self.okuriField, returnType: .Default),
+            (title: NSLocalizedString("word", comment: ""), text: self.wordField, returnType: .next),
+            (title: NSLocalizedString("yomi", comment: ""), text: self.yomiField, returnType: .next),
+            (title: NSLocalizedString("okuri", comment: ""), text: self.okuriField, returnType: .default),
     ])]
 
     init() {
-        super.init(style: .Grouped)
-        self.doneButton.enabled = false
+        super.init(style: .grouped)
+        self.doneButton.isEnabled = false
         self.navigationItem.rightBarButtonItem = doneButton
     }
 
@@ -36,7 +36,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc private func register() {
+    @objc fileprivate func register() {
         if canRegister() {
             var okuri : String? = nil
 
@@ -55,60 +55,60 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
                 self.wordField.text ?? "",
                 okuri,
                 self.yomiField.text ?? "")
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
     let kCellID = "Cell"
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         return sections.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rows.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellID) ?? UITableViewCell(style: .default, reuseIdentifier: kCellID)
 
         let row = sections[indexPath.section].rows[indexPath.row]
-        cell.accessoryType = .None
-        cell.selectionStyle = .None
+        cell.accessoryType = .none
+        cell.selectionStyle = .none
 
         // label
-        let label = UILabel(frame: CGRectMake(20, 5, 130, 45))
+        let label = UILabel(frame: CGRect(x: 20, y: 5, width: 130, height: 45))
         label.text = row.title
         label.font = Appearance.normalFont(17.0)
         cell.contentView.addSubview(label)
 
         // text field
         let textField = row.text
-        textField.frame = CGRectMake(130, 0, view.frame.width-130, 50)
+        textField.frame = CGRect(x: 130, y: 0, width: view.frame.width-130, height: 50)
         textField.font = Appearance.normalFont(17.0)
-        textField.clearButtonMode = .WhileEditing
+        textField.clearButtonMode = .whileEditing
         textField.placeholder = row.title
-        textField.contentVerticalAlignment = .Center
+        textField.contentVerticalAlignment = .center
         textField.returnKeyType = row.returnType
         textField.delegate = self
-        textField.addTarget(self, action: "didChange", forControlEvents: .EditingChanged)
+        textField.addTarget(self, action: "didChange", for: .editingChanged)
         cell.contentView.addSubview(textField)
 
         return cell
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 50.0
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         for section in self.sections {
-            for (index,row) in section.rows.enumerate() {
+            for (index,row) in section.rows.enumerated() {
                 if textField == row.text {
                     switch row.returnType {
-                    case .Next:
+                    case .next:
                         section.rows[index+1].text.becomeFirstResponder()
-                    case .Default:
+                    case .default:
                         register()
                     default:
                         // do nothing
@@ -120,11 +120,11 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         return true
     }
 
-    @objc private func didChange() {
-        self.doneButton.enabled = canRegister()
+    @objc fileprivate func didChange() {
+        self.doneButton.isEnabled = canRegister()
     }
 
-    private func canRegister() -> Bool {
+    fileprivate func canRegister() -> Bool {
         // 登録できる条件
         // ・登録する単語が入力されている
         // ・よみが入力されている。SKK的に読みはほぼ任意(例: forallとかもある)なので、あまり前提をおけない。

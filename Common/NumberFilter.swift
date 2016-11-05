@@ -7,12 +7,12 @@
 // #1 等はそれぞれ「全角数字に変換する」などのルールが決まっている。
 class NumberFilter : SKKFilter {
     // 見出し語中に含まれる数字を置換するための正規表現(e.g. 10, 231)
-    private let regexp : NSRegularExpression! = try? NSRegularExpression(pattern: "[0-9]+", options: [])
+    fileprivate let regexp : NSRegularExpression! = try? NSRegularExpression(pattern: "[0-9]+", options: [])
 
     // 単語中の #1 等を置換するための正規表現(e.g. #1, #2)
-    private let template : NSRegularExpression! = try? NSRegularExpression(pattern: "#[0-9]", options: [])
+    fileprivate let template : NSRegularExpression! = try? NSRegularExpression(pattern: "#[0-9]", options: [])
 
-    func call(target: String, binarySearch: BinarySearch, parse: String -> [String]) -> [String] {
+    func call(_ target: String, binarySearch: BinarySearch, parse: (String) -> [String]) -> [String] {
         // 検索語の置換のために、数字を記憶する
         let numbers = self.numbers(target)
 
@@ -32,50 +32,50 @@ class NumberFilter : SKKFilter {
     }
 
     // 見出し語中の数値を抜き出す
-    private func numbers(value : String) -> [Int64] {
-        let xs = regexp.matchesInString(value,
+    fileprivate func numbers(_ value : String) -> [Int64] {
+        let xs = regexp.matches(in: value,
             options: [],
             range: NSMakeRange(0, value.utf16.count)) 
         return xs.map({ x in
-            let n : NSString = (value as NSString).substringWithRange(x.range)
+            let n : NSString = (value as NSString).substring(with: x.range) as NSString
             return n.longLongValue
         })
     }
 
     // 検索用に変換する: 16や -> #や
-    private func hashnize(target : String) -> String {
-        return regexp.stringByReplacingMatchesInString(target,
+    fileprivate func hashnize(_ target : String) -> String {
+        return regexp.stringByReplacingMatches(in: target,
             options: [],
             range: NSMakeRange(0, target.utf16.count),
             withTemplate: "#")
     }
 
     // 単語中の #1 等を置換する
-    private func stringnize(entry : String, numbers : [Int64]) -> String {
+    fileprivate func stringnize(_ entry : String, numbers : [Int64]) -> String {
         let result : NSMutableString =
         entry.mutableCopy() as! NSMutableString
 
         var ret =
-        template.firstMatchInString(result as String, options: [], range: NSMakeRange(0, result.length))
+        template.firstMatch(in: result as String, options: [], range: NSMakeRange(0, result.length))
 
         var index = 0
 
         while let x = ret {
-            let matched = result.substringWithRange(x.range)
+            let matched = result.substring(with: x.range)
 
-            template.replaceMatchesInString(result,
+            template.replaceMatches(in: result,
                 options: [],
                 range: x.range,
                 withTemplate: stringFor(numbers[index], entry: matched))
             index += 1
-            ret = template.firstMatchInString(result as String, options: [], range: NSMakeRange(0, result.length))
+            ret = template.firstMatch(in: result as String, options: [], range: NSMakeRange(0, result.length))
         }
 
         return result as String
     }
 
     // #1 等に応じて、対応した文字に変換する
-    private func stringFor(n : Int64, entry : String) -> String {
+    fileprivate func stringFor(_ n : Int64, entry : String) -> String {
         let formatter = NumberFormatter(value: n)
         switch entry {
         case "#0":
