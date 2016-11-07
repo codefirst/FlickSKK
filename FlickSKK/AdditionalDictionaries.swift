@@ -28,7 +28,7 @@ class AdditionalDictionaries {
         return dictionaryFiles.map { url in
             self.dictionaryForURL(url as URL).map {
                 self.copy($0, local: url as URL)
-                } ?? (title: url.lastPathComponent ?? "-", url: nil, local: url as URL)
+                } ?? (title: url.lastPathComponent, url: nil, local: url as URL)
         }
     }
 

@@ -19,18 +19,15 @@ class DictionaryCache {
             if let (Exact, file) = kCache[url] {
                 if Exact == mtime {
                     // キャッシュが有効
-                    NSLog("%@ is cached", url)
                     return file as! T
                 } else {
                     // キャシュが無効になっている
-                    NSLog("%@ cache is expired", url)
                     let newFile = closure(url)
                     kCache[url] = (mtime, newFile)
                     return newFile
                 }
             } else {
                 // キャッシュが存在しない
-                NSLog("%@ is cached", url)
                 let file = closure(url)
                 kCache[url] = (mtime, file)
                 return file
@@ -53,7 +50,7 @@ class DictionaryCache {
 
     fileprivate func getModifiedTime(_ url: URL) -> Date? {
         let fm = FileManager.default
-        guard let path = url.path else { return nil }
+        let path = url.path
         guard let attrs = try? fm.attributesOfItem(atPath: path) else { return nil }
         return attrs[FileAttributeKey.modificationDate] as? Date
     }

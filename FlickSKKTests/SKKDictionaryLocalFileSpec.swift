@@ -11,26 +11,26 @@ import Nimble
 
 class SKKDictionaryLocalFileSpec : QuickSpec {
     override func spec() {
-        let bundle = Bundle(forClass: self.classForCoder)
-        let jisyo = bundle.URLForResource("skk", withExtension: "jisyo")
+        let bundle = Bundle(for: self.classForCoder)
+        let jisyo = bundle.url(forResource: "skk", withExtension: "jisyo")
         let dict = SKKLocalDictionaryFile(url: jisyo!)
         describe("okuri-nasi") {
             it("can find at first entry") {
-                let xs = dict.find("あいかた", okuri: .None)
+                let xs = dict.find("あいかた", okuri: .none)
                 expect(xs).to(contain("相方"))
                 expect(xs).to(contain("合方"))
             }
             it("can find at last entry") {
-                let xs = dict.find("わりもどし", okuri: .None)
+                let xs = dict.find("わりもどし", okuri: .none)
                 expect(xs).to(contain("割戻し"))
                 expect(xs).to(contain("割り戻し"))
             }
             it("can find one word entry") {
-                let xs = dict.find("じ", okuri: .None)
+                let xs = dict.find("じ", okuri: .none)
                 expect(xs).to(contain("字"))
             }
             it("can find number entry") {
-                let xs = dict.find("1えん", okuri: .None)
+                let xs = dict.find("1えん", okuri: .none)
                 expect(xs).to(contain("一円"))
                 expect(xs).to(contain("1円"))
             }

@@ -34,11 +34,11 @@ class LoadLocalDictionary {
     fileprivate var nasi : NSMutableArray = NSMutableArray()
 
     init(url : URL) {
-        guard let path = url.path else { return }
+        let path = url.path
 
         var isOkuriAri = true
         IOUtil.each(path, with: { line -> Void in
-            let s = line as NSString
+            guard let s = line else { return }
             // toggle
             if s.hasPrefix(";; okuri-nasi entries.") {
                 isOkuriAri = false
@@ -50,9 +50,9 @@ class LoadLocalDictionary {
             if s == "" { return }
 
             if isOkuriAri {
-                self.ari.add(line)
+                self.ari.add(s)
             } else {
-                self.nasi.add(line)
+                self.nasi.add(s)
             }
         })
     }

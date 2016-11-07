@@ -8,7 +8,6 @@
 
 import UIKit
 import NorthLayout
-import AppGroup
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 216)
@@ -375,7 +374,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     fileprivate func updateSpaceButtonLabel() {
         let normal = self.spaceButton.key.buttonLabel
         let nextCandidate = NSLocalizedString("NextCandidate", comment: "")
-        self.spaceButton.label.text = (self.engine.inStatusShowsCandidatesBySpace() ?? false) ? nextCandidate : normal
+        self.spaceButton.label.text = (self.engine.inStatusShowsCandidatesBySpace()) ? nextCandidate : normal
         self.spaceButton.flicksEnabled = self.engine.hasPartialCandidates
     }
 

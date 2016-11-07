@@ -12,7 +12,7 @@ class ComposeModePresenter {
             return "▼\(text)"
         case .wordRegister(kana : let kana, okuri : let okuri, composeText : let text, composeMode : let m):
             let prefix = kana + (okuri.map({ str in "*" + str }) ?? "")
-            let nested = toString(m[0]) ?? ""
+            let nested = toString(m[0])
             return "[登録:\(prefix)]\(text)\(nested)"
         }
     }

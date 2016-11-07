@@ -21,31 +21,27 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
     init(url : URL){
         self.url = url
         // TODO: 変なデータが来たら、空で初期化する
-        let now = Date()
         var isOkuriAri = true
-        if let path = url.path {
-            IOUtil.each(path, with: { line -> Void in
-                let s = line as NSString
-                // toggle
-                if s.hasPrefix(";; okuri-nasi entries.") {
-                    isOkuriAri = false
-                }
-                // skip comment
-                if(s.hasPrefix(";")) { return }
+        IOUtil.each(url.path, with: { line -> Void in
+            guard let s = line else { return }
+            // toggle
+            if s.hasPrefix(";; okuri-nasi entries.") {
+                isOkuriAri = false
+            }
+            // skip comment
+            if(s.hasPrefix(";")) { return }
 
-                switch self.parse(s) {
-                case .some(let x,let y):
-                    if isOkuriAri {
-                        self.okuriAri[x] = y
-                    } else {
-                        self.okuriNasi[x] = y
-                    }
-                case .none:
-                    break
+            switch self.parse(s as NSString) {
+            case .some(let x,let y):
+                if isOkuriAri {
+                    self.okuriAri[x] = y
+                } else {
+                    self.okuriNasi[x] = y
                 }
-            })
-        }
-        NSLog("loaded (%f) (%d + %d entries from %@)\n", Date().timeIntervalSince(now), okuriAri.count, okuriNasi.count, url)
+            case .none:
+                break
+            }
+        })
     }
 
     func entries() -> [SKKDictionaryEntry] {

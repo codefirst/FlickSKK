@@ -23,20 +23,17 @@ class DictionarySettings {
 
     // 変換結果の学習
     class func defaultLearnDictionaryURL() -> URL {
-        return AppGroup.url(forResource: "Library/skk.learn.jisyo") ??
-            home("Library/skk.learn.jisyo")
+        return AppGroup.url(forResource: "Library/skk.learn.jisyo") ?? home("Library/skk.learn.jisyo")
     }
 
     // q確定の結果の学習
     class func defaultPartialDictionaryURL() -> URL {
-        return AppGroup.url(forResource: "Library/skk.partial.jisyo") ??
-            home("Library/skk.partial.jisyo")
+        return AppGroup.url(forResource: "Library/skk.partial.jisyo") ?? home("Library/skk.partial.jisyo")
     }
 
     // 追加辞書
     class func additionalDictionaryURL() -> URL {
-        return AppGroup.url(forResource: "Library/additional") ??
-            home("Library/additional")
+        return AppGroup.url(forResource: "Library/additional") ?? home("Library/additional")
     }
 
     // 組込みの辞書(L辞書とか)

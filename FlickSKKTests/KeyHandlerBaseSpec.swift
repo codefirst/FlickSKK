@@ -3,7 +3,7 @@ import Nimble
 
 class KeyHandlerBaseSpec : QuickSpec {
     lazy var dictionary : SKKDictionary = {
-        DictionarySettings.bundle = Bundle(forClass: self.classForCoder)
+        DictionarySettings.bundle = Bundle(for: self.classForCoder)
         let dict = SKKDictionary()
         dict.waitForLoading()
         return dict

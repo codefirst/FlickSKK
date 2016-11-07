@@ -3,7 +3,7 @@ import Nimble
 
 class TextEngineSpec : QuickSpec {
     lazy var dictionary : SKKDictionary = {
-        DictionarySettings.bundle = Bundle(forClass: self.classForCoder)
+        DictionarySettings.bundle = Bundle(for: self.classForCoder)
         let dict = SKKDictionary()
         dict.waitForLoading()
         return dict
@@ -21,7 +21,7 @@ class TextEngineSpec : QuickSpec {
 
         describe("#insertPartial") {
             beforeEach {
-                target.insertPartial("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.TopLevel)
+                let _ = target.insertPartial("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.topLevel)
             }
 
             it("挿入される") {

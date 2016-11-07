@@ -13,7 +13,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
     fileprivate let wordField = UITextField(frame: CGRect.zero)
     fileprivate lazy var doneButton : UIBarButtonItem =
         UIBarButtonItem(title: NSLocalizedString("Register", comment:""),
-            style: .done, target:self, action: Selector("register"))
+            style: .done, target:self, action: #selector(WordRegisterViewController.register))
     var done : ((String, String?, String) -> Void)?
 
     fileprivate lazy var sections : [(
@@ -40,13 +40,15 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         if canRegister() {
             var okuri : String? = nil
 
-            if let text = self.okuriField.text where !text.isEmpty {
+            if let text = self.okuriField.text, !text.isEmpty {
                 // 1文字目
-                let first = Array(text.characters)[0]
+                let xs = Array(text.characters)
+                let first = xs[0]
                 // ローマ字変換
                 if let roman = first.toRoman() {
                     // 1文字目を取得
-                    okuri = String(Array(roman.characters)[0])
+                    let rs = Array(roman.characters)
+                    okuri = String(rs[0])
                 } else {
                     okuri = String(first)
                 }
@@ -55,7 +57,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
                 self.wordField.text ?? "",
                 okuri,
                 self.yomiField.text ?? "")
-            self.navigationController?.popViewController(animated: true)
+            let _ = self.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -91,7 +93,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         textField.contentVerticalAlignment = .center
         textField.returnKeyType = row.returnType
         textField.delegate = self
-        textField.addTarget(self, action: "didChange", for: .editingChanged)
+        textField.addTarget(self, action: #selector(WordRegisterViewController.didChange), for: .editingChanged)
         cell.contentView.addSubview(textField)
 
         return cell

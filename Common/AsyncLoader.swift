@@ -3,7 +3,7 @@ class AsyncLoader {
     var initialized = false
 
     // 辞書をロードする
-    func load(_ closure: () -> ()) {
+    func load(_ closure: @escaping () -> ()) {
        async {
             closure()
             self.initialized = true

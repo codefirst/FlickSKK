@@ -6,10 +6,7 @@ class LocalFile {
     fileprivate let handle : FileHandle?
 
     init?(url : URL) {
-        guard let path = url.path else {
-            self.handle = nil
-            return nil
-        }
+        let path = url.path
 
         if !FileManager.default.fileExists(atPath: path) {
             FileManager.default.createFile(atPath: path, contents: nil, attributes:nil)
@@ -31,7 +28,7 @@ class LocalFile {
 
     func write(_ str : String) {
         let s = str as NSString
-        let data = Data(bytes: UnsafePointer<UInt8>(s.utf8String!),
+        let data = Data(bytes: UnsafeRawPointer(s.utf8String!),
             count: s.lengthOfBytes(using: String.Encoding.utf8.rawValue))
         handle?.write(data)
     }

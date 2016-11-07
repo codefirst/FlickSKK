@@ -19,7 +19,7 @@ class NumberFilter : SKKFilter {
         if numbers.isEmpty { return [] }
 
         // 検索する
-        if let line = binarySearch.call(self.hashnize(target)) {
+        if let line = binarySearch.call(self.hashnize(target) as NSString) {
             let entries = parse(line)
 
             // 検索結果を置換する

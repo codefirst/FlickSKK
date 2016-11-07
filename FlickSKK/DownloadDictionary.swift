@@ -31,7 +31,7 @@ class DownloadDictionary {
 
         let local = DictionarySettings.additionalDictionaryURL()
         try! FileManager.default.createDirectory(at: local as URL, withIntermediateDirectories: true, attributes: nil)
-        self.local = local.appendingPathComponent(url.lastPathComponent ?? "skk.jisyo")!
+        self.local = local.appendingPathComponent(url.lastPathComponent)
     }
 
     func call() {
@@ -72,22 +72,21 @@ class DownloadDictionary {
 
     // URLを特定ファイルに保存する。
     fileprivate func save(_ url : URL, path: URL, onSuccess : @escaping (Void) -> Void, onError : @escaping (Error?) -> Void) {
-        Alamofire.download(.GET, url) { (temporaryURL, response) in
-            return path ?? temporaryURL
-        }.progress { (_, totalBytesRead, totalBytesExpectedToRead) in
-            let progress = Float(totalBytesRead) / Float(totalBytesExpectedToRead)
-            self.progress?(NSLocalizedString("Downloading", comment:""), progress / 2)
-        }.response { (request, response, _, error) in
-            if let e = error {
-                onError(e)
-            } else {
-                if response?.statusCode == 200 {
+
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            return (path, [.removePreviousFile, .createIntermediateDirectories])
+        }
+        Alamofire.download(url, to: destination)
+            .downloadProgress { progress in
+                self.progress?(NSLocalizedString("Downloading", comment:""), Float(progress.fractionCompleted) / 2.0)
+            }.responseData { response in
+                switch response.result {
+                case .failure(let error):
+                    onError(error)
+                case .success:
                     onSuccess()
-                } else {
-                    onError(nil)
                 }
             }
-        }
     }
 
     // UTF8でエンコードして、保存する

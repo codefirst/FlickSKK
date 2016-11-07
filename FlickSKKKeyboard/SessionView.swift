@@ -63,7 +63,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
         let autolayout = self.northLayoutFormat(
-            ["onepx": 1.0 / UIScreen.mainScreen().scale],
+            ["onepx": 1.0 / UIScreen.main.scale],
             ["b": border])
         autolayout("H:|[b]|")
         autolayout("V:|[b(==onepx)]")
@@ -186,7 +186,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
 
         self.backgroundColor = UIColor.white
 
-        self.textLabel.tap { (l: UILabel) in
+        let _ = self.textLabel.tap { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
             l.textColor = UIColor.black
             l.backgroundColor = UIColor.clear
@@ -199,7 +199,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         }
 
         let autolayout = self.northLayoutFormat(
-            ["p": 4, "onepx": 1.0 / UIScreen.mainScreen().scale],
+            ["p": 4, "onepx": 1.0 / UIScreen.main.scale],
             ["l": self.textLabel, "b": border])
         autolayout("H:|[b(==onepx)]-p-[l]-p-|")
         autolayout("V:|[b]|")

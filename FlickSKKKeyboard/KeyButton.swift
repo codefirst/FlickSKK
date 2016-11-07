@@ -97,7 +97,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         self.backgroundColor = normalBackgroundColor
 
-        self.label.tap { (l:UILabel) in
+        let _ = self.label.tap { (l:UILabel) in
             l.text = self.key.buttonLabel
             l.textColor = UIColor.black
             l.textAlignment = .center
@@ -204,8 +204,9 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 }
 
                 if direction != .none {
-                    let text = String(Array(s)[self.sequenceIndex ?? 0])
-                    KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
+                    if let text = String(Array(s)[self.sequenceIndex ?? 0]) {
+                        KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
+                    }
                 }
             }
         }
