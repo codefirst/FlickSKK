@@ -3,7 +3,7 @@ import Nimble
 
 class NumberFilterSpec : QuickSpec {
 
-    func search(str : String) -> [String] {
+    func search(_ str : String) -> [String] {
         let binarySearch = BinarySearch(entries: [
             "#や /#0夜/#1夜/#2夜/#3夜/"
         ], reverse: false)

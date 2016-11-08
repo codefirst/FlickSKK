@@ -23,39 +23,39 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         didSet {
             self.collectionView.reloadData()
 
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.updateCandidateSelection()
             }
         }
     }
     var canEnterWordRegister = false
-    var didSelectCandidateAtIndex: (Int -> Void)? = nil
+    var didSelectCandidateAtIndex: ((Int) -> Void)? = nil
 
     let collectionView: UICollectionView
-    private let collectionViewLayout: UICollectionViewFlowLayout
+    fileprivate let collectionViewLayout: UICollectionViewFlowLayout
 
     init(engine: SKKEngine) {
         self.engine = engine
         self.collectionViewLayout = UICollectionViewFlowLayout().tap { (l: UICollectionViewFlowLayout) in
-            l.scrollDirection = .Horizontal
+            l.scrollDirection = .horizontal
             l.minimumInteritemSpacing = 0.0
             l.minimumLineSpacing = 0.0
         }
         self.collectionView = UICollectionView(
-            frame: CGRectZero,
+            frame: CGRect.zero,
             collectionViewLayout: self.collectionViewLayout).tap { (cv: UICollectionView) in
-                cv.registerClass(CandidateCollectionViewCell.self, forCellWithReuseIdentifier: kCellID)
+                cv.register(CandidateCollectionViewCell.self, forCellWithReuseIdentifier: kCellID)
                 cv.showsHorizontalScrollIndicator = false
                 cv.showsVerticalScrollIndicator = false
-                cv.backgroundColor = UIColor.whiteColor()
+                cv.backgroundColor = UIColor.white
         }
 
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
 
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
 
-        self.collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.collectionView.frame = self.bounds
         self.addSubview(self.collectionView)
 
@@ -63,33 +63,33 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
         let autolayout = self.northLayoutFormat(
-            ["onepx": 1.0 / UIScreen.mainScreen().scale],
+            ["onepx": 1.0 / UIScreen.main.scale],
             ["b": border])
         autolayout("H:|[b]|")
         autolayout("V:|[b(==onepx)]")
 
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func updateCandidateSelection() {
+    fileprivate func updateCandidateSelection() {
         let selectionIndex = self.engine.candidates()?.index
         if let index = selectionIndex {
             if index < self.candidates.count {
-                let indexPath = NSIndexPath(forItem: index, inSection: Section.Candidates.rawValue)
-                if let la = collectionViewLayout.layoutAttributesForItemAtIndexPath(indexPath) {
-                    let visible = la.frame.width > 0 && CGRectIntersection(bounds, convertRect(la.frame, fromView: collectionView)).width == la.frame.width
-                    let scrollPosition = visible ? .None : UICollectionViewScrollPosition.CenteredHorizontally
-                    collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: scrollPosition)
+                let indexPath = IndexPath(item: index, section: Section.candidates.rawValue)
+                if let la = collectionViewLayout.layoutAttributesForItem(at: indexPath) {
+                    let visible = la.frame.width > 0 && bounds.intersection(convert(la.frame, from: collectionView)).width == la.frame.width
+                    let scrollPosition = visible ? UICollectionViewScrollPosition() : UICollectionViewScrollPosition.centeredHorizontally
+                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: scrollPosition)
                 }
             }
         } else {
             // deselect all
-            for indexPath in self.collectionView.indexPathsForSelectedItems() ?? [] {
-                self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+            for indexPath in self.collectionView.indexPathsForSelectedItems ?? [] {
+                self.collectionView.deselectItem(at: indexPath, animated: false)
             }
         }
     }
@@ -97,64 +97,64 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     // MARK: UICollectionViewDataSource, UICollectionViewDelegate
 
     enum Section: Int {
-        case ComposeText = 0, Candidates, EnterWordRegister
+        case composeText = 0, candidates, enterWordRegister
     }
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3 // composeText, candidates, EnterWordRegister
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section(rawValue: section) {
-        case .Some(.ComposeText): return self.composeText != nil ? 1 : 0
-        case .Some(.Candidates): return self.candidates.count
-        case .Some(.EnterWordRegister): return canEnterWordRegister ? 1 : 0
-        case .None: return 0
+        case .some(.composeText): return self.composeText != nil ? 1 : 0
+        case .some(.candidates): return self.candidates.count
+        case .some(.enterWordRegister): return canEnterWordRegister ? 1 : 0
+        case .none: return 0
         }
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch Section(rawValue: indexPath.section) {
-        case .Some(.ComposeText): break
-        case .Some(.Candidates): self.didSelectCandidateAtIndex?(indexPath.row)
-        case .Some(.EnterWordRegister): self.didSelectCandidateAtIndex?(candidates.count)
-        case .None: break
+        case .some(.composeText): break
+        case .some(.candidates): self.didSelectCandidateAtIndex?(indexPath.row)
+        case .some(.enterWordRegister): self.didSelectCandidateAtIndex?(candidates.count)
+        case .none: break
         }
     }
 
-    private func configureCell(cell: CandidateCollectionViewCell, forIndexPath indexPath: NSIndexPath) -> CandidateCollectionViewCell {
+    fileprivate func configureCell(_ cell: CandidateCollectionViewCell, forIndexPath indexPath: IndexPath) -> CandidateCollectionViewCell {
         switch Section(rawValue: indexPath.section) {
-        case .Some(.ComposeText):
-            cell.style = .Default
+        case .some(.composeText):
+            cell.style = .default
             cell.textLabel.text = self.composeText ?? ""
-            cell.textLabel.textAlignment = .Left
+            cell.textLabel.textAlignment = .left
             return cell
-        case .Some(.Candidates):
+        case .some(.candidates):
             let candidate: Candidate? = (indexPath.item < candidates.count) ? candidates[indexPath.item] : nil
-            cell.style = (candidate?.isPartial ?? false) ? .PartialCandidate : .Default
+            cell.style = (candidate?.isPartial ?? false) ? .partialCandidate : .default
             cell.textLabel.text = candidate?.kanji
-            cell.textLabel.textAlignment = .Center
+            cell.textLabel.textAlignment = .center
             return cell
-        case .Some(.EnterWordRegister):
-            cell.style = .Default
+        case .some(.enterWordRegister):
+            cell.style = .default
             cell.textLabel.text = NSLocalizedString("EnterWordRegister", comment: "")
-            cell.textLabel.textAlignment = .Center
+            cell.textLabel.textAlignment = .center
             return cell
-        case .None:
+        case .none:
             return cell
         }
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellID, forIndexPath: indexPath) as! CandidateCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellID, for: indexPath) as! CandidateCollectionViewCell
         return self.configureCell(cell, forIndexPath: indexPath)
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         struct Static { static let layoutCell = CandidateCollectionViewCell() }
         let minWidth = CGFloat(44 + 8)
         let cell = self.configureCell(Static.layoutCell, forIndexPath: indexPath)
-        return CGSizeMake(max(cell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width, minWidth),self.collectionView.bounds.height)
+        return CGSize(width: max(cell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).width, minWidth),height: self.collectionView.bounds.height)
     }
 }
 
@@ -163,19 +163,19 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     let textLabel = UILabel()
 
     enum Style {
-        case Default, PartialCandidate
+        case `default`, partialCandidate
 
         var textAlpha: CGFloat {
             switch self {
-            case .Default: return 1.0
-            case .PartialCandidate: return 0.5
+            case .default: return 1.0
+            case .partialCandidate: return 0.5
             }
         }
-        var normalBackgroundColor: UIColor { return UIColor.whiteColor() }
+        var normalBackgroundColor: UIColor { return UIColor.white }
         var highlightedBackgroundColor: UIColor { return UIColor(white: 0.5, alpha: 1.0) }
         var selectedBackgroundColor: UIColor { return UIColor(white: 0.9, alpha: 1.0) }
     }
-    var style: Style = .Default {
+    var style: Style = .default {
         didSet {
             updateStates()
         }
@@ -184,14 +184,14 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
 
-        self.textLabel.tap { (l: UILabel) in
+        let _ = self.textLabel.tap { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
-            l.textColor = UIColor.blackColor()
-            l.backgroundColor = UIColor.clearColor()
-            l.textAlignment = .Center
-            l.lineBreakMode = .ByClipping
+            l.textColor = UIColor.black
+            l.backgroundColor = UIColor.clear
+            l.textAlignment = .center
+            l.lineBreakMode = .byClipping
         }
 
         let border = UIView().tap { (v: UIView) in
@@ -199,7 +199,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         }
 
         let autolayout = self.northLayoutFormat(
-            ["p": 4, "onepx": 1.0 / UIScreen.mainScreen().scale],
+            ["p": 4, "onepx": 1.0 / UIScreen.main.scale],
             ["l": self.textLabel, "b": border])
         autolayout("H:|[b(==onepx)]-p-[l]-p-|")
         autolayout("V:|[b]|")
@@ -210,22 +210,22 @@ class CandidateCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func updateStates() {
+    fileprivate func updateStates() {
         UIView.setAnimationsEnabled(false) // disable fade-in
-        self.backgroundColor = highlighted ? style.highlightedBackgroundColor
-            : selected ? style.selectedBackgroundColor
+        self.backgroundColor = isHighlighted ? style.highlightedBackgroundColor
+            : isSelected ? style.selectedBackgroundColor
             : style.normalBackgroundColor
         textLabel.alpha = style.textAlpha
         UIView.setAnimationsEnabled(true)
     }
 
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
             self.updateStates()
         }
     }
 
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
             self.updateStates()
         }

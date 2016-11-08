@@ -10,14 +10,14 @@ import UIKit
 import FlickSKKKeyboard
 
 class UserDictionaryViewController: SafeTableViewController {
-    private var entries : [SKKDictionaryEntry] = []
+    fileprivate var entries : [SKKDictionaryEntry] = []
 
     init() {
-        super.init(style: .Grouped)
+        super.init(style: .grouped)
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func viewDidLoad() {
@@ -25,50 +25,50 @@ class UserDictionaryViewController: SafeTableViewController {
 
         self.title = NSLocalizedString("User Dictionary", comment: "")
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("openWordRegister"))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(UserDictionaryViewController.openWordRegister))
         self.navigationItem.rightBarButtonItem = addButton
 
         self.reloadEntries()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationDidBecomeActive:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
 
-    private func reloadEntries() {
+    fileprivate func reloadEntries() {
         self.entries = SKKDictionary.defaultUserDictionary().entries()
         self.tableView.reloadData()
     }
 
-    func applicationDidBecomeActive(notification: NSNotification) {
+    func applicationDidBecomeActive(_ notification: Notification) {
         self.reloadEntries()
     }
 
     // MARK: - Table View
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
         return 2 // description + entries
     }
 
-    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0: return NSLocalizedString("HowToRegisterWordToUserDictionary", comment: "")
-        case 1: return NSString(format: NSLocalizedString("%d words registered", comment: ""), self.entries.count) as String
+        case 1: return NSString(format: NSLocalizedString("%d words registered", comment: "") as NSString, self.entries.count) as String
         default: return nil
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 1: return self.entries.count
         default: return 0
         }
     }
 
-    private let kCellID = "Cell"
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellID) ?? UITableViewCell(style: .Default, reuseIdentifier: kCellID)
-        cell.selectionStyle = .None
+    fileprivate let kCellID = "Cell"
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellID) ?? UITableViewCell(style: .default, reuseIdentifier: kCellID)
+        cell.selectionStyle = .none
 
         switch self.entries[indexPath.row] {
-        case .SKKDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
+        case .skkDictionaryEntry(kanji: let kanji, kana: let kana, okuri: let okuri):
             let o = okuri ?? ""
             cell.textLabel?.text = "\(kanji): \(kana)\(o)"
         }
@@ -76,14 +76,14 @@ class UserDictionaryViewController: SafeTableViewController {
         return cell
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
         // TODO: something
     }
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+        if editingStyle == .delete {
             let entry = self.entries[indexPath.row]
             SKKDictionary.defaultUserDictionary().unregister(entry)
             self.reloadEntries()
@@ -95,7 +95,7 @@ class UserDictionaryViewController: SafeTableViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc private func openWordRegister() {
+    @objc fileprivate func openWordRegister() {
         let controller = WordRegisterViewController()
         controller.done = {(word, okuri, yomi) in
             let dict = SKKDictionary.defaultUserDictionary()

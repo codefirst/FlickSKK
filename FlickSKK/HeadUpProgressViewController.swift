@@ -6,8 +6,8 @@ import NorthLayout
 // 途中キャンセルとかあったほうがいいんだけど、面倒なのであとまわし。
 // それほどサイズが大きい辞書をDLしないだろうし、たぶん問題になることはすくないはず。
 class HeadUpProgressViewController: UIViewController {
-    private let progressView : UIProgressView
-    private let label = UILabel()
+    fileprivate let progressView : UIProgressView
+    fileprivate let label = UILabel()
 
     var progress : Float? {
         didSet {
@@ -22,8 +22,8 @@ class HeadUpProgressViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        modalPresentationStyle = .OverFullScreen
-        modalTransitionStyle = .CrossDissolve
+        modalPresentationStyle = .overFullScreen
+        modalTransitionStyle = .crossDissolve
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -35,8 +35,8 @@ class HeadUpProgressViewController: UIViewController {
         
         view.backgroundColor = UIColor(white: 0, alpha: 0.5)
 
-        label.textColor = UIColor.whiteColor()
-        label.textAlignment = .Center
+        label.textColor = UIColor.white
+        label.textAlignment = .center
 
         let autolayout = view.northLayoutFormat(["p":8, "h" : 10],
             ["progress": progressView, "label" : label])
@@ -45,29 +45,29 @@ class HeadUpProgressViewController: UIViewController {
         autolayout("H:|-p-[label]-p-|")
 
         // 画面中央に表示する
-        self.view.addConstraint(NSLayoutConstraint(item: progressView, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: progressView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
-    private func updateProgress() {
+    fileprivate func updateProgress() {
         // メインスレッドで更新しないとプログレスバーが反映されない
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             self.label.text = self.text
             self.progressView.setProgress(self.progress ?? 0.0, animated: true)
         }
     }
 
-    func close(completion: (() -> Void)? = nil) {
-        dispatch_async(dispatch_get_main_queue()) {
-            self.dismissViewControllerAnimated(true, completion: completion)
+    func close(_ completion: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: completion)
         }
     }
 }

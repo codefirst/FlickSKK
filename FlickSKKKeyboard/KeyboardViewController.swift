@@ -8,13 +8,12 @@
 
 import UIKit
 import NorthLayout
-import AppGroup
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
-    lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 216)
+    lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 216)
 
     let keypadAndControlsView = UIView()
-    let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     lazy var sessionView : SessionView = SessionView(engine: self.engine)
 
@@ -23,7 +22,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     // MARK: Status
-    var inputMode : SKKInputMode = .Hirakana
+    var inputMode : SKKInputMode = .hirakana
     var prevShiftEnabled: Bool = false
     var shiftEnabled: Bool { didSet { updateControlButtons() } }
     var keyboardMode : KeyboardMode { didSet { updateControlButtons() } }
@@ -36,26 +35,26 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     let keypads: [KeyboardMode:KeyPad]
 
     // MARK: Buttons
-    lazy var inputModeChangeButton : KeyButton = self.keyButton(.InputModeChange([nil, nil, .Hirakana, .Katakana, .HankakuKana]))
-    lazy var numberModeButton : KeyButton = self.keyButton(.Number)
-    lazy var alphabetModeButton : KeyButton = self.keyButton(.Alphabet)
-    lazy var spaceButton : KeyButton = self.keyButton(.Space)
-    lazy var nextKeyboardButton : KeyButton = self.keyButton(.KeyboardChange).tap { (kb:KeyButton) in
+    lazy var inputModeChangeButton : KeyButton = self.keyButton(.inputModeChange([nil, nil, .hirakana, .katakana, .hankakuKana]))
+    lazy var numberModeButton : KeyButton = self.keyButton(.number)
+    lazy var alphabetModeButton : KeyButton = self.keyButton(.alphabet)
+    lazy var spaceButton : KeyButton = self.keyButton(.space)
+    lazy var nextKeyboardButton : KeyButton = self.keyButton(.keyboardChange).tap { (kb:KeyButton) in
         kb.imageView.image = UIImage(named: "globe")
     }
-    lazy var shiftButton: KeyButton = self.keyButton(.Shift).tap { (kb:KeyButton) in
+    lazy var shiftButton: KeyButton = self.keyButton(.shift).tap { (kb:KeyButton) in
         kb.imageView.image = UIImage(named: "flickskk-arrow")
     }
 
     // MARK: -
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        self.keyboardMode = .InputMode(mode: .Hirakana)
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.keyboardMode = .inputMode(mode: .hirakana)
         self.shiftEnabled = false
-        let seq = {(s: String) -> KanaFlickKey in .Seq(s, showSeqs: false)}
-        let seqWithSymbols = {(s: String) -> KanaFlickKey in .Seq(s, showSeqs: true)}
+        let seq = {(s: String) -> KanaFlickKey in .seq(s, showSeqs: false)}
+        let seqWithSymbols = {(s: String) -> KanaFlickKey in .seq(s, showSeqs: true)}
         self.keypads = [
-            .InputMode(mode: .Hirakana): KeyPad(keys: [
+            .inputMode(mode: .hirakana): KeyPad(keys: [
                 seq("あいうえお"),
                 seq("かきくけこ"),
                 seq("さしすせそ"),
@@ -65,11 +64,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 seq("まみむめも"),
                 seq("や「ゆ」よ"),
                 seq("らりるれろ"),
-                .KomojiDakuten,
+                .komojiDakuten,
                 seq("わをんー"),
                 seqWithSymbols("、。？！"),
                 ]),
-            .InputMode(mode: .Katakana): KeyPad(keys: [
+            .inputMode(mode: .katakana): KeyPad(keys: [
                 seq("アイウエオ"),
                 seq("カキクケコ"),
                 seq("サシスセソ"),
@@ -79,11 +78,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 seq("マミムメモ"),
                 seq("ヤ「ユ」ヨ"),
                 seq("ラリルレロ"),
-                .KomojiDakuten,
+                .komojiDakuten,
                 seq("ワヲンー"),
                 seqWithSymbols("、。？！"),
                 ]),
-            .InputMode(mode: .HankakuKana): KeyPad(keys: [
+            .inputMode(mode: .hankakuKana): KeyPad(keys: [
                 seq("ｱｲｳｴｵ"),
                 seq("ｶｷｸｹｺ"),
                 seq("ｻｼｽｾｿ"),
@@ -93,11 +92,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 seq("ﾏﾐﾑﾒﾓ"),
                 seq("ﾔ｢ﾕ｣ﾖ"),
                 seq("ﾗﾘﾙﾚﾛ"),
-                .KomojiDakuten,
+                .komojiDakuten,
                 seq("ﾜｦﾝ-"),
                 seqWithSymbols("､｡?!"),
                 ]),
-            .Number: KeyPad(keys: [
+            .number: KeyPad(keys: [
                 // よく使う記号(アルファベットキーにあわせた)
                 seqWithSymbols("1#@&_"),
                 // 通貨用記号
@@ -123,7 +122,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 // 標準キーボードにあわせた
                 seqWithSymbols(".,-/"),
                 ]),
-            .Alphabet: KeyPad(keys: [
+            .alphabet: KeyPad(keys: [
                 seqWithSymbols("@#/&_"),
                 seq("abc"),
                 seq("def"),
@@ -133,7 +132,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 seq("pqrs"),
                 seq("tuv"),
                 seq("wxyz"),
-                .UpperLower,
+                .upperLower,
                 seqWithSymbols("'\"()"),
                 seqWithSymbols(".,?!"),
                 ]),
@@ -160,7 +159,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         dictionary.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
     }
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let dict = object as? SKKDictionary {
             if dict.isWaitingForLoad {
                 self.disableAllKeys()
@@ -170,7 +169,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 loadingProgressView.stopAnimating()
             }
         } else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
 
@@ -188,10 +187,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             nextKeyboardButton,
             ])
         let rightControl = controlViewWithButtons([
-            keyButton(.Backspace),
+            keyButton(.backspace),
             self.spaceButton,
             self.shiftButton,
-            keyButton(.Return),
+            keyButton(.return),
             ])
 
         for keypad in self.keypads.values {
@@ -205,11 +204,11 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             autolayout("V:|[left]|")
             autolayout("V:|[keypad]|")
             autolayout("V:|[right]|")
-            self.keypadAndControlsView.addConstraint(NSLayoutConstraint(item: keypad, attribute: .Width, relatedBy: .Equal, toItem: leftControl, attribute: .Width, multiplier: 3.0, constant: 0.0))
+            self.keypadAndControlsView.addConstraint(NSLayoutConstraint(item: keypad, attribute: .width, relatedBy: .equal, toItem: leftControl, attribute: .width, multiplier: 3.0, constant: 0.0))
         }
 
         sessionView.didSelectCandidateAtIndex = { [weak self] index in
-            self?.engine.handle(.Select(index : index))
+            self?.engine.handle(.select(index : index))
             return
         }
 
@@ -220,7 +219,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         // iOS8 layout height(0) workaround: call self.inputView.addSubview() after viewDidAppear
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.setupViewConstraints() // iOS8 layout height(0) workaround: setup constraints after view did appear
         // keyboard height can be changed, but cause some layout errors.
@@ -230,13 +229,13 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
 //        }
     }
 
-    private func setupViewConstraints() {
-        if CGRectIsEmpty(view.frame) {
-            print("\(__FUNCTION__): empty view. ignored.")
+    fileprivate func setupViewConstraints() {
+        if view.frame.isEmpty {
+            print("\(#function): empty view. ignored.")
             return
         }
 
-        if sessionView.isDescendantOfView(view) {
+        if sessionView.isDescendant(of: view) {
             return
         }
 
@@ -256,7 +255,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.view.addConstraint(heightConstraint);
     }
 
-    func controlViewWithButtons(buttons: [UIView]) -> UIView {
+    func controlViewWithButtons(_ buttons: [UIView]) -> UIView {
         if (buttons.count != 4) { print("fatal: cannot add buttons not having 4 buttons to control"); return UIView(); }
 
         let views = [
@@ -276,17 +275,17 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         }
     }
 
-    override func textWillChange(textInput: UITextInput?) {
+    override func textWillChange(_ textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
     }
 
-    override func textDidChange(textInput: UITextInput?) {
+    override func textDidChange(_ textInput: UITextInput?) {
         // The app has just changed the document's contents, the document context has been updated.
 
         updateControlButtons()
     }
 
-    private func keyButton(key: KanaFlickKey) -> KeyButton {
+    fileprivate func keyButton(_ key: KanaFlickKey) -> KeyButton {
         return KeyButton(key: key).tap { (b:KeyButton) in
             weak var weakSelf = self
             b.tapped = { (key:KanaFlickKey, index:Int?) in
@@ -296,49 +295,49 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         }
     }
 
-    func insertText(s: String) {
+    func insertText(_ s: String) {
         self.inputProxy.insertText(s)
         self.shiftEnabled = false
         self.updateControlButtons()
     }
 
-    func keyTapped(key: KanaFlickKey, _ index: Int?) {
+    func keyTapped(_ key: KanaFlickKey, _ index: Int?) {
         switch key {
-        case let .Seq(s, _):
+        case let .seq(s, _):
             let kana = Array(s.characters)[index ?? 0]
-            self.engine.handle(.Char(kana: String(kana), shift: self.shiftEnabled))
+            self.engine.handle(.char(kana: String(kana), shift: self.shiftEnabled))
             self.prevShiftEnabled = self.shiftEnabled
             self.shiftEnabled = false
-        case .Backspace:
-            self.engine.handle(.Backspace)
+        case .backspace:
+            self.engine.handle(.backspace)
             self.shiftEnabled = self.prevShiftEnabled
             self.prevShiftEnabled = false
-        case .Return:
-            self.engine.handle(.Enter)
-        case .Shift: toggleShift()
-        case .KeyboardChange:
+        case .return:
+            self.engine.handle(.enter)
+        case .shift: toggleShift()
+        case .keyboardChange:
             advanceToNextInputMode()
-        case .InputModeChange(let modes):
+        case .inputModeChange(let modes):
             switch modes[index ?? 0] {
-            case .Some(let m):
-                self.engine.handle(.InputModeChange(inputMode: m))
-            case .None:
+            case .some(let m):
+                self.engine.handle(.inputModeChange(inputMode: m))
+            case .none:
                 break
             }
-            self.keyboardMode = .InputMode(mode: self.inputMode)
-        case .Number:
-            self.keyboardMode = .Number
-        case .Alphabet:
-            self.keyboardMode = .Alphabet
-        case .KomojiDakuten: self.toggleKomojiDakuten()
-        case .UpperLower: self.toggleUpperLower()
-        case .Space:
+            self.keyboardMode = .inputMode(mode: self.inputMode)
+        case .number:
+            self.keyboardMode = .number
+        case .alphabet:
+            self.keyboardMode = .alphabet
+        case .komojiDakuten: self.toggleKomojiDakuten()
+        case .upperLower: self.toggleUpperLower()
+        case .space:
             if index.map({$0 > 0}) ?? false {
                 self.handleSkipPartialCandidates()
             } else {
                 self.handleSpace()
             }
-        case .Nothing: break
+        case .nothing: break
         }
         updateControlButtons()
     }
@@ -346,36 +345,36 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     func updateControlButtons() {
         // Keyboard mode
         for (mode, keypad) in self.keypads {
-            keypad.hidden = !(mode == keyboardMode)
+            keypad.isHidden = !(mode == keyboardMode)
         }
 
         // each button
         switch(self.keyboardMode) {
-        case .InputMode(_):
+        case .inputMode(_):
             self.inputModeChangeButton.selected = true
         default:
             self.inputModeChangeButton.selected = false
         }
-        self.numberModeButton.selected = self.keyboardMode == .Number
-        self.alphabetModeButton.selected = self.keyboardMode == .Alphabet
+        self.numberModeButton.selected = self.keyboardMode == .number
+        self.alphabetModeButton.selected = self.keyboardMode == .alphabet
         self.shiftButton.selected = self.shiftEnabled
 
         switch self.inputMode {
-        case .Hirakana:
+        case .hirakana:
             self.inputModeChangeButton.label.text = "かな"
-        case .Katakana:
+        case .katakana:
             self.inputModeChangeButton.label.text = "カナ"
-        case .HankakuKana:
+        case .hankakuKana:
             self.inputModeChangeButton.label.text = "ｶﾅ"
         }
 
         updateSpaceButtonLabel()
     }
 
-    private func updateSpaceButtonLabel() {
+    fileprivate func updateSpaceButtonLabel() {
         let normal = self.spaceButton.key.buttonLabel
         let nextCandidate = NSLocalizedString("NextCandidate", comment: "")
-        self.spaceButton.label.text = (self.engine.inStatusShowsCandidatesBySpace() ?? false) ? nextCandidate : normal
+        self.spaceButton.label.text = (self.engine.inStatusShowsCandidatesBySpace()) ? nextCandidate : normal
         self.spaceButton.flicksEnabled = self.engine.hasPartialCandidates
     }
 
@@ -384,46 +383,46 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func handleSpace() {
-        engine.handle(.Space)
+        engine.handle(.space)
     }
 
     func handleSkipPartialCandidates() {
-        engine.handle(.SkipPartialCandidates)
+        engine.handle(.skipPartialCandidates)
     }
 
     func toggleKomojiDakuten() {
-        self.engine.handle(.ToggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
+        self.engine.handle(.toggleDakuten(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
 
     func toggleUpperLower() {
-        self.engine.handle(.ToggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
+        self.engine.handle(.toggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
 
-    func composeText(text: String) {
+    func composeText(_ text: String) {
         self.sessionView.composeText = text
 
         self.updateSpaceButtonLabel()
     }
 
-    func showCandidates(candidates: [Candidate]?) {
+    func showCandidates(_ candidates: [Candidate]?) {
         sessionView.canEnterWordRegister = candidates != nil
         sessionView.candidates = candidates ?? []
 
         self.updateSpaceButtonLabel()
     }
 
-    private let userInteractionMaskView = UIView()
-    private func disableAllKeys() {
-        userInteractionMaskView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    fileprivate let userInteractionMaskView = UIView()
+    fileprivate func disableAllKeys() {
+        userInteractionMaskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         userInteractionMaskView.frame = self.view.bounds
         userInteractionMaskView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
         if userInteractionMaskView.superview == nil {
             self.view.addSubview(userInteractionMaskView)
         } else {
-            self.view.bringSubviewToFront(userInteractionMaskView)
+            self.view.bringSubview(toFront: userInteractionMaskView)
         }
     }
-    private func enableAllKeys() {
+    fileprivate func enableAllKeys() {
         userInteractionMaskView.removeFromSuperview()
     }
 
@@ -431,7 +430,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         (self.textDocumentProxy as UIKeyInput).deleteBackward()
     }
 
-    func changeInputMode(inputMode : SKKInputMode) {
+    func changeInputMode(_ inputMode : SKKInputMode) {
         self.inputMode = inputMode
         updateControlButtons()
     }

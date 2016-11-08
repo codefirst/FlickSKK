@@ -3,7 +3,7 @@ class AsyncLoader {
     var initialized = false
 
     // 辞書をロードする
-    func load(closure: () -> ()) {
+    func load(_ closure: @escaping () -> ()) {
        async {
             closure()
             self.initialized = true
@@ -13,7 +13,7 @@ class AsyncLoader {
     // ロード完了をまつ
     func wait() {
         while !self.initialized {
-            NSRunLoop.currentRunLoop().runUntilDate(NSDate(timeIntervalSinceNow: 0.1))
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         }
     }
 }

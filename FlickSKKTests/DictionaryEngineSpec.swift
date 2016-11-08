@@ -3,7 +3,7 @@ import Nimble
 
 class DictionaryEngineSpec : QuickSpec {
     lazy var dictionary : SKKDictionary = {
-        DictionarySettings.bundle = NSBundle(forClass: self.classForCoder)
+        DictionarySettings.bundle = Bundle(for: self.classForCoder)
         let dict = SKKDictionary()
         dict.waitForLoading()
         return dict
@@ -18,7 +18,7 @@ class DictionaryEngineSpec : QuickSpec {
 
         describe("#find") {
             it("送り仮名を補う") {
-                dictionaryEngine.find("おく", okuri: "る", dynamic: false)
+                expect(dictionaryEngine.find("おく", okuri: "る", dynamic: false)).notTo(beEmpty())
             }
         }
     }

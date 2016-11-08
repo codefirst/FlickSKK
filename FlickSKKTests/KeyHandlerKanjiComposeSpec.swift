@@ -17,25 +17,25 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
         let candidatesWithOkuri = exacts(["居る", "入る"])
 
         context("kanji compose") {
-            let composeMode = ComposeMode.KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 0)
+            let composeMode = ComposeMode.kanjiCompose(kana: "かわ", okuri: .none, candidates: candidates, index: 0)
 
             it("文字入力(シフトなし)") {
-                let m = handler.handle(.Char(kana: "に", shift: false), composeMode: composeMode)
+                let m = handler.handle(.char(kana: "に", shift: false), composeMode: composeMode)
                 expect(delegate.insertedText).to(equal("川に"))
-                expect(m == .DirectInput).to(beTrue())
+                expect(m == .directInput).to(beTrue())
                 // 学習したものが先頭にくる
                 expect(self.dictionary.find("かわ", okuri: nil)[0]).to(equal("川"))
             }
             describe("Space") {
                 it("単語がある場合") {
-                    let m = handler.handle(.Space, composeMode: composeMode)
+                    let m = handler.handle(.space, composeMode: composeMode)
                     let (kana, okuri) = self.kanji(m)!
                     expect(kana).to(equal("かわ"))
                     expect(okuri).to(equal(""))
                     expect(self.index(m)).to(equal(1))
                 }
                 it("送り仮名がある場合") {
-                    let m = handler.handle(.Space, composeMode: ComposeMode.KanjiCompose(kana: "い", okuri: "る",
+                    let m = handler.handle(.space, composeMode: ComposeMode.kanjiCompose(kana: "い", okuri: "る",
                         candidates: candidatesWithOkuri, index: 0))
                     let (kana, okuri) = self.kanji(m)!
                     expect(kana).to(equal("い"))
@@ -43,13 +43,13 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                     expect(self.index(m)).to(equal(1))
                 }
                 it("単語がない場合") {
-                    let m = handler.handle(.Space, composeMode: .KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 1))
+                    let m = handler.handle(.space, composeMode: .kanjiCompose(kana: "かわ", okuri: .none, candidates: candidates, index: 1))
                     switch m {
-                    case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
+                    case .wordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
                         expect(kana).to(equal("かわ"))
                         expect(okuri).to(beNil())
                         expect(composeText).to(equal(""))
-                        expect(composeMode[0] == .DirectInput).to(beTrue())
+                        expect(composeMode[0] == .directInput).to(beTrue())
                     default:
                         fail()
                     }
@@ -57,10 +57,10 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
             }
             describe("SkipPartialCandidates") {
                 it("partialな候補がある場合はexactまでスキップ") {
-                    let candidates: [Candidate] = [.Partial(kanji: "かわなんとか", kana: "カワナントカ0"), .Partial(kanji: "かわなんとか", kana: "カワナントカ1")] + self.exacts(["川", "河"])
-                    let m = handler.handle(.SkipPartialCandidates, composeMode: ComposeMode.KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 0))
+                    let candidates: [Candidate] = [.partial(kanji: "かわなんとか", kana: "カワナントカ0"), .partial(kanji: "かわなんとか", kana: "カワナントカ1")] + self.exacts(["川", "河"])
+                    let m = handler.handle(.skipPartialCandidates, composeMode: ComposeMode.kanjiCompose(kana: "かわ", okuri: .none, candidates: candidates, index: 0))
                     switch m {
-                    case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+                    case let .kanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
                         expect(kana).to(equal("かわ"))
                         expect(okuri).to(beNil())
                         expect(candidates).toNot(beEmpty())
@@ -71,9 +71,9 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                 }
 
                 it("partialな候補がなくexactの候補がある場合は通常の変換") {
-                    let m = handler.handle(.SkipPartialCandidates, composeMode: composeMode)
+                    let m = handler.handle(.skipPartialCandidates, composeMode: composeMode)
                     switch m {
-                    case let .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
+                    case let .kanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: index):
                         expect(kana).to(equal("かわ"))
                         expect(okuri).to(beNil())
                         expect(candidates).toNot(beEmpty())
@@ -84,32 +84,32 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                 }
 
                 it("partial,exactどちらも候補がない場合は登録") {
-                    let m = handler.handle(.SkipPartialCandidates, composeMode: .KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 1))
+                    let m = handler.handle(.skipPartialCandidates, composeMode: .kanjiCompose(kana: "かわ", okuri: .none, candidates: candidates, index: 1))
                     switch m {
-                    case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
+                    case .wordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
                         expect(kana).to(equal("かわ"))
                         expect(okuri).to(beNil())
                         expect(composeText).to(equal(""))
-                        expect(composeMode[0] == .DirectInput).to(beTrue())
+                        expect(composeMode[0] == .directInput).to(beTrue())
                     default:
                         fail()
                     }
                 }
             }
             it("Enter") {
-                let m = handler.handle(.Enter, composeMode: composeMode)
-                expect(m == .DirectInput).to(beTrue())
+                let m = handler.handle(.enter, composeMode: composeMode)
+                expect(m == .directInput).to(beTrue())
                 expect(delegate.insertedText).to(equal("川"))
                 // 学習したものが先頭にくる
                 expect(self.dictionary.find("かわ", okuri: nil)[0]).to(equal("川"))
             }
             describe("Backspace") {
                 it("index == 0") {
-                    let m = handler.handle(.Backspace, composeMode: composeMode)
+                    let m = handler.handle(.backspace, composeMode: composeMode)
                     expect(self.kana(m)).to(equal("かわ"))
                 }
                 it("index > 0") {
-                    let m = handler.handle(.Backspace, composeMode: ComposeMode.KanjiCompose(kana: "かわ", okuri: .None, candidates: candidates, index: 1))
+                    let m = handler.handle(.backspace, composeMode: ComposeMode.kanjiCompose(kana: "かわ", okuri: .none, candidates: candidates, index: 1))
                     expect(self.index(m)).to(equal(0))
                 }
             }
@@ -117,8 +117,8 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                 // FIXME: 辞書に適当な単語が登録されていないのでテストしにくい
             }
             it("濁点変換") {
-                let m = handler.handle(.ToggleDakuten(beforeText: ""),
-                    composeMode: ComposeMode.KanjiCompose(kana: "さわ",
+                let m = handler.handle(.toggleDakuten(beforeText: ""),
+                    composeMode: ComposeMode.kanjiCompose(kana: "さわ",
                         okuri: "き",
                         candidates: candidates, index: 1))
                 let (kana, okuri) = self.kanji(m)!
@@ -128,29 +128,29 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
                 expect(self.index(m)).to(equal(0))
             }
             it("入力モード") {
-                let m = handler.handle(.InputModeChange(inputMode : .Katakana), composeMode: composeMode)
+                let m = handler.handle(.inputModeChange(inputMode : .katakana), composeMode: composeMode)
                 expect(m == composeMode).to(beTrue())
-                expect(delegate.inputMode == .Katakana).to(beTrue())
+                expect(delegate.inputMode == .katakana).to(beTrue())
             }
             it("シフトあり文字入力") {
-                let m = handler.handle(.Char(kana: "い", shift: true), composeMode: composeMode)
+                let m = handler.handle(.char(kana: "い", shift: true), composeMode: composeMode)
                 expect(delegate.insertedText).to(equal("川"))
                 expect(self.kana(m)).to(equal("い"))
             }
             describe("候補選択") {
                 it("選択") {
-                    let m = handler.handle(.Select(index: 0), composeMode: composeMode)
+                    let m = handler.handle(.select(index: 0), composeMode: composeMode)
                     expect(delegate.insertedText).to(equal("川"))
-                    expect(m == .DirectInput).to(beTrue())
+                    expect(m == .directInput).to(beTrue())
                                    }
                 it("単語登録モード") {
-                    let m = handler.handle(.Select(index: 2), composeMode: composeMode)
+                    let m = handler.handle(.select(index: 2), composeMode: composeMode)
                     switch m {
-                    case .WordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
+                    case .wordRegister(kana: let kana, okuri: let okuri, composeText : let composeText, composeMode : let composeMode):
                         expect(kana).to(equal("かわ"))
                         expect(okuri).to(beNil())
                         expect(composeText).to(equal(""))
-                        expect(composeMode[0] == .DirectInput).to(beTrue())
+                        expect(composeMode[0] == .directInput).to(beTrue())
                     default:
                         fail()
                     }
@@ -158,13 +158,13 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
             }
             describe("学習") {
                 it("送りなし") {
-                    handler.handle(.Select(index: 0), composeMode: composeMode)
+                    let _ = handler.handle(.select(index: 0), composeMode: composeMode)
                     // 学習したものが先頭にくる
                     expect(self.dictionary.find("かわ", okuri: nil)[0]).to(equal("川"))
                 }
                 it("送りあり") {
-                    let composeMode = ComposeMode.KanjiCompose(kana: "い", okuri: "る", candidates: candidatesWithOkuri, index: 0)
-                    handler.handle(.Select(index: 1), composeMode: composeMode)
+                    let composeMode = ComposeMode.kanjiCompose(kana: "い", okuri: "る", candidates: candidatesWithOkuri, index: 0)
+                    let _ = handler.handle(.select(index: 1), composeMode: composeMode)
 
                     // 学習したものが先頭にくる
                     let xs = self.dictionary.find("い", okuri: "r")

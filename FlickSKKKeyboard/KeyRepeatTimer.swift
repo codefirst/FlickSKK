@@ -12,13 +12,13 @@
 //   2. delayInterval秒後にactionを呼びだす
 //   3. repeatInterval秒毎にactionを呼び出す
 class KeyRepeatTimer : NSObject {
-    private let action : Void -> Void
-    private let delayInterval : NSTimeInterval
-    private let repeatInterval : NSTimeInterval
-    private var timer : NSTimer?
+    fileprivate let action : (Void) -> Void
+    fileprivate let delayInterval : TimeInterval
+    fileprivate let repeatInterval : TimeInterval
+    fileprivate var timer : Timer?
 
 
-    init(delayInterval : NSTimeInterval, repeatInterval : NSTimeInterval, action: Void -> Void) {
+    init(delayInterval : TimeInterval, repeatInterval : TimeInterval, action: @escaping (Void) -> Void) {
         self.delayInterval = delayInterval
         self.repeatInterval = repeatInterval
         self.action = action
@@ -27,14 +27,14 @@ class KeyRepeatTimer : NSObject {
     func start() {
         self.action()
         cancel()
-        self.timer = NSTimer(
-            fireDate: NSDate(timeIntervalSinceNow: self.delayInterval),
+        self.timer = Timer(
+            fireAt: Date(timeIntervalSinceNow: self.delayInterval),
             interval: self.repeatInterval,
             target: self,
-            selector: Selector("repeat"),
+            selector: #selector(KeyRepeatTimer.repeat),
             userInfo: nil,
             repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+        RunLoop.current.add(timer!, forMode: RunLoopMode.defaultRunLoopMode)
     }
 
     func cancel() {
@@ -42,7 +42,7 @@ class KeyRepeatTimer : NSObject {
         self.timer = nil
     }
 
-    @objc private func `repeat`() {
+    @objc fileprivate func `repeat`() {
         self.action()
     }
 }

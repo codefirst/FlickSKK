@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0497A4C45B9C918FAD31B291 /* Pods_FlickSKKKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C68278BF8014A23AD739ED6E /* Pods_FlickSKKKeyboard.framework */; };
 		1306495E1A8723150044B225 /* KeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495A1A871FEE0044B225 /* KeyHandler.swift */; };
 		1306495F1A8723170044B225 /* SKKKeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1306495C1A8721180044B225 /* SKKKeyEvent.swift */; };
 		1307DDED1ABD6DCF00678358 /* TextEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307DDEC1ABD6DCF00678358 /* TextEngineSpec.swift */; };
@@ -142,10 +143,9 @@
 		13F9326E19E2DC1700AC5019 /* KeyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA985FE719D84D060043564C /* KeyButton.swift */; };
 		13F9326F19E2DC1700AC5019 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */; };
 		13FFFD471A3D24F70049D45D /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13D118C719D99923009E9E79 /* skk.jisyo */; };
-		5F257844159BF4486EBB171C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D184B1D0EAEC5D0C5E64CD /* Pods.framework */; };
 		80E568DB1AA358920029DDBD /* flickskk_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 80E568DA1AA358920029DDBD /* flickskk_white.png */; };
 		80EA0A2A1AAB3C1300D7148D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 80EA0A291AAB3C1300D7148D /* Settings.bundle */; };
-		9DB9E5AC72A72193B3E19E0C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D184B1D0EAEC5D0C5E64CD /* Pods.framework */; };
+		D1A84A6D6AE5807C63BC3007 /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */; };
 		EA28E7F51A21D3B8005DF803 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */; };
 		EA349A481A903BDE00084BDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A471A903BDE00084BDE /* AppDelegate.swift */; };
 		EA349A4A1A903BDE00084BDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA349A491A903BDE00084BDE /* ViewController.swift */; };
@@ -286,14 +286,18 @@
 		13E566CB1AF6360300592844 /* BinarySearchSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinarySearchSpec.swift; sourceTree = "<group>"; };
 		13F456371ADBD863004EB68D /* NumberFliterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberFliterSpec.swift; sourceTree = "<group>"; };
 		1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2B64D840D9B22E362C17379A /* Pods-FlickSKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.release.xcconfig"; sourceTree = "<group>"; };
+		3696666C4D3CBDFDB08D829B /* Pods-FlickSKKKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		3758E2CE5E666333313C17EA /* Pods-FlickSKKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3F8E386C47EFBEA9835F2AFB /* Pods_FlickSKKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D184B1D0EAEC5D0C5E64CD /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46448DA65802AE61CC91EFF0 /* Pods-FlickSKKKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard.release.xcconfig"; sourceTree = "<group>"; };
 		5D1C6E1592D9B5899F90072A /* Pods_FlickSKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80E568DA1AA358920029DDBD /* flickskk_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flickskk_white.png; sourceTree = "<group>"; };
 		80EA0A291AAB3C1300D7148D /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C68278BF8014A23AD739ED6E /* Pods_FlickSKKKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC587CBA34583432700FD8FD /* Pods-FlickSKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.debug.xcconfig"; sourceTree = "<group>"; };
 		EA28E7F41A21D3B8005DF803 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		EA2D4D7E19E173EC00607C35 /* KeyButtonFlickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyButtonFlickPopup.swift; sourceTree = "<group>"; };
 		EA349A431A903BDE00084BDE /* Memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -338,7 +342,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DB9E5AC72A72193B3E19E0C /* Pods.framework in Frameworks */,
+				D1A84A6D6AE5807C63BC3007 /* Pods_FlickSKK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,7 +358,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F257844159BF4486EBB171C /* Pods.framework in Frameworks */,
+				0497A4C45B9C918FAD31B291 /* Pods_FlickSKKKeyboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +372,10 @@
 				0BD1525BEE3562FC7DB87AF9 /* Pods-FlickSKKTests.release.xcconfig */,
 				1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */,
 				B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */,
+				CC587CBA34583432700FD8FD /* Pods-FlickSKK.debug.xcconfig */,
+				2B64D840D9B22E362C17379A /* Pods-FlickSKK.release.xcconfig */,
+				3696666C4D3CBDFDB08D829B /* Pods-FlickSKKKeyboard.debug.xcconfig */,
+				46448DA65802AE61CC91EFF0 /* Pods-FlickSKKKeyboard.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -801,14 +809,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAD4B57F19D5CB50007B6636 /* Build configuration list for PBXNativeTarget "FlickSKK" */;
 			buildPhases = (
-				7B73828051B3D1AB9FECADDC /* Check Pods Manifest.lock */,
+				7B73828051B3D1AB9FECADDC /* [CP] Check Pods Manifest.lock */,
 				EAD4B55C19D5CB50007B6636 /* Sources */,
 				EAD4B55D19D5CB50007B6636 /* Frameworks */,
 				EAD4B55E19D5CB50007B6636 /* Resources */,
 				EAD4B59719D5CB8A007B6636 /* Embed App Extensions */,
 				80EA0A2B1AAB3C8F00D7148D /* ShellScript */,
-				C675DD7CE1BABC38FE1AD1DC /* Embed Pods Frameworks */,
-				B52CFE56657C5A107BB0C08C /* Copy Pods Resources */,
+				C675DD7CE1BABC38FE1AD1DC /* [CP] Embed Pods Frameworks */,
+				B52CFE56657C5A107BB0C08C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -825,13 +833,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAD4B58219D5CB50007B6636 /* Build configuration list for PBXNativeTarget "FlickSKKTests" */;
 			buildPhases = (
-				351977BFA91B57BB334C0647 /* Check Pods Manifest.lock */,
+				351977BFA91B57BB334C0647 /* [CP] Check Pods Manifest.lock */,
 				EAD4B57119D5CB50007B6636 /* Sources */,
 				EAD4B57219D5CB50007B6636 /* Frameworks */,
 				EAD4B57319D5CB50007B6636 /* Resources */,
 				EA997CB61A3D8206006D5AA2 /* Copy Frameworks */,
-				752D97DA5F4A7A7532E51006 /* Embed Pods Frameworks */,
-				C1A4C272C2DBC05A1079A697 /* Copy Pods Resources */,
+				752D97DA5F4A7A7532E51006 /* [CP] Embed Pods Frameworks */,
+				C1A4C272C2DBC05A1079A697 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -848,12 +856,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EAD4B59419D5CB8A007B6636 /* Build configuration list for PBXNativeTarget "FlickSKKKeyboard" */;
 			buildPhases = (
-				7BE759E949577AFF355E19DC /* Check Pods Manifest.lock */,
+				7BE759E949577AFF355E19DC /* [CP] Check Pods Manifest.lock */,
 				EAD4B58519D5CB8A007B6636 /* Sources */,
 				EAD4B58619D5CB8A007B6636 /* Frameworks */,
 				EAD4B58719D5CB8A007B6636 /* Resources */,
-				3FFC4AB8699CC3AF97F3080D /* Copy Pods Resources */,
-				01C455B6402DA7EDE93A80E1 /* Embed Pods Frameworks */,
+				3FFC4AB8699CC3AF97F3080D /* [CP] Copy Pods Resources */,
 				EA17B1F81BE8B80700BEFF70 /* Workaround for disallowed Frameworks in appex error */,
 			);
 			buildRules = (
@@ -873,7 +880,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "BAN Jun";
 				TargetAttributes = {
 					EA349A421A903BDE00084BDE = {
@@ -969,59 +976,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		01C455B6402DA7EDE93A80E1 /* Embed Pods Frameworks */ = {
+		351977BFA91B57BB334C0647 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		351977BFA91B57BB334C0647 /* Check Pods Manifest.lock */ = {
+		3FFC4AB8699CC3AF97F3080D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3FFC4AB8699CC3AF97F3080D /* Copy Pods Resources */ = {
+		752D97DA5F4A7A7532E51006 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		752D97DA5F4A7A7532E51006 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1029,34 +1021,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7B73828051B3D1AB9FECADDC /* Check Pods Manifest.lock */ = {
+		7B73828051B3D1AB9FECADDC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		7BE759E949577AFF355E19DC /* Check Pods Manifest.lock */ = {
+		7BE759E949577AFF355E19DC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		80EA0A2B1AAB3C8F00D7148D /* ShellScript */ = {
@@ -1072,29 +1064,29 @@
 			shellPath = /bin/sh;
 			shellScript = "VERSION_NUMBER=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$INFOPLIST_FILE\")\n/usr/libexec/PlistBuddy ${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}/Settings.bundle/Root.plist -c \"set PreferenceSpecifiers:0:DefaultValue $VERSION_NUMBER\"";
 		};
-		B52CFE56657C5A107BB0C08C /* Copy Pods Resources */ = {
+		B52CFE56657C5A107BB0C08C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C1A4C272C2DBC05A1079A697 /* Copy Pods Resources */ = {
+		C1A4C272C2DBC05A1079A697 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1102,19 +1094,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C675DD7CE1BABC38FE1AD1DC /* Embed Pods Frameworks */ = {
+		C675DD7CE1BABC38FE1AD1DC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA17B1F81BE8B80700BEFF70 /* Workaround for disallowed Frameworks in appex error */ = {
@@ -1384,8 +1376,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1395,6 +1389,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1407,12 +1402,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Common/FlickSKK-Common-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1430,8 +1426,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1440,16 +1438,19 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Common/FlickSKK-Common-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1457,8 +1458,9 @@
 		};
 		EAD4B58019D5CB50007B6636 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = CC587CBA34583432700FD8FD /* Pods-FlickSKK.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1473,8 +1475,9 @@
 		};
 		EAD4B58119D5CB50007B6636 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 2B64D840D9B22E362C17379A /* Pods-FlickSKK.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
 				COPY_PHASE_STRIP = NO;
@@ -1490,11 +1493,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3758E2CE5E666333313C17EA /* Pods-FlickSKKTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1511,11 +1512,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BD1525BEE3562FC7DB87AF9 /* Pods-FlickSKKTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FlickSKKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER).$(PRODUCT_NAME:rfc1034identifier)";
@@ -1526,13 +1525,13 @@
 		};
 		EAD4B59519D5CB8A007B6636 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BFDE4CE398C429695DD5951 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 3696666C4D3CBDFDB08D829B /* Pods-FlickSKKKeyboard.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1550,19 +1549,19 @@
 		};
 		EAD4B59619D5CB8A007B6636 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B83A2E70ED08F6BDF8F06316 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 46448DA65802AE61CC91EFF0 /* Pods-FlickSKKKeyboard.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FlickSKKKeyboard/FlickSKKKeyboard.entitlements;
 				COPY_PHASE_STRIP = NO;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = FlickSKKKeyboard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER).$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

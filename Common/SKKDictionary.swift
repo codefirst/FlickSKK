@@ -5,38 +5,38 @@
 // などを行なう。
 class SKKDictionary : NSObject {
     // すべての辞書(先頭から順に検索される)
-    private var dictionaries : [ SKKDictionaryFile ] = []
+    fileprivate var dictionaries : [ SKKDictionaryFile ] = []
 
     // ダイナミック変換用辞書
-    private var dynamicDictionaries : [ SKKUserDictionaryFile ] = []
+    fileprivate var dynamicDictionaries : [ SKKUserDictionaryFile ] = []
 
     // ユーザ辞書
-    private var userDictionary : SKKUserDictionaryFile?
+    fileprivate var userDictionary : SKKUserDictionaryFile?
 
     // 学習辞書
-    private var learnDictionary : SKKUserDictionaryFile?
+    fileprivate var learnDictionary : SKKUserDictionaryFile?
 
     // 略語辞書
-    private var partialDictionary : SKKUserDictionaryFile?
+    fileprivate var partialDictionary : SKKUserDictionaryFile?
 
     // ロード完了を監視するために Key value observing を使う
     dynamic var isWaitingForLoad : Bool = false
     class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
 
-    private let loader = AsyncLoader()
-    private let cache = DictionaryCache()
+    fileprivate let loader = AsyncLoader()
+    fileprivate let cache = DictionaryCache()
 
     class func resetLearnDictionary() {
         for url in [DictionarySettings.defaultLearnDictionaryURL(), DictionarySettings.defaultPartialDictionaryURL()] {
-            let _ = try? NSFileManager.defaultManager().removeItemAtURL(url)
+            let _ = try? FileManager.default.removeItem(at: url as URL)
         }
     }
 
-    class func additionalDictionaries() -> [NSURL] {
+    class func additionalDictionaries() -> [URL] {
         do {
-            let manager = NSFileManager.defaultManager()
+            let manager = FileManager.default
             let url = DictionarySettings.additionalDictionaryURL()
-            return try manager.contentsOfDirectoryAtURL(url,
+            return try manager.contentsOfDirectory(at: url as URL,
                 includingPropertiesForKeys: nil,
                 options: [])
         } catch {
@@ -73,7 +73,7 @@ class SKKDictionary : NSObject {
     }
 
     // 辞書を検索する
-    func find(normal : String, okuri : String?) -> [ String ] {
+    func find(_ normal : String, okuri : String?) -> [ String ] {
         self.waitForLoading()
 
         let xs : [String] = self.dictionaries.flatMap {
@@ -84,7 +84,7 @@ class SKKDictionary : NSObject {
     }
 
     // ダイナミック変換用の辞書検索
-    func findDynamic(prefix : String) -> [(kana: String, kanji: String)] {
+    func findDynamic(_ prefix : String) -> [(kana: String, kanji: String)] {
         self.waitForLoading()
 
         let xs : [(kana : String, kanji: String)] = self.dynamicDictionaries.flatMap {
@@ -95,7 +95,7 @@ class SKKDictionary : NSObject {
     }
 
     // 単語を登録する
-    func register(normal : String, okuri: String?, kanji: String) {
+    func register(_ normal : String, okuri: String?, kanji: String) {
         userDictionary?.register(normal, okuri: okuri, kanji: kanji)
         async {
             self.cache.update(DictionarySettings.defaultUserDictionaryURL()) {
@@ -105,7 +105,7 @@ class SKKDictionary : NSObject {
     }
 
     // 確定結果を学習する
-    func learn(normal : String, okuri: String?, kanji: String) {
+    func learn(_ normal : String, okuri: String?, kanji: String) {
         learnDictionary?.register(normal, okuri: okuri, kanji: kanji)
         async {
             self.cache.update(DictionarySettings.defaultLearnDictionaryURL()) {
@@ -115,7 +115,7 @@ class SKKDictionary : NSObject {
     }
 
     // InputModeChangeによる確定を学習する
-    func partial(kana: String, okuri: String?, kanji: String) {
+    func partial(_ kana: String, okuri: String?, kanji: String) {
         partialDictionary?.register(kana, okuri: okuri, kanji: kanji)
         async {
             self.cache.update(DictionarySettings.defaultPartialDictionaryURL()) {

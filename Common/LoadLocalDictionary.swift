@@ -30,15 +30,15 @@
 //
 // といったことを行なっている。
 class LoadLocalDictionary {
-    private var ari : NSMutableArray = NSMutableArray()
-    private var nasi : NSMutableArray = NSMutableArray()
+    fileprivate var ari : NSMutableArray = NSMutableArray()
+    fileprivate var nasi : NSMutableArray = NSMutableArray()
 
-    init(url : NSURL) {
-        guard let path = url.path else { return }
+    init(url : URL) {
+        let path = url.path
 
         var isOkuriAri = true
         IOUtil.each(path, with: { line -> Void in
-            let s = line as NSString
+            guard let s = line else { return }
             // toggle
             if s.hasPrefix(";; okuri-nasi entries.") {
                 isOkuriAri = false
@@ -50,9 +50,9 @@ class LoadLocalDictionary {
             if s == "" { return }
 
             if isOkuriAri {
-                self.ari.addObject(line)
+                self.ari.add(s)
             } else {
-                self.nasi.addObject(line)
+                self.nasi.add(s)
             }
         })
     }

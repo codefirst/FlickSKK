@@ -1,11 +1,11 @@
 class Tempfile {
-    private static var count = 0
+    fileprivate static var count = 0
 
-    class func temp() -> NSURL {
+    class func temp() -> URL {
         count += 1
 
         let dir = NSTemporaryDirectory()
-        let basename = NSString(format: "temp%.0f-%d.txt", NSDate.timeIntervalSinceReferenceDate() * 1000.0, count)
-        return NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(basename as String)
+        let basename = NSString(format: "temp%.0f-%d.txt", Date.timeIntervalSinceReferenceDate * 1000.0, count)
+        return URL(fileURLWithPath: dir).appendingPathComponent(basename as String)
     }
 }

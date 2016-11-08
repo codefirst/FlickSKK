@@ -13,29 +13,29 @@
 //
 // また送りありエントリは辞書の逆順で格納されているので、比較順を逆にできるオプションも実装する。
 class BinarySearch {
-    private let entries : NSArray
-    private let compare : NSComparisonResult
+    fileprivate let entries : NSArray
+    fileprivate let compare : ComparisonResult
 
     init(entries : NSArray, reverse : Bool) {
         self.entries = entries
         self.compare = reverse ?
-            NSComparisonResult.OrderedDescending :
-            NSComparisonResult.OrderedAscending
+            ComparisonResult.orderedDescending :
+            ComparisonResult.orderedAscending
 
     }
 
-    func call(target : NSString) -> String? {
+    func call(_ target : NSString) -> String? {
         return binarySearch(target, begin: 0, end: entries.count)
     }
 
-    private func binarySearch(target : NSString, begin : Int, end : Int) -> String? {
-        if begin == end { return .None }
+    fileprivate func binarySearch(_ target : NSString, begin : Int, end : Int) -> String? {
+        if begin == end { return .none }
         if begin + 1 == end {
             let x = entries[begin] as! NSString
             if x.hasPrefix(target as String) {
                 return x as String
             } else {
-                return .None
+                return .none
             }
         }
 
@@ -44,7 +44,7 @@ class BinarySearch {
         if x.hasPrefix(target as String) {
             return x as String
         } else {
-            if target.compare(x as String, options: .LiteralSearch) == compare {
+            if target.compare(x as String, options: .literal) == compare {
                 return binarySearch(target, begin: begin, end: mid)
             } else {
                 return binarySearch(target, begin: mid, end: end)

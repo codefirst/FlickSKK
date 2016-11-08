@@ -46,25 +46,25 @@ class UtilitiesSpec: QuickSpec {
         describe("String") {
             context("ひらがな to カタカナ") {
                 it("convert あ行") {
-                    let result = "あいうえお".conv(.Hirakana, to: .Katakana)
+                    let result = "あいうえお".conv(.hirakana, to: .katakana)
                     expect(result).to(equal("アイウエオ"))
                 }
                 it("convert 'ポップアップ'") {
-                    let result = "ぽっぷあっぷ".conv(.Hirakana, to: .Katakana)
+                    let result = "ぽっぷあっぷ".conv(.hirakana, to: .katakana)
                     expect(result).to(equal("ポップアップ"))
                 }
             }
             context("ひらがな to ﾊﾝｶｸｶﾅ") {
                 it("convert あ行") {
-                    let result = "あいうえお".conv(.Hirakana, to: .HankakuKana)
+                    let result = "あいうえお".conv(.hirakana, to: .hankakuKana)
                     expect(result).to(equal("ｱｲｳｴｵ"))
                 }
                 it("convert が行") {
-                    let result = "がぎぐげご".conv(.Hirakana, to: .HankakuKana)
+                    let result = "がぎぐげご".conv(.hirakana, to: .hankakuKana)
                     expect(result).to(equal("ｶﾞｷﾞｸﾞｹﾞｺﾞ"))
                 }
                 it("convert ゃゅょｰ") {
-                    let result = "ゃゅょー".conv(.Hirakana, to: .HankakuKana)
+                    let result = "ゃゅょー".conv(.hirakana, to: .hankakuKana)
                     expect(result).to(equal("ｬｭｮｰ"))
                 }
             }

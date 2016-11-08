@@ -1,21 +1,21 @@
 class ComposeModeFactory {
-    private let dictionary : DictionaryEngine
+    fileprivate let dictionary : DictionaryEngine
 
     init(dictionary : DictionaryEngine) {
         self.dictionary = dictionary
     }
 
-    func kanaCompose(kana : String) -> ComposeMode {
+    func kanaCompose(_ kana : String) -> ComposeMode {
         let candidates = dictionary.find(kana, okuri: nil, dynamic: kana.utf16.count > 1)
-        return .KanaCompose(kana : kana, candidates: candidates)
+        return .kanaCompose(kana : kana, candidates: candidates)
     }
 
-    func kanjiCompose(kana : String, okuri : String?) -> ComposeMode {
+    func kanjiCompose(_ kana : String, okuri : String?) -> ComposeMode {
         let candidates = dictionary.find(kana, okuri: okuri, dynamic: okuri == nil && kana.utf16.count > 1)
         if candidates.isEmpty {
-            return .WordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .DirectInput ])
+            return .wordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .directInput ])
         } else {
-            return .KanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: 0)
+            return .kanjiCompose(kana: kana, okuri: okuri, candidates: candidates, index: 0)
         }
     }
 }

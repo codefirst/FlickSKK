@@ -14,12 +14,12 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
         }
 
         context("word register with kana mode") {
-            let composeMode = ComposeMode.WordRegister(kana: "まじ",
-                okuri: .None, composeText : "か", composeMode: [ .KanaCompose(kana: "あああ", candidates: []) ])
+            let composeMode = ComposeMode.wordRegister(kana: "まじ",
+                okuri: .none, composeText : "か", composeMode: [ .kanaCompose(kana: "あああ", candidates: []) ])
             it("Enter") {
-                let m = handler.handle(.Enter, composeMode : composeMode)
+                let m = handler.handle(.enter, composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
+                case ComposeMode.wordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("かあああ"))
@@ -28,9 +28,9 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
                 }
             }
             it("InputModeChange") {
-                let m = handler.handle(.InputModeChange(inputMode: .Katakana), composeMode : composeMode)
+                let m = handler.handle(.inputModeChange(inputMode: .katakana), composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
+                case ComposeMode.wordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("かアアア"))
@@ -41,12 +41,12 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
         }
 
         context("word register with kanji mode") {
-            let composeMode = ComposeMode.WordRegister(kana: "まじ",
-                okuri: .None, composeText : "か", composeMode: [ .KanjiCompose(kana: "やま", okuri : .None, candidates: self.exacts(["山"]), index: 0)])
+            let composeMode = ComposeMode.wordRegister(kana: "まじ",
+                okuri: .none, composeText : "か", composeMode: [ .kanjiCompose(kana: "やま", okuri : .none, candidates: self.exacts(["山"]), index: 0)])
             it("Enter") {
-                let m = handler.handle(.Enter, composeMode : composeMode)
+                let m = handler.handle(.enter, composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
+                case ComposeMode.wordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : _):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("か山"))
@@ -57,9 +57,9 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
                 }
             }
             it("シフト付き") {
-                let m = handler.handle(.Char(kana: "あ", shift: true), composeMode : composeMode)
+                let m = handler.handle(.char(kana: "あ", shift: true), composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
+                case ComposeMode.wordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("か山"))
@@ -70,14 +70,14 @@ class KeyHandlerWordRegisterWithKanaComposeSpec : KeyHandlerBaseSpec {
                 }
             }
             it("シフトなし") {
-                let m = handler.handle(.Char(kana: "あ", shift: false), composeMode : composeMode)
+                let m = handler.handle(.char(kana: "あ", shift: false), composeMode : composeMode)
                 switch m {
-                case ComposeMode.WordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
+                case ComposeMode.wordRegister(kana: let k, okuri: let okuri, composeText : let composeText, composeMode : let xs):
                     expect(k).to(equal("まじ"))
                     expect(okuri).to(beNil())
                     expect(composeText).to(equal("か山あ"))
                     expect(delegate.insertedText).to(equal(""))
-                    expect(xs[0] == .DirectInput).to(beTrue())
+                    expect(xs[0] == .directInput).to(beTrue())
                 default:
                     fail()
                 }

@@ -32,17 +32,17 @@ class NumberFormatter {
         }
     }
 
-    private func conv(target : String, from : String, to : String) -> String {
+    fileprivate func conv(_ target : String, from : String, to : String) -> String {
         return implode(Array(target.characters).map( { c in
             tr(c, from: from, to: to) ?? c
         }))
     }
 
 
-    private func toKanji_lt_10(n : Int) -> String? {
+    fileprivate func toKanji_lt_10(_ n : Int) -> String? {
         // where n < 10
         if n == 0 {
-            return .None
+            return .none
         } else if n == 1 {
             return ""
         } else {
@@ -51,14 +51,14 @@ class NumberFormatter {
         }
     }
 
-    private func toKanjiDigit(n : Int64, at : Int64, name: String) -> String {
+    fileprivate func toKanjiDigit(_ n : Int64, at : Int64, name: String) -> String {
         let m : Int = Int((n / at) % 10)
         return toKanji_lt_10(m).map({ c in c + name }) ?? ""
     }
 
-    private func toKanji_lt_10000(n : Int64) -> String? { // where n < 10_000
+    fileprivate func toKanji_lt_10000(_ n : Int64) -> String? { // where n < 10_000
         if n == 0 {
-            return .None
+            return .none
         } else if n == 1 {
             return "一"
         } else {
@@ -70,11 +70,11 @@ class NumberFormatter {
         }
     }
 
-    private func toKanjiDigits(n : Int64, at : Int64, name: String) -> String {
+    fileprivate func toKanjiDigits(_ n : Int64, at : Int64, name: String) -> String {
         return toKanji_lt_10000((n / at) % Int64(1_0000)).map({ c in c + name }) ?? ""
     }
 
-    private func toKanji(n : Int64) -> String {
+    fileprivate func toKanji(_ n : Int64) -> String {
         let 兆 = toKanjiDigits(n, at: 1_0000_0000_0000, name: "兆")
         let 億 = toKanjiDigits(n, at: 1_0000_0000, name: "億")
         let 万 = toKanjiDigits(n, at: 1_0000, name: "万")

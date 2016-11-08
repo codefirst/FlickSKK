@@ -9,37 +9,37 @@
 import Foundation
 
 enum SKKKeyEvent {
-    case Char(kana : String, shift : Bool)
-    case Space
-    case Enter
-    case Backspace
-    case InputModeChange(inputMode : SKKInputMode)
-    case ToggleDakuten(beforeText : String)
-    case ToggleUpperLower(beforeText : String)
-    case Select(index : Int)
-    case SkipPartialCandidates
+    case char(kana : String, shift : Bool)
+    case space
+    case enter
+    case backspace
+    case inputModeChange(inputMode : SKKInputMode)
+    case toggleDakuten(beforeText : String)
+    case toggleUpperLower(beforeText : String)
+    case select(index : Int)
+    case skipPartialCandidates
 }
 
 func ==(l : SKKKeyEvent, r : SKKKeyEvent) -> Bool {
     switch (l,r) {
-    case (.Char(kana: let kana1, shift: let shift1),
-          .Char(kana: let kana2, shift: let shift2)):
+    case (.char(kana: let kana1, shift: let shift1),
+          .char(kana: let kana2, shift: let shift2)):
           return kana1 == kana2 && shift1 == shift2
-    case (.Space, .Space):
+    case (.space, .space):
         return true
-    case (.Enter, .Enter):
+    case (.enter, .enter):
         return true
-    case (.Backspace, .Backspace):
+    case (.backspace, .backspace):
         return true
-    case (.InputModeChange(inputMode: let m1), .InputModeChange(inputMode: let m2)):
+    case (.inputModeChange(inputMode: let m1), .inputModeChange(inputMode: let m2)):
         return m1 == m2
-    case (.ToggleDakuten(_), .ToggleDakuten(_)):
+    case (.toggleDakuten(_), .toggleDakuten(_)):
         return true
-    case (.ToggleUpperLower(_), .ToggleUpperLower(_)):
+    case (.toggleUpperLower(_), .toggleUpperLower(_)):
         return true
-    case (.Select(index: let index1), .Select(index: let index2)):
+    case (.select(index: let index1), .select(index: let index2)):
         return index1 == index2
-    case (.SkipPartialCandidates, .SkipPartialCandidates):
+    case (.skipPartialCandidates, .skipPartialCandidates):
         return true
     default:
         return false
