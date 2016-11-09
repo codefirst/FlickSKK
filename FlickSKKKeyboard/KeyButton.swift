@@ -51,7 +51,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     var flicksEnabled: Bool = true
 
     var metrics: [String:CGFloat] {
-        return ["p": 10]
+        return ["p": 2]
     }
 
     var tapped: ((KanaFlickKey, Int?) -> Void)?
