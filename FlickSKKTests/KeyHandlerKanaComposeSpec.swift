@@ -27,7 +27,7 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
                 it("partialな候補がある場合") {
                     self.dictionary.partial("かわなんとか", okuri: .none, kanji: "カワナントカ")
                     let m = handler.handle(.space, composeMode: composeMode)
-                    let _ = self.kanji(m)!
+                    _ = self.kanji(m)!
                     if let c = self.candidates(m)?[0] {
                         switch c {
                         case let .partial(kanji: kanji, kana: _):
@@ -132,7 +132,7 @@ class KeyHandlerKanaComposeSpec : KeyHandlerBaseSpec {
             }
             it("略語学習") {
                 let composeMode = ComposeMode.kanaCompose(kana: "はなやまた", candidates: candidates)
-                let _ = handler.handle(.inputModeChange(inputMode : .katakana), composeMode: composeMode)
+                _ = handler.handle(.inputModeChange(inputMode : .katakana), composeMode: composeMode)
                 let xs = self.dictionary.findDynamic("はなや").filter { w in
                     w.kanji == "ハナヤマタ"
                 }

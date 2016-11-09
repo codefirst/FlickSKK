@@ -53,31 +53,31 @@ class KeyButtonFlickPopup: UIView {
         super.init(frame: frame)
 
         self.clipsToBounds = false
-        let _ = self.layer ※ { (la:CALayer) in
+        _ = self.layer ※ { (la:CALayer) in
             la.shadowColor = UIColor.black.cgColor
             la.shadowOpacity = 0.2
             la.shadowOffset = CGSize(width: 0, height: 0)
             la.shadowRadius = 2.0
         }
 
-        let _ = label ※ { (l:UILabel) in
+        _ = label ※ { (l:UILabel) in
             l.backgroundColor = KeyButtonHighlightedColor
             l.textColor = UIColor.black
             l.textAlignment = .center
             l.font = Appearance.boldFont(28.0)
             l.adjustsFontSizeToFitWidth = true
             l.baselineAdjustment = .alignCenters
-            let _ = l.layer ※ { (la:CALayer) in
+            _ = l.layer ※ { (la:CALayer) in
                 la.cornerRadius = 2.0
                 la.masksToBounds = true
             }
             self.addSubview(l)
         }
 
-        let _ = arrowShapeLayer ※ { (sl:CAShapeLayer) in
+        _ = arrowShapeLayer ※ { (sl:CAShapeLayer) in
             sl.fillColor = KeyButtonHighlightedColor.cgColor
         }
-        let _ = arrow ※ { (a:UIView) in
+        _ = arrow ※ { (a:UIView) in
             a.backgroundColor = UIColor.clear
             a.layer.addSublayer(self.arrowShapeLayer)
             self.addSubview(a)

@@ -16,7 +16,7 @@ class SKKDictionaryUserFileSpec : QuickSpec {
 
         describe("SKK dictionary") {
             beforeEach {
-                let _ = try? FileManager.default.removeItem(at: url)
+                _ = try? FileManager.default.removeItem(at: url)
                 dict = SKKUserDictionaryFile(url: url)
             }
 

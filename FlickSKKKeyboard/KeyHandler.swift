@@ -39,13 +39,13 @@ class KeyHandler {
     fileprivate func directInput(_ keyEvent : SKKKeyEvent, status : TextEngine.Status) -> ComposeMode? {
         switch keyEvent {
         case .char(kana: let kana, shift : let shift) where !shift:
-            let _ = text.insert(kana, learn: nil, status: status)
+            _ = text.insert(kana, learn: nil, status: status)
         case .char(kana: let kana, shift : _): // shiftが押されている
             return factory.kanaCompose(kana)
         case .space:
-            let _ = text.insert(" ", learn: nil, status: status)
+            _ = text.insert(" ", learn: nil, status: status)
         case .enter:
-            let _ = text.insert("\n", learn: nil, status: status)
+            _ = text.insert("\n", learn: nil, status: status)
         case .backspace:
             text.deleteBackward(status)
         case .toggleDakuten(beforeText : let beforeText):
@@ -73,7 +73,7 @@ class KeyHandler {
             return factory.kanjiCompose(kana, okuri: .none)
         case .enter:
             // かなモードでのEnterは学習しない
-            let _ = text.insert(kana, learn: nil, status: status)
+            _ = text.insert(kana, learn: nil, status: status)
             return .directInput
         case .backspace:
             let str = kana.butLast()
@@ -97,11 +97,11 @@ class KeyHandler {
             }
         case .inputModeChange(inputMode: let inputMode):
             let str = kana.conv(inputMode.kanaType())
-            let _ = text.insertPartial(str, kana: kana, status: status)
+            _ = text.insertPartial(str, kana: kana, status: status)
             return .directInput
         case .select(index: let index):
             if index < candidates.count {
-                let _ = text.insertCandidate(candidates[index], learn: (kana, nil), status : status)
+                _ = text.insertCandidate(candidates[index], learn: (kana, nil), status : status)
                 return .directInput
             } else {
                 return .wordRegister(kana : kana, okuri : .none, composeText: "", composeMode : [ .directInput ])
@@ -137,7 +137,7 @@ class KeyHandler {
                 return .wordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .directInput ])
             }
         case .enter:
-            let _ = text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
+            _ = text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
             return .directInput
         case .backspace where index == 0:
             return factory.kanaCompose(kana)
@@ -160,7 +160,7 @@ class KeyHandler {
             return nil
         case .select(index : let index):
             if index < candidates.count {
-                let _ = text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
+                _ = text.insertCandidate(candidates[index], learn: (kana, okuri), status : status)
                 return .directInput
             } else {
                 return .wordRegister(kana : kana, okuri : okuri, composeText: "", composeMode : [ .directInput ])
@@ -189,7 +189,7 @@ class KeyHandler {
             dictionary.register(kana, okuri: okuri, kanji: composeText)
 
             // composeTextを入力する
-            let _ = text.insert(composeText + (okuri ?? ""), learn: (kana, okuri), status: status)
+            _ = text.insert(composeText + (okuri ?? ""), learn: (kana, okuri), status: status)
 
             // 状態遷移
             return .directInput

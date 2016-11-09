@@ -187,7 +187,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
 
         self.backgroundColor = UIColor.white
 
-        let _ = self.textLabel ※ { (l: UILabel) in
+        _ = self.textLabel ※ { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
             l.textColor = UIColor.black
             l.backgroundColor = UIColor.clear

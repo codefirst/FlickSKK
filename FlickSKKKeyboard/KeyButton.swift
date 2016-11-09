@@ -98,7 +98,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         self.backgroundColor = normalBackgroundColor
 
-        let _ = self.label ※ { (l:UILabel) in
+        _ = self.label ※ { (l:UILabel) in
             l.text = self.key.buttonLabel
             l.textColor = UIColor.black
             l.textAlignment = .center
