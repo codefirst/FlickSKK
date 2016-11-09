@@ -57,7 +57,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
                 self.wordField.text ?? "",
                 okuri,
                 self.yomiField.text ?? "")
-            let _ = self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
 

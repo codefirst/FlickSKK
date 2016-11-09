@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import NorthLayout
+import Ikemen
 
 let KeyButtonHighlightedColor = UIColor(hue: 0.10, saturation: 0.07, brightness: 0.96, alpha: 1.0)
 
@@ -29,7 +30,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     let label = UILabel()
     lazy var imageView: UIImageView = { [unowned self] in
-        UIImageView().tap{ (iv:UIImageView) in
+        UIImageView() ※ { (iv:UIImageView) in
             self.label.text = nil
 
             iv.contentMode = .scaleAspectFit
@@ -40,7 +41,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         }
     }()
     lazy var sequenceLabel: UILabel = { [unowned self] in
-        UILabel().tap { (l: UILabel) in
+        UILabel() ※ { (l: UILabel) in
             l.text = self.key.additionalButtonLabel
             l.font = Appearance.normalFont(12)
             l.textColor = UIColor.lightGray
@@ -50,7 +51,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     var flicksEnabled: Bool = true
 
     var metrics: [String:CGFloat] {
-        return ["p": 10]
+        return ["p": 2]
     }
 
     var tapped: ((KanaFlickKey, Int?) -> Void)?
@@ -97,7 +98,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         self.backgroundColor = normalBackgroundColor
 
-        let _ = self.label.tap { (l:UILabel) in
+        _ = self.label ※ { (l:UILabel) in
             l.text = self.key.buttonLabel
             l.textColor = UIColor.black
             l.textAlignment = .center

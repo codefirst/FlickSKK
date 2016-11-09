@@ -158,13 +158,13 @@ class KeyHandlerKanjiComposeSpec : KeyHandlerBaseSpec {
             }
             describe("学習") {
                 it("送りなし") {
-                    let _ = handler.handle(.select(index: 0), composeMode: composeMode)
+                    _ = handler.handle(.select(index: 0), composeMode: composeMode)
                     // 学習したものが先頭にくる
                     expect(self.dictionary.find("かわ", okuri: nil)[0]).to(equal("川"))
                 }
                 it("送りあり") {
                     let composeMode = ComposeMode.kanjiCompose(kana: "い", okuri: "る", candidates: candidatesWithOkuri, index: 0)
-                    let _ = handler.handle(.select(index: 1), composeMode: composeMode)
+                    _ = handler.handle(.select(index: 1), composeMode: composeMode)
 
                     // 学習したものが先頭にくる
                     let xs = self.dictionary.find("い", okuri: "r")

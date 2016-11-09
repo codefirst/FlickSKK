@@ -15,35 +15,35 @@ class KeyHandlerDirectInputSpec : KeyHandlerBaseSpec {
 
         context("directInput") {
             it("文字入力(シフトなし)") {
-                let _ = handler.handle(.char(kana: "あ", shift: false), composeMode: .directInput)
+                _ = handler.handle(.char(kana: "あ", shift: false), composeMode: .directInput)
                 expect(delegate.insertedText).to(equal("あ"))
             }
             it("Space") {
-                let _ = handler.handle(.space, composeMode: .directInput)
+                _ = handler.handle(.space, composeMode: .directInput)
                 expect(delegate.insertedText).to(equal(" "))
             }
             it("Enter") {
-                let _ = handler.handle(.enter, composeMode: .directInput)
+                _ = handler.handle(.enter, composeMode: .directInput)
                 expect(delegate.insertedText).to(equal("\n"))
             }
             it("Backspace") {
                 delegate.insertedText = "foo"
-                let _ = handler.handle(.backspace, composeMode: .directInput)
+                _ = handler.handle(.backspace, composeMode: .directInput)
                 expect(delegate.insertedText).to(equal("fo"))
             }
             it("大文字変換") {
                 delegate.insertedText = "foo"
-                let _ = handler.handle(.toggleUpperLower(beforeText: "o"), composeMode: .directInput)
+                _ = handler.handle(.toggleUpperLower(beforeText: "o"), composeMode: .directInput)
                 expect(delegate.insertedText).to(equal("foO"))
 
             }
             it("濁点変換") {
                 delegate.insertedText = "か"
-                let _ = handler.handle(.toggleDakuten(beforeText: "か"), composeMode: .directInput)
+                _ = handler.handle(.toggleDakuten(beforeText: "か"), composeMode: .directInput)
                 expect(delegate.insertedText).to(equal("が"))
             }
             it("入力モード") {
-                let _ = handler.handle(.inputModeChange(inputMode : .katakana), composeMode: .directInput)
+                _ = handler.handle(.inputModeChange(inputMode : .katakana), composeMode: .directInput)
                 expect(delegate.inputMode).to(equal(SKKInputMode.katakana))
             }
             it("シフトあり文字入力") {

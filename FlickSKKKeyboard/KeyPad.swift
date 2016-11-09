@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import NorthLayout
-
+import Ikemen
 
 class KeyPad : UIView {
     let keys: [KanaFlickKey]
@@ -29,7 +29,7 @@ class KeyPad : UIView {
     }
 
     fileprivate func keyButton(_ key: KanaFlickKey) -> KeyButton {
-        return KeyButton(key: key).tap { (b:KeyButton) in
+        return KeyButton(key: key) ※ { (b:KeyButton) in
             weak var weakSelf = self
             b.tapped = { (key:KanaFlickKey, index:Int?) in
                 weakSelf?.tapped?(key, index)

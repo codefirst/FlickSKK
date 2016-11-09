@@ -84,7 +84,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
                 vc.close {
                     self.alert(NSLocalizedString("DownloadComplete", comment:""),
                         message: NSString(format: NSLocalizedString("%d okuri-ari %d okuri-nasi", comment:"") as NSString, info.okuriAri(), info.okuriNasi()) as String) {
-                            let _ = self.navigationController?.popViewController(animated: true)
+                            _ = self.navigationController?.popViewController(animated: true)
                             self.done()
                     }
                 }

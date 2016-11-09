@@ -6,11 +6,13 @@ use_frameworks!
 target 'FlickSKK' do
   pod 'NorthLayout'
   pod 'Alamofire', '~> 4.0.0'
+  pod '※ikemen'
 end
 
 target 'FlickSKKKeyboard' do
   pod 'NorthLayout'
   pod 'Alamofire', '~> 4.0.0'
+  pod '※ikemen'
 end
 
 target 'FlickSKKTests' do

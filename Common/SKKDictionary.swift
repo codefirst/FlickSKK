@@ -28,7 +28,7 @@ class SKKDictionary : NSObject {
 
     class func resetLearnDictionary() {
         for url in [DictionarySettings.defaultLearnDictionaryURL(), DictionarySettings.defaultPartialDictionaryURL()] {
-            let _ = try? FileManager.default.removeItem(at: url as URL)
+            _ = try? FileManager.default.removeItem(at: url as URL)
         }
     }
 

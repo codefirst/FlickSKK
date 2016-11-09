@@ -8,6 +8,7 @@
 
 import UIKit
 import NorthLayout
+import Ikemen
 
 private let kCellID = "CellID"
 
@@ -36,14 +37,14 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 
     init(engine: SKKEngine) {
         self.engine = engine
-        self.collectionViewLayout = UICollectionViewFlowLayout().tap { (l: UICollectionViewFlowLayout) in
+        self.collectionViewLayout = UICollectionViewFlowLayout() ※ { (l: UICollectionViewFlowLayout) in
             l.scrollDirection = .horizontal
             l.minimumInteritemSpacing = 0.0
             l.minimumLineSpacing = 0.0
         }
         self.collectionView = UICollectionView(
             frame: CGRect.zero,
-            collectionViewLayout: self.collectionViewLayout).tap { (cv: UICollectionView) in
+            collectionViewLayout: self.collectionViewLayout) ※ { (cv: UICollectionView) in
                 cv.register(CandidateCollectionViewCell.self, forCellWithReuseIdentifier: kCellID)
                 cv.showsHorizontalScrollIndicator = false
                 cv.showsVerticalScrollIndicator = false
@@ -59,7 +60,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         self.collectionView.frame = self.bounds
         self.addSubview(self.collectionView)
 
-        let border = UIView().tap { (v: UIView) in
+        let border = UIView() ※ { (v: UIView) in
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
         let autolayout = self.northLayoutFormat(
@@ -186,7 +187,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
 
         self.backgroundColor = UIColor.white
 
-        let _ = self.textLabel.tap { (l: UILabel) in
+        _ = self.textLabel ※ { (l: UILabel) in
             l.font = Appearance.normalFont(17.0)
             l.textColor = UIColor.black
             l.backgroundColor = UIColor.clear
@@ -194,7 +195,7 @@ class CandidateCollectionViewCell: UICollectionViewCell {
             l.lineBreakMode = .byClipping
         }
 
-        let border = UIView().tap { (v: UIView) in
+        let border = UIView() ※ { (v: UIView) in
             v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         }
 

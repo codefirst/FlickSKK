@@ -21,7 +21,7 @@ class TextEngineSpec : QuickSpec {
 
         describe("#insertPartial") {
             beforeEach {
-                let _ = target.insertPartial("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.topLevel)
+                _ = target.insertPartial("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.topLevel)
             }
 
             it("挿入される") {
