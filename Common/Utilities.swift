@@ -9,14 +9,6 @@
 import Foundation
 import UIKit
 
-
-extension NSObject {
-    func tap<T>(_ block:(T) -> Void) -> Self {
-        block(self as! T)
-        return self
-    }
-}
-
 extension UIButton {
     func setBackgroundImage(color: UIColor, forState state: UIControlState) {
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))

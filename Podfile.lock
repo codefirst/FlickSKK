@@ -4,6 +4,7 @@ PODS:
   - Nimble (5.1.1)
   - NorthLayout (3.0.0)
   - Quick (0.10.0)
+  - "※ikemen (0.2.0)"
 
 DEPENDENCIES:
   - Alamofire (~> 4.0.0)
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - Nimble (= 5.1.1)
   - NorthLayout
   - Quick (~> 0.10.0)
+  - "※ikemen"
 
 EXTERNAL SOURCES:
   AppGroup:
@@ -22,7 +24,8 @@ SPEC CHECKSUMS:
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   NorthLayout: 28db8bfa49b861b4e972cc8e7c683c8ba819ff88
   Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
+  "※ikemen": c04aecee4293a2b6deb2119f7e67e7a82c6dea06
 
-PODFILE CHECKSUM: 600026c0d831e7a6fb2d931e9ae72d6091d3d5bd
+PODFILE CHECKSUM: 7043916e54a634504a509a2deea75cd472bd5c67
 
 COCOAPODS: 1.1.1

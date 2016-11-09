@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Ikemen
 
 
 enum KeyButtonFlickDirection : CustomStringConvertible {
@@ -53,31 +53,31 @@ class KeyButtonFlickPopup: UIView {
         super.init(frame: frame)
 
         self.clipsToBounds = false
-        let _ = self.layer.tap { (la:CALayer) in
+        let _ = self.layer ※ { (la:CALayer) in
             la.shadowColor = UIColor.black.cgColor
             la.shadowOpacity = 0.2
             la.shadowOffset = CGSize(width: 0, height: 0)
             la.shadowRadius = 2.0
         }
 
-        let _ = label.tap { (l:UILabel) in
+        let _ = label ※ { (l:UILabel) in
             l.backgroundColor = KeyButtonHighlightedColor
             l.textColor = UIColor.black
             l.textAlignment = .center
             l.font = Appearance.boldFont(28.0)
             l.adjustsFontSizeToFitWidth = true
             l.baselineAdjustment = .alignCenters
-            let _ = l.layer.tap { (la:CALayer) in
+            let _ = l.layer ※ { (la:CALayer) in
                 la.cornerRadius = 2.0
                 la.masksToBounds = true
             }
             self.addSubview(l)
         }
 
-        let _ = arrowShapeLayer.tap{ (sl:CAShapeLayer) in
+        let _ = arrowShapeLayer ※ { (sl:CAShapeLayer) in
             sl.fillColor = KeyButtonHighlightedColor.cgColor
         }
-        let _ = arrow.tap { (a:UIView) in
+        let _ = arrow ※ { (a:UIView) in
             a.backgroundColor = UIColor.clear
             a.layer.addSublayer(self.arrowShapeLayer)
             self.addSubview(a)
@@ -137,7 +137,7 @@ class KeyButtonFlickPopup: UIView {
         self.label.frame = self.convert(labelFrame, from: pv)
         self.arrow.frame = self.convert(arrowFrame, from: pv)
 
-        arrowShapeLayer.path = UIBezierPath().tap{ (p:UIBezierPath) in
+        arrowShapeLayer.path = (UIBezierPath() ※ { (p:UIBezierPath) in
             let (c, lt, rt, lb, rb) = (
                 self.arrow.convert(center, from: pv),
                 CGPoint(x: 0, y: 0),
@@ -161,7 +161,7 @@ class KeyButtonFlickPopup: UIView {
                 p.addLine(to: rb)
             }
             p.close()
-        }.cgPath
+        }).cgPath
 
         self.isHidden = (direction == .none)
     }
