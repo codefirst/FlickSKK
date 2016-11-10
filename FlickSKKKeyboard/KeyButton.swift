@@ -37,7 +37,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
             let autolayout = self.northLayoutFormat(self.metrics, ["iv": iv])
             autolayout("H:|-p-[iv]-p-|")
-            autolayout("V:|-p-[iv]-p-|")
+            autolayout("V:|-10-[iv]-10-|")
         }
     }()
     lazy var sequenceLabel: UILabel = { [unowned self] in
