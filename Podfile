@@ -16,8 +16,8 @@ target 'FlickSKKKeyboard' do
 end
 
 target 'FlickSKKTests' do
-  pod 'Quick', '~> 0.10.0'
-  pod 'Nimble', '5.1.1'
+  pod 'Quick'
+  pod 'Nimble'
 end
 
 post_install do |installer|
