@@ -142,7 +142,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         super.touchesCancelled(touches, with: event)
     }
 
-    func gestureTapped(_ gesture: UITapGestureRecognizer) {
+    @objc func gestureTapped(_ gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
         self.highlighted = false
         if !self.key.isRepeat {
@@ -152,7 +152,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     var originOfPanGesture = CGPoint.zero
 
-    func gesturePanned(_ gesture: UIPanGestureRecognizer) {
+    @objc func gesturePanned(_ gesture: UIPanGestureRecognizer) {
         // FIXME: キーリピート対応について、なにも考慮してない。
         // 動くような気もするけど未確認。
         let p = gesture.location(in: self)
