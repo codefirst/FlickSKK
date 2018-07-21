@@ -205,9 +205,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 }
 
                 if direction != .none {
-                    if let text = String(Array(s)[self.sequenceIndex ?? 0]) {
-                        KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
-                    }
+                    let text = String(Array(s)[self.sequenceIndex ?? 0])
+                    KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
                 }
             }
         }
