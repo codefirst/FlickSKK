@@ -30,8 +30,10 @@ post_install do |installer|
     remove_destination: true)
 
   installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
+    if %w(NorthLayout Nimble).include?(target.name)
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.0'
+      end
     end
   end
 end
