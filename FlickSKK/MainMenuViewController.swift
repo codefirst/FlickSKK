@@ -42,7 +42,7 @@ class MainMenuViewController: SafeTableViewController {
 
     // MARK: - Table View
 
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -60,7 +60,7 @@ class MainMenuViewController: SafeTableViewController {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()

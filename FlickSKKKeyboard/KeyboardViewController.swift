@@ -420,7 +420,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         if userInteractionMaskView.superview == nil {
             self.view.addSubview(userInteractionMaskView)
         } else {
-            self.view.bringSubview(toFront: userInteractionMaskView)
+            self.view.bringSubviewToFront(userInteractionMaskView)
         }
     }
     fileprivate func enableAllKeys() {

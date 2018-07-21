@@ -89,7 +89,7 @@ class KeyButtonFlickPopup: UIView {
     func show(_ text: String, fromView: UIView, direction: KeyButtonFlickDirection) {
         if parentView == nil { return }
         let pv = parentView!
-        pv.bringSubview(toFront: self)
+        pv.bringSubviewToFront(self)
         label.text = text
 
         let center = pv.convert(fromView.center, from: fromView.superview)
