@@ -10,7 +10,7 @@ import UIKit
 import Ikemen
 
 class WebViewController: UIViewController, UIWebViewDelegate {
-    lazy var webView: UIWebView = UIWebView(frame: CGRect.zero) ※ { (wv:UIWebView) in
+    lazy var webView: UIWebView = UIWebView(frame: CGRect.zero) ※ { (wv: inout UIWebView) in
         wv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         wv.scalesPageToFit = true
         wv.delegate = self

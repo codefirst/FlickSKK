@@ -30,7 +30,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     let label = UILabel()
     lazy var imageView: UIImageView = { [unowned self] in
-        UIImageView() ※ { (iv:UIImageView) in
+        UIImageView() ※ { (iv:inout UIImageView) in
             self.label.text = nil
 
             iv.contentMode = .scaleAspectFit
@@ -41,7 +41,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         }
     }()
     lazy var sequenceLabel: UILabel = { [unowned self] in
-        UILabel() ※ { (l: UILabel) in
+        UILabel() ※ { (l: inout UILabel) in
             l.text = self.key.additionalButtonLabel
             l.font = Appearance.normalFont(12)
             l.textColor = UIColor.lightGray
@@ -98,7 +98,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         self.backgroundColor = normalBackgroundColor
 
-        _ = self.label ※ { (l:UILabel) in
+        _ = self.label ※ { (l:inout UILabel) in
             l.text = self.key.buttonLabel
             l.textColor = UIColor.black
             l.textAlignment = .center

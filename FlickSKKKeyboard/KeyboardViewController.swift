@@ -40,10 +40,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var numberModeButton : KeyButton = self.keyButton(.number)
     lazy var alphabetModeButton : KeyButton = self.keyButton(.alphabet)
     lazy var spaceButton : KeyButton = self.keyButton(.space)
-    lazy var nextKeyboardButton : KeyButton = self.keyButton(.keyboardChange) ※ { (kb:KeyButton) in
+    lazy var nextKeyboardButton : KeyButton = self.keyButton(.keyboardChange) ※ { (kb:inout KeyButton) in
         kb.imageView.image = UIImage(named: "globe")
     }
-    lazy var shiftButton: KeyButton = self.keyButton(.shift) ※ { (kb:KeyButton) in
+    lazy var shiftButton: KeyButton = self.keyButton(.shift) ※ { (kb:inout KeyButton) in
         kb.imageView.image = UIImage(named: "flickskk-arrow")
     }
 
@@ -266,7 +266,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             "d": buttons[3],
         ]
 
-        return UIView() ※ { (c:UIView) in
+        return UIView() ※ { (c:inout UIView) in
             let autolayout = c.northLayoutFormat(self.metrics, views)
             autolayout("H:|[a]|")
             autolayout("H:|[b]|")
@@ -287,7 +287,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     fileprivate func keyButton(_ key: KanaFlickKey) -> KeyButton {
-        return KeyButton(key: key) ※ { (b:KeyButton) in
+        return KeyButton(key: key) ※ { (b:inout KeyButton) in
             weak var weakSelf = self
             b.tapped = { (key:KanaFlickKey, index:Int?) in
                 weakSelf?.keyTapped(key, index)
