@@ -16,6 +16,8 @@ target 'FlickSKKKeyboard' do
 end
 
 target 'FlickSKKTests' do
+  pod 'NorthLayout'
+  pod '※ikemen'
   pod 'Quick'
   pod 'Nimble'
 end
