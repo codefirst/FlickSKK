@@ -157,11 +157,11 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         // 動くような気もするけど未確認。
         let p = gesture.location(in: self)
 
-        if gesture.state == UIGestureRecognizerState.began {
+        if gesture.state == UIGestureRecognizer.State.began {
             originOfPanGesture = p
         }
 
-        if gesture.state == UIGestureRecognizerState.ended {
+        if gesture.state == UIGestureRecognizer.State.ended {
             let delay = 0.2 * Double(NSEC_PER_SEC)
             let time  = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: time, execute: {

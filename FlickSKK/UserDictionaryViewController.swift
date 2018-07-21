@@ -30,7 +30,7 @@ class UserDictionaryViewController: SafeTableViewController {
 
         self.reloadEntries()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     fileprivate func reloadEntries() {
@@ -82,7 +82,7 @@ class UserDictionaryViewController: SafeTableViewController {
         // TODO: something
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
         if editingStyle == .delete {
             let entry = self.entries[indexPath.row]
             SKKDictionary.defaultUserDictionary().unregister(entry)

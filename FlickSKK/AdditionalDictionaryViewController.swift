@@ -23,7 +23,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
 
         self.reloadEntries()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     // MARK: - Entries
@@ -105,7 +105,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         }
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
         if indexPath.section == 0 && editingStyle == .delete {
             if let local = self.entries[indexPath.row].local {
                 _ = try? FileManager.default.removeItem(at: local as URL)
@@ -114,7 +114,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         }
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if indexPath.section == 0 {
             return .delete
         } else {

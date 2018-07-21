@@ -9,7 +9,7 @@
 import UIKit
 
 class MainMenuViewController: SafeTableViewController {
-    typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: (Void) -> Void)
+    typealias row = (title: String, accessoryType: UITableViewCell.AccessoryType, action: () -> Void)
     lazy var sections : [(title: String?, rows: [row])] = {
         weak var weakSelf = self
         return [
@@ -66,7 +66,7 @@ class MainMenuViewController: SafeTableViewController {
         row.action()
     }
 
-    fileprivate func item(_ title : String, accessoryType: UITableViewCellAccessoryType = .disclosureIndicator, action : @escaping (Void) -> Void) -> row {
+    fileprivate func item(_ title : String, accessoryType: UITableViewCell.AccessoryType = .disclosureIndicator, action : @escaping () -> Void) -> row {
         return (title: NSLocalizedString(title, comment: ""), accessoryType: accessoryType, action: action)
     }
 

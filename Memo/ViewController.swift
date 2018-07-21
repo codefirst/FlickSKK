@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        self.textView.backgroundColor = UIColor.whiteColor()
-        self.textView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
+        self.textView.backgroundColor = UIColor.white
+        self.textView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         self.textView.font = Appearance.normalFont(18.0)
         self.textView.frame = self.view.bounds
         self.textView.text = "FlickSKK\n\n日本語入力キーボード FlickSKK。シンプルな日本語入力を、iPhone/iPadで。"

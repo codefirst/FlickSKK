@@ -83,7 +83,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
                 let indexPath = IndexPath(item: index, section: Section.candidates.rawValue)
                 if let la = collectionViewLayout.layoutAttributesForItem(at: indexPath) {
                     let visible = la.frame.width > 0 && bounds.intersection(convert(la.frame, from: collectionView)).width == la.frame.width
-                    let scrollPosition = visible ? UICollectionViewScrollPosition() : UICollectionViewScrollPosition.centeredHorizontally
+                    let scrollPosition = visible ? UICollectionView.ScrollPosition() : UICollectionView.ScrollPosition.centeredHorizontally
                     collectionView.selectItem(at: indexPath, animated: true, scrollPosition: scrollPosition)
                 }
             }
@@ -155,7 +155,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         struct Static { static let layoutCell = CandidateCollectionViewCell() }
         let minWidth = CGFloat(44 + 8)
         let cell = self.configureCell(Static.layoutCell, forIndexPath: indexPath)
-        return CGSize(width: max(cell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).width, minWidth),height: self.collectionView.bounds.height)
+        return CGSize(width: max(cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width, minWidth),height: self.collectionView.bounds.height)
     }
 }
 

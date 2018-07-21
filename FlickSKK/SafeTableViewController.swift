@@ -15,7 +15,7 @@ import UIKit
 class SafeTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tableView: UITableView { return view as! UITableView }
 
-    init(style: UITableViewStyle) {
+    init(style: UITableView.Style) {
         super.init(nibName: nil, bundle: nil)
 
         view = UITableView(frame: CGRect.zero, style: style)
