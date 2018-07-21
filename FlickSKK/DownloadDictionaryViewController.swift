@@ -10,9 +10,9 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
     fileprivate lazy var doneButton : UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Download", comment:""),
         style: .done, target:self, action: #selector(DownloadDictionaryViewController.download))
-    fileprivate let done : (Void) -> Void
+    fileprivate let done : () -> Void
 
-    init(url : URL?, done : @escaping (Void) -> Void) {
+    init(url : URL?, done : @escaping () -> Void) {
         self.done = done
         super.init(style: .grouped)
         urlField.text = url?.absoluteString ?? ""
