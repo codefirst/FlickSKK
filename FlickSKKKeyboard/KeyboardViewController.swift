@@ -14,7 +14,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 216)
 
     let keypadAndControlsView = UIView()
-    let loadingProgressView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let loadingProgressView = UIActivityIndicatorView(style: .gray)
 
     lazy var sessionView : SessionView = SessionView(engine: self.engine)
 

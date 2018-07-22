@@ -34,7 +34,7 @@ class KeyRepeatTimer : NSObject {
             selector: #selector(KeyRepeatTimer.repeat),
             userInfo: nil,
             repeats: true)
-        RunLoop.current.add(timer!, forMode: .defaultRunLoopMode)
+        RunLoop.current.add(timer!, forMode: .default)
     }
 
     func cancel() {
