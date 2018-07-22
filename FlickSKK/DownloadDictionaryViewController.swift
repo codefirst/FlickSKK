@@ -5,7 +5,7 @@ import UIKit
 //
 // プログレスバーでの進捗表示をしようかと思ったが、3G回線でもほぼ待ち時間なしでダウンロードできたので
 // とりあえずあとまわしにしている。
-class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDelegate {
+class DownloadDictionaryViewController : UITableViewController, UITextFieldDelegate {
     fileprivate let urlField = UITextField(frame: CGRect.zero)
     fileprivate lazy var doneButton : UIBarButtonItem = UIBarButtonItem(
         title: NSLocalizedString("Download", comment:""),
@@ -28,9 +28,8 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
 
     let kCellID = "Cell"
 
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,7 +50,7 @@ class DownloadDictionaryViewController : SafeTableViewController, UITextFieldDel
         return cell
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50.0
     }
 

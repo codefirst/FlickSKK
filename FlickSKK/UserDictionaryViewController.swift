@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserDictionaryViewController: SafeTableViewController {
+class UserDictionaryViewController: UITableViewController {
     fileprivate var entries : [SKKDictionaryEntry] = []
 
     init() {
@@ -42,11 +42,11 @@ class UserDictionaryViewController: SafeTableViewController {
     }
 
     // MARK: - Table View
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2 // description + entries
     }
 
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0: return NSLocalizedString("HowToRegisterWordToUserDictionary", comment: "")
         case 1: return NSString(format: NSLocalizedString("%d words registered", comment: "") as NSString, self.entries.count) as String
@@ -75,13 +75,13 @@ class UserDictionaryViewController: SafeTableViewController {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
         // TODO: something
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let entry = self.entries[indexPath.row]
             SKKDictionary.defaultUserDictionary().unregister(entry)

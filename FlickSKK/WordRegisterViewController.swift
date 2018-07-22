@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate {
+class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
     fileprivate let yomiField = UITextField(frame: CGRect.zero)
     fileprivate let okuriField = UITextField(frame: CGRect.zero)
     fileprivate let wordField = UITextField(frame: CGRect.zero)
@@ -63,7 +63,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
 
     let kCellID = "Cell"
 
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -99,7 +99,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         return cell
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50.0
     }
 

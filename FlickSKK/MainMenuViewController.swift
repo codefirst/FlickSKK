@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainMenuViewController: SafeTableViewController {
+class MainMenuViewController: UITableViewController {
     typealias row = (title: String, accessoryType: UITableViewCell.AccessoryType, action: () -> Void)
     lazy var sections : [(title: String?, rows: [row])] = {
         weak var weakSelf = self
@@ -42,7 +42,7 @@ class MainMenuViewController: SafeTableViewController {
 
     // MARK: - Table View
 
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -60,7 +60,7 @@ class MainMenuViewController: SafeTableViewController {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()

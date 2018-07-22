@@ -128,7 +128,6 @@
 		13EBD05E2102C7A30064606B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0342102C79F0064606B /* Images.xcassets */; };
 		13EBD05F2102C7A30064606B /* SortDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD0352102C79F0064606B /* SortDictionary.swift */; };
 		13EBD0602102C7A30064606B /* HeadUpProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD0362102C7A00064606B /* HeadUpProgressViewController.swift */; };
-		13EBD0612102C7A30064606B /* SafeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD0372102C7A00064606B /* SafeTableViewController.swift */; };
 		13EBD0632102C7A30064606B /* DictionaryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD0392102C7A00064606B /* DictionaryInfo.swift */; };
 		13EBD0642102C7A30064606B /* AdditionalDictionaries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD03A2102C7A00064606B /* AdditionalDictionaries.swift */; };
 		13EBD0652102C7A30064606B /* Tempfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD03B2102C7A10064606B /* Tempfile.swift */; };
@@ -270,7 +269,6 @@
 		13EBD0342102C79F0064606B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		13EBD0352102C79F0064606B /* SortDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDictionary.swift; sourceTree = "<group>"; };
 		13EBD0362102C7A00064606B /* HeadUpProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadUpProgressViewController.swift; sourceTree = "<group>"; };
-		13EBD0372102C7A00064606B /* SafeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeTableViewController.swift; sourceTree = "<group>"; };
 		13EBD0392102C7A00064606B /* DictionaryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryInfo.swift; sourceTree = "<group>"; };
 		13EBD03A2102C7A00064606B /* AdditionalDictionaries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDictionaries.swift; sourceTree = "<group>"; };
 		13EBD03B2102C7A10064606B /* Tempfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tempfile.swift; sourceTree = "<group>"; };
@@ -472,7 +470,6 @@
 			isa = PBXGroup;
 			children = (
 				13EBD03B2102C7A10064606B /* Tempfile.swift */,
-				13EBD0372102C7A00064606B /* SafeTableViewController.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -1111,7 +1108,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				132FE6682102C3D200E1DA99 /* IOUtil.mm in Sources */,
-				13EBD0612102C7A30064606B /* SafeTableViewController.swift in Sources */,
 				132FE63E2102C3D200E1DA99 /* AsyncLoader.swift in Sources */,
 				132FE6532102C3D200E1DA99 /* SKKDictionaryFile.swift in Sources */,
 				132FE66E2102C3D200E1DA99 /* LocalFile.swift in Sources */,

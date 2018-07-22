@@ -4,7 +4,7 @@ import UIKit
 // ダウンロード済みの辞書一覧の表示、削除、追加といったことをできるようにする。
 //
 // 辞書の更新は、URLをどこに保持するかが難しいので、現バージョンは対応しない。
-class AdditionalDictionaryViewController: SafeTableViewController {
+class AdditionalDictionaryViewController: UITableViewController {
     fileprivate var entries : [AdditionalDictionaries.Entry] = []
     fileprivate var dictionaries : [AdditionalDictionaries.Entry] = []
 
@@ -40,11 +40,11 @@ class AdditionalDictionaryViewController: SafeTableViewController {
     }
 
     // MARK: - Table View
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2 // entries + quickadd
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0: return nil
         case 1: return NSLocalizedString("AvailableDictionaries", comment: "")
@@ -52,7 +52,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 0:
             if self.entries.isEmpty {
@@ -91,7 +91,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
         switch indexPath.section {
@@ -105,7 +105,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         }
     }
 
-    func tableView(_ tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && editingStyle == .delete {
             if let local = self.entries[indexPath.row].local {
                 _ = try? FileManager.default.removeItem(at: local as URL)
@@ -114,7 +114,7 @@ class AdditionalDictionaryViewController: SafeTableViewController {
         }
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if indexPath.section == 0 {
             return .delete
         } else {
