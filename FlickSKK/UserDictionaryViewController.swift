@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FlickSKKKeyboard
 
 class UserDictionaryViewController: SafeTableViewController {
     fileprivate var entries : [SKKDictionaryEntry] = []
