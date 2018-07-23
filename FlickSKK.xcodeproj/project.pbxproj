@@ -365,9 +365,9 @@
 		132FE61D2102C3D100E1DA99 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				133D396321036A4600290652 /* SKKDicitonary */,
+				133D396321036A4600290652 /* Settings */,
 				133D396221036A3F00290652 /* IO */,
-				133D396121036A3400290652 /* Settings */,
+				133D396121036A3400290652 /* SKKDictionary */,
 				132FE6322102C3D100E1DA99 /* FlickSKK-Common-Bridging-Header.h */,
 				132FE61E2102C3D100E1DA99 /* Localizable.strings */,
 				132FE6212102C3D100E1DA99 /* Utilities.swift */,
@@ -375,7 +375,7 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		133D396121036A3400290652 /* Settings */ = {
+		133D396121036A3400290652 /* SKKDictionary */ = {
 			isa = PBXGroup;
 			children = (
 				133D396421036A7900290652 /* Cache */,
@@ -384,7 +384,7 @@
 				132FE62E2102C3D100E1DA99 /* SKKDictionary.swift */,
 				133D396721036B1800290652 /* DictionaryFile */,
 			);
-			name = Settings;
+			name = SKKDictionary;
 			sourceTree = "<group>";
 		};
 		133D396221036A3F00290652 /* IO */ = {
@@ -397,13 +397,13 @@
 			name = IO;
 			sourceTree = "<group>";
 		};
-		133D396321036A4600290652 /* SKKDicitonary */ = {
+		133D396321036A4600290652 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				132FE6332102C3D100E1DA99 /* Appearance.swift */,
 				132FE6302102C3D100E1DA99 /* DictionarySettings.swift */,
 			);
-			name = SKKDicitonary;
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		133D396421036A7900290652 /* Cache */ = {
