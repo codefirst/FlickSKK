@@ -94,6 +94,7 @@
 		132FE66F2102C3D200E1DA99 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE6342102C3D100E1DA99 /* LocalFile.swift */; };
 		134B6EAD210595CD0008BB40 /* KeyboardImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1316C57E2102C5E6000AC4D3 /* KeyboardImages.xcassets */; };
 		134B6EC021059AE80008BB40 /* SKKEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134B6EBF21059AE80008BB40 /* SKKEngineSpec.swift */; };
+		134B6EC22105A6EF0008BB40 /* html in Resources */ = {isa = PBXBuildFile; fileRef = 134B6EC12105A6EF0008BB40 /* html */; };
 		13E8875E210325AF00E3A551 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5812102C5E7000AC4D3 /* ComposeMode.swift */; };
 		13E88760210325BE00E3A551 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5812102C5E7000AC4D3 /* ComposeMode.swift */; };
 		13E887612103261600E3A551 /* KeyRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5822102C5E7000AC4D3 /* KeyRepeatTimer.swift */; };
@@ -139,20 +140,6 @@
 		13EBD06A2102C7A30064606B /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD0402102C7A20064606B /* MainMenuViewController.swift */; };
 		13EBD06B2102C7A30064606B /* UserDictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD0412102C7A20064606B /* UserDictionaryViewController.swift */; };
 		13EBD06C2102C7A30064606B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0422102C7A20064606B /* LaunchScreen.xib */; };
-		13EBD06F2102C7A30064606B /* License.html in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0462102C7A30064606B /* License.html */; };
-		13EBD0702102C7A30064606B /* common.css in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0472102C7A30064606B /* common.css */; };
-		13EBD0712102C7A30064606B /* globe.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0482102C7A30064606B /* globe.png */; };
-		13EBD0722102C7A30064606B /* HowToUse.html in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0492102C7A30064606B /* HowToUse.html */; };
-		13EBD0732102C7A30064606B /* 1-Preferences.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD04B2102C7A30064606B /* 1-Preferences.png */; };
-		13EBD0742102C7A30064606B /* 6-FlickSKK.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD04C2102C7A30064606B /* 6-FlickSKK.png */; };
-		13EBD0752102C7A30064606B /* 7-KeyboardList.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD04D2102C7A30064606B /* 7-KeyboardList.png */; };
-		13EBD0762102C7A30064606B /* 8-FullAccess.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD04E2102C7A30064606B /* 8-FullAccess.png */; };
-		13EBD0772102C7A30064606B /* 2-General.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD04F2102C7A30064606B /* 2-General.png */; };
-		13EBD0782102C7A30064606B /* 5-Add.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0502102C7A30064606B /* 5-Add.png */; };
-		13EBD0792102C7A30064606B /* 3-Keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0512102C7A30064606B /* 3-Keyboard.png */; };
-		13EBD07A2102C7A30064606B /* 4-Keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0522102C7A30064606B /* 4-Keyboard.png */; };
-		13EBD07B2102C7A30064606B /* 9-Change.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0532102C7A30064606B /* 9-Change.png */; };
-		13EBD07C2102C7A30064606B /* Setup.html in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0542102C7A30064606B /* Setup.html */; };
 		13F610132102B31D00A27B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F610122102B31D00A27B6F /* AppDelegate.swift */; };
 		13F610392102B32E00A27B6F /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F610382102B32E00A27B6F /* KeyboardViewController.swift */; };
 		13F6103D2102B32E00A27B6F /* FlickSKKKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 13F610362102B32E00A27B6F /* FlickSKKKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -261,6 +248,7 @@
 		132FE6712102C5CD00E1DA99 /* SKKInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
 		132FE6722102C5CD00E1DA99 /* SKKKeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKKKeyEvent.swift; sourceTree = "<group>"; };
 		134B6EBF21059AE80008BB40 /* SKKEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKEngineSpec.swift; sourceTree = "<group>"; };
+		134B6EC12105A6EF0008BB40 /* html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = html; sourceTree = "<group>"; };
 		13EBD0272102C79E0064606B /* FlickSKK.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = FlickSKK.entitlements; sourceTree = "<group>"; };
 		13EBD0282102C79E0064606B /* AdditionalDictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDictionaryViewController.swift; sourceTree = "<group>"; };
 		13EBD0292102C79E0064606B /* DownloadDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDictionary.swift; sourceTree = "<group>"; };
@@ -282,20 +270,6 @@
 		13EBD0412102C7A20064606B /* UserDictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDictionaryViewController.swift; sourceTree = "<group>"; };
 		13EBD0422102C7A20064606B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		13EBD0442102C7A30064606B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		13EBD0462102C7A30064606B /* License.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = License.html; sourceTree = "<group>"; };
-		13EBD0472102C7A30064606B /* common.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = common.css; sourceTree = "<group>"; };
-		13EBD0482102C7A30064606B /* globe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = globe.png; sourceTree = "<group>"; };
-		13EBD0492102C7A30064606B /* HowToUse.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = HowToUse.html; sourceTree = "<group>"; };
-		13EBD04B2102C7A30064606B /* 1-Preferences.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-Preferences.png"; sourceTree = "<group>"; };
-		13EBD04C2102C7A30064606B /* 6-FlickSKK.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "6-FlickSKK.png"; sourceTree = "<group>"; };
-		13EBD04D2102C7A30064606B /* 7-KeyboardList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7-KeyboardList.png"; sourceTree = "<group>"; };
-		13EBD04E2102C7A30064606B /* 8-FullAccess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "8-FullAccess.png"; sourceTree = "<group>"; };
-		13EBD04F2102C7A30064606B /* 2-General.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-General.png"; sourceTree = "<group>"; };
-		13EBD0502102C7A30064606B /* 5-Add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5-Add.png"; sourceTree = "<group>"; };
-		13EBD0512102C7A30064606B /* 3-Keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-Keyboard.png"; sourceTree = "<group>"; };
-		13EBD0522102C7A30064606B /* 4-Keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4-Keyboard.png"; sourceTree = "<group>"; };
-		13EBD0532102C7A30064606B /* 9-Change.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "9-Change.png"; sourceTree = "<group>"; };
-		13EBD0542102C7A30064606B /* Setup.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Setup.html; sourceTree = "<group>"; };
 		13F6100F2102B31D00A27B6F /* FlickSKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickSKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F610122102B31D00A27B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13F610232102B31E00A27B6F /* FlickSKKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickSKKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -459,12 +433,12 @@
 		133D396A21036B3900290652 /* Resourecs */ = {
 			isa = PBXGroup;
 			children = (
+				134B6EC12105A6EF0008BB40 /* html */,
 				13EBD02B2102C79F0064606B /* iTunesArtwork */,
 				13EBD03F2102C7A10064606B /* iTunesArtwork@2x */,
 				13EBD03C2102C7A10064606B /* flickskk_white.png */,
 				13EBD0342102C79F0064606B /* Images.xcassets */,
 				13EBD0422102C7A20064606B /* LaunchScreen.xib */,
-				13EBD0452102C7A30064606B /* html */,
 			);
 			name = Resourecs;
 			sourceTree = "<group>";
@@ -672,35 +646,6 @@
 				13F610382102B32E00A27B6F /* KeyboardViewController.swift */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		13EBD0452102C7A30064606B /* html */ = {
-			isa = PBXGroup;
-			children = (
-				13EBD0462102C7A30064606B /* License.html */,
-				13EBD0472102C7A30064606B /* common.css */,
-				13EBD0482102C7A30064606B /* globe.png */,
-				13EBD0492102C7A30064606B /* HowToUse.html */,
-				13EBD04A2102C7A30064606B /* how_to_use */,
-				13EBD0542102C7A30064606B /* Setup.html */,
-			);
-			path = html;
-			sourceTree = "<group>";
-		};
-		13EBD04A2102C7A30064606B /* how_to_use */ = {
-			isa = PBXGroup;
-			children = (
-				13EBD04B2102C7A30064606B /* 1-Preferences.png */,
-				13EBD04C2102C7A30064606B /* 6-FlickSKK.png */,
-				13EBD04D2102C7A30064606B /* 7-KeyboardList.png */,
-				13EBD04E2102C7A30064606B /* 8-FullAccess.png */,
-				13EBD04F2102C7A30064606B /* 2-General.png */,
-				13EBD0502102C7A30064606B /* 5-Add.png */,
-				13EBD0512102C7A30064606B /* 3-Keyboard.png */,
-				13EBD0522102C7A30064606B /* 4-Keyboard.png */,
-				13EBD0532102C7A30064606B /* 9-Change.png */,
-			);
-			path = how_to_use;
 			sourceTree = "<group>";
 		};
 		13F610062102B31D00A27B6F = {
@@ -943,26 +888,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				13EBD0692102C7A30064606B /* iTunesArtwork@2x in Resources */,
+				134B6EC22105A6EF0008BB40 /* html in Resources */,
 				13EBD05E2102C7A30064606B /* Images.xcassets in Resources */,
-				13EBD0742102C7A30064606B /* 6-FlickSKK.png in Resources */,
-				13EBD0792102C7A30064606B /* 3-Keyboard.png in Resources */,
-				13EBD0762102C7A30064606B /* 8-FullAccess.png in Resources */,
-				13EBD0722102C7A30064606B /* HowToUse.html in Resources */,
-				13EBD06F2102C7A30064606B /* License.html in Resources */,
 				13EBD05D2102C7A30064606B /* Settings.bundle in Resources */,
-				13EBD0782102C7A30064606B /* 5-Add.png in Resources */,
-				13EBD07C2102C7A30064606B /* Setup.html in Resources */,
-				13EBD0732102C7A30064606B /* 1-Preferences.png in Resources */,
-				13EBD0712102C7A30064606B /* globe.png in Resources */,
-				13EBD07B2102C7A30064606B /* 9-Change.png in Resources */,
 				132FE6352102C3D200E1DA99 /* Localizable.strings in Resources */,
-				13EBD0702102C7A30064606B /* common.css in Resources */,
 				13EBD0662102C7A30064606B /* flickskk_white.png in Resources */,
 				13EBD06C2102C7A30064606B /* LaunchScreen.xib in Resources */,
-				13EBD0752102C7A30064606B /* 7-KeyboardList.png in Resources */,
 				13EBD0582102C7A30064606B /* iTunesArtwork in Resources */,
-				13EBD07A2102C7A30064606B /* 4-Keyboard.png in Resources */,
-				13EBD0772102C7A30064606B /* 2-General.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
