@@ -93,6 +93,7 @@
 		132FE66E2102C3D200E1DA99 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE6342102C3D100E1DA99 /* LocalFile.swift */; };
 		132FE66F2102C3D200E1DA99 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE6342102C3D100E1DA99 /* LocalFile.swift */; };
 		134B6EAD210595CD0008BB40 /* KeyboardImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1316C57E2102C5E6000AC4D3 /* KeyboardImages.xcassets */; };
+		134B6EC021059AE80008BB40 /* SKKEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134B6EBF21059AE80008BB40 /* SKKEngineSpec.swift */; };
 		13E8875E210325AF00E3A551 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5812102C5E7000AC4D3 /* ComposeMode.swift */; };
 		13E88760210325BE00E3A551 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5812102C5E7000AC4D3 /* ComposeMode.swift */; };
 		13E887612103261600E3A551 /* KeyRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5822102C5E7000AC4D3 /* KeyRepeatTimer.swift */; };
@@ -259,6 +260,7 @@
 		132FE6342102C3D100E1DA99 /* LocalFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalFile.swift; sourceTree = "<group>"; };
 		132FE6712102C5CD00E1DA99 /* SKKInputMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKKInputMode.swift; sourceTree = "<group>"; };
 		132FE6722102C5CD00E1DA99 /* SKKKeyEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKKKeyEvent.swift; sourceTree = "<group>"; };
+		134B6EBF21059AE80008BB40 /* SKKEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKKEngineSpec.swift; sourceTree = "<group>"; };
 		13EBD0272102C79E0064606B /* FlickSKK.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = FlickSKK.entitlements; sourceTree = "<group>"; };
 		13EBD0282102C79E0064606B /* AdditionalDictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalDictionaryViewController.swift; sourceTree = "<group>"; };
 		13EBD0292102C79E0064606B /* DownloadDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadDictionary.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 		133D397621036C5E00290652 /* SKKEngine */ = {
 			isa = PBXGroup;
 			children = (
+				134B6EBF21059AE80008BB40 /* SKKEngineSpec.swift */,
 				133D397721036C6B00290652 /* KeyHandlre */,
 				1328C64B2102C927000F9E5C /* ComposeModePresenterSpec.swift */,
 				1328C6492102C927000F9E5C /* DictionaryEngineSpec.swift */,
@@ -1196,6 +1199,7 @@
 				13E88776210327C200E3A551 /* ComposeModePresenter.swift in Sources */,
 				13E8876E210327B900E3A551 /* KeyboardMode.swift in Sources */,
 				1328C67121032415000F9E5C /* NumberFormatter.swift in Sources */,
+				134B6EC021059AE80008BB40 /* SKKEngineSpec.swift in Sources */,
 				13E88760210325BE00E3A551 /* ComposeMode.swift in Sources */,
 				1328C6612102C938000F9E5C /* KeyHandlerWordRegisterWithKanaComposeSpec.swift in Sources */,
 				1328C67C2103241D000F9E5C /* SKKUserDictionaryFile.swift in Sources */,
