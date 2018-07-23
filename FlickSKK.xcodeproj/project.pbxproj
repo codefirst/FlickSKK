@@ -92,6 +92,7 @@
 		132FE66D2102C3D200E1DA99 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE6332102C3D100E1DA99 /* Appearance.swift */; };
 		132FE66E2102C3D200E1DA99 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE6342102C3D100E1DA99 /* LocalFile.swift */; };
 		132FE66F2102C3D200E1DA99 /* LocalFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE6342102C3D100E1DA99 /* LocalFile.swift */; };
+		134B6EAD210595CD0008BB40 /* KeyboardImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1316C57E2102C5E6000AC4D3 /* KeyboardImages.xcassets */; };
 		13E8875E210325AF00E3A551 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5812102C5E7000AC4D3 /* ComposeMode.swift */; };
 		13E88760210325BE00E3A551 /* ComposeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5812102C5E7000AC4D3 /* ComposeMode.swift */; };
 		13E887612103261600E3A551 /* KeyRepeatTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1316C5822102C5E7000AC4D3 /* KeyRepeatTimer.swift */; };
@@ -976,6 +977,7 @@
 			files = (
 				13FDAC052102C61B002D4B38 /* skk.jisyo in Resources */,
 				132FE6362102C3D200E1DA99 /* Localizable.strings in Resources */,
+				134B6EAD210595CD0008BB40 /* KeyboardImages.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
