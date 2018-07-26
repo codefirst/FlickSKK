@@ -81,7 +81,7 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             if n.hasPrefix(prefix) && n != prefix {
                 let parser = EntryParser(entry: (entry as! String))
                 for word in parser.words() {
-                    xs.append(kana : n, kanji: word)
+                    xs.append((kana : n, kanji: word))
                 }
             }
         }

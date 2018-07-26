@@ -53,31 +53,31 @@ class KeyButtonFlickPopup: UIView {
         super.init(frame: frame)
 
         self.clipsToBounds = false
-        _ = self.layer ※ { (la:CALayer) in
+        _ = self.layer ※ { (la:inout CALayer) in
             la.shadowColor = UIColor.black.cgColor
             la.shadowOpacity = 0.2
             la.shadowOffset = CGSize(width: 0, height: 0)
             la.shadowRadius = 2.0
         }
 
-        _ = label ※ { (l:UILabel) in
+        _ = label ※ { (l:inout UILabel) in
             l.backgroundColor = KeyButtonHighlightedColor
             l.textColor = UIColor.black
             l.textAlignment = .center
             l.font = Appearance.boldFont(28.0)
             l.adjustsFontSizeToFitWidth = true
             l.baselineAdjustment = .alignCenters
-            _ = l.layer ※ { (la:CALayer) in
+            _ = l.layer ※ { (la:inout CALayer) in
                 la.cornerRadius = 2.0
                 la.masksToBounds = true
             }
             self.addSubview(l)
         }
 
-        _ = arrowShapeLayer ※ { (sl:CAShapeLayer) in
+        _ = arrowShapeLayer ※ { (sl:inout CAShapeLayer) in
             sl.fillColor = KeyButtonHighlightedColor.cgColor
         }
-        _ = arrow ※ { (a:UIView) in
+        _ = arrow ※ { (a:inout UIView) in
             a.backgroundColor = UIColor.clear
             a.layer.addSublayer(self.arrowShapeLayer)
             self.addSubview(a)
@@ -89,7 +89,7 @@ class KeyButtonFlickPopup: UIView {
     func show(_ text: String, fromView: UIView, direction: KeyButtonFlickDirection) {
         if parentView == nil { return }
         let pv = parentView!
-        pv.bringSubview(toFront: self)
+        pv.bringSubviewToFront(self)
         label.text = text
 
         let center = pv.convert(fromView.center, from: fromView.superview)
@@ -137,7 +137,7 @@ class KeyButtonFlickPopup: UIView {
         self.label.frame = self.convert(labelFrame, from: pv)
         self.arrow.frame = self.convert(arrowFrame, from: pv)
 
-        arrowShapeLayer.path = (UIBezierPath() ※ { (p:UIBezierPath) in
+        arrowShapeLayer.path = (UIBezierPath() ※ { (p: inout UIBezierPath) in
             let (c, lt, rt, lb, rb) = (
                 self.arrow.convert(center, from: pv),
                 CGPoint(x: 0, y: 0),

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate {
+class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
     fileprivate let yomiField = UITextField(frame: CGRect.zero)
     fileprivate let okuriField = UITextField(frame: CGRect.zero)
     fileprivate let wordField = UITextField(frame: CGRect.zero)
@@ -63,7 +63,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
 
     let kCellID = "Cell"
 
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -93,13 +93,13 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         textField.contentVerticalAlignment = .center
         textField.returnKeyType = row.returnType
         textField.delegate = self
-        textField.addTarget(self, action: #selector(WordRegisterViewController.didChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(didChange(sender:)), for: .editingChanged)
         cell.contentView.addSubview(textField)
 
         return cell
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50.0
     }
 
@@ -122,7 +122,7 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         return true
     }
 
-    @objc fileprivate func didChange() {
+    @objc fileprivate func didChange(sender: UITextField) {
         self.doneButton.isEnabled = canRegister()
     }
 
@@ -131,8 +131,8 @@ class WordRegisterViewController : SafeTableViewController, UITextFieldDelegate 
         // ・登録する単語が入力されている
         // ・よみが入力されている。SKK的に読みはほぼ任意(例: forallとかもある)なので、あまり前提をおけない。
         // ・送り仮名が空もしくはひらがな一文字(ローマ字に変換できる)
-        let wordInputed : Bool = self.wordField.text != nil
-        let yomiInputed : Bool = yomiField.text != nil
+        let wordInputed : Bool = !(self.wordField.text?.isEmpty ?? true)
+        let yomiInputed : Bool = !(yomiField.text?.isEmpty ?? true)
 
         let okuriBlank : Bool = self.okuriField.text?.isEmpty ?? true
         let okuri = self.okuriField.text?.characters

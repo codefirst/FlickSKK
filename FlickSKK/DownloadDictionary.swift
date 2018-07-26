@@ -71,7 +71,7 @@ class DownloadDictionary {
     }
 
     // URLを特定ファイルに保存する。
-    fileprivate func save(_ url : URL, path: URL, onSuccess : @escaping (Void) -> Void, onError : @escaping (Error?) -> Void) {
+    fileprivate func save(_ url : URL, path: URL, onSuccess : @escaping () -> Void, onError : @escaping (Error?) -> Void) {
 
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             return (path, [.removePreviousFile, .createIntermediateDirectories])

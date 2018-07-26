@@ -10,7 +10,7 @@ import UIKit
 import Ikemen
 
 class WebViewController: UIViewController, UIWebViewDelegate {
-    lazy var webView: UIWebView = UIWebView(frame: CGRect.zero) ※ { (wv:UIWebView) in
+    lazy var webView: UIWebView = UIWebView(frame: CGRect.zero) ※ { (wv: inout UIWebView) in
         wv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         wv.scalesPageToFit = true
         wv.delegate = self
@@ -34,8 +34,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
 
     // MARK: WebView Delegate
 
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if navigationType == UIWebViewNavigationType.linkClicked {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
+        if navigationType == UIWebView.NavigationType.linkClicked {
             // Open in Safari
             UIApplication.shared.openURL(request.url!)
             return false

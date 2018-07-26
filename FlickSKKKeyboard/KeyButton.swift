@@ -30,7 +30,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     let label = UILabel()
     lazy var imageView: UIImageView = { [unowned self] in
-        UIImageView() ※ { (iv:UIImageView) in
+        UIImageView() ※ { (iv:inout UIImageView) in
             self.label.text = nil
 
             iv.contentMode = .scaleAspectFit
@@ -41,7 +41,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         }
     }()
     lazy var sequenceLabel: UILabel = { [unowned self] in
-        UILabel() ※ { (l: UILabel) in
+        UILabel() ※ { (l: inout UILabel) in
             l.text = self.key.additionalButtonLabel
             l.font = Appearance.normalFont(12)
             l.textColor = UIColor.lightGray
@@ -98,7 +98,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         self.backgroundColor = normalBackgroundColor
 
-        _ = self.label ※ { (l:UILabel) in
+        _ = self.label ※ { (l:inout UILabel) in
             l.text = self.key.buttonLabel
             l.textColor = UIColor.black
             l.textAlignment = .center
@@ -142,7 +142,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         super.touchesCancelled(touches, with: event)
     }
 
-    func gestureTapped(_ gesture: UITapGestureRecognizer) {
+    @objc func gestureTapped(_ gesture: UITapGestureRecognizer) {
         KeyButtonFlickPopup.sharedInstance.hide()
         self.highlighted = false
         if !self.key.isRepeat {
@@ -152,16 +152,16 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
     var originOfPanGesture = CGPoint.zero
 
-    func gesturePanned(_ gesture: UIPanGestureRecognizer) {
+    @objc func gesturePanned(_ gesture: UIPanGestureRecognizer) {
         // FIXME: キーリピート対応について、なにも考慮してない。
         // 動くような気もするけど未確認。
         let p = gesture.location(in: self)
 
-        if gesture.state == UIGestureRecognizerState.began {
+        if gesture.state == UIGestureRecognizer.State.began {
             originOfPanGesture = p
         }
 
-        if gesture.state == UIGestureRecognizerState.ended {
+        if gesture.state == UIGestureRecognizer.State.ended {
             let delay = 0.2 * Double(NSEC_PER_SEC)
             let time  = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: time, execute: {
@@ -205,9 +205,8 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 }
 
                 if direction != .none {
-                    if let text = String(Array(s)[self.sequenceIndex ?? 0]) {
-                        KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
-                    }
+                    let text = String(Array(s)[self.sequenceIndex ?? 0])
+                    KeyButtonFlickPopup.sharedInstance.show(text, fromView: self, direction: direction)
                 }
             }
         }

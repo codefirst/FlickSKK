@@ -20,7 +20,7 @@ class SKKDictionary : NSObject {
     fileprivate var partialDictionary : SKKUserDictionaryFile?
 
     // ロード完了を監視するために Key value observing を使う
-    dynamic var isWaitingForLoad : Bool = false
+    @objc dynamic var isWaitingForLoad : Bool = false
     class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
 
     fileprivate let loader = AsyncLoader()

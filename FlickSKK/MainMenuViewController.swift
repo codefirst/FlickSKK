@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MainMenuViewController: SafeTableViewController {
-    typealias row = (title: String, accessoryType: UITableViewCellAccessoryType, action: (Void) -> Void)
+class MainMenuViewController: UITableViewController {
+    typealias row = (title: String, accessoryType: UITableViewCell.AccessoryType, action: () -> Void)
     lazy var sections : [(title: String?, rows: [row])] = {
         weak var weakSelf = self
         return [
@@ -42,7 +42,7 @@ class MainMenuViewController: SafeTableViewController {
 
     // MARK: - Table View
 
-    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
 
@@ -60,13 +60,13 @@ class MainMenuViewController: SafeTableViewController {
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         row.action()
     }
 
-    fileprivate func item(_ title : String, accessoryType: UITableViewCellAccessoryType = .disclosureIndicator, action : @escaping (Void) -> Void) -> row {
+    fileprivate func item(_ title : String, accessoryType: UITableViewCell.AccessoryType = .disclosureIndicator, action : @escaping () -> Void) -> row {
         return (title: NSLocalizedString(title, comment: ""), accessoryType: accessoryType, action: action)
     }
 
