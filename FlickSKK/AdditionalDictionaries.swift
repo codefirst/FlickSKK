@@ -34,7 +34,7 @@ class AdditionalDictionaries {
 
     // 有効にできる辞書一覧を取得する
     func availableDictionaries() -> [Entry] {
-        let names : [String] = dictionaryFiles.flatMap { $0.lastPathComponent }
+        let names : [String] = dictionaryFiles.compactMap { $0.lastPathComponent }
         return defaultDictionaries.filter { entry in
             !names.contains(entry.url?.lastPathComponent ?? "")
         }
