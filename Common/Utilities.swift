@@ -54,7 +54,7 @@ func tr(_ c : Character, from : String, to : String) -> Character? {
      */
     let r = (from as NSString).range(of: String(c))
     if r.location != NSNotFound {
-        return Array(to.characters)[r.location]
+        return Array(to)[r.location]
     }
     return .none
 }
@@ -324,11 +324,11 @@ extension String {
     func conv(_ from : KanaType, to : KanaType) -> String {
         let x = ConversionTable[from] ?? ""
         let y = ConversionTable[to] ?? ""
-        return implode(Array(self.characters).map({ (c : Character) -> Character in tr(c, from: x, to: y) ?? c }))
+        return implode(Array(self).map({ (c : Character) -> Character in tr(c, from: x, to: y) ?? c }))
     }
 
     func conv(_ to : KanaType) -> String {
-        var result = Array(self.characters)
+        var result = Array(self)
         let target = ConversionTable[to] ?? ""
         for (type, table) in ConversionTable {
             if type != to {
@@ -405,12 +405,12 @@ extension String {
     }
 
     func first() -> Character? {
-        let xs = Array(self.characters)
+        let xs = Array(self)
         return xs.first
     }
 
     func last() -> String? {
-        let xs = Array(self.characters)
+        let xs = Array(self)
         switch xs.last {
         case .some(let last):
             if (last == "ﾞ" || last == "ﾟ") && xs.count > 1 {
@@ -430,7 +430,7 @@ extension String {
             return self
         case .some(let s):
             if(s.utf16.count <= self.utf16.count) {
-                return self.substring(to: self.characters.index(self.startIndex, offsetBy: self.utf16.count - s.utf16.count))
+                return self.substring(to: self.index(self.startIndex, offsetBy: self.utf16.count - s.utf16.count))
             } else {
                 return self
             }

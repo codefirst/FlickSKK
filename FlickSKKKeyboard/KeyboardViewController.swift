@@ -305,7 +305,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     func keyTapped(_ key: KanaFlickKey, _ index: Int?) {
         switch key {
         case let .seq(s, _):
-            let kana = Array(s.characters)[index ?? 0]
+            let kana = Array(s)[index ?? 0]
             self.engine.handle(.char(kana: String(kana), shift: self.shiftEnabled))
             self.prevShiftEnabled = self.shiftEnabled
             self.shiftEnabled = false

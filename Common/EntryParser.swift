@@ -18,7 +18,7 @@ class EntryParser {
     }
 
     func title() -> String? {
-        if let n = self.entry.characters.index(of: " ") {
+        if let n = self.entry.index(of: " ") {
             return self.entry.substring(to: n)
         } else {
             return nil
@@ -90,7 +90,7 @@ class EntryParser {
 
     // アノテーションの除去
     fileprivate func stripAnnotation(_ str : String) -> String {
-        if let index = str.characters.index(of: ";") {
+        if let index = str.index(of: ";") {
             return str.substring(to: index)
         } else {
             return str
