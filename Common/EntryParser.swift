@@ -19,7 +19,7 @@ class EntryParser {
 
     func title() -> String? {
         if let n = self.entry.index(of: " ") {
-            return self.entry.substring(to: n)
+            return String(self.entry[..<n])
         } else {
             return nil
         }
@@ -91,7 +91,7 @@ class EntryParser {
     // アノテーションの除去
     fileprivate func stripAnnotation(_ str : String) -> String {
         if let index = str.index(of: ";") {
-            return str.substring(to: index)
+            return String(str[..<index])
         } else {
             return str
         }

@@ -430,7 +430,7 @@ extension String {
             return self
         case .some(let s):
             if(s.utf16.count <= self.utf16.count) {
-                return self.substring(to: self.index(self.startIndex, offsetBy: self.utf16.count - s.utf16.count))
+                return String(self[..<self.index(self.startIndex, offsetBy: self.utf16.count - s.utf16.count)])
             } else {
                 return self
             }
