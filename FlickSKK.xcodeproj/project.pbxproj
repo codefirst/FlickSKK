@@ -1365,7 +1365,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 92DE47F7458305C609589D80 /* Pods-FlickSKK.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1386,7 +1385,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA637250DAFDB970E2B0ADFC /* Pods-FlickSKK.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FlickSKK/FlickSKK.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1407,7 +1405,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9036AD1140DA0D2513D7C438 /* Pods-FlickSKKTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1431,7 +1428,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E97CFEC1CD35CDEC98446553 /* Pods-FlickSKKTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
