@@ -24,3 +24,7 @@ Pods/*
 tmp/
 
 /Config.xcconfig
+
+fastlane/report.xml
+/*.dSYM.zip
+/*.ipa

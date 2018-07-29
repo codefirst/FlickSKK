@@ -1,0 +1,9 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    build_app(workspace: "FlickSKK.xcworkspace", scheme: "FlickSKK")
+    upload_to_testflight
+  end
+end
