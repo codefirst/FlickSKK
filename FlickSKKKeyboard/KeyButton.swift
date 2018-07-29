@@ -190,13 +190,13 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
                 var direction = KeyButtonFlickDirection.none
 
                 let angle = Double(atan2(p.y - originOfPanGesture.y, p.x - originOfPanGesture.x))
-                if maxIndex >= 1 && (angle < -3*M_PI_4 || angle >= 3*M_PI_4) {
+                if maxIndex >= 1 && (angle < -3*Double.pi/4 || angle >= 3*Double.pi/4) {
                     self.sequenceIndex = 1
                     direction = .left
-                } else if maxIndex >= 2 && angle < -M_PI_4 {
+                } else if maxIndex >= 2 && angle < -Double.pi/4 {
                     self.sequenceIndex = 2
                     direction = .up
-                } else if maxIndex >= 3 && angle < M_PI_4 {
+                } else if maxIndex >= 3 && angle < Double.pi/4 {
                     self.sequenceIndex = 3
                     direction = .right
                 } else if maxIndex >= 4 {

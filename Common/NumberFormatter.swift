@@ -33,7 +33,7 @@ class NumberFormatter {
     }
 
     fileprivate func conv(_ target : String, from : String, to : String) -> String {
-        return implode(Array(target.characters).map( { c in
+        return implode(Array(target).map( { c in
             tr(c, from: from, to: to) ?? c
         }))
     }
@@ -46,7 +46,7 @@ class NumberFormatter {
         } else if n == 1 {
             return ""
         } else {
-            let xs = Array("__二三四五六七八九".characters)
+            let xs = Array("__二三四五六七八九")
             return String(xs[n])
         }
     }

@@ -8,13 +8,15 @@
 
 import UIKit
 import Ikemen
+import WebKit
 
-class WebViewController: UIViewController, UIWebViewDelegate {
-    lazy var webView: UIWebView = UIWebView(frame: CGRect.zero) ※ { (wv: inout UIWebView) in
+class WebViewController: UIViewController, WKNavigationDelegate {
+    lazy var configure = WKWebViewConfiguration() ※ { (wc: inout WKWebViewConfiguration) in
+        wc.dataDetectorTypes = .link
+    }
+    lazy var webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: configure) ※ { (wv: inout WKWebView) in
         wv.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        wv.scalesPageToFit = true
-        wv.delegate = self
-        wv.dataDetectorTypes = UIDataDetectorTypes.link
+        wv.navigationDelegate = self
     }
 
     var initialURL: URL?
@@ -28,24 +30,26 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         self.view = self.webView
 
         if let u = initialURL {
-            self.webView.loadRequest(URLRequest(url: u))
+            self.webView.load(URLRequest(url: u))
         }
     }
 
     // MARK: WebView Delegate
-
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-        if navigationType == UIWebView.NavigationType.linkClicked {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated {
             // Open in Safari
-            UIApplication.shared.openURL(request.url!)
-            return false
+            UIApplication.shared.open(navigationAction.request.url!, options: [:]) { _ in }
+            decisionHandler(.cancel)
+            return
         }
-        return true
+        decisionHandler(.allow)
     }
 
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        if let title = self.webView.stringByEvaluatingJavaScript(from: "document.title") {
-            self.title = title
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("document.title") { (result : Any?, _) in
+            if let title = result as? String {
+                self.title = title
+            }
         }
     }
 

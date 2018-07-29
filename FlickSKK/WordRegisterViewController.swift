@@ -42,12 +42,12 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
 
             if let text = self.okuriField.text, !text.isEmpty {
                 // 1文字目
-                let xs = Array(text.characters)
+                let xs = Array(text)
                 let first = xs[0]
                 // ローマ字変換
                 if let roman = first.toRoman() {
                     // 1文字目を取得
-                    let rs = Array(roman.characters)
+                    let rs = Array(roman)
                     okuri = String(rs[0])
                 } else {
                     okuri = String(first)
@@ -135,7 +135,7 @@ class WordRegisterViewController : UITableViewController, UITextFieldDelegate {
         let yomiInputed : Bool = !(yomiField.text?.isEmpty ?? true)
 
         let okuriBlank : Bool = self.okuriField.text?.isEmpty ?? true
-        let okuri = self.okuriField.text?.characters
+        let okuri = self.okuriField.text
         let okuriInputed = okuri?.count == 1 && (okuri?.first?.toRoman() != nil)
 
         return wordInputed && yomiInputed && (okuriBlank || okuriInputed)
