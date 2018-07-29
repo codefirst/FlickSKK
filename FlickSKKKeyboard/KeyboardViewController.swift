@@ -119,7 +119,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
                 // 全角記号
                 seqWithSymbols("☆✿※♪"),
                 // 行末で使う全角記号
-                seqWithSymbols("0～・⋯"),
+                seqWithSymbols("0～・…"),
                 // 標準キーボードにあわせた
                 seqWithSymbols(".,-/"),
                 ]),
