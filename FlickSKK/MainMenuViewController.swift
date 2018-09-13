@@ -98,6 +98,9 @@ class MainMenuViewController: UITableViewController {
 
     func reset() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.popoverPresentationController?.sourceView = view
+        alert.popoverPresentationController?.sourceRect = view.bounds
+        alert.popoverPresentationController?.permittedArrowDirections = []
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("Reset", comment: ""), style: .destructive, handler: { action in
             SKKDictionary.resetLearnDictionary()
