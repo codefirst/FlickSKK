@@ -934,27 +934,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AppGroup/AppGroup.framework",
-				"${BUILT_PRODUCTS_DIR}/FootlessParser/FootlessParser.framework",
-				"${BUILT_PRODUCTS_DIR}/NorthLayout/NorthLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/※ikemen/Ikemen.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppGroup.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FootlessParser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NorthLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ikemen.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		22CCCC921DF09E35F7E7AE07 /* [CP] Embed Pods Frameworks */ = {
@@ -962,25 +951,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AppGroup/AppGroup.framework",
-				"${BUILT_PRODUCTS_DIR}/FootlessParser/FootlessParser.framework",
-				"${BUILT_PRODUCTS_DIR}/NorthLayout/NorthLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/※ikemen/Ikemen.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppGroup.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FootlessParser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NorthLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ikemen.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		55B1773AC1F0EF44407A74D0 /* [CP] Check Pods Manifest.lock */ = {
