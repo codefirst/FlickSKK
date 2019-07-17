@@ -402,7 +402,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     func composeText(_ text: String) {
         self.sessionView.composeText = text
         if #available(iOS 13.0, iOSApplicationExtension 13.0, *) {
-            inputProxy.setMarkedText(text, selectedRange: NSRange(location: 0, length: (text as NSString).length))
+            inputProxy.setMarkedText(text, selectedRange: NSRange(location: (text as NSString).length, length: 0))
         }
 
         self.updateSpaceButtonLabel()
