@@ -10,7 +10,7 @@ class MockDelegate : SKKDelegate {
         self.insertedText = self.insertedText.butLast()
     }
 
-    func composeText(_ text : String) {
+    func composeText(_ text : String, currentCandidate: Candidate?) {
     }
 
     func changeInputMode(_ inputMode: SKKInputMode) {

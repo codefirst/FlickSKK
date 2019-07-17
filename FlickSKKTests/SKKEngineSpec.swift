@@ -13,7 +13,7 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
     // delegate
     func insertText(_ text : String) { self.insertedText += text }
     func deleteBackward() {}
-    func composeText(_ text : String) { self.currentComposeText = text }
+    func composeText(_ text : String, currentCandidate: Candidate?) { self.currentComposeText = text }
     func changeInputMode(_ inputMode: SKKInputMode) {}
     func showCandidates(_ candidates: [Candidate]?) { self.candidates = candidates }
 

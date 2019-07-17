@@ -399,10 +399,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.engine.handle(.toggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
 
-    func composeText(_ text: String) {
+    func composeText(_ text: String, currentCandidate: Candidate?) {
         self.sessionView.composeText = text
+
         if #available(iOS 13.0, iOSApplicationExtension 13.0, *) {
-            inputProxy.setMarkedText(text, selectedRange: NSRange(location: (text as NSString).length, length: 0))
+            let markedText = currentCandidate?.kanji ?? text
+            inputProxy.setMarkedText(markedText, selectedRange: NSRange(location: (markedText as NSString).length, length: 0))
         }
 
         self.updateSpaceButtonLabel()

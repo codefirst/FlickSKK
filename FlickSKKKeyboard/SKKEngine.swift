@@ -22,10 +22,11 @@ class SKKEngine {
         self.composeMode = keyHandler.handle(keyEvent, composeMode: composeMode)
 
         // 表示を更新
-        self.delegate?.composeText(presenter.toString(self.composeMode))
+        let candidates = self.candidates()
+        self.delegate?.composeText(presenter.toString(self.composeMode), currentCandidate: candidates.flatMap {cs in cs.index.map {cs.candidates[$0]}})
 
         // 候補表示
-        self.delegate?.showCandidates(candidates()?.candidates)
+        self.delegate?.showCandidates(candidates?.candidates)
     }
 
     func candidates() -> (candidates: [Candidate], index: Int?)? {

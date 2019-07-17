@@ -16,7 +16,7 @@ protocol SKKDelegate : class {
     func deleteBackward()
 
     // 未確定文字の表示
-    func composeText(_ text : String)
+    func composeText(_ text : String, currentCandidate: Candidate?)
 
     // 入力モードの変更
     func changeInputMode(_ inputMode : SKKInputMode)
