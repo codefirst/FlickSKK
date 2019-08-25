@@ -153,7 +153,13 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         struct Static { static let layoutCell = CandidateCollectionViewCell() }
-        let minWidth = CGFloat(44 + 8)
+
+        let minWidth: CGFloat
+        switch Section(rawValue: indexPath.section) {
+        case .composeText?: minWidth = 8 + 8
+        case .candidates?, .enterWordRegister?, nil: minWidth = 44 + 8
+        }
+        
         let cell = self.configureCell(Static.layoutCell, forIndexPath: indexPath)
         return CGSize(width: max(cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width, minWidth),height: self.collectionView.bounds.height)
     }
