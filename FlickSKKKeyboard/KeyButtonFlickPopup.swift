@@ -52,17 +52,9 @@ class KeyButtonFlickPopup: UIView {
     fileprivate override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.clipsToBounds = false
-        _ = self.layer ※ { (la:inout CALayer) in
-            la.shadowColor = UIColor.black.cgColor
-            la.shadowOpacity = 0.2
-            la.shadowOffset = CGSize(width: 0, height: 0)
-            la.shadowRadius = 2.0
-        }
-
         _ = label ※ { (l:inout UILabel) in
-            l.backgroundColor = KeyButtonHighlightedColor
-            l.textColor = UIColor.black
+            l.backgroundColor = ThemeColor.buttonHighlighted
+            l.textColor = ThemeColor.buttonTextOnFlickPopup
             l.textAlignment = .center
             l.font = Appearance.boldFont(28.0)
             l.adjustsFontSizeToFitWidth = true
@@ -74,15 +66,29 @@ class KeyButtonFlickPopup: UIView {
             self.addSubview(l)
         }
 
-        _ = arrowShapeLayer ※ { (sl:inout CAShapeLayer) in
-            sl.fillColor = KeyButtonHighlightedColor.cgColor
-        }
         _ = arrow ※ { (a:inout UIView) in
             a.backgroundColor = UIColor.clear
             a.layer.addSublayer(self.arrowShapeLayer)
             self.addSubview(a)
         }
         isUserInteractionEnabled = false
+
+        updateCGColor()
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateCGColor()
+    }
+
+    private func updateCGColor() {
+        clipsToBounds = false
+        layer.shadowColor = ThemeColor.shadow.cgColor
+        layer.shadowOpacity = 0.2
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+        layer.shadowRadius = 2.0
+
+        arrowShapeLayer.fillColor = ThemeColor.buttonHighlighted.cgColor
     }
 
     // MARK: - public methods
