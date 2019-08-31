@@ -60,7 +60,7 @@ class KeyButtonFlickPopup: UIView {
             l.adjustsFontSizeToFitWidth = true
             l.baselineAdjustment = .alignCenters
             _ = l.layer ※ { (la:inout CALayer) in
-                la.cornerRadius = 2.0
+                la.cornerRadius = 4
                 la.masksToBounds = true
             }
             self.addSubview(l)
@@ -150,21 +150,56 @@ class KeyButtonFlickPopup: UIView {
                 CGPoint(x: arrowFrame.size.width, y: 0),
                 CGPoint(x: 0, y: arrowFrame.size.height),
                 CGPoint(x: arrowFrame.size.width, y: arrowFrame.size.height))
+            let r = label.layer.cornerRadius
+
+            func tangentPointToCorner(cornerCenterToKeyCenter offset: CGPoint, leftSelector: (CGPoint, CGPoint) -> Bool) -> CGPoint {
+                let r2 = r * r
+                let c1 = CGPoint(x: c.x - offset.x, y: c.y - offset.y)
+                let c2 = CGPoint(x: c1.x * c1.x, y: c1.y * c1.y)
+                let s1 = CGPoint(
+                    x: Double((c1.x * r2 + c1.y * r * sqrt(c2.x + c2.y - r2)) / (c2.x + c2.y)),
+                    y: Double((c1.y * r2 - c1.x * r * sqrt(c2.x + c2.y - r2)) / (c2.x + c2.y)))
+                let s2 = CGPoint(
+                    x: Double((c1.x * r2 - c1.y * r * sqrt(c2.x + c2.y - r2)) / (c2.x + c2.y)),
+                    y: Double((c1.y * r2 + c1.x * r * sqrt(c2.x + c2.y - r2)) / (c2.x + c2.y)))
+                return leftSelector(s1, s2) ? s1 : s2
+            }
+
             p.move(to: c)
             switch direction {
             case .none: break
             case .left:
-                p.addLine(to: lt)
-                p.addLine(to: lb)
+                let ltOffset = CGPoint(x: lt.x - r, y: lt.y + r)
+                let s = tangentPointToCorner(cornerCenterToKeyCenter: ltOffset) {$0.y < $1.y}
+                p.addLine(to: CGPoint(x: ltOffset.x + s.x, y: ltOffset.y + s.y))
+
+                let lbOffset = CGPoint(x: lb.x - r, y: lb.y - r)
+                let t = tangentPointToCorner(cornerCenterToKeyCenter: lbOffset) {$0.y > $1.y}
+                p.addLine(to: CGPoint(x: lbOffset.x + t.x, y: lbOffset.y + t.y))
             case .up:
-                p.addLine(to: lt)
-                p.addLine(to: rt)
+                let ltOffset = CGPoint(x: lt.x + r, y: lt.y - r)
+                let s = tangentPointToCorner(cornerCenterToKeyCenter: ltOffset) {$0.x < $1.x}
+                p.addLine(to: CGPoint(x: ltOffset.x + s.x, y: ltOffset.y + s.y))
+
+                let rtOffset = CGPoint(x: rt.x - r, y: rt.y - r)
+                let t = tangentPointToCorner(cornerCenterToKeyCenter: rtOffset) {$0.x > $1.x}
+                p.addLine(to: CGPoint(x: rtOffset.x + t.x, y: rtOffset.y + t.y))
             case .right:
-                p.addLine(to: rt)
-                p.addLine(to: rb)
+                let rtOffset = CGPoint(x: rt.x + r, y: rt.y + r)
+                let s = tangentPointToCorner(cornerCenterToKeyCenter: rtOffset) {$0.y < $1.y}
+                p.addLine(to: CGPoint(x: rtOffset.x + s.x, y: rtOffset.y + s.y))
+
+                let rbOffset = CGPoint(x: rb.x + r, y: rb.y - r)
+                let t = tangentPointToCorner(cornerCenterToKeyCenter: rbOffset) {$0.y > $1.y}
+                p.addLine(to: CGPoint(x: rbOffset.x + t.x, y: rbOffset.y + t.y))
             case .down:
-                p.addLine(to: lb)
-                p.addLine(to: rb)
+                let lbOffset = CGPoint(x: lb.x + r, y: lb.y + r)
+                let s = tangentPointToCorner(cornerCenterToKeyCenter: lbOffset) {$0.x < $1.x}
+                p.addLine(to: CGPoint(x: lbOffset.x + s.x, y: lbOffset.y + s.y))
+
+                let rbOffset = CGPoint(x: rb.x - r, y: rb.y + r)
+                let t = tangentPointToCorner(cornerCenterToKeyCenter: rbOffset) {$0.x > $1.x}
+                p.addLine(to: CGPoint(x: rbOffset.x + t.x, y: rbOffset.y + t.y))
             }
             p.close()
         }).cgPath
