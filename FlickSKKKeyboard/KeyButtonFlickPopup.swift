@@ -152,6 +152,7 @@ class KeyButtonFlickPopup: UIView {
                 CGPoint(x: arrowFrame.size.width, y: arrowFrame.size.height))
             let r = label.layer.cornerRadius
 
+            // center point to round rect: https://github.com/codefirst/FlickSKK/pull/164#issuecomment-527197952
             func tangentPointToCorner(cornerCenterToKeyCenter offset: CGPoint, leftSelector: (CGPoint, CGPoint) -> Bool) -> CGPoint {
                 let r2 = r * r
                 let c1 = CGPoint(x: c.x - offset.x, y: c.y - offset.y)
