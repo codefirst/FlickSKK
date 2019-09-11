@@ -26,5 +26,6 @@ tmp/
 /Config.xcconfig
 
 fastlane/report.xml
+fastlane/Preview.html
 /*.dSYM.zip
 /*.ipa
