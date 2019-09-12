@@ -1,12 +1,12 @@
 PODS:
   - Alamofire (4.0.1)
   - AppGroup (1.0.0)
-  - FootlessParser (0.5.0)
-  - Nimble (7.1.3)
-  - NorthLayout (5.1.0):
+  - FootlessParser (0.5.2)
+  - Nimble (8.0.2)
+  - NorthLayout (5.2.0):
     - FootlessParser (~> 0.4)
-  - Quick (1.3.1)
-  - "※ikemen (0.5.0)"
+  - Quick (2.1.0)
+  - "※ikemen (0.6.0)"
 
 DEPENDENCIES:
   - Alamofire (~> 4.0.0)
@@ -32,12 +32,12 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   AppGroup: ba0c3626371b5b0f23815f7ae68d14f1061df19f
-  FootlessParser: bc75547b0ccd696a0496993f394fdef3a2d481d0
-  Nimble: 2839b01d1b31f6a6a7777a221f0d91cf52e8e27b
-  NorthLayout: 157045b4ef9e94019f00ec9dc66192c2b17c0c61
-  Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
-  "※ikemen": 0cf85af52790db21a846ad31abca356e99da1ffb
+  FootlessParser: 521916d592fa6cba06cfca6f4b5d4f5a2d49175a
+  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
+  NorthLayout: 308a58a8f7d96f316e6399ff6432f8769321bbdf
+  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+  "※ikemen": da47fe6e0acfbe241611221f4d98ade266bf50a2
 
-PODFILE CHECKSUM: 48297b3c95509b75b31ae516520bb3f13dddb3c9
+PODFILE CHECKSUM: 5e5e09c3f122e44a27d36a2e73b1aab19f6b8f50
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.4

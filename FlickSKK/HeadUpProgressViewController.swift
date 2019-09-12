@@ -33,9 +33,9 @@ class HeadUpProgressViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.backgroundColor = ThemeColor.hudBackground
 
-        label.textColor = UIColor.white
+        label.textColor = ThemeColor.invertedText
         label.textAlignment = .center
 
         let autolayout = view.northLayoutFormat(["p":8, "h" : 10],

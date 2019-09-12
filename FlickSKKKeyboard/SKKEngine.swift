@@ -19,13 +19,13 @@ class SKKEngine {
 
     func handle(_ keyEvent : SKKKeyEvent) {
         // 状態遷移
-        self.composeMode = keyHandler.handle(keyEvent, composeMode: composeMode)
+        composeMode = keyHandler.handle(keyEvent, composeMode: composeMode)
 
         // 表示を更新
-        self.delegate?.composeText(presenter.toString(self.composeMode))
+        delegate?.composeText(presenter.composeText(composeMode), markedText: presenter.markedText(composeMode), legacyStyleText: presenter.toString(composeMode))
 
         // 候補表示
-        self.delegate?.showCandidates(candidates()?.candidates)
+        delegate?.showCandidates(candidates()?.candidates)
     }
 
     func candidates() -> (candidates: [Candidate], index: Int?)? {

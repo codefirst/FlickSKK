@@ -2,3 +2,10 @@ body {
   word-break: break-all;
   font-family: "HiraKakuProN-W3";
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: white;
+        background-color: black;
+    }
+}

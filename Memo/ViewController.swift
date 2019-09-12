@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        self.textView.backgroundColor = UIColor.white
+        self.textView.backgroundColor = ThemeColor.background
         self.textView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         self.textView.font = Appearance.normalFont(18.0)
         self.textView.frame = self.view.bounds

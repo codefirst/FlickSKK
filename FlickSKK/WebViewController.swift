@@ -28,6 +28,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 
     override func loadView() {
         self.view = self.webView
+        view.backgroundColor = ThemeColor.background
+        webView.isOpaque = false // https://stackoverflow.com/questions/27655930/how-can-i-give-wkwebview-a-colored-background
 
         if let u = initialURL {
             self.webView.load(URLRequest(url: u))

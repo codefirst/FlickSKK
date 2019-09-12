@@ -48,7 +48,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
                 cv.register(CandidateCollectionViewCell.self, forCellWithReuseIdentifier: kCellID)
                 cv.showsHorizontalScrollIndicator = false
                 cv.showsVerticalScrollIndicator = false
-                cv.backgroundColor = UIColor.white
+                cv.backgroundColor = ThemeColor.keyboardBackground
         }
 
         super.init(frame: CGRect.zero)
@@ -61,7 +61,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         self.addSubview(self.collectionView)
 
         let border = UIView() ※ { (v: inout UIView) in
-            v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
+            v.backgroundColor = ThemeColor.sessionCellBorder
         }
         let autolayout = self.northLayoutFormat(
             ["onepx": 1.0 / UIScreen.main.scale],
@@ -69,7 +69,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
         autolayout("H:|[b]|")
         autolayout("V:|[b(==onepx)]")
 
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = ThemeColor.keyboardBackground
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -153,7 +153,13 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         struct Static { static let layoutCell = CandidateCollectionViewCell() }
-        let minWidth = CGFloat(44 + 8)
+
+        let minWidth: CGFloat
+        switch Section(rawValue: indexPath.section) {
+        case .composeText?: minWidth = 8 + 8
+        case .candidates?, .enterWordRegister?, nil: minWidth = 44 + 8
+        }
+
         let cell = self.configureCell(Static.layoutCell, forIndexPath: indexPath)
         return CGSize(width: max(cell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width, minWidth),height: self.collectionView.bounds.height)
     }
@@ -172,9 +178,6 @@ class CandidateCollectionViewCell: UICollectionViewCell {
             case .partialCandidate: return 0.5
             }
         }
-        var normalBackgroundColor: UIColor { return UIColor.white }
-        var highlightedBackgroundColor: UIColor { return UIColor(white: 0.5, alpha: 1.0) }
-        var selectedBackgroundColor: UIColor { return UIColor(white: 0.9, alpha: 1.0) }
     }
     var style: Style = .default {
         didSet {
@@ -185,18 +188,18 @@ class CandidateCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = ThemeColor.keyboardBackground
 
         _ = self.textLabel ※ { (l: inout UILabel) in
             l.font = Appearance.normalFont(17.0)
-            l.textColor = UIColor.black
+            l.textColor = ThemeColor.buttonText
             l.backgroundColor = UIColor.clear
             l.textAlignment = .center
             l.lineBreakMode = .byClipping
         }
 
         let border = UIView() ※ { (v: inout UIView) in
-            v.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
+            v.backgroundColor = ThemeColor.sessionCellBorder
         }
 
         let autolayout = self.northLayoutFormat(
@@ -213,9 +216,9 @@ class CandidateCollectionViewCell: UICollectionViewCell {
 
     fileprivate func updateStates() {
         UIView.setAnimationsEnabled(false) // disable fade-in
-        self.backgroundColor = isHighlighted ? style.highlightedBackgroundColor
-            : isSelected ? style.selectedBackgroundColor
-            : style.normalBackgroundColor
+        self.backgroundColor = isHighlighted ? ThemeColor.highlightedBackground
+            : isSelected ? ThemeColor.selectedBackground
+            : ThemeColor.keyboardBackground
         textLabel.alpha = style.textAlpha
         UIView.setAnimationsEnabled(true)
     }

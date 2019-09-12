@@ -41,10 +41,12 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var alphabetModeButton : KeyButton = self.keyButton(.alphabet)
     lazy var spaceButton : KeyButton = self.keyButton(.space)
     lazy var nextKeyboardButton : KeyButton = self.keyButton(.keyboardChange) ※ { (kb:inout KeyButton) in
-        kb.imageView.image = UIImage(named: "globe")
+        kb.imageView.image = UIImage(named: "globe")!.withRenderingMode(.alwaysTemplate)
+        kb.imageView.tintColor = ThemeColor.buttonText
     }
     lazy var shiftButton: KeyButton = self.keyButton(.shift) ※ { (kb:inout KeyButton) in
-        kb.imageView.image = UIImage(named: "flickskk-arrow")
+        kb.imageView.image = UIImage(named: "flickskk-arrow")!.withRenderingMode(.alwaysTemplate)
+        kb.imageView.tintColor = ThemeColor.buttonText
     }
 
     // MARK: -
@@ -399,10 +401,17 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.engine.handle(.toggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
 
-    func composeText(_ text: String) {
-        self.sessionView.composeText = text
+    func composeText(_ text: String?, markedText: String?, legacyStyleText: String) {
+        if #available(iOS 13.0, iOSApplicationExtension 13.0, *) {
+            sessionView.composeText = text
 
-        self.updateSpaceButtonLabel()
+            let markedText = markedText ?? ""
+            inputProxy.setMarkedText(markedText, selectedRange: NSRange(location: (markedText as NSString).length, length: 0))
+        } else {
+            sessionView.composeText = legacyStyleText
+        }
+
+        updateSpaceButtonLabel()
     }
 
     func showCandidates(_ candidates: [Candidate]?) {
@@ -416,7 +425,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     fileprivate func disableAllKeys() {
         userInteractionMaskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         userInteractionMaskView.frame = self.view.bounds
-        userInteractionMaskView.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        userInteractionMaskView.backgroundColor = ThemeColor.userInteractionMask
         if userInteractionMaskView.superview == nil {
             self.view.addSubview(userInteractionMaskView)
         } else {

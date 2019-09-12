@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -145,8 +145,6 @@
 		13F6103D2102B32E00A27B6F /* FlickSKKKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 13F610362102B32E00A27B6F /* FlickSKKKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		13F610492102B33D00A27B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F610482102B33D00A27B6F /* AppDelegate.swift */; };
 		13F6104B2102B33D00A27B6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6104A2102B33D00A27B6F /* ViewController.swift */; };
-		13F6104E2102B33D00A27B6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F6104C2102B33D00A27B6F /* Main.storyboard */; };
-		13F610532102B33E00A27B6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F610512102B33E00A27B6F /* LaunchScreen.storyboard */; };
 		13FDAC042102C61B002D4B38 /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDABED2102C617002D4B38 /* KeyboardMode.swift */; };
 		13FDAC052102C61B002D4B38 /* skk.jisyo in Resources */ = {isa = PBXBuildFile; fileRef = 13FDABEE2102C617002D4B38 /* skk.jisyo */; };
 		13FDAC062102C61B002D4B38 /* KeyButtonFlickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDABEF2102C618002D4B38 /* KeyButtonFlickPopup.swift */; };
@@ -157,6 +155,11 @@
 		13FDAC162102C61B002D4B38 /* ComposeModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDABFF2102C61B002D4B38 /* ComposeModeFactory.swift */; };
 		9A4866D9F0A6C27D63A9EBAE /* Pods_FlickSKKKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7D6DE4FB7D3F6D01EF81E7 /* Pods_FlickSKKKeyboard.framework */; };
 		A9837EF4E5432CA907AFB2A8 /* Pods_FlickSKKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E179D67487B1D8C9273F219 /* Pods_FlickSKKTests.framework */; };
+		EA1ADEE72315734C0081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
+		EA1ADEE82315734C0081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
+		EA1ADEE92315734C0081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
+		EA1ADEEA23157C380081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
+		EA1ADEED2315893B0081366A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA1ADEEB2315893B0081366A /* LaunchScreen.xib */; };
 		ED78BBC12601BBC9E08D187C /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 019B53C5130F00D730BC608B /* Pods_FlickSKK.framework */; };
 /* End PBXBuildFile section */
 
@@ -279,8 +282,6 @@
 		13F610462102B33D00A27B6F /* Memo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F610482102B33D00A27B6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13F6104A2102B33D00A27B6F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		13F6104D2102B33D00A27B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		13F610522102B33E00A27B6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13F610542102B33E00A27B6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13FDABED2102C617002D4B38 /* KeyboardMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardMode.swift; sourceTree = "<group>"; };
 		13FDABEE2102C617002D4B38 /* skk.jisyo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = skk.jisyo; sourceTree = "<group>"; };
@@ -299,6 +300,8 @@
 		92DE47F7458305C609589D80 /* Pods-FlickSKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.debug.xcconfig"; sourceTree = "<group>"; };
 		AA637250DAFDB970E2B0ADFC /* Pods-FlickSKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.release.xcconfig"; sourceTree = "<group>"; };
 		E97CFEC1CD35CDEC98446553 /* Pods-FlickSKKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.release.xcconfig"; sourceTree = "<group>"; };
+		EA1ADEE62315734C0081366A /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
+		EA1ADEEC2315893B0081366A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				132FE6332102C3D100E1DA99 /* Appearance.swift */,
+				EA1ADEE62315734C0081366A /* ThemeColor.swift */,
 				132FE6302102C3D100E1DA99 /* DictionarySettings.swift */,
 			);
 			name = Settings;
@@ -715,8 +719,7 @@
 			children = (
 				13F610482102B33D00A27B6F /* AppDelegate.swift */,
 				13F6104A2102B33D00A27B6F /* ViewController.swift */,
-				13F6104C2102B33D00A27B6F /* Main.storyboard */,
-				13F610512102B33E00A27B6F /* LaunchScreen.storyboard */,
+				EA1ADEEB2315893B0081366A /* LaunchScreen.xib */,
 				13F610542102B33E00A27B6F /* Info.plist */,
 			);
 			path = Memo;
@@ -920,9 +923,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13F610532102B33E00A27B6F /* LaunchScreen.storyboard in Resources */,
+				EA1ADEED2315893B0081366A /* LaunchScreen.xib in Resources */,
 				132FE6372102C3D200E1DA99 /* Localizable.strings in Resources */,
-				13F6104E2102B33D00A27B6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,27 +936,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AppGroup/AppGroup.framework",
-				"${BUILT_PRODUCTS_DIR}/FootlessParser/FootlessParser.framework",
-				"${BUILT_PRODUCTS_DIR}/NorthLayout/NorthLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/※ikemen/Ikemen.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppGroup.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FootlessParser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NorthLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ikemen.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		22CCCC921DF09E35F7E7AE07 /* [CP] Embed Pods Frameworks */ = {
@@ -962,25 +953,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AppGroup/AppGroup.framework",
-				"${BUILT_PRODUCTS_DIR}/FootlessParser/FootlessParser.framework",
-				"${BUILT_PRODUCTS_DIR}/NorthLayout/NorthLayout.framework",
-				"${BUILT_PRODUCTS_DIR}/※ikemen/Ikemen.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppGroup.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FootlessParser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NorthLayout.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Ikemen.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		55B1773AC1F0EF44407A74D0 /* [CP] Check Pods Manifest.lock */ = {
@@ -1065,6 +1047,7 @@
 				13EBD0602102C7A30064606B /* HeadUpProgressViewController.swift in Sources */,
 				132FE64A2102C3D200E1DA99 /* EntryParser.swift in Sources */,
 				13EBD05F2102C7A30064606B /* SortDictionary.swift in Sources */,
+				EA1ADEE72315734C0081366A /* ThemeColor.swift in Sources */,
 				132FE63B2102C3D200E1DA99 /* Utilities.swift in Sources */,
 				13EBD06B2102C7A30064606B /* UserDictionaryViewController.swift in Sources */,
 				132FE6502102C3D200E1DA99 /* SKKDictionaryEntry.swift in Sources */,
@@ -1108,6 +1091,7 @@
 				1328C67521032415000F9E5C /* LoadLocalDictionary.swift in Sources */,
 				13E88773210327B900E3A551 /* KeyRepeatTimer.swift in Sources */,
 				1328C6572102C930000F9E5C /* KeyHandlerKanaComposeSpec.swift in Sources */,
+				EA1ADEEA23157C380081366A /* ThemeColor.swift in Sources */,
 				1328C6562102C930000F9E5C /* KeyHandlerWordRegisterWithDirectInputSpec.swift in Sources */,
 				1328C6782103241D000F9E5C /* NumberFilter.swift in Sources */,
 				1328C67221032415000F9E5C /* Utilities.swift in Sources */,
@@ -1166,6 +1150,7 @@
 				132FE6662102C3D200E1DA99 /* DictionarySettings.swift in Sources */,
 				13FDAC0D2102C61B002D4B38 /* Candidate.swift in Sources */,
 				13E8875E210325AF00E3A551 /* ComposeMode.swift in Sources */,
+				EA1ADEE82315734C0081366A /* ThemeColor.swift in Sources */,
 				13FDAC122102C61B002D4B38 /* TextEngine.swift in Sources */,
 				132FE6602102C3D200E1DA99 /* SKKDictionary.swift in Sources */,
 				13FDAC062102C61B002D4B38 /* KeyButtonFlickPopup.swift in Sources */,
@@ -1195,6 +1180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13F6104B2102B33D00A27B6F /* ViewController.swift in Sources */,
+				EA1ADEE92315734C0081366A /* ThemeColor.swift in Sources */,
 				132FE66D2102C3D200E1DA99 /* Appearance.swift in Sources */,
 				13F610492102B33D00A27B6F /* AppDelegate.swift in Sources */,
 			);
@@ -1224,20 +1210,12 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		13F6104C2102B33D00A27B6F /* Main.storyboard */ = {
+		EA1ADEEB2315893B0081366A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				13F6104D2102B33D00A27B6F /* Base */,
+				EA1ADEEC2315893B0081366A /* Base */,
 			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		13F610512102B33E00A27B6F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13F610522102B33E00A27B6F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1277,7 +1255,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1339,7 +1317,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

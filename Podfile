@@ -28,14 +28,6 @@ post_install do |installer|
     'Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-Acknowledgements.plist',
     'FlickSKK/Settings.bundle/Acknowledgements.plist',
     remove_destination: true)
-
-  installer.pods_project.targets.each do |target|
-    if %w(NorthLayout Nimble).include?(target.name)
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.0'
-      end
-    end
-  end
 end
 
 plugin 'cocoapods-app_group'
