@@ -11,9 +11,6 @@ import UIKit
 import NorthLayout
 import Ikemen
 
-let KeyButtonHighlightedColor = UIColor(hue: 0.10, saturation: 0.07, brightness: 0.96, alpha: 1.0)
-
-
 class KeyButton: UIView, UIGestureRecognizerDelegate {
     let key: KanaFlickKey
     var sequenceIndex: Int? {
@@ -44,7 +41,7 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
         UILabel() ※ { (l: inout UILabel) in
             l.text = self.key.additionalButtonLabel
             l.font = Appearance.normalFont(12)
-            l.textColor = UIColor.lightGray
+            l.textColor = ThemeColor.buttonSubText
             l.textAlignment = .center
         }
     }()
@@ -57,25 +54,24 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
     var tapped: ((KanaFlickKey, Int?) -> Void)?
     var selected: Bool {
         didSet {
-            self.backgroundColor = selected ? selectedBackgroundColor : normalBackgroundColor
+            self.backgroundColor = selected ? ThemeColor.buttonSelected : normalBackgroundColor
         }
     }
     var enabled: Bool {
         didSet {
             self.isUserInteractionEnabled = enabled
-            self.label.textColor = enabled ? UIColor.black : UIColor.gray
+            self.label.textColor = enabled ? ThemeColor.buttonText : ThemeColor.buttonTextDisabled
         }
     }
     var highlighted: Bool {
         didSet {
-            self.backgroundColor = highlighted ? KeyButtonHighlightedColor : selected ? selectedBackgroundColor : normalBackgroundColor
+            self.backgroundColor = highlighted ? ThemeColor.buttonHighlighted : selected ? ThemeColor.buttonSelected : normalBackgroundColor
         }
     }
 
-    fileprivate lazy var normalBackgroundColor: UIColor = {
-        self.key.isControl ? UIColor.lightGray : UIColor(white: 1.0, alpha: 1.0)
+    private lazy var normalBackgroundColor: UIColor = {
+        self.key.isControl ? ThemeColor.controlButtonBackground : ThemeColor.buttonBackground
     }()
-    fileprivate let selectedBackgroundColor: UIColor =  UIColor(white: 0.95, alpha: 1.0)
 
     lazy var repeatTimer : KeyRepeatTimer? = {
         if self.key.isRepeat {
@@ -100,12 +96,11 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         _ = self.label ※ { (l:inout UILabel) in
             l.text = self.key.buttonLabel
-            l.textColor = UIColor.black
+            l.textColor = ThemeColor.buttonText
             l.textAlignment = .center
             l.font = Appearance.normalFont(17.0)
         }
-        self.layer.borderColor = UIColor.gray.cgColor
-        self.layer.borderWidth = 1.0 / UIScreen.main.scale / 2.0
+        updateCGColor()
 
         switch key {
         case .seq(_, showSeqs: true):
@@ -121,6 +116,16 @@ class KeyButton: UIView, UIGestureRecognizerDelegate {
 
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(KeyButton.gestureTapped(_:))))
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(KeyButton.gesturePanned(_:))))
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateCGColor()
+    }
+
+    private func updateCGColor() {
+        layer.borderColor = ThemeColor.buttonBorder.cgColor
+        layer.borderWidth = 1.0 / UIScreen.main.scale / 2.0
     }
 
     // MARK: - Gestures
