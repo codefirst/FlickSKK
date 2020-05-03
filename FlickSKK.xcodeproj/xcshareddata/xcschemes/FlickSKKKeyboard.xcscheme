@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "1140"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -42,6 +42,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "13F6100E2102B31D00A27B6F"
+            BuildableName = "FlickSKK.app"
+            BlueprintName = "FlickSKK"
+            ReferencedContainer = "container:FlickSKK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -54,17 +63,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13F6100E2102B31D00A27B6F"
-            BuildableName = "FlickSKK.app"
-            BlueprintName = "FlickSKK"
-            ReferencedContainer = "container:FlickSKK.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -73,6 +71,7 @@
       language = "ja"
       region = "JP"
       launchStyle = "0"
+      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
@@ -92,11 +91,9 @@
             ReferencedContainer = "container:FlickSKK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
       <IDERemoteRunnable
-         RemotePath = "/var/mobile/Containers/Bundle/Application/99BECA51-BAE1-409F-B6D1-08A440C31C69/asakusasatellite.app"
-         BundleIdentifier = "/var/mobile/Containers/Bundle/Application/99BECA51-BAE1-409F-B6D1-08A440C31C69/asakusasatellite.app">
+         RemotePath = "RemotePath"
+         BundleIdentifier = "BundleIdentifier">
       </IDERemoteRunnable>
    </LaunchAction>
    <ProfileAction

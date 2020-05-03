@@ -1,5 +1,6 @@
 private var kDicitonary : SKKLocalDictionaryFile?
 private var kCache : [URL:(Date, Any)] = [:]
+private let writeQueue = DispatchQueue(label: "DictionaryCache.write")
 
 // 辞書のロードには時間がかかるので、一度ロードした結果をキャッシュする
 // グローバル変数にいれておけば、次回起動時にも残っている(ことがある)
@@ -23,13 +24,17 @@ class DictionaryCache {
                 } else {
                     // キャシュが無効になっている
                     let newFile = closure(url)
-                    kCache[url] = (mtime, newFile)
+                    writeQueue.sync {
+                        kCache[url] = (mtime, newFile)
+                    }
                     return newFile
                 }
             } else {
                 // キャッシュが存在しない
                 let file = closure(url)
-                kCache[url] = (mtime, file)
+                writeQueue.sync {
+                    kCache[url] = (mtime, file)
+                }
                 return file
             }
         } else {
@@ -43,7 +48,9 @@ class DictionaryCache {
         closure()
         if let (_, file) = kCache[url] {
             if let mtime = getModifiedTime(url) {
-                kCache[url] = (mtime, file)
+                writeQueue.sync {
+                    kCache[url] = (mtime, file)
+                }
             }
         }
     }

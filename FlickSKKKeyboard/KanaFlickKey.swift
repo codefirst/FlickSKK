@@ -1,4 +1,4 @@
-enum KanaFlickKey: Hashable {
+enum KanaFlickKey {
     case seq(String, showSeqs: Bool)
     case shift
     case `return`
@@ -58,7 +58,7 @@ enum KanaFlickKey: Hashable {
 
     var isControl: Bool {
         switch self {
-        case .seq(_): return false
+        case .seq: return false
         default: return true
         }
     }
@@ -68,29 +68,5 @@ enum KanaFlickKey: Hashable {
         case .backspace: return true
         default: return false
         }
-    }
-
-    var hashValue: Int {
-        switch self {
-        case .seq(_): return 0
-        case .shift: return 1
-        case .return: return 2
-        case .backspace: return 3
-        case .keyboardChange: return 4
-        case .inputModeChange: return 5
-        case .number: return 6
-        case .alphabet: return 7
-        case .komojiDakuten: return 8
-        case .upperLower: return 9
-        case .space: return 10
-        case .nothing: return 11
-        }
-    }
-}
-
-func ==(l: KanaFlickKey, r: KanaFlickKey) -> Bool {
-    switch (l, r) {
-    case let (.seq(ls, lShowSeqs), .seq(rs, rShowSeqs)): return ls == rs && lShowSeqs && rShowSeqs
-    default: return l.hashValue == r.hashValue
     }
 }

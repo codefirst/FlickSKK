@@ -1,17 +1,17 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '12.0'
 
 use_frameworks!
 
 target 'FlickSKK' do
   pod 'NorthLayout'
-  pod 'Alamofire', '~> 4.0.0'
+  pod 'Alamofire'
   pod '※ikemen'
 end
 
 target 'FlickSKKKeyboard' do
   pod 'NorthLayout'
-  pod 'Alamofire', '~> 4.0.0'
+  pod 'Alamofire'
   pod '※ikemen'
 end
 

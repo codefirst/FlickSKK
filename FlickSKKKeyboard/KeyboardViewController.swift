@@ -11,7 +11,7 @@ import NorthLayout
 import Ikemen
 
 class KeyboardViewController: UIInputViewController, SKKDelegate {
-    lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 216)
+    lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 216)
 
     let keypadAndControlsView = UIView()
     let loadingProgressView = UIActivityIndicatorView(style: .gray)
