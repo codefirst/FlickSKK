@@ -1,5 +1,3 @@
-import Alamofire
-
 // URLで指定された辞書をダウンロードし、FlickSKKで利用できるように整形する。
 //
 // おもに以下の処理を行なう。
@@ -39,8 +37,9 @@ class DownloadDictionary {
         let utf8File = Tempfile.temp()
 
         // ダウンロード
-        save(self.remote, path: downloadFile as URL,
-            onSuccess: {
+        save(self.remote, path: downloadFile) {
+            switch $0 {
+            case .success:
                 do {
                     // UTF8へのエンコード
                     try self.encodeToUTF8(downloadFile as URL, dest: utf8File as URL)
@@ -64,29 +63,33 @@ class DownloadDictionary {
                 } catch let e {
                     self.error?(NSLocalizedString("EncodingError", comment:""), e)
                 }
-            },
-            onError: { e in
+            case .failure(let e):
                 self.error?(NSLocalizedString("DownloadError", comment:""), e)
-            })
+            }
+        }
     }
 
     // URLを特定ファイルに保存する。
-    fileprivate func save(_ url : URL, path: URL, onSuccess : @escaping () -> Void, onError : @escaping (Error?) -> Void) {
-
-        let destination: DownloadRequest.Destination = { _, _ in
-            return (path, [.removePreviousFile, .createIntermediateDirectories])
-        }
-        AF.download(url, to: destination)
-            .downloadProgress { progress in
-                self.progress?(NSLocalizedString("Downloading", comment:""), Float(progress.fractionCompleted) / 2.0)
-            }.responseData { response in
-                switch response.result {
-                case .failure(let error):
-                    onError(error)
-                case .success:
-                    onSuccess()
-                }
+    fileprivate func save(_ url : URL, path: URL, completion: @escaping (Result<Void, Error>) -> Void) {
+        var observation: NSKeyValueObservation?
+        let task = URLSession.shared.downloadTask(with: url) { url, response, error in
+            observation?.invalidate()
+            if let error = error {
+                completion(.failure(error))
             }
+            guard let url = url else { fatalError() }
+            do {
+                try FileManager.default.createDirectory(at: path.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.moveItem(at: url, to: path)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        observation = task.progress.observe(\.fractionCompleted) { progress, _ in
+            self.progress?(NSLocalizedString("Downloading", comment:""), Float(progress.fractionCompleted) / 2.0)
+        }
+        task.resume()
     }
 
     // UTF8でエンコードして、保存する
