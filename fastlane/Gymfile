@@ -1,2 +1,2 @@
 scheme "FlickSKK"
-output_directory "./"
+output_directory "build"

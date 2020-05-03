@@ -3,7 +3,7 @@
 .cocoapods_appgroup
 
 # Xcode
-build/*
+/build/*
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -18,10 +18,10 @@ profile
 *.xccheckout
 
 #CocoaPod
-Pods/*
+/Pods/*
 
 #other
-tmp/
+/tmp/
 
 /Config.xcconfig
 
