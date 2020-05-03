@@ -5,13 +5,11 @@ use_frameworks!
 
 target 'FlickSKK' do
   pod 'NorthLayout'
-  pod 'Alamofire'
   pod '※ikemen'
 end
 
 target 'FlickSKKKeyboard' do
   pod 'NorthLayout'
-  pod 'Alamofire'
   pod '※ikemen'
 end
 
