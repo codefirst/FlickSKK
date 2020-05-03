@@ -73,10 +73,10 @@ class DownloadDictionary {
     // URLを特定ファイルに保存する。
     fileprivate func save(_ url : URL, path: URL, onSuccess : @escaping () -> Void, onError : @escaping (Error?) -> Void) {
 
-        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+        let destination: DownloadRequest.Destination = { _, _ in
             return (path, [.removePreviousFile, .createIntermediateDirectories])
         }
-        Alamofire.download(url, to: destination)
+        AF.download(url, to: destination)
             .downloadProgress { progress in
                 self.progress?(NSLocalizedString("Downloading", comment:""), Float(progress.fractionCompleted) / 2.0)
             }.responseData { response in

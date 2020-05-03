@@ -32,13 +32,13 @@ class SKKUserDictionaryFile  : SKKDictionaryFile {
             if(s.hasPrefix(";")) { return }
 
             switch self.parse(s as NSString) {
-            case .some(let x,let y):
+            case (let x, let y)?:
                 if isOkuriAri {
                     self.okuriAri[x] = y
                 } else {
                     self.okuriNasi[x] = y
                 }
-            case .none:
+            case nil:
                 break
             }
         })

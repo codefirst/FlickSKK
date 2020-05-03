@@ -1,0 +1,2 @@
+scheme "FlickSKK"
+output_directory "build"

@@ -153,14 +153,14 @@
 		13FDAC142102C61B002D4B38 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDABFD2102C61A002D4B38 /* SessionView.swift */; };
 		13FDAC152102C61B002D4B38 /* ComposeModePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDABFE2102C61B002D4B38 /* ComposeModePresenter.swift */; };
 		13FDAC162102C61B002D4B38 /* ComposeModeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDABFF2102C61B002D4B38 /* ComposeModeFactory.swift */; };
-		9A4866D9F0A6C27D63A9EBAE /* Pods_FlickSKKKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7D6DE4FB7D3F6D01EF81E7 /* Pods_FlickSKKKeyboard.framework */; };
-		A9837EF4E5432CA907AFB2A8 /* Pods_FlickSKKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E179D67487B1D8C9273F219 /* Pods_FlickSKKTests.framework */; };
+		454E1072743DAE35D1F44A07 /* Pods_FlickSKKKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5894E4A02902745C82E0014 /* Pods_FlickSKKKeyboard.framework */; };
+		8259E5FB833307F52740718C /* Pods_FlickSKKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92757246FBBD1B2EF52DB88 /* Pods_FlickSKKTests.framework */; };
+		E35F37A5CB2CB6548C8A5A16 /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C58AD1810E975EF464AA40 /* Pods_FlickSKK.framework */; };
 		EA1ADEE72315734C0081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
 		EA1ADEE82315734C0081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
 		EA1ADEE92315734C0081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
 		EA1ADEEA23157C380081366A /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1ADEE62315734C0081366A /* ThemeColor.swift */; };
 		EA1ADEED2315893B0081366A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA1ADEEB2315893B0081366A /* LaunchScreen.xib */; };
-		ED78BBC12601BBC9E08D187C /* Pods_FlickSKK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 019B53C5130F00D730BC608B /* Pods_FlickSKK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,7 +195,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		019B53C5130F00D730BC608B /* Pods_FlickSKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		130A35112102C90500D1D7FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1310CE832103255300275B48 /* KanaFlickKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KanaFlickKey.swift; sourceTree = "<group>"; };
 		1310CE842103255400275B48 /* KeyPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
@@ -292,13 +291,14 @@
 		13FDABFE2102C61B002D4B38 /* ComposeModePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModePresenter.swift; sourceTree = "<group>"; };
 		13FDABFF2102C61B002D4B38 /* ComposeModeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeModeFactory.swift; sourceTree = "<group>"; };
 		13FDAC022102C61B002D4B38 /* FlickSKKKeyboard.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = FlickSKKKeyboard.entitlements; sourceTree = "<group>"; };
-		1E179D67487B1D8C9273F219 /* Pods_FlickSKKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D7D6DE4FB7D3F6D01EF81E7 /* Pods_FlickSKKKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14C58AD1810E975EF464AA40 /* Pods_FlickSKK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51CA4976B7761F47994639BF /* Pods-FlickSKKKeyboard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKKeyboard.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard.release.xcconfig"; sourceTree = "<group>"; };
 		644B7BAB174AE62A9B2C2769 /* Pods-FlickSKKKeyboard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKKeyboard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKKeyboard/Pods-FlickSKKKeyboard.debug.xcconfig"; sourceTree = "<group>"; };
 		9036AD1140DA0D2513D7C438 /* Pods-FlickSKKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		92DE47F7458305C609589D80 /* Pods-FlickSKK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.debug.xcconfig"; sourceTree = "<group>"; };
 		AA637250DAFDB970E2B0ADFC /* Pods-FlickSKK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKK.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK.release.xcconfig"; sourceTree = "<group>"; };
+		B5894E4A02902745C82E0014 /* Pods_FlickSKKKeyboard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKKeyboard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E92757246FBBD1B2EF52DB88 /* Pods_FlickSKKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlickSKKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97CFEC1CD35CDEC98446553 /* Pods-FlickSKKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA1ADEE62315734C0081366A /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		EA1ADEEC2315893B0081366A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED78BBC12601BBC9E08D187C /* Pods_FlickSKK.framework in Frameworks */,
+				E35F37A5CB2CB6548C8A5A16 /* Pods_FlickSKK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9837EF4E5432CA907AFB2A8 /* Pods_FlickSKKTests.framework in Frameworks */,
+				8259E5FB833307F52740718C /* Pods_FlickSKKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A4866D9F0A6C27D63A9EBAE /* Pods_FlickSKKKeyboard.framework in Frameworks */,
+				454E1072743DAE35D1F44A07 /* Pods_FlickSKKKeyboard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,7 +662,7 @@
 				13F610472102B33D00A27B6F /* Memo */,
 				13F610102102B31D00A27B6F /* Products */,
 				73D2BDE5A19A81C2975D8C0C /* Pods */,
-				719913F6885E1A1266CE0875 /* Frameworks */,
+				807013E16C6F87E88C9386CC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -725,16 +725,6 @@
 			path = Memo;
 			sourceTree = "<group>";
 		};
-		719913F6885E1A1266CE0875 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				019B53C5130F00D730BC608B /* Pods_FlickSKK.framework */,
-				3D7D6DE4FB7D3F6D01EF81E7 /* Pods_FlickSKKKeyboard.framework */,
-				1E179D67487B1D8C9273F219 /* Pods_FlickSKKTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		73D2BDE5A19A81C2975D8C0C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +736,16 @@
 				E97CFEC1CD35CDEC98446553 /* Pods-FlickSKKTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		807013E16C6F87E88C9386CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E92757246FBBD1B2EF52DB88 /* Pods_FlickSKKTests.framework */,
+				14C58AD1810E975EF464AA40 /* Pods_FlickSKK.framework */,
+				B5894E4A02902745C82E0014 /* Pods_FlickSKKKeyboard.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -834,7 +834,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = codefirst;
 				TargetAttributes = {
 					13F6100E2102B31D00A27B6F = {
@@ -1225,6 +1225,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1280,6 +1281,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Common/FlickSKK-Common-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1287,6 +1289,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1335,6 +1338,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "Common/FlickSKK-Common-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1354,7 +1358,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1374,7 +1377,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1396,7 +1398,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.codefirst.FlickSKKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlickSKK.app/FlickSKK";
 			};
@@ -1418,7 +1419,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.codefirst.FlickSKKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlickSKK.app/FlickSKK";
 			};
@@ -1432,7 +1432,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FPZK4WRGW7;
 				INFOPLIST_FILE = FlickSKKKeyboard/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1441,7 +1440,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER).FlickSKKKeyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1454,7 +1452,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FPZK4WRGW7;
 				INFOPLIST_FILE = FlickSKKKeyboard/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1463,7 +1460,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_IDENTIFIER).FlickSKKKeyboard";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1481,7 +1477,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.codefirst.Memo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1499,7 +1494,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.codefirst.Memo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

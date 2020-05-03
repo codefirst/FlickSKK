@@ -67,7 +67,7 @@ class ComposeModePresenter {
         switch composeMode {
         case .directInput:
             return false
-        case .kanaCompose(_):
+        case .kanaCompose:
             return true
         case .kanjiCompose(kana: _, okuri: _, candidates: _, index: _):
             return true

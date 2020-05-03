@@ -1,15 +1,15 @@
 PODS:
-  - Alamofire (4.0.1)
+  - Alamofire (5.1.0)
   - AppGroup (1.0.0)
   - FootlessParser (0.5.2)
-  - Nimble (8.0.2)
+  - Nimble (8.0.7)
   - NorthLayout (5.2.0):
     - FootlessParser (~> 0.4)
-  - Quick (2.1.0)
+  - Quick (2.2.0)
   - "※ikemen (0.6.0)"
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0.0)
+  - Alamofire
   - AppGroup (from `Pods/CocoaPodsAppGroup/AppGroup.podspec.json`)
   - Nimble
   - NorthLayout
@@ -17,7 +17,7 @@ DEPENDENCIES:
   - "※ikemen"
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - FootlessParser
     - Nimble
@@ -30,14 +30,14 @@ EXTERNAL SOURCES:
     :podspec: Pods/CocoaPodsAppGroup/AppGroup.podspec.json
 
 SPEC CHECKSUMS:
-  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
   AppGroup: ba0c3626371b5b0f23815f7ae68d14f1061df19f
   FootlessParser: 521916d592fa6cba06cfca6f4b5d4f5a2d49175a
-  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
+  Nimble: a73af6ecd4c9106f434f3d55fc54570be3739e0b
   NorthLayout: 308a58a8f7d96f316e6399ff6432f8769321bbdf
-  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   "※ikemen": da47fe6e0acfbe241611221f4d98ade266bf50a2
 
-PODFILE CHECKSUM: 5e5e09c3f122e44a27d36a2e73b1aab19f6b8f50
+PODFILE CHECKSUM: 9d7e777c42d8beb6f7fba4772efda606dbe5b08a
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.9.1

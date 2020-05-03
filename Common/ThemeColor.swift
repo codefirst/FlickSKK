@@ -10,6 +10,7 @@ private struct ColorPair {
             switch $0.userInterfaceStyle {
             case .light, .unspecified: return self.light
             case .dark: return self.dark
+            @unknown default: return self.light
             }
         })
     }

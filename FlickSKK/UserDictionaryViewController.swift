@@ -29,7 +29,7 @@ class UserDictionaryViewController: UITableViewController {
 
         self.reloadEntries()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
 
     fileprivate func reloadEntries() {
@@ -37,7 +37,7 @@ class UserDictionaryViewController: UITableViewController {
         self.tableView.reloadData()
     }
 
-    func applicationDidBecomeActive(_ notification: Notification) {
+    @objc func applicationDidBecomeActive(_ notification: Notification) {
         self.reloadEntries()
     }
 
