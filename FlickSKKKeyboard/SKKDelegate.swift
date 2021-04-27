@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SKKDelegate : class {
+protocol SKKDelegate : AnyObject {
     // 確定文字の表示
     func insertText(_ text : String)
 
