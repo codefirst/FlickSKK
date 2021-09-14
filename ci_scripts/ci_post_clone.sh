@@ -6,7 +6,7 @@ set -e
 set -x
 
 gem install --user-install bundler
-bundle config set path .bundle
+bundle config set --local path .bundle
 bundle install
 
 if [[ ! -e .cocoapods_appgroup ]]; then
