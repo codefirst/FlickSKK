@@ -302,6 +302,7 @@
 		E97CFEC1CD35CDEC98446553 /* Pods-FlickSKKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickSKKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA1ADEE62315734C0081366A /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		EA1ADEEC2315893B0081366A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		EACE6CB526F13D2000AE84E9 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -655,6 +656,7 @@
 		13F610062102B31D00A27B6F = {
 			isa = PBXGroup;
 			children = (
+				EACE6CB426F13CCC00AE84E9 /* ci_scripts */,
 				132FE61D2102C3D100E1DA99 /* Common */,
 				13F610112102B31D00A27B6F /* FlickSKK */,
 				13F610262102B31E00A27B6F /* FlickSKKTests */,
@@ -746,6 +748,14 @@
 				B5894E4A02902745C82E0014 /* Pods_FlickSKKKeyboard.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EACE6CB426F13CCC00AE84E9 /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				EACE6CB526F13D2000AE84E9 /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
