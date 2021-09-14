@@ -5,7 +5,7 @@
 set -e
 set -x
 
-bundle update --bundler
+gem install bundler
 bundle install
 if [[ ! -e .cocoapods_appgroup ]]; then
     bundle exec pod app-group org.codefirst.FlickSKK
