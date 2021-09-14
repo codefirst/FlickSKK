@@ -31,10 +31,12 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
     override func spec() {
         var engine : SKKEngine!
         DictionarySettings.bundle =  Bundle(for: self.classForCoder)
-        let dict = SKKDictionary()
-        dict.waitForLoading()
 
         beforeEach {
+            SKKDictionary.resetLearnDictionary()
+            _ = try? FileManager.default.removeItem(at: DictionarySettings.defaultUserDictionaryURL())
+            let dict = SKKDictionary()
+            dict.waitForLoading()
             engine = SKKEngine(delegate: self, dictionary: dict)
             self.insertedText = ""
         }
@@ -202,7 +204,7 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
                     engine.handle(.char(kana: "か", shift: false))
                     engine.handle(.toggleDakuten(beforeText: ""))
                     engine.handle(.enter)
-                    expect(self.insertedText).to(equal("がか\n"))
+                    expect(self.insertedText).to(equal("が"))
 
                     self.insertedText = ""
 
@@ -220,7 +222,7 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
                     engine.handle(.char(kana: "か", shift: true))
                     engine.handle(.char(kana: "か", shift: false))
                     engine.handle(.enter)
-                    expect(self.insertedText).to(equal("かかか\n"))
+                    expect(self.insertedText).to(equal("かか"))
                     self.insertedText = ""
 
                     engine.handle(.char(kana: "か", shift: true))
