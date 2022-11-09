@@ -142,7 +142,7 @@
 		13EBD06C2102C7A30064606B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13EBD0422102C7A20064606B /* LaunchScreen.xib */; };
 		13F610132102B31D00A27B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F610122102B31D00A27B6F /* AppDelegate.swift */; };
 		13F610392102B32E00A27B6F /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F610382102B32E00A27B6F /* KeyboardViewController.swift */; };
-		13F6103D2102B32E00A27B6F /* FlickSKKKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 13F610362102B32E00A27B6F /* FlickSKKKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		13F6103D2102B32E00A27B6F /* FlickSKKKeyboard.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 13F610362102B32E00A27B6F /* FlickSKKKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		13F610492102B33D00A27B6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F610482102B33D00A27B6F /* AppDelegate.swift */; };
 		13F6104B2102B33D00A27B6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6104A2102B33D00A27B6F /* ViewController.swift */; };
 		13FDAC042102C61B002D4B38 /* KeyboardMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FDABED2102C617002D4B38 /* KeyboardMode.swift */; };
@@ -181,15 +181,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		13F610412102B32E00A27B6F /* Embed App Extensions */ = {
+		13F610412102B32E00A27B6F /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				13F6103D2102B32E00A27B6F /* FlickSKKKeyboard.appex in Embed App Extensions */,
+				13F6103D2102B32E00A27B6F /* FlickSKKKeyboard.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -769,7 +769,7 @@
 				13F6100B2102B31D00A27B6F /* Sources */,
 				13F6100C2102B31D00A27B6F /* Frameworks */,
 				13F6100D2102B31D00A27B6F /* Resources */,
-				13F610412102B32E00A27B6F /* Embed App Extensions */,
+				13F610412102B32E00A27B6F /* Embed Foundation Extensions */,
 				22CCCC921DF09E35F7E7AE07 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -844,7 +844,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = codefirst;
 				TargetAttributes = {
 					13F6100E2102B31D00A27B6F = {
@@ -1267,7 +1267,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1332,7 +1332,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
