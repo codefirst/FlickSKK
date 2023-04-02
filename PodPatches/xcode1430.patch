@@ -1,0 +1,26 @@
+diff --git a/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh b/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh
+index b2bd958..95452c6 100755
+--- a/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh	
++++ b/Pods/Target Support Files/Pods-FlickSKK/Pods-FlickSKK-frameworks.sh	
+@@ -41,7 +41,7 @@ install_framework()
+ 
+   if [ -L "${source}" ]; then
+     echo "Symlinked..."
+-    source="$(readlink "${source}")"
++    source="$(readlink -f "${source}")"
+   fi
+ 
+   if [ -d "${source}/${BCSYMBOLMAP_DIR}" ]; then
+diff --git a/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh b/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh
+index b9265ed..732aa3f 100755
+--- a/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh	
++++ b/Pods/Target Support Files/Pods-FlickSKKTests/Pods-FlickSKKTests-frameworks.sh	
+@@ -41,7 +41,7 @@ install_framework()
+ 
+   if [ -L "${source}" ]; then
+     echo "Symlinked..."
+-    source="$(readlink "${source}")"
++    source="$(readlink -f "${source}")"
+   fi
+ 
+   if [ -d "${source}/${BCSYMBOLMAP_DIR}" ]; then

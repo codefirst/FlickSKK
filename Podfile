@@ -33,6 +33,8 @@ post_install do |installer|
       end
     end
   end
+  
+  system 'patch -p1 < PodPatches/xcode1430.patch'
 end
 
 plugin 'cocoapods-app_group'
