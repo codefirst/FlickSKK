@@ -14,7 +14,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     lazy var heightConstraint : NSLayoutConstraint = NSLayoutConstraint(item: self.view!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 216)
 
     let keypadAndControlsView = UIView()
-    let loadingProgressView = UIActivityIndicatorView(style: .gray)
+    let loadingProgressView = UIActivityIndicatorView(style: .medium)
 
     lazy var sessionView : SessionView = SessionView(engine: self.engine)
 
@@ -402,14 +402,10 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     func composeText(_ text: String?, markedText: String?, legacyStyleText: String) {
-        if #available(iOS 13.0, iOSApplicationExtension 13.0, *) {
-            sessionView.composeText = text
+        sessionView.composeText = text
 
-            let markedText = markedText ?? ""
-            inputProxy.setMarkedText(markedText, selectedRange: NSRange(location: (markedText as NSString).length, length: 0))
-        } else {
-            sessionView.composeText = legacyStyleText
-        }
+        let markedText = markedText ?? ""
+        inputProxy.setMarkedText(markedText, selectedRange: NSRange(location: (markedText as NSString).length, length: 0))
 
         updateSpaceButtonLabel()
     }

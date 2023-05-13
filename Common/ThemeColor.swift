@@ -5,8 +5,7 @@ private struct ColorPair {
     var dark: UIColor
 
     var color: UIColor {
-        guard #available(iOS 13.0, iOSApplicationExtension 13.0, *) else { return light }
-        return .init(dynamicProvider: {
+        .init(dynamicProvider: {
             switch $0.userInterfaceStyle {
             case .light, .unspecified: return self.light
             case .dark: return self.dark
