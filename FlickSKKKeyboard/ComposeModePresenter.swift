@@ -11,7 +11,7 @@ class ComposeModePresenter {
             return candidates[index].kanji
         case .wordRegister(kana: _, okuri: let okuri, composeText: let text, composeMode: let m):
             let nested = markedText(m[0])
-            return text + (okuri ?? "") + (nested ?? "")
+            return text + (nested ?? "")
         }
     }
 

@@ -28,7 +28,7 @@ class ComposeModePresenterSpec : QuickSpec {
             it("word register mode(direct)") {
                 let m = ComposeMode.wordRegister(kana: "ろうたけ", okuri: "る", composeText: "あああ", composeMode: [.directInput])
                 expect(target.composeText(m)).to(equal("[登録:ろうたけ*る]あああ"))
-                expect(target.markedText(m)).to(equal("ああある"))
+                expect(target.markedText(m)).to(equal("あああ"))
             }
             it("word register mode(kana compose)") {
                 let m = ComposeMode.wordRegister(kana: "ほんき", okuri: nil, composeText: "あ",
