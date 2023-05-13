@@ -8,27 +8,33 @@ class ComposeModePresenterSpec : QuickSpec {
         let candidates : [Candidate] = [ .exact(kanji: "本気"), .partial(kanji: "マジ", kana: "まじ") ]
         describe("toString") {
             it("direct input") {
-                expect(target.toString(.directInput)).to(equal(""))
+                expect(target.composeText(.directInput)).to(beNil())
+                expect(target.markedText(.directInput)).to(beNil())
             }
             it("kana compose mode") {
-                expect(target.toString(.kanaCompose(kana: "こんにちは", candidates: candidates))).to(equal("▽こんにちは"))
+                expect(target.composeText(.kanaCompose(kana: "こんにちは", candidates: candidates))).to(equal("▽"))
+                expect(target.markedText(.kanaCompose(kana: "こんにちは", candidates: candidates))).to(equal("こんにちは"))
             }
             it("kanji compose mode") {
                 let m = ComposeMode.kanjiCompose(kana: "ほんき", okuri: .none, candidates: candidates, index: 0)
-                expect(target.toString(m)).to(equal("▼ほんき"))
+                expect(target.composeText(m)).to(equal("▼"))
+                expect(target.markedText(m)).to(equal("本気"))
             }
             it("word register mode(direct)") {
                 let m = ComposeMode.wordRegister(kana: "ほんき", okuri: nil, composeText: "あああ", composeMode: [.directInput])
-                expect(target.toString(m)).to(equal("[登録:ほんき]あああ"))
+                expect(target.composeText(m)).to(equal("[登録:ほんき]あああ"))
+                expect(target.markedText(m)).to(equal("あああ"))
             }
             it("word register mode(direct)") {
                 let m = ComposeMode.wordRegister(kana: "ろうたけ", okuri: "る", composeText: "あああ", composeMode: [.directInput])
-                expect(target.toString(m)).to(equal("[登録:ろうたけ*る]あああ"))
+                expect(target.composeText(m)).to(equal("[登録:ろうたけ*る]あああ"))
+                expect(target.markedText(m)).to(equal("あああ"))
             }
             it("word register mode(kana compose)") {
                 let m = ComposeMode.wordRegister(kana: "ほんき", okuri: nil, composeText: "あ",
                     composeMode: [.kanaCompose(kana: "い", candidates: [])])
-                expect(target.toString(m)).to(equal("[登録:ほんき]あ▽い"))
+                expect(target.composeText(m)).to(equal("[登録:ほんき]あ▽"))
+                expect(target.markedText(m)).to(equal("あい"))
             }
         }
 

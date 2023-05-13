@@ -22,7 +22,7 @@ class SKKEngine {
         composeMode = keyHandler.handle(keyEvent, composeMode: composeMode)
 
         // 表示を更新
-        delegate?.composeText(presenter.composeText(composeMode), markedText: presenter.markedText(composeMode), legacyStyleText: presenter.toString(composeMode))
+        delegate?.composeText(presenter.composeText(composeMode), markedText: presenter.markedText(composeMode))
 
         // 候補表示
         delegate?.showCandidates(candidates()?.candidates)

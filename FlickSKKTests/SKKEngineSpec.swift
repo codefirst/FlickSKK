@@ -13,10 +13,9 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
     // delegate
     func insertText(_ text : String) { self.insertedText += text }
     func deleteBackward() {}
-    func composeText(_ text : String?, markedText: String?, legacyStyleText: String) {
+    func composeText(_ text : String?, markedText: String?) {
         self.currentComposeText = text
         self.currentMarkedText = markedText
-        self.legacyStyleText = legacyStyleText
     }
     func changeInputMode(_ inputMode: SKKInputMode) {}
     func showCandidates(_ candidates: [Candidate]?) { self.candidates = candidates }
@@ -25,7 +24,6 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
     var insertedText = ""
     var currentComposeText: String?
     var currentMarkedText: String?
-    var legacyStyleText = ""
     var candidates: [Candidate]? = nil
 
     override func spec() {
@@ -52,11 +50,9 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
                 it("convert kanji") {
                     engine.handle(.char(kana: "や", shift: true))
                     engine.handle(.char(kana: "ま", shift: false))
-                    expect(self.legacyStyleText).to(equal("▽やま"))
                     expect(self.currentComposeText).to(equal("▽"))
                     expect(self.currentMarkedText).to(equal("やま"))
                     engine.handle(.space)
-                    expect(self.legacyStyleText).to(equal("▼やま"))
                     expect(self.currentComposeText).to(equal("▼"))
                     expect(self.currentMarkedText).to(equal("山"))
                     engine.handle(.enter)
@@ -73,11 +69,9 @@ class SKKEngineSpec : QuickSpec, SKKDelegate {
                         engine.handle(.char(kana: "か", shift: true))
                         engine.handle(.char(kana: "ん", shift: false))
                         engine.handle(.char(kana: "し", shift: true))
-                        expect(self.legacyStyleText).to(equal("▼かん*し"))
                         expect(self.currentComposeText).to(equal("▼"))
                         expect(self.currentMarkedText).to(equal("関し"))
                         engine.handle(.toggleDakuten(beforeText: ""))
-                        expect(self.legacyStyleText).to(equal("▼かん*じ"))
                         expect(self.currentComposeText).to(equal("▼"))
                         expect(self.currentMarkedText).to(equal("感じ"))
                         engine.handle(.enter)

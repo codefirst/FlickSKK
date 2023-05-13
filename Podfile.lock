@@ -1,11 +1,11 @@
 PODS:
   - AppGroup (1.0.0)
   - FootlessParser (0.5.2)
-  - Nimble (10.0.0)
+  - Nimble (12.0.0)
   - NorthLayout (5.2.0):
     - FootlessParser (~> 0.4)
-  - Quick (5.0.1)
-  - "※ikemen (0.7.0)"
+  - Quick (6.1.0)
+  - "※ikemen (0.8.0)"
 
 DEPENDENCIES:
   - AppGroup (from `Pods/CocoaPodsAppGroup/AppGroup.podspec.json`)
@@ -29,11 +29,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppGroup: ba0c3626371b5b0f23815f7ae68d14f1061df19f
   FootlessParser: 521916d592fa6cba06cfca6f4b5d4f5a2d49175a
-  Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
+  Nimble: 02a4990866e51868303a466970cd1c81bb84a192
   NorthLayout: 308a58a8f7d96f316e6399ff6432f8769321bbdf
-  Quick: 749aa754fd1e7d984f2000fe051e18a3a9809179
-  "※ikemen": db03a47c165f9889af8260758087b49f6cdeee2f
+  Quick: 6676ffb409bf04abba2ff23902af2407bfc6ac90
+  "※ikemen": dd846bad2317b0ea51e5c7dd8e565108fa40d528
 
-PODFILE CHECKSUM: dbddf1ec57f185bdde0a3a9a5194000e5438b59b
+PODFILE CHECKSUM: 88486acd6e5763ee4c6b6072f3bca52217dae98a
 
 COCOAPODS: 1.12.1

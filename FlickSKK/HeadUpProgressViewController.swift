@@ -47,15 +47,6 @@ class HeadUpProgressViewController: UIViewController {
         // 画面中央に表示する
         self.view.addConstraint(NSLayoutConstraint(item: progressView, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
 
     fileprivate func updateProgress() {
         // メインスレッドで更新しないとプログレスバーが反映されない
