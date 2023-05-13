@@ -36,6 +36,10 @@ class SKKEngine {
         return self.presenter.inStatusShowsCandidatesBySpace(composeMode)
     }
 
+    var isOnInitialStateOfWordRegister: Bool {
+        presenter.isOnInitialStateOfWordRegister(composeMode)
+    }
+
     var hasPartialCandidates: Bool {
         let cs = candidates()?.candidates ?? []
         return cs.any{$0.isPartial}

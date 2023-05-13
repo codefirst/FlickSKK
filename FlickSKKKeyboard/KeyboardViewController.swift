@@ -415,6 +415,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         sessionView.candidates = candidates ?? []
 
         self.updateSpaceButtonLabel()
+        if engine.isOnInitialStateOfWordRegister {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        }
     }
 
     fileprivate let userInteractionMaskView = UIView()

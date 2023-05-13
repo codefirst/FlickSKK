@@ -59,4 +59,17 @@ class ComposeModePresenter {
             )
         }
     }
+
+    /// wordRegisterの初期状態か(初期状態に入ったときにhapticするため)
+    func isOnInitialStateOfWordRegister(_ composeMode : ComposeMode) -> Bool {
+        switch composeMode {
+        case .directInput, .kanaCompose, .kanjiCompose: return false
+        case .wordRegister(kana: _, okuri: _, composeText: let composeText, composeMode: let composeMode):
+            guard let mode = composeMode.first else { return false }
+            switch mode {
+            case .directInput: return composeText.isEmpty
+            case .kanaCompose, .kanjiCompose, .wordRegister: return isOnInitialStateOfWordRegister(mode)
+            }
+        }
+    }
 }
