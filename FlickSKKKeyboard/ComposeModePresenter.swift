@@ -1,22 +1,5 @@
 // ComposeModeを表示する
 class ComposeModePresenter {
-    /// (iOS 13未満用(markedTextなしで全ての情報を返す)) 表示用文字列(▽あああ、みたいなやつ)
-    func toString(_ composeMode : ComposeMode) -> String {
-        switch composeMode {
-        case .directInput:
-            return ""
-        case .kanaCompose(kana: let kana, candidates: _):
-            return "▽\(kana)"
-        case .kanjiCompose(kana: let kana, okuri: let okuri, candidates: _, index: _):
-            let text = kana + (okuri.map({ str in "*" + str }) ?? "")
-            return "▼\(text)"
-        case .wordRegister(kana : let kana, okuri : let okuri, composeText : let text, composeMode : let m):
-            let prefix = kana + (okuri.map({ str in "*" + str }) ?? "")
-            let nested = toString(m[0])
-            return "[登録:\(prefix)]\(text)\(nested)"
-        }
-    }
-
     /// 入力先のアプリにマーク付きテキストで表示する未確定文字列
     func markedText(_ composeMode : ComposeMode) -> String? {
         switch composeMode {

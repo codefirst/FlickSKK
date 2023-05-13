@@ -401,7 +401,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         self.engine.handle(.toggleUpperLower(beforeText: self.inputProxy.documentContextBeforeInput ?? ""))
     }
 
-    func composeText(_ text: String?, markedText: String?, legacyStyleText: String) {
+    func composeText(_ text: String?, markedText: String?) {
         sessionView.composeText = text
 
         let markedText = markedText ?? ""
