@@ -9,7 +9,7 @@ class ComposeModePresenter {
             return kana
         case .kanjiCompose(kana: _, okuri: _, candidates: let candidates, index: let index):
             return candidates[index].kanji
-        case .wordRegister(kana: _, okuri: let okuri, composeText: let text, composeMode: let m):
+        case .wordRegister(kana: _, okuri: _, composeText: let text, composeMode: let m):
             let nested = markedText(m[0])
             return text + (nested ?? "")
         }
