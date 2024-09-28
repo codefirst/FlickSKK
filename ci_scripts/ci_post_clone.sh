@@ -6,6 +6,8 @@ set -e
 set -x
 
 brew install ruby
+PATH="/usr/local/opt/ruby/bin:$PATH"
+
 gem install --user-install bundler
 bundle config set --local path .bundle
 bundle install
