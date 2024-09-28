@@ -7,20 +7,20 @@
 //
 // もしかしたらダウンロード済みの辞書を統合したほうが高速化ができるかもしれないが、
 // とりあえず現バージョンでは対応しない。
-class DownloadDictionary {
+final class DownloadDictionary: Sendable {
     fileprivate let remote : URL
     fileprivate let local : URL
 
     // MARK: - handler
     // FIXME: delegateにしたほうがiOSっぽいので直したほうがいい?
     // 辞書追加に成功した際の処理
-    var success : ((DictionaryInfo)->Void)?
+    nonisolated(unsafe) var success : ((DictionaryInfo)->Void)?
 
     // 辞書追加でエラーが発生した際の処理
-    var error : ((String, Error?)->Void)?
+    nonisolated(unsafe) var error : ((String, Error?)->Void)?
 
     // ダウンロードが進捗した際の処理
-    var progress : ((String, Float) -> Void)?
+    nonisolated(unsafe) var progress : ((String, Float) -> Void)?
 
     // MARK: -
 
@@ -32,7 +32,7 @@ class DownloadDictionary {
         self.local = local.appendingPathComponent(url.lastPathComponent)
     }
 
-    func call() {
+    @MainActor func call() {
         let downloadFile = Tempfile.temp()
         let utf8File = Tempfile.temp()
 
@@ -45,7 +45,7 @@ class DownloadDictionary {
                     try self.encodeToUTF8(downloadFile as URL, dest: utf8File as URL)
 
                     // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
-                    async {
+                    globalAsync {
                         let dictionary = LoadLocalDictionary(url: utf8File)
 
                         // 妥当性のチェック
@@ -70,8 +70,8 @@ class DownloadDictionary {
     }
 
     // URLを特定ファイルに保存する。
-    fileprivate func save(_ url : URL, path: URL, completion: @escaping (Result<Void, Error>) -> Void) {
-        var observation: NSKeyValueObservation?
+    fileprivate func save(_ url : URL, path: URL, completion: @Sendable @escaping (Result<Void, Error>) -> Void) {
+        nonisolated(unsafe) var observation: NSKeyValueObservation?
         let task = URLSession.shared.downloadTask(with: url) { url, response, error in
             observation?.invalidate()
             if let error = error {

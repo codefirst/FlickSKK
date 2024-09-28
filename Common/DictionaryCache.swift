@@ -1,10 +1,10 @@
-private var kDicitonary : SKKLocalDictionaryFile?
-private var kCache : [URL:(Date, Any)] = [:]
+private nonisolated(unsafe) var kDicitonary : SKKLocalDictionaryFile?
+private nonisolated(unsafe) var kCache : [URL:(Date, Any)] = [:]
 private let writeQueue = DispatchQueue(label: "DictionaryCache.write")
 
 // 辞書のロードには時間がかかるので、一度ロードした結果をキャッシュする
 // グローバル変数にいれておけば、次回起動時にも残っている(ことがある)
-class DictionaryCache {
+final class DictionaryCache: Sendable {
     // L辞書等のインストール済みの辞書をロードする
     // FIXME: 現時点では二個以上の辞書ファイルは存在しないと仮定している
     func loadLocalDicitonary(_ url: URL, closure: (URL) -> SKKLocalDictionaryFile) -> SKKLocalDictionaryFile {

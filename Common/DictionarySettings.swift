@@ -5,7 +5,7 @@ class DictionarySettings {
     // テスト時は違うBundleからロードする
     // FIXME: もっといい感じに書きたい
     fileprivate struct ClassProperty {
-        static var bundle : Bundle?
+        nonisolated(unsafe) static var bundle : Bundle?
     }
     class var bundle: Bundle? {
         get {

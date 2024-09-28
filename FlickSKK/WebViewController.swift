@@ -8,7 +8,7 @@
 
 import UIKit
 import Ikemen
-@preconcurrency import WebKit
+import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     lazy var configure = WKWebViewConfiguration() ※ { (wc: inout WKWebViewConfiguration) in
@@ -37,14 +37,14 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
 
     // MARK: WebView Delegate
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping @MainActor (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             // Open in Safari
             UIApplication.shared.open(navigationAction.request.url!, options: [:]) { _ in }
-            decisionHandler(.cancel)
+            decisionHandler(.cancel, preferences)
             return
         }
-        decisionHandler(.allow)
+        decisionHandler(.allow, preferences)
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
