@@ -1,4 +1,5 @@
 // SKKの辞書をラップして、フリック入力に適したインターフェースを提供する
+@MainActor
 class DictionaryEngine {
     fileprivate let dictionary : SKKDictionary
     init(dictionary : SKKDictionary){

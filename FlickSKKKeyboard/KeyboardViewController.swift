@@ -48,6 +48,7 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
         kb.imageView.image = UIImage(named: "flickskk-arrow")!.withRenderingMode(.alwaysTemplate)
         kb.imageView.tintColor = ThemeColor.buttonText
     }
+    private var observation: NSKeyValueObservation?
 
     // MARK: -
 
@@ -150,7 +151,9 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
             }
         }
 
-        dictionary.addObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey(), options: NSKeyValueObservingOptions(), context: nil)
+        observation = dictionary.observe(\.isWaitingForLoad) { [weak self] dict, _ in
+            Task { @MainActor in self?.observeDictionaryIsWaitingForLoad(dict) }
+        }
         updateControlButtons()
     }
 
@@ -159,20 +162,16 @@ class KeyboardViewController: UIInputViewController, SKKDelegate {
     }
 
     deinit {
-        dictionary.removeObserver(self, forKeyPath: SKKDictionary.isWaitingForLoadKVOKey())
+        observation = nil
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let dict = object as? SKKDictionary {
-            if dict.isWaitingForLoad {
-                self.disableAllKeys()
-                loadingProgressView.startAnimating()
-            } else {
-                self.enableAllKeys()
-                loadingProgressView.stopAnimating()
-            }
+    private func observeDictionaryIsWaitingForLoad(_ dict: SKKDictionary) {
+        if dict.isWaitingForLoad {
+            self.disableAllKeys()
+            loadingProgressView.startAnimating()
         } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+            self.enableAllKeys()
+            loadingProgressView.stopAnimating()
         }
     }
 

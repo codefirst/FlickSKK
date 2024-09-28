@@ -1,3 +1,4 @@
+@MainActor
 class ComposeModeFactory {
     fileprivate let dictionary : DictionaryEngine
 

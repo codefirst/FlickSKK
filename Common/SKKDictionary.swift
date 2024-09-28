@@ -3,6 +3,7 @@
 // ・辞書のロードの非同期実行
 // ・ロード結果のキャッシュ
 // などを行なう。
+@MainActor
 final class SKKDictionary : NSObject, Sendable {
     // すべての辞書(先頭から順に検索される)
     nonisolated(unsafe) fileprivate var dictionaries : [ SKKDictionaryFile ] = []
@@ -21,18 +22,18 @@ final class SKKDictionary : NSObject, Sendable {
 
     // ロード完了を監視するために Key value observing を使う
     @objc nonisolated(unsafe) dynamic var isWaitingForLoad : Bool = false
-    class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
+    nonisolated class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
 
     fileprivate let loader = AsyncLoader()
     fileprivate let cache = DictionaryCache()
 
-    class func resetLearnDictionary() {
+    nonisolated class func resetLearnDictionary() {
         for url in [DictionarySettings.defaultLearnDictionaryURL(), DictionarySettings.defaultPartialDictionaryURL()] {
             _ = try? FileManager.default.removeItem(at: url as URL)
         }
     }
 
-    class func additionalDictionaries() -> [URL] {
+    nonisolated class func additionalDictionaries() -> [URL] {
         do {
             let manager = FileManager.default
             let url = DictionarySettings.additionalDictionaryURL()

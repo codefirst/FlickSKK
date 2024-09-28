@@ -1,7 +1,8 @@
 import Quick
 import Nimble
 
-class KeyHandlerBaseSpec : QuickSpec {
+@MainActor
+class KeyHandlerBaseSpec : QuickSpec, Sendable {
     lazy var dictionary : SKKDictionary = {
         DictionarySettings.bundle = Bundle(for: self.classForCoder)
         let dict = SKKDictionary()

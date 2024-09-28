@@ -31,6 +31,8 @@ post_install do |installer|
       if Gem::Version.new('12.0') > Gem::Version.new(c.build_settings['IPHONEOS_DEPLOYMENT_TARGET'])
         c.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
       end
+      
+      c.build_settings['SWIFT_VERSION'] = '5.0' if %w[NorthLayout FootlessParser].include?(t.name)
     end
   end
 end

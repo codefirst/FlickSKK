@@ -1,7 +1,8 @@
 import Quick
 import Nimble
 
-class DictionaryEngineSpec : QuickSpec {
+@MainActor
+final class DictionaryEngineSpec : QuickSpec, Sendable {
     lazy var dictionary : SKKDictionary = {
         DictionarySettings.bundle = Bundle(for: self.classForCoder)
         let dict = SKKDictionary()
@@ -10,15 +11,17 @@ class DictionaryEngineSpec : QuickSpec {
         }()
 
     override func spec() {
-        var dictionaryEngine : DictionaryEngine!
-
-        beforeEach {
-            dictionaryEngine = DictionaryEngine(dictionary: self.dictionary)
-        }
-
-        describe("#find") {
-            it("送り仮名を補う") {
-                expect(dictionaryEngine.find("おく", okuri: "る", dynamic: false)).notTo(beEmpty())
+        MainActor.assumeIsolated {
+            var dictionaryEngine : DictionaryEngine!
+            
+            beforeEach {
+                dictionaryEngine = DictionaryEngine(dictionary: self.dictionary)
+            }
+            
+            describe("#find") {
+                it("送り仮名を補う") {
+                    expect(dictionaryEngine.find("おく", okuri: "る", dynamic: false)).notTo(beEmpty())
+                }
             }
         }
     }
