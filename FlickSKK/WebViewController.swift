@@ -8,7 +8,7 @@
 
 import UIKit
 import Ikemen
-import WebKit
+@preconcurrency import WebKit
 
 class WebViewController: UIViewController, WKNavigationDelegate {
     lazy var configure = WKWebViewConfiguration() ※ { (wc: inout WKWebViewConfiguration) in
