@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 protocol SKKDelegate : AnyObject {
     // 確定文字の表示
     func insertText(_ text : String)

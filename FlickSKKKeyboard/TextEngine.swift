@@ -1,7 +1,8 @@
 // トップレベルと、単語登録モードではテキストの挿入先が異なる。
 // そこを抽象化する。
 
-class TextEngine {
+@MainActor
+final class TextEngine: Sendable {
     enum Status {
         // トップレベルのため、iOS側にテキストの追加・削除を伝える
         case topLevel

@@ -1,4 +1,5 @@
-class MockDelegate : SKKDelegate {
+@MainActor
+final class MockDelegate : SKKDelegate, Sendable {
     var insertedText = ""
     var inputMode : SKKInputMode = .hirakana
 

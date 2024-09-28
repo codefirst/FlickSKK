@@ -1,10 +1,10 @@
 // 非同期に辞書のロードを行なう
-class AsyncLoader {
-    var initialized = false
+final class AsyncLoader: Sendable {
+    nonisolated(unsafe) var initialized = false
 
     // 辞書をロードする
-    func load(_ closure: @escaping () -> ()) {
-       async {
+    func load(_ closure: @Sendable @escaping () -> ()) {
+       globalAsync {
             closure()
             self.initialized = true
         }

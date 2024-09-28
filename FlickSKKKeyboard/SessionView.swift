@@ -152,7 +152,7 @@ class SessionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate,
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        struct Static { static let layoutCell = CandidateCollectionViewCell() }
+        @MainActor struct Static { static let layoutCell = CandidateCollectionViewCell() }
 
         let minWidth: CGFloat
         switch Section(rawValue: indexPath.section) {

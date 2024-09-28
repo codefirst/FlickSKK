@@ -1,6 +1,7 @@
 // キー入力を受け取り、次の状態を返す。
 // その際、状態に応じて、テキストの追加・削除を行なう
-class KeyHandler {
+@MainActor
+final class KeyHandler: Sendable {
     fileprivate weak var delegate : SKKDelegate?
     fileprivate let dictionary : DictionaryEngine
     fileprivate let text : TextEngine

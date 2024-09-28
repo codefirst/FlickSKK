@@ -3,36 +3,37 @@
 // ・辞書のロードの非同期実行
 // ・ロード結果のキャッシュ
 // などを行なう。
-class SKKDictionary : NSObject {
+@MainActor
+final class SKKDictionary : NSObject, Sendable {
     // すべての辞書(先頭から順に検索される)
-    fileprivate var dictionaries : [ SKKDictionaryFile ] = []
+    nonisolated(unsafe) fileprivate var dictionaries : [ SKKDictionaryFile ] = []
 
     // ダイナミック変換用辞書
-    fileprivate var dynamicDictionaries : [ SKKUserDictionaryFile ] = []
+    nonisolated(unsafe) fileprivate var dynamicDictionaries : [ SKKUserDictionaryFile ] = []
 
     // ユーザ辞書
-    fileprivate var userDictionary : SKKUserDictionaryFile?
+    nonisolated(unsafe) fileprivate var userDictionary : SKKUserDictionaryFile?
 
     // 学習辞書
-    fileprivate var learnDictionary : SKKUserDictionaryFile?
+    nonisolated(unsafe) fileprivate var learnDictionary : SKKUserDictionaryFile?
 
     // 略語辞書
-    fileprivate var partialDictionary : SKKUserDictionaryFile?
+    nonisolated(unsafe) fileprivate var partialDictionary : SKKUserDictionaryFile?
 
     // ロード完了を監視するために Key value observing を使う
-    @objc dynamic var isWaitingForLoad : Bool = false
-    class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
+    @objc nonisolated(unsafe) dynamic var isWaitingForLoad : Bool = false
+    nonisolated class func isWaitingForLoadKVOKey() -> String { return "isWaitingForLoad" }
 
     fileprivate let loader = AsyncLoader()
     fileprivate let cache = DictionaryCache()
 
-    class func resetLearnDictionary() {
+    nonisolated class func resetLearnDictionary() {
         for url in [DictionarySettings.defaultLearnDictionaryURL(), DictionarySettings.defaultPartialDictionaryURL()] {
             _ = try? FileManager.default.removeItem(at: url as URL)
         }
     }
 
-    class func additionalDictionaries() -> [URL] {
+    nonisolated class func additionalDictionaries() -> [URL] {
         do {
             let manager = FileManager.default
             let url = DictionarySettings.additionalDictionaryURL()
@@ -97,7 +98,7 @@ class SKKDictionary : NSObject {
     // 単語を登録する
     func register(_ normal : String, okuri: String?, kanji: String) {
         userDictionary?.register(normal, okuri: okuri, kanji: kanji)
-        async {
+        globalAsync {
             self.cache.update(DictionarySettings.defaultUserDictionaryURL()) {
                 self.userDictionary?.serialize()
             }
@@ -107,7 +108,7 @@ class SKKDictionary : NSObject {
     // 確定結果を学習する
     func learn(_ normal : String, okuri: String?, kanji: String) {
         learnDictionary?.register(normal, okuri: okuri, kanji: kanji)
-        async {
+        globalAsync {
             self.cache.update(DictionarySettings.defaultLearnDictionaryURL()) {
                 self.learnDictionary?.serialize()
             }
@@ -117,7 +118,7 @@ class SKKDictionary : NSObject {
     // InputModeChangeによる確定を学習する
     func partial(_ kana: String, okuri: String?, kanji: String) {
         partialDictionary?.register(kana, okuri: okuri, kanji: kanji)
-        async {
+        globalAsync {
             self.cache.update(DictionarySettings.defaultPartialDictionaryURL()) {
                 self.partialDictionary?.serialize()
             }

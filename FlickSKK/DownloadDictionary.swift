@@ -7,7 +7,8 @@
 //
 // もしかしたらダウンロード済みの辞書を統合したほうが高速化ができるかもしれないが、
 // とりあえず現バージョンでは対応しない。
-class DownloadDictionary {
+@MainActor
+final class DownloadDictionary: Sendable {
     fileprivate let remote : URL
     fileprivate let local : URL
 
@@ -32,7 +33,7 @@ class DownloadDictionary {
         self.local = local.appendingPathComponent(url.lastPathComponent)
     }
 
-    func call() {
+    @MainActor func call() {
         let downloadFile = Tempfile.temp()
         let utf8File = Tempfile.temp()
 
@@ -45,7 +46,7 @@ class DownloadDictionary {
                     try self.encodeToUTF8(downloadFile as URL, dest: utf8File as URL)
 
                     // メインスレッドはプログラスバーの更新を行なうので辞書の検証等は別スレッドで行なう。
-                    async {
+                    globalAsync {
                         let dictionary = LoadLocalDictionary(url: utf8File)
 
                         // 妥当性のチェック
@@ -55,9 +56,9 @@ class DownloadDictionary {
 
                             // 結果のサマリを渡す
                             let info = DictionaryInfo(dictionary: dictionary)
-                            self.success?(info)
+                            Task { @MainActor in self.success?(info) }
                         } else {
-                            self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil)
+                            Task { @MainActor in self.error?(NSLocalizedString("InvalidDictionary", comment:""), nil) }
                         }
                     }
                 } catch let e {
@@ -70,24 +71,26 @@ class DownloadDictionary {
     }
 
     // URLを特定ファイルに保存する。
-    fileprivate func save(_ url : URL, path: URL, completion: @escaping (Result<Void, Error>) -> Void) {
-        var observation: NSKeyValueObservation?
+    fileprivate func save(_ url : URL, path: URL, completion: @MainActor @Sendable @escaping (Result<Void, Error>) -> Void) {
+        nonisolated(unsafe) var observation: NSKeyValueObservation?
         let task = URLSession.shared.downloadTask(with: url) { url, response, error in
             observation?.invalidate()
             if let error = error {
-                completion(.failure(error))
+                Task { @MainActor in completion(.failure(error)) }
             }
             guard let url = url else { fatalError() }
             do {
                 try FileManager.default.createDirectory(at: path.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
                 try FileManager.default.moveItem(at: url, to: path)
-                completion(.success(()))
+                Task { @MainActor in completion(.success(())) }
             } catch {
-                completion(.failure(error))
+                Task { @MainActor in completion(.failure(error)) }
             }
         }
         observation = task.progress.observe(\.fractionCompleted) { progress, _ in
-            self.progress?(NSLocalizedString("Downloading", comment:""), Float(progress.fractionCompleted) / 2.0)
+            Task { @MainActor in
+                self.progress?(NSLocalizedString("Downloading", comment:""), Float(progress.fractionCompleted) / 2.0)
+            }
         }
         task.resume()
     }
@@ -112,11 +115,13 @@ class DownloadDictionary {
 
     // 辞書の検証をする
     // 検証の進捗状況は逐次表示する
-    fileprivate func validate(_ dictionary : LoadLocalDictionary) -> Bool {
+    private nonisolated func validate(_ dictionary : LoadLocalDictionary) -> Bool {
         let validate = ValidateDictionary(dictionary: dictionary)
         validate.progress = { (current, total) in
             let progress = Float(current) / Float(total)
-            self.progress?(NSLocalizedString("Validating", comment:""), progress / 2 + 0.5)
+            Task { @MainActor in
+                self.progress?(NSLocalizedString("Validating", comment:""), progress / 2 + 0.5)
+            }
         }
         return validate.call()
     }

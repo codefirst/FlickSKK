@@ -20,7 +20,7 @@ extension UIButton {
 }
 
 // 非同期に処理を実行する
-func async(_ closure: @escaping () -> ()) {
+func globalAsync(_ closure: @Sendable @escaping () -> ()) {
     DispatchQueue.global(qos: .default).async(execute: closure)
 }
 

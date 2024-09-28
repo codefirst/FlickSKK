@@ -1,7 +1,8 @@
 import Quick
 import Nimble
 
-class TextEngineSpec : QuickSpec {
+@MainActor
+final class TextEngineSpec : QuickSpec, Sendable {
     lazy var dictionary : SKKDictionary = {
         DictionarySettings.bundle = Bundle(for: self.classForCoder)
         let dict = SKKDictionary()
@@ -10,27 +11,29 @@ class TextEngineSpec : QuickSpec {
     }()
 
     override func spec() {
-        var target : TextEngine!
-        var delegate : MockDelegate!
+        MainActor.assumeIsolated {
+            var target : TextEngine!
+            var delegate : MockDelegate!
 
-        beforeEach {
-            delegate = MockDelegate()
-            let dictionaryEngine = DictionaryEngine(dictionary: self.dictionary)
-            target = TextEngine(delegate: delegate, dictionary: dictionaryEngine)
-        }
-
-        describe("#insertPartial") {
-            beforeEach {
-                _ = target.insertPartial("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.topLevel)
+            beforeEach { @MainActor in
+                delegate = MockDelegate()
+                let dictionaryEngine = DictionaryEngine(dictionary: self.dictionary)
+                target = TextEngine(delegate: delegate, dictionary: dictionaryEngine)
             }
 
-            it("挿入される") {
-                expect(delegate.insertedText).to(equal("ハナヤマタ"))
-            }
+            describe("#insertPartial") {
+                beforeEach { @MainActor in
+                    _ = target.insertPartial("ハナヤマタ", kana: "はなやまた", status: TextEngine.Status.topLevel)
+                }
 
-            it("補完できる") {
-                let xs = self.dictionary.findDynamic("はなや").filter { w in w.kanji == "ハナヤマタ" }
-                expect(xs.count).to(equal(1))
+                it("挿入される") { @MainActor in
+                    expect(delegate.insertedText).to(equal("ハナヤマタ"))
+                }
+
+                it("補完できる") { @MainActor in
+                    let xs = self.dictionary.findDynamic("はなや").filter { w in w.kanji == "ハナヤマタ" }
+                    expect(xs.count).to(equal(1))
+                }
             }
         }
     }

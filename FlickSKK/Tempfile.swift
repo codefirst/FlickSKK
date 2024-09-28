@@ -1,3 +1,4 @@
+@MainActor
 class Tempfile {
     fileprivate static var count = 0
 

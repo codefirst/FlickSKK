@@ -1,6 +1,7 @@
 // SKKのメインエンジン
 
-class SKKEngine {
+@MainActor
+final class SKKEngine: Sendable {
     fileprivate let keyHandler : KeyHandler
     fileprivate weak var delegate : SKKDelegate?
 
